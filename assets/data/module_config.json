@@ -1,0 +1,104 @@
+[
+  {
+    "id": "quote",
+    "name": "每日名言",
+    "icon": "📜",
+    "color": "#FF6B6B",
+    "description": "名言警句，每日一句，点亮你的一天",
+    "generate": "请生成一句经典名言，包含作者和出处",
+    "fallback": [
+      {
+        "content": "天行健，君子以自强不息",
+        "title": "《周易》",
+        "subtitle": "乾卦",
+        "category": "古典名言",
+        "categoryIcon": "📜"
+      }
+    ]
+  },
+  {
+    "id": "joke",
+    "name": "幽默笑话",
+    "icon": "😄",
+    "color": "#4ECDC4",
+    "description": "轻松一刻，快乐每一天",
+    "generate": "请生成一个简短有趣的笑话",
+    "fallback": [
+      {
+        "content": "今天的心情就像一杯咖啡，苦中带甜",
+        "title": "生活趣事",
+        "subtitle": "每日一笑",
+        "category": "幽默",
+        "categoryIcon": "😄"
+      }
+    ]
+  },
+  {
+    "id": "psychology",
+    "name": "心理学",
+    "icon": "🧠",
+    "color": "#45B7D1",
+    "description": "心理小知识，了解自己了解他人",
+    "generate": "请生成一个实用的心理学小知识",
+    "fallback": [
+      {
+        "content": "皮格马利翁效应：当你对某人抱有期望时，这个人往往会朝着你期望的方向发展",
+        "title": "皮格马利翁效应",
+        "subtitle": "心理学效应",
+        "category": "心理学",
+        "categoryIcon": "🧠"
+      }
+    ]
+  },
+  {
+    "id": "finance",
+    "name": "财经",
+    "icon": "💰",
+    "color": "#96CEB4",
+    "description": "投资理财，财富增长",
+    "generate": "请生成一条实用的理财小知识",
+    "fallback": [
+      {
+        "content": "不要把所有鸡蛋放在一个篮子里，分散投资是降低风险的有效方法",
+        "title": "投资箴言",
+        "subtitle": "理财小知识",
+        "category": "财经",
+        "categoryIcon": "💰"
+      }
+    ]
+  },
+  {
+    "id": "idiom",
+    "name": "歇后语俗语",
+    "icon": "📝",
+    "color": "#FFEAA7",
+    "description": "民间智慧，传承文化",
+    "generate": "请生成一个有趣的歇后语并解释",
+    "fallback": [
+      {
+        "content": "竹篮打水——一场空",
+        "title": "歇后语",
+        "subtitle": "民间智慧",
+        "category": "民间文化",
+        "categoryIcon": "📝"
+      }
+    ]
+  },
+  {
+    "id": "seoExpert",
+    "name": "SEO专家",
+    "icon": "🔍",
+    "color": "#DDA0DD",
+    "description": "搜索引擎优化，让内容被更多人看到",
+    "generate": "请生成一条SEO优化技巧",
+    "fallback": [
+      {
+        "content": "优质内容是SEO的基石，关键词密度控制在2%-3%之间最为合理",
+        "title": "SEO技巧",
+        "subtitle": "搜索引擎优化",
+        "category": "SEO",
+        "categoryIcon": "🔍"
+      }
+    ]
+  }
+]
