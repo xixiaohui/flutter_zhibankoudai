@@ -52,3 +52,7 @@ build/
 .packages
 .pub-cache/
 .pub/
+
+./material-components-flutter/*
+material-components-flutter/*
+node_modules

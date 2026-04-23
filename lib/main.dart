@@ -5,6 +5,7 @@ import 'config/routes.dart';
 import 'config/theme.dart';
 import 'providers/module_provider.dart';
 import 'providers/daily_content_provider.dart';
+import 'xui/pages/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +22,33 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  runApp(const ZhiBanKouDaiApp());
+  runApp(const ZbApp());
+}
+
+class ZbApp extends StatelessWidget {
+  const ZbApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: '智伴口袋',
+      debugShowCheckedModeBanner: false,
+      home: const HomePage(),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        brightness: Brightness.light,
+      ),
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blue,
+          brightness: Brightness.dark,
+        ),
+      ),
+      themeMode: ThemeMode.system,
+    );
+  }
 }
 
 class ZhiBanKouDaiApp extends StatelessWidget {
@@ -35,7 +62,7 @@ class ZhiBanKouDaiApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => DailyContentProvider()),
       ],
       child: MaterialApp.router(
-        title: 'ZhiBanKouDai',
+        title: '智伴口袋',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
