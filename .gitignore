@@ -56,3 +56,5 @@ build/
 ./material-components-flutter/*
 material-components-flutter/*
 node_modules
+
+./ai-server/.env
