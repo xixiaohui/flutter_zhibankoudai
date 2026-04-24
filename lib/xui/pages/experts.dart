@@ -1,6 +1,14 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/xui/pages/expert_detail.dart';
+import 'package:flutter_application_zhiban/xui/pages/poster_preview.dart';
+import 'package:flutter_application_zhiban/xui/pages/poster_widget.dart';
 import 'package:http/http.dart' as http;
+import 'package:screenshot/screenshot.dart';
+import 'package:path_provider/path_provider.dart';
+
+
 
 class ExpertsPage extends StatefulWidget {
   const ExpertsPage({super.key});
@@ -12,6 +20,11 @@ class ExpertsPage extends StatefulWidget {
 class _ExpertsPageState extends State<ExpertsPage> {
   late Future<List<dynamic>> _future;
 
+  // ⚠️ 本地开发注意：
+  static const baseUrl = "http://localhost:3000"; // Android模拟器
+  // iOS用：http://localhost:3000
+  // 真机用：你的局域网IP
+
   @override
   void initState() {
     super.initState();
@@ -19,9 +32,7 @@ class _ExpertsPageState extends State<ExpertsPage> {
   }
 
   Future<List<dynamic>> fetchExperts() async {
-    final res = await http.get(
-      Uri.parse('http://localhost:3000/api/experts'),
-    );
+    final res = await http.get(Uri.parse('$baseUrl/api/experts'));
 
     if (res.statusCode == 200) {
       final jsonData = json.decode(res.body);
@@ -29,6 +40,12 @@ class _ExpertsPageState extends State<ExpertsPage> {
     } else {
       throw Exception('加载失败');
     }
+  }
+
+  Future<void> _refresh() async {
+    setState(() {
+      _future = fetchExperts();
+    });
   }
 
   @override
@@ -40,12 +57,10 @@ class _ExpertsPageState extends State<ExpertsPage> {
       body: FutureBuilder<List<dynamic>>(
         future: _future,
         builder: (context, snapshot) {
-          // 加载中
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          // 错误
           if (snapshot.hasError) {
             return Center(child: Text("错误: ${snapshot.error}"));
           }
@@ -56,14 +71,25 @@ class _ExpertsPageState extends State<ExpertsPage> {
             return const Center(child: Text("暂无数据"));
           }
 
-          return ListView.builder(
-            padding: const EdgeInsets.all(12),
-            itemCount: list.length,
-            itemBuilder: (context, index) {
-              final item = list[index];
+          // ⭐ 自适应列数（核心优化）
+          final width = MediaQuery.of(context).size.width;
+          final crossAxisCount = (width / 140).floor().clamp(2, 4);
 
-              return _ExpertCard(item: item);
-            },
+          return RefreshIndicator(
+            onRefresh: _refresh,
+            child: GridView.builder(
+              padding: const EdgeInsets.all(12),
+              itemCount: list.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: 0.8,
+              ),
+              itemBuilder: (context, index) {
+                return _ExpertCard(item: list[index]);
+              },
+            ),
           );
         },
       ),
@@ -83,77 +109,118 @@ class _ExpertCard extends StatelessWidget {
     final date = item['date'] ?? '';
     final isAI = item['isAIGenerated'] ?? false;
 
-    return Card(
-      margin: const EdgeInsets.only(bottom: 12),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // 标题 + AI标签
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                if (isAI)
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8, vertical: 2),
-                    decoration: BoxDecoration(
-                      color: Colors.blue.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Text(
-                      "AI",
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.blue,
+    return InkWell(
+      borderRadius: BorderRadius.circular(20),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => ExpertDetailPage(item: item),
+          ),
+        );
+      },
+      child: Card(
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // 顶部：AI标签
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (isAI)
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: Colors.blue.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: const Text(
+                        "AI",
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Colors.blue,
+                        ),
                       ),
                     ),
-                  ),
-              ],
-            ),
+                  const Icon(Icons.arrow_forward_ios, size: 14),
+                ],
+              ),
 
-            const SizedBox(height: 8),
-
-            // 内容摘要（限制行数）
-            Text(
-              content,
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.grey[700]),
-            ),
-
-            const SizedBox(height: 10),
-
-            // 日期
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  date,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[500],
-                  ),
+              // 中间：标题
+              Text(
+                title,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.left,
+                style: const TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
                 ),
-                const Icon(Icons.arrow_forward_ios, size: 14),
-              ],
-            ),
-          ],
+              ),
+
+              // 内容摘要
+              Text(
+                content,
+                maxLines: 10,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey[700],
+                  fontFamily: "Microsoft YaHei",
+                ),
+              ),
+
+              // 底部：日期
+              Text(
+                date,
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Colors.grey[500],
+                ),
+              ),
+
+              IconButton(
+                icon: const Icon(Icons.image),
+                onPressed: () => showPosterPreview(context, item),
+              )
+            ],
+          ),
         ),
       ),
     );
   }
+}
+
+void showPosterPreview(BuildContext context, Map item) {
+  showDialog(
+    context: context,
+    builder: (_) => Dialog(
+      insetPadding: const EdgeInsets.all(20),
+      child: PosterPreview(item: item),
+    ),
+  );
+}
+
+
+Future<void> generatePoster(Map item) async {
+  final controller = ScreenshotController();
+
+  final image = await controller.captureFromWidget(
+    PosterWidget(item: item),
+    delay: const Duration(milliseconds: 100),
+  );
+
+  final dir = await getTemporaryDirectory();
+  final file = File('${dir.path}/poster.png');
+  await file.writeAsBytes(image);
+
+  print("海报路径: ${file.path}");
 }

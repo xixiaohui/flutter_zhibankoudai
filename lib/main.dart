@@ -38,7 +38,7 @@ class ZbApp extends StatelessWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo, brightness: Brightness.light),
         brightness: Brightness.light,
-        fontFamily: 'NotoSansSC',
+        fontFamily: 'NotoSansSC-Bold',
         fontFamilyFallback: [
           'PingFang SC',
           'Microsoft YaHei',
@@ -51,7 +51,7 @@ class ZbApp extends StatelessWidget {
           seedColor: Colors.indigo,
           brightness: Brightness.dark,
         ),
-        fontFamily: 'NotoSansSC',
+        fontFamily: 'NotoSansSC-Bold',
         fontFamilyFallback: [
           'PingFang SC',
           'Microsoft YaHei',

@@ -21,6 +21,9 @@ dependencies:
   share_plus: ^9.0.0
   screenshot: ^3.0.0
   http: ^1.2.0
+  path_provider: ^2.1.5
+  image_gallery_saver: ^2.0.3
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -33,6 +36,6 @@ flutter:
     - assets/images/
     - assets/data/
   fonts:
-  - family: NotoSansSC
+  - family: NotoSansSC-Bold
     fonts:
-      - asset: assets/fonts/NotoSansSC-Regular.ttf
+      - asset: assets/fonts/NotoSansSC-Bold.ttf
