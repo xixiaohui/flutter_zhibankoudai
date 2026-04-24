@@ -11,6 +11,7 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@cloudbase/node-sdk": "^3.18.1",
     "@genkit-ai/googleai": "^1.28.0",
     "axios": "^1.15.2",
     "cors": "^2.8.6",

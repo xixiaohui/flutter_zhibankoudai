@@ -1,20 +1,48 @@
+import 'dotenv/config';
 import express from "express";
 import cors from "cors";
+import axios from "axios";
 
 import { genkit } from "genkit";
-import { googleAI } from "@genkit-ai/googleai";
-
-// 初始化 Genkit
-const ai = genkit({
-  plugins: [googleAI()],
-  model: "googleai/gemini-2.0-flash",
-});
+import { z } from "zod";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// 👇 定义 AI 流程（重点）
+const API_KEY = process.env.DEEPSEEK_API_KEY;
+
+if (!API_KEY) {
+  console.error("❌ DEEPSEEK_API_KEY 未设置");
+  process.exit(1);
+}
+
+// ===== DeepSeek 调用 =====
+async function callDeepSeek(messages) {
+  const res = await axios.post(
+    "https://api.deepseek.com/v1/chat/completions",
+    {
+      model: "deepseek-chat",
+      messages,
+      temperature: 0.7,
+      max_tokens: 1000,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      timeout: 30000,
+    }
+  );
+
+  return res.data.choices[0].message.content;
+}
+
+// ===== 初始化 Genkit =====
+const ai = genkit();
+
+// ===== 定义 Flow（核心）=====
 const analyzeFlow = ai.defineFlow(
   {
     name: "analyzeFlow",
@@ -24,30 +52,49 @@ const analyzeFlow = ai.defineFlow(
     outputSchema: z.string(),
   },
   async ({ query }) => {
-    const response = await ai.generate({
-      prompt: `你是一个材料行业专家，请分析：
+    const messages = [
+      {
+        role: "system",
+        content: "你是材料行业专家，擅长分析玻璃纤维、FRP、复合材料。",
+      },
+      {
+        role: "user",
+        content: `
+请分析以下问题：
 
-问题：${query}
+${query}
 
-要求：
-1. 给出专业分析
-2. 提供建议
-3. 结构清晰`,
-    });
+请按格式输出：
+【结论】
+【原因】
+【建议】
+`,
+      },
+    ];
 
-    return response.text;
+    const result = await callDeepSeek(messages);
+
+    return result;
   }
 );
 
-// API 接口
+// ===== API =====
 app.post("/ai", async (req, res) => {
-  const { query } = req.body;
+  try {
+    const { query } = req.body;
 
-  const result = await analyzeFlow({ query });
+    const result = await analyzeFlow({ query });
 
-  res.json({ result });
+    res.json({ result });
+  } catch (e) {
+    console.error("❌ AI error:", e.response?.data || e.message);
+    res.status(500).json({ error: "AI调用失败" });
+  }
 });
 
+console.log("✅ Genkit + DeepSeek server initialized");
+console.log("API_KEY:", API_KEY);
+// ===== 启动 =====
 app.listen(3000, () => {
-  console.log("✅ Genkit AI server running: http://localhost:3000");
+  console.log("✅ Genkit + DeepSeek server: http://localhost:3000");
 });

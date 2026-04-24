@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'ai_hero.dart' show AiHeroSection;
+import 'experts.dart';
 
 
 class HomePage extends StatelessWidget {
@@ -237,12 +238,15 @@ class StepsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        _StepItem("1", "输入问题"),
-        _StepItem("2", "AI分析"),
-        _StepItem("3", "获取结果"),
-      ],
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min, // ⭐ 关键：不撑满高度
+        children: const [
+          _StepItem("1", "输入问题"),
+          _StepItem("2", "AI分析"),
+          _StepItem("3", "获取结果"),
+        ],
+      ),
     );
   }
 }
@@ -255,9 +259,16 @@ class _StepItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: CircleAvatar(child: Text(step)),
-      title: Text(text),
+    return SizedBox(
+      width: 250, // ⭐ 控制整体宽度（更像卡片）
+      child: ListTile(
+        contentPadding: EdgeInsets.zero,
+        leading: CircleAvatar(child: Text(step)),
+        title: Text(
+          text,
+          textAlign: TextAlign.center, // ⭐ 文本居中
+        ),
+      ),
     );
   }
 }
@@ -308,15 +319,27 @@ class FooterSection extends StatelessWidget {
         children: [
           Wrap(
             spacing: 40,
-            children: const [
+            children: [
               Text("智伴口袋"),
               Text("产品"),
               Text("资源"),
               Text("公司"),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ExpertsPage(),
+                    ),
+                  );
+                },
+                child: const Text("进入专家列表"),
+              )
             ],
           ),
           const SizedBox(height: 20),
           const Text("© 2026 智伴口袋"),
+          
         ],
       ),
     );

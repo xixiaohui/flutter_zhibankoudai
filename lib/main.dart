@@ -36,15 +36,27 @@ class ZbApp extends StatelessWidget {
       home: const HomePage(),
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo, brightness: Brightness.light),
         brightness: Brightness.light,
+        fontFamily: 'NotoSansSC',
+        fontFamilyFallback: [
+          'PingFang SC',
+          'Microsoft YaHei',
+          'SimSun',
+        ]
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blue,
+          seedColor: Colors.indigo,
           brightness: Brightness.dark,
         ),
+        fontFamily: 'NotoSansSC',
+        fontFamilyFallback: [
+          'PingFang SC',
+          'Microsoft YaHei',
+          'SimSun',
+        ],
       ),
       themeMode: ThemeMode.system,
     );
