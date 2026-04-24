@@ -127,8 +127,40 @@ app.post("/ai-stream", async (req, res) => {
 // API接口
 app.get("/api/experts", async (req, res) => {
   try {
+    const { collection } = req.query; // ⭐ 获取参数
+
+    // ✅ 参数校验（非常重要）
+    if (!collection) {
+      return res.status(400).json({
+        success: false,
+        error: "缺少 collection 参数",
+      });
+    }
+
     const result = await db
-      .collection("dailyAmericanExperts")
+      .collection(collection) // ⭐ 动态集合
+      .limit(10)
+      .get();
+
+    console.log("查询集合:", collection);
+    console.log("查询结果:", result);
+
+    res.json({
+      success: true,
+      data: result.data,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: err.message,
+    });
+  }
+});
+
+app.get("/api/meta", async (req, res) => {
+  try {
+    const result = await db
+      .collection("collections_meta")
       .limit(10)
       .get();
 

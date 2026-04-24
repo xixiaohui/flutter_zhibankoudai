@@ -15,12 +15,13 @@ class PosterWidget extends StatelessWidget {
 
     return Container(
       width: 800,
-      height: 800,
+      height: 900,
       padding: const EdgeInsets.all(32),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
         gradient: const LinearGradient(
-          colors: [Color(0xFFEEF2FF), Color(0xFFE0E7FF)],
+          // colors: [Color(0xFFEEF2FF), Color(0xFFE0E7FF)],
+          colors: [Color(0xFFFF9A9E), Color(0xFFFAD0C4)],
         ),
       ),
       child: Column(
@@ -53,8 +54,8 @@ class PosterWidget extends StatelessWidget {
           AutoSizeText(
             title,
             maxLines: 3,
-            minFontSize: 18,
-            maxFontSize: 32,
+            minFontSize: 24,
+            maxFontSize: 34,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
@@ -70,13 +71,16 @@ class PosterWidget extends StatelessWidget {
               child: AutoSizeText(
                 content,
                 textAlign: TextAlign.left,
-                maxLines: 10,
-                minFontSize: 18,
-                maxFontSize: 24,
+                
+                maxLines: 70,
+                minFontSize: 21,
+                maxFontSize: 34,
                 overflow: TextOverflow.ellipsis,
+                
                 style: const TextStyle(
                   height: 1.6,
                   color: Colors.black87,
+                  fontFamily: 'NotoSerifSC-Regular',
                 ),
               ),
             ),

@@ -11,7 +11,14 @@ import 'package:path_provider/path_provider.dart';
 
 
 class ExpertsPage extends StatefulWidget {
-  const ExpertsPage({super.key});
+  final String collectionName;
+
+  const ExpertsPage({
+    super.key,
+    required this.collectionName,
+  });
+
+  
 
   @override
   State<ExpertsPage> createState() => _ExpertsPageState();
@@ -32,7 +39,7 @@ class _ExpertsPageState extends State<ExpertsPage> {
   }
 
   Future<List<dynamic>> fetchExperts() async {
-    final res = await http.get(Uri.parse('$baseUrl/api/experts'));
+    final res = await http.get(Uri.parse('$baseUrl/api/experts?collection=${Uri.encodeComponent(widget.collectionName)}'));
 
     if (res.statusCode == 200) {
       final jsonData = json.decode(res.body);
@@ -174,7 +181,7 @@ class _ExpertCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.grey[700],
-                  fontFamily: "Microsoft YaHei",
+                  fontFamily: "NotoSerifSC-Regular",
                 ),
               ),
 
