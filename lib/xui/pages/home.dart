@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_zhiban/xui/pages/collections_page.dart';
+import 'package:flutter_application_zhiban/xui/pages/collections_list.dart';
+import 'package:flutter_application_zhiban/xui/pages/collections_grid.dart';
 
 import 'ai_hero.dart' show AiHeroSection;
 import 'experts.dart';
@@ -325,27 +326,28 @@ class FooterSection extends StatelessWidget {
               Text("产品"),
               Text("资源"),
               Text("公司"),
+              
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ExpertsPage(collectionName: "dailyAnthropologists",),
+                      builder: (context) => const CollectionsListPage(),
                     ),
                   );
                 },
-                child: const Text("进入专家列表"),
+                child: const Text("助理List"),
               ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const CollectionsPage(),
+                      builder: (context) => const CollectionsGridPage(),
                     ),
                   );
                 },
-                child: const Text("所有助理"),
+                child: const Text("助理Grid"),
               )
             ],
           ),

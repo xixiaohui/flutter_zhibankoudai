@@ -125,11 +125,47 @@ app.post("/ai-stream", async (req, res) => {
 
 
 // API接口
+// app.get("/api/experts", async (req, res) => {
+//   try {
+//     const { collection } = req.query; // ⭐ 获取参数
+
+//     // ✅ 参数校验（非常重要）
+//     if (!collection) {
+//       return res.status(400).json({
+//         success: false,
+//         error: "缺少 collection 参数",
+//       });
+//     }
+
+//     const result = await db
+//       .collection(collection) // ⭐ 动态集合
+//       .limit(10)
+//       .get();
+
+//     console.log("查询集合:", collection);
+//     console.log("查询结果:", result);
+
+//     res.json({
+//       success: true,
+//       data: result.data,
+//     });
+//   } catch (err) {
+//     res.status(500).json({
+//       success: false,
+//       error: err.message,
+//     });
+//   }
+// });
+
 app.get("/api/experts", async (req, res) => {
   try {
-    const { collection } = req.query; // ⭐ 获取参数
+    const { collection } = req.query;
 
-    // ✅ 参数校验（非常重要）
+    // ⭐ 分页参数（默认值）
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
+    // ✅ 参数校验
     if (!collection) {
       return res.status(400).json({
         success: false,
@@ -137,17 +173,37 @@ app.get("/api/experts", async (req, res) => {
       });
     }
 
+    if (page < 1 || limit < 1) {
+      return res.status(400).json({
+        success: false,
+        error: "page 和 limit 必须大于 0",
+      });
+    }
+
+    const skip = (page - 1) * limit;
+
+    // ⭐ 查询数据（多查一条判断是否还有下一页）
     const result = await db
-      .collection(collection) // ⭐ 动态集合
-      .limit(10)
+      .collection(collection)
+      .skip(skip)
+      .limit(limit + 1) // ⭐ 关键：多查1条
       .get();
 
-    console.log("查询集合:", collection);
-    console.log("查询结果:", result);
+    const list = result.data || [];
+
+    const hasMore = list.length > limit;
+
+    // ⭐ 只返回 limit 条
+    const data = hasMore ? list.slice(0, limit) : list;
+
+    console.log("集合:", collection, "页:", page, "数量:", data.length);
 
     res.json({
       success: true,
-      data: result.data,
+      data,
+      page,
+      limit,
+      hasMore,
     });
   } catch (err) {
     res.status(500).json({

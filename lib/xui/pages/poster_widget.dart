@@ -11,6 +11,7 @@ class PosterWidget extends StatelessWidget {
   double getMaxFontSize(String text) {
     final len = text.length;
 
+    debugPrint("文本长度: $len");
     if (len < 50) {
       return 48; // ⭐ 很短 → 大字海报感
     } else if (len < 150) {
@@ -20,6 +21,21 @@ class PosterWidget extends StatelessWidget {
     } else {
       return 27; // ⭐ 长文本 → 自动压缩
     }
+  }
+  double getMinFontSize(String text) {
+    final len = text.length;
+
+    if (len <= 50) return 28;     // 超短 → 大字
+    if (len <= 100) return 25;
+    if (len <= 150) return 24;
+    if (len <= 200) return 23;
+    if (len <= 250) return 21;
+    if (len <= 300) return 18;
+    if (len <= 350) return 17;
+    if (len <= 400) return 16;
+    if (len <= 1200) return 10;
+
+    return 10; // 超长内容
   }
 
   @override
@@ -33,6 +49,8 @@ class PosterWidget extends StatelessWidget {
     final date = DateFormat('yyyy.MM.dd').format(DateTime.now());
 
     final maxSize = getMaxFontSize(content);
+    final minSize = getMinFontSize(content);
+
 
     return AspectRatio(
       aspectRatio: 3 / 4, // ⭐ 核心
@@ -85,7 +103,7 @@ class PosterWidget extends StatelessWidget {
               child: Text(
                 "ZHIBANKOUDAI",
                 style: TextStyle(
-                  fontSize: 60,
+                  fontSize: 67,
                   fontWeight: FontWeight.bold,
                   color: Colors.blue.withOpacity(0.04),
                 ),
@@ -94,7 +112,7 @@ class PosterWidget extends StatelessWidget {
 
             /// ⭐ 主体
             Padding(
-              padding: const EdgeInsets.all(40),
+              padding: const EdgeInsets.all(30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -132,7 +150,7 @@ class PosterWidget extends StatelessWidget {
                     ],
                   ),
 
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 30),
 
                   /// ⭐ 标题
                   AutoSizeText(
@@ -148,7 +166,7 @@ class PosterWidget extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 48),
+                  const SizedBox(height: 30),
 
                   /// ⭐ 内容块
                   Expanded(
@@ -170,7 +188,7 @@ class PosterWidget extends StatelessWidget {
                           content,
                           textAlign: TextAlign.left,
                           maxLines: 100,
-                          minFontSize: 14, // ⭐ 放大
+                          minFontSize: minSize, // ⭐ 放大
                           maxFontSize: maxSize,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
@@ -183,7 +201,7 @@ class PosterWidget extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 48),
+                  const SizedBox(height: 30),
 
                   /// ⭐ 底部
                   Row(

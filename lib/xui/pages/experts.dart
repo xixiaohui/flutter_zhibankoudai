@@ -8,8 +8,6 @@ import 'package:http/http.dart' as http;
 import 'package:screenshot/screenshot.dart';
 import 'package:path_provider/path_provider.dart';
 
-
-
 class ExpertsPage extends StatefulWidget {
   final String collectionName;
 
@@ -18,87 +16,119 @@ class ExpertsPage extends StatefulWidget {
     required this.collectionName,
   });
 
-  
-
   @override
   State<ExpertsPage> createState() => _ExpertsPageState();
 }
 
 class _ExpertsPageState extends State<ExpertsPage> {
-  late Future<List<dynamic>> _future;
+  final List<dynamic> _list = [];
 
-  // ⚠️ 本地开发注意：
-  static const baseUrl = "http://localhost:3000"; // Android模拟器
-  // iOS用：http://localhost:3000
-  // 真机用：你的局域网IP
+  int page = 1;
+  bool isLoading = false;
+  bool hasMore = true;
+
+  static const baseUrl = "http://localhost:3000";
+
+  final ScrollController _controller = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    _future = fetchExperts();
+    _fetchData();
+
+    _controller.addListener(() {
+      if (_controller.position.pixels >
+          _controller.position.maxScrollExtent - 200) {
+        _fetchData();
+      }
+    });
   }
 
-  Future<List<dynamic>> fetchExperts() async {
-    final res = await http.get(Uri.parse('$baseUrl/api/experts?collection=${Uri.encodeComponent(widget.collectionName)}'));
+  Future<void> _fetchData({bool isRefresh = false}) async {
+    if (isLoading) return;
 
-    if (res.statusCode == 200) {
-      final jsonData = json.decode(res.body);
-      return jsonData['data'];
-    } else {
-      throw Exception('加载失败');
+    setState(() => isLoading = true);
+
+    if (isRefresh) {
+      page = 1;
+      _list.clear();
+      hasMore = true;
     }
+
+    try {
+      final res = await http.get(
+        Uri.parse(
+          '$baseUrl/api/experts?collection=${Uri.encodeComponent(widget.collectionName)}&page=$page&limit=2',
+        ),
+      );
+
+      final jsonData = json.decode(res.body);
+
+      final List data = jsonData['data'] ?? [];
+
+      setState(() {
+        _list.addAll(data);
+        hasMore = jsonData['hasMore'] ?? false;
+
+        if (hasMore) page++;
+      });
+    } catch (e) {
+      debugPrint("请求异常: $e");
+    }
+
+    setState(() => isLoading = false);
   }
 
   Future<void> _refresh() async {
-    setState(() {
-      _future = fetchExperts();
-    });
+    await _fetchData(isRefresh: true);
   }
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final crossAxisCount = (width / 140).floor().clamp(2, 4);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("专家内容"),
+        title: Text(widget.collectionName),
       ),
-      body: FutureBuilder<List<dynamic>>(
-        future: _future,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
+      body: RefreshIndicator(
+        onRefresh: _refresh,
+        child: GridView.builder(
+          padding: const EdgeInsets.all(12),
+          itemCount: _list.length + 1,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+            crossAxisSpacing: 12,
+            mainAxisSpacing: 12,
+            childAspectRatio: 0.8,
+          ),
+          itemBuilder: (context, index) {
+            if (index < _list.length) {
+              return _ExpertCard(item: _list[index]);
+            }
 
-          if (snapshot.hasError) {
-            return Center(child: Text("错误: ${snapshot.error}"));
-          }
+            // ⭐ 底部区域
+            return _buildLoadMore();
+          },
+        ),
+      ),
+    );
+  }
 
-          final list = snapshot.data ?? [];
+  Widget _buildLoadMore() {
+    if (isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
 
-          if (list.isEmpty) {
-            return const Center(child: Text("暂无数据"));
-          }
+    if (!hasMore) {
+      return const Center(child: Text("没有更多数据"));
+    }
 
-          // ⭐ 自适应列数（核心优化）
-          final width = MediaQuery.of(context).size.width;
-          final crossAxisCount = (width / 140).floor().clamp(2, 4);
-
-          return RefreshIndicator(
-            onRefresh: _refresh,
-            child: GridView.builder(
-              padding: const EdgeInsets.all(12),
-              itemCount: list.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: crossAxisCount,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-                childAspectRatio: 0.8,
-              ),
-              itemBuilder: (context, index) {
-                return _ExpertCard(item: list[index]);
-              },
-            ),
-          );
-        },
+    return Center(
+      child: ElevatedButton(
+        onPressed: _fetchData,
+        child: const Text("加载更多"),
       ),
     );
   }
