@@ -159,17 +159,41 @@ app.get("/api/experts", async (req, res) => {
 
 app.get("/api/meta", async (req, res) => {
   try {
+    // ⭐ 获取参数（带默认值）
+    const { page = 1, limit = 10 } = req.query;
+
+    const pageSize = Math.max(1, Math.min(100, Number(limit))); // 限制最大100
+    const pageIndex = Math.max(1, Number(page));
+
+    const skip = (pageIndex - 1) * pageSize;
+
+    // ⭐ 查询数据
     const result = await db
       .collection("collections_meta")
-      .limit(10)
+      .skip(skip)
+      .limit(pageSize)
       .get();
 
-    console.log("数据库查询结果:", result);
+    // ⭐ 可选：返回总数（用于判断是否还有更多）
+    const countRes = await db.collection("collections_meta").count();
+    const total = countRes.total;
 
     res.json({
       success: true,
       data: result.data,
+      page: pageIndex,
+      limit: pageSize,
+      total,
+      hasMore: skip + result.data.length < total, // ⭐ 是否还有数据
     });
+
+    console.log("分页查询:", {
+      page: pageIndex,
+      limit: pageSize,
+      returned: result.data.length,
+      total,
+    });
+
   } catch (err) {
     res.status(500).json({
       success: false,
@@ -178,18 +202,6 @@ app.get("/api/meta", async (req, res) => {
   }
 });
 
-// app.get("/api/experts", async (req, res) => {
-//   const page = Number(req.query.page || 0);
-//   const size = 10;
-
-//   const result = await db
-//     .collection("dailyAmericanExperts")
-//     .skip(page * size)
-//     .limit(size)
-//     .get();
-
-//   res.json(result.data);
-// });
 
 
 // ===== 启动 =====

@@ -131,73 +131,96 @@ class _ExpertCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
+        color: Colors.white,
+        clipBehavior: Clip.antiAlias, // ⭐ 防止点击溢出
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(16),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            
+            crossAxisAlignment: CrossAxisAlignment.start,
+            
             children: [
-              // 顶部：AI标签
+              // ⭐ 顶部：标签 + 箭头
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   if (isAI)
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 6, vertical: 2),
+                          horizontal: 8, vertical: 3),
                       decoration: BoxDecoration(
-                        color: Colors.blue.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(6),
+                        color: Colors.white,
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(8),
                       ),
                       child: const Text(
-                        "AI",
+                        "AI解读",
                         style: TextStyle(
-                          fontSize: 10,
+                          fontSize: 11,
                           color: Colors.blue,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                    ),
+                    )
+                  else
+                    const SizedBox(),
+
                   const Icon(Icons.arrow_forward_ios, size: 14),
                 ],
               ),
 
-              // 中间：标题
+              const SizedBox(height: 12),
+
+              // ⭐ 标题（核心）
               Text(
                 title,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.left,
                 style: const TextStyle(
-                  fontSize: 17,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
+                  height: 1.4,
                 ),
               ),
 
-              // 内容摘要
-              Text(
-                content,
-                maxLines: 10,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey[700],
-                  fontFamily: "NotoSerifSC-Regular",
+              const SizedBox(height: 10),
+
+              // ⭐ 内容摘要（优化重点）
+              Expanded(
+                child: Text(
+                  content,
+                  maxLines: 10, // ⭐ 控制在10行（最佳阅读）
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 18,
+                    height: 1.6,
+                    color: Colors.black87,
+                    fontFamily: "NotoSerifSC-Regular",
+                  ),
                 ),
               ),
 
-              // 底部：日期
-              Text(
-                date,
-                style: TextStyle(
-                  fontSize: 11,
-                  color: Colors.grey[500],
-                ),
-              ),
+              const SizedBox(height: 12),
 
-              IconButton(
-                icon: const Icon(Icons.image),
-                onPressed: () => showPosterPreview(context, item),
-              )
+              // ⭐ 底部：日期 + 操作
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    date,
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Colors.grey[500],
+                    ),
+                  ),
+
+                  IconButton(
+                    icon: const Icon(Icons.image, size: 18),
+                    tooltip: "生成海报",
+                    onPressed: () => showPosterPreview(context, item),
+                  )
+                ],
+              ),
             ],
           ),
         ),
@@ -216,12 +239,26 @@ void showPosterPreview(BuildContext context, Map item) {
   );
 }
 
+final GlobalKey posterKey = GlobalKey();
+
+Widget buildPoster(Map item) {
+  return Center(
+    child: RepaintBoundary(
+      key: posterKey,
+      child: SizedBox(
+        width: 360,   // ⭐ UI缩小显示（适配屏幕）
+        height: 480,  // ⭐ 3:4比例
+        child: PosterWidget(item: item),
+      ),
+    ),
+  );
+}
 
 Future<void> generatePoster(Map item) async {
   final controller = ScreenshotController();
 
   final image = await controller.captureFromWidget(
-    PosterWidget(item: item),
+    buildPoster(item),
     delay: const Duration(milliseconds: 100),
   );
 

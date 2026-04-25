@@ -1,8 +1,8 @@
 import 'dart:typed_data';
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_application_zhiban/xui/pages/poster_widget.dart';
-import 'package:screenshot/screenshot.dart';
-import 'package:flutter/foundation.dart';
 
 import 'package:flutter_application_zhiban/xui/utils/save_image_stub.dart'
     if (dart.library.html) 'package:flutter_application_zhiban/xui/utils/save_image_web.dart'
@@ -18,40 +18,61 @@ class PosterPreview extends StatefulWidget {
 }
 
 class _PosterPreviewState extends State<PosterPreview> {
-  final ScreenshotController _controller = ScreenshotController();
+  final GlobalKey posterKey = GlobalKey();
 
   Uint8List? imageBytes;
 
   @override
   void initState() {
     super.initState();
-    _generate();
-  }
 
-  Future<void> _generate() async {
-    final img = await _controller.captureFromWidget(
-      Material(
-        child: PosterWidget(item: widget.item),
-      ),
-    );
-
-    setState(() {
-      imageBytes = img;
+    // ⭐ 等 UI 渲染完再截图（关键）
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _capture();
     });
   }
 
-  // ⭐ 下载逻辑（跨平台）
- Future<void> _download() async {
-  if (imageBytes == null) return;
+  /// ⭐ 核心截图方法
+  Future<void> _capture() async {
+    try {
+      final boundary =
+          posterKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
 
-  await saveImage(imageBytes!);
+      // ⭐ 确保已渲染
+      if (boundary.debugNeedsPaint) {
+        await Future.delayed(const Duration(milliseconds: 100));
+        return _capture();
+      }
 
-  if (mounted) {
+      final ui.Image image = await boundary.toImage(pixelRatio: 3.0);
+
+      final byteData =
+          await image.toByteData(format: ui.ImageByteFormat.png);
+
+      final bytes = byteData?.buffer.asUint8List();
+
+      if (!mounted) return;
+
+      setState(() {
+        imageBytes = bytes;
+      });
+    } catch (e) {
+      debugPrint("❌ 导出失败: $e");
+    }
+  }
+
+  /// ⭐ 下载
+  Future<void> _download() async {
+    if (imageBytes == null) return;
+
+    await saveImage(imageBytes!);
+
+    if (!mounted) return;
+
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text("已下载")),
     );
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -69,16 +90,14 @@ class _PosterPreviewState extends State<PosterPreview> {
 
           const SizedBox(height: 10),
 
-          if (imageBytes == null)
-            const Padding(
-              padding: EdgeInsets.all(40),
-              child: CircularProgressIndicator(),
-            )
-          else
-            ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: Image.memory(imageBytes!),
+          /// ⭐ 关键：必须包 RepaintBoundary
+          RepaintBoundary(
+            key: posterKey,
+            child: Container(
+              color: Colors.white, // ⭐ 避免透明背景影响截图
+              child: PosterWidget(item: widget.item),
             ),
+          ),
 
           const SizedBox(height: 16),
 

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'dart:io';
 import '../config/theme.dart';
 
 class PosterPage extends StatefulWidget {
@@ -23,6 +26,7 @@ class PosterPage extends StatefulWidget {
 
 class _PosterPageState extends State<PosterPage> {
   final ScreenshotController _screenshotController = ScreenshotController();
+  bool _isProcessing = false;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +36,7 @@ class _PosterPageState extends State<PosterPage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.share),
-            onPressed: _sharePoster,
+            onPressed: _isProcessing ? null : _sharePoster,
             tooltip: '分享海报',
           ),
         ],
@@ -136,16 +140,30 @@ class _PosterPageState extends State<PosterPage> {
               const SizedBox(height: 24),
 
               // 操作按钮
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton.icon(
-                  onPressed: _sharePoster,
-                  icon: const Icon(Icons.share),
-                  label: const Text('保存并分享'),
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 14),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: _isProcessing ? null : _savePoster,
+                      icon: const Icon(Icons.download),
+                      label: Text(_isProcessing ? '处理中...' : '保存相册'),
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                      ),
+                    ),
                   ),
-                ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      onPressed: _isProcessing ? null : _sharePoster,
+                      icon: const Icon(Icons.share),
+                      label: const Text('分享'),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -154,10 +172,71 @@ class _PosterPageState extends State<PosterPage> {
     );
   }
 
-  /// 保存并分享海报
-  Future<void> _sharePoster() async {
+  /// 申请相册权限
+  Future<bool> _requestPermission() async {
+    if (Platform.isIOS) {
+      return await Permission.photosAddOnly.request().isGranted ||
+             await Permission.photos.request().isGranted;
+    } else {
+      // Android
+      if (await Permission.storage.request().isGranted) return true;
+      // Android 13+
+      if (await Permission.photos.request().isGranted) return true;
+      return true; // image_gallery_saver covers API >= 29 without storage permission in most cases
+    }
+  }
+
+  /// 保存海报到相册
+  Future<void> _savePoster() async {
+    setState(() => _isProcessing = true);
     try {
-      final image = await _screenshotController.capture();
+      final hasPermission = await _requestPermission();
+      if (!hasPermission) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('需要相册权限才能保存海报，请在设置中开启')),
+          );
+        }
+        return;
+      }
+
+      // 获取截图并处理清晰度
+      final image = await _screenshotController.capture(pixelRatio: 3.0);
+      if (image != null) {
+        final result = await ImageGallerySaver.saveImage(
+          image,
+          quality: 100,
+          name: 'zhiban_poster_${DateTime.now().millisecondsSinceEpoch}',
+        );
+        
+        if (mounted) {
+          if (result['isSuccess'] == true || result['isSuccess'] == "true") {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('🎉 海报已成功保存至相册')),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('保存失败，请重试')),
+            );
+          }
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('保存出错: $e')),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isProcessing = false);
+    }
+  }
+
+  /// 分享海报
+  Future<void> _sharePoster() async {
+    setState(() => _isProcessing = true);
+    try {
+      final image = await _screenshotController.capture(pixelRatio: 3.0);
       if (image != null) {
         await Share.shareXFiles(
           [XFile.fromData(image, name: 'zhiban_poster.png', mimeType: 'image/png')],
@@ -170,6 +249,8 @@ class _PosterPageState extends State<PosterPage> {
           SnackBar(content: Text('分享失败: $e')),
         );
       }
+    } finally {
+      if (mounted) setState(() => _isProcessing = false);
     }
   }
 }
