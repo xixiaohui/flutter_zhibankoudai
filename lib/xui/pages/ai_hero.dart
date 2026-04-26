@@ -112,5 +112,7 @@ class _AiHeroSectionState extends State<AiHeroSection> {
     );
   }
   
-  Future<Object?> fetchAiResult(String query) async {}
+  Future<Object?> fetchAiResult(String query) async {
+    return null;
+  }
 }

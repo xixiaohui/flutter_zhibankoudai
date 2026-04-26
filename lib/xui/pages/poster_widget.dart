@@ -41,7 +41,7 @@ class PosterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final title = item['title'] ?? '';
-    final content = item['content'] ?? '';
+    final content = item['content'] ?? item['summary'] ?? '';
     final isAI = item['isAIGenerated'] ?? false;
 
 

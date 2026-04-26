@@ -198,6 +198,9 @@ app.get("/api/experts", async (req, res) => {
 
     console.log("集合:", collection, "页:", page, "数量:", data.length);
 
+    console.log(data[0])
+    
+
     res.json({
       success: true,
       data,

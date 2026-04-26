@@ -1,4 +1,4 @@
-package com.example.flutter_application_zhiban
+package com.xxh.flutter_application_zhiban
 
 import io.flutter.embedding.android.FlutterActivity
 

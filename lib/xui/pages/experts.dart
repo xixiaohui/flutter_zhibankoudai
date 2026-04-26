@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_zhiban/xui/pages/expert_detail.dart';
 import 'package:flutter_application_zhiban/xui/pages/poster_preview.dart';
 import 'package:flutter_application_zhiban/xui/pages/poster_widget.dart';
+import 'package:flutter_application_zhiban/xui/utils/module.dart';
 import 'package:http/http.dart' as http;
 import 'package:screenshot/screenshot.dart';
 import 'package:path_provider/path_provider.dart';
@@ -88,9 +89,15 @@ class _ExpertsPageState extends State<ExpertsPage> {
     final width = MediaQuery.of(context).size.width;
     final crossAxisCount = (width / 140).floor().clamp(2, 4);
 
+    final module = findModuleByCollection(widget.collectionName);
+    String agentName = "";
+
+    if(module!=null){
+      agentName = module.name;
+    }
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.collectionName),
+        title: Text(agentName),
       ),
       body: RefreshIndicator(
         onRefresh: _refresh,
@@ -142,7 +149,7 @@ class _ExpertCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final title = item['title'] ?? '';
-    final content = item['content'] ?? '';
+    final content = item['content'] ?? item['summary'] ?? '';
     final date = item['date'] ?? '';
     final isAI = item['isAIGenerated'] ?? false;
 
@@ -210,6 +217,7 @@ class _ExpertCard extends StatelessWidget {
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   height: 1.4,
+                  color: Colors.black87
                 ),
               ),
 

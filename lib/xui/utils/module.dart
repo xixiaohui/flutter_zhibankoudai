@@ -1886,3 +1886,14 @@ const defaultModuleConfig = ModuleConfig(
     ),
   ],
 );
+
+
+Module? findModuleByCollection(String collection) {
+    try {
+      return defaultModuleConfig.modules.firstWhere(
+        (m) => m.collection == collection,
+      );
+    } catch (e) {
+      return null;
+    }
+  }

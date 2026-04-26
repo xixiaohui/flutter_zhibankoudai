@@ -88,7 +88,7 @@ class _CollectionsGridPageState extends State<CollectionsGridPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("数据库列表")),
+      appBar: AppBar(title: const Text("助理列表")),
 
       body: RefreshIndicator(
         onRefresh: () => _fetchData(isRefresh: true),

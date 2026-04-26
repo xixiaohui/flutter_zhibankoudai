@@ -9,7 +9,7 @@ class ExpertDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final title = item['title'] ?? '';
-    final content = item['content'] ?? '';
+    final content = item['content'] ?? item['summary']??'';
     final date = item['date'] ?? '';
 
     return Scaffold(
@@ -54,6 +54,7 @@ class ExpertDetailPage extends StatelessWidget {
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
                         height: 1.4,
+                        color: Colors.black87
                       ),
                     ),
 
