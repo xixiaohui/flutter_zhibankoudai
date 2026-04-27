@@ -6,6 +6,7 @@ import 'config/theme.dart';
 import 'providers/module_provider.dart';
 import 'providers/daily_content_provider.dart';
 import 'xui/pages/home.dart';
+import 'package:flutter/gestures.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +24,14 @@ void main() async {
   ]);
 
   runApp(const ZbApp());
+}
+
+class MyScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }
 
 class ZbApp extends StatelessWidget {
@@ -59,6 +68,7 @@ class ZbApp extends StatelessWidget {
         ],
       ),
       themeMode: ThemeMode.system,
+      scrollBehavior: MyScrollBehavior(),
     );
   }
 }

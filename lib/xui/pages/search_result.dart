@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-
 class SearchResultPage extends StatefulWidget {
   final String query;
 
@@ -71,8 +70,10 @@ class _SearchResultPageState extends State<SearchResultPage> {
 
     try {
       final res = await http.post(
-        Uri.parse("http://localhost:3000/ai"),
-        headers: {"Content-Type": "application/json"},
+        Uri.parse("https://www.xclaw.living/api/hunyuan/ai"),
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: jsonEncode({"query": query}),
       );
 

@@ -56,7 +56,7 @@ class _CollectionsPageState extends State<CollectionsListPage> {
 
     try {
       final res = await http.get(
-        Uri.parse('http://127.0.0.1:3000/api/meta?page=$page&limit=10'),
+        Uri.parse('https://www.xclaw.living/api/hunyuan/meta?page=$page&limit=10'),
       );
 
       if (!mounted) return;

@@ -28,7 +28,7 @@ class _ExpertsPageState extends State<ExpertsPage> {
   bool isLoading = false;
   bool hasMore = true;
 
-  static const baseUrl = "http://localhost:3000";
+  static const baseUrl = "https://www.xclaw.living/api/hunyuan";
 
   final ScrollController _controller = ScrollController();
 
@@ -59,7 +59,7 @@ class _ExpertsPageState extends State<ExpertsPage> {
     try {
       final res = await http.get(
         Uri.parse(
-          '$baseUrl/api/experts?collection=${Uri.encodeComponent(widget.collectionName)}&page=$page&limit=2',
+          '$baseUrl/experts?collection=${Uri.encodeComponent(widget.collectionName)}&page=$page&limit=2',
         ),
       );
 
