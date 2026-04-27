@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/xui/pages/ai_chat_page.dart';
 import 'package:flutter_application_zhiban/xui/pages/collections_grid.dart';
 import 'package:flutter_application_zhiban/xui/pages/collections_list.dart';
 
@@ -30,6 +31,10 @@ class HomePage extends StatelessWidget {
               SliverToBoxAdapter(child: HeroSection()),
               SliverToBoxAdapter(child: SizedBox(height: 16)),
 
+
+              /// 🔥 新增这里
+              AiEntrySliver(),
+              SliverToBoxAdapter(child: SizedBox(height: 24)),
               /// 快捷入口
               QuickGridSliver(),
               SliverToBoxAdapter(child: SizedBox(height: 24)),
@@ -463,18 +468,6 @@ class _AssistantItem {
   });
 }
 
-class AiChatPage extends StatelessWidget {
-  const AiChatPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("AI材料助手")),
-      body: const Center(child: Text("AI 对话页面")),
-    );
-  }
-}
-
 class MarketAiPage extends StatelessWidget {
   const MarketAiPage({super.key});
 
@@ -597,6 +590,73 @@ class TradeAiPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text("外贸助手")),
       body: const Center(child: Text("外贸询盘回复 / 英文生成")),
+    );
+  }
+}
+
+/// 进入AI聊天页面
+class AiEntrySliver extends StatelessWidget {
+  const AiEntrySliver({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(20),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const AiChatPage(),
+              ),
+            );
+          },
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              gradient: LinearGradient(
+                colors: [
+                  Theme.of(context).colorScheme.primary,
+                  Theme.of(context).colorScheme.primaryContainer,
+                ],
+              ),
+            ),
+            child: Row(
+              children: [
+                const Icon(Icons.smart_toy, size: 40, color: Colors.white),
+                const SizedBox(width: 16),
+
+                /// 文本
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "AI材料助手",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(height: 6),
+                      Text(
+                        "智能分析材料问题 · 行情趋势 · 采购建议",
+                        style: TextStyle(color: Colors.white70),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const Icon(Icons.arrow_forward_ios, color: Colors.white),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
