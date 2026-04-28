@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:gal/gal.dart';
 import 'dart:io';
 import '../config/theme.dart';
 
@@ -31,6 +32,7 @@ class _PosterPageState extends State<PosterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppTheme.warmCream,
       appBar: AppBar(
         title: const Text('生成海报'),
         actions: [
@@ -44,195 +46,109 @@ class _PosterPageState extends State<PosterPage> {
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
-          child: Column(
-            children: [
-              // 海报预览
-              Screenshot(
-                controller: _screenshotController,
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(32),
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [AppTheme.primaryColor, Color(0xFF8B5CF6)],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: BorderRadius.circular(24),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // 顶部品牌
-                      Row(
-                        children: [
-                          Text(
-                            widget.categoryIcon,
-                            style: const TextStyle(fontSize: 24),
-                          ),
-                          const SizedBox(width: 8),
-                          const Text(
-                            '智伴口袋',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 32),
-
-                      // 主要内容
-                      Text(
-                        widget.content,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w500,
-                          height: 1.8,
-                        ),
-                      ),
-
-                      // 标题/副标题
-                      if (widget.title.isNotEmpty) ...[
-                        const SizedBox(height: 24),
-                        Text(
-                          '— ${widget.title}',
-                          style: TextStyle(
-                            color: Colors.white.withValues(alpha: 0.8),
-                            fontSize: 16,
-                            fontStyle: FontStyle.italic,
-                          ),
-                        ),
-                      ],
-                      if (widget.subtitle.isNotEmpty) ...[
-                        const SizedBox(height: 4),
-                        Text(
-                          widget.subtitle,
-                          style: TextStyle(
-                            color: Colors.white.withValues(alpha: 0.6),
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-
-                      const SizedBox(height: 40),
-
-                      // 底部品牌
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            '每日知识陪伴',
-                            style: TextStyle(
-                              color: Colors.white.withValues(alpha: 0.5),
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+          child: Column(children: [
+            // 海报预览 — Clay 风
+            Screenshot(
+              controller: _screenshotController,
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(32),
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(colors: [AppTheme.ube800, AppTheme.ube900], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                  borderRadius: BorderRadius.circular(40),
+                  border: Border.all(color: AppTheme.oatBorder),
+                  boxShadow: AppTheme.clayShadow,
                 ),
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  // 头部
+                  Row(children: [
+                    Text(widget.categoryIcon, style: const TextStyle(fontSize: 24)),
+                    const SizedBox(width: 8),
+                    const Text('智伴口袋', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600, letterSpacing: -0.4)),
+                  ]),
+                  const SizedBox(height: 32),
+                  // 内容
+                  Text(widget.content, style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w500, height: 1.8)),
+                  if (widget.title.isNotEmpty) ...[
+                    const SizedBox(height: 24),
+                    Text('— ${widget.title}', style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 16, fontStyle: FontStyle.italic)),
+                  ],
+                  if (widget.subtitle.isNotEmpty) ...[
+                    const SizedBox(height: 4),
+                    Text(widget.subtitle, style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 14)),
+                  ],
+                  const SizedBox(height: 40),
+                  Align(alignment: Alignment.centerRight, child: Text('每日知识陪伴', style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 12))),
+                ]),
               ),
+            ),
 
-              const SizedBox(height: 24),
+            const SizedBox(height: 24),
 
-              // 操作按钮
-              Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton.icon(
-                      onPressed: _isProcessing ? null : _savePoster,
-                      icon: const Icon(Icons.download),
-                      label: Text(_isProcessing ? '处理中...' : '保存相册'),
-                      style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: ElevatedButton.icon(
-                      onPressed: _isProcessing ? null : _sharePoster,
-                      icon: const Icon(Icons.share),
-                      label: const Text('分享'),
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+            // Clay 风格按钮
+            Row(children: [
+              Expanded(child: _clayBtn(Icons.download, _isProcessing ? '处理中...' : '保存相册', _isProcessing ? null : _savePoster)),
+              const SizedBox(width: 16),
+              Expanded(child: _clayBtn(Icons.share, '分享', _isProcessing ? null : _sharePoster)),
+            ]),
+          ]),
         ),
       ),
     );
   }
 
-  /// 申请相册权限
-  Future<bool> _requestPermission() async {
-    if (Platform.isIOS) {
-      return await Permission.photosAddOnly.request().isGranted ||
-             await Permission.photos.request().isGranted;
-    } else {
-      // Android
-      if (await Permission.storage.request().isGranted) return true;
-      // Android 13+
-      if (await Permission.photos.request().isGranted) return true;
-      return true; // image_gallery_saver covers API >= 29 without storage permission in most cases
-    }
+  Widget _clayBtn(IconData icon, String label, VoidCallback? onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+        decoration: BoxDecoration(
+          color: AppTheme.pureWhite,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: AppTheme.oatBorder),
+          boxShadow: AppTheme.clayShadow,
+        ),
+        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Icon(icon, size: 18, color: AppTheme.clayBlack),
+          const SizedBox(width: 6),
+          Text(label, style: const TextStyle(color: AppTheme.clayBlack, fontSize: 16, fontWeight: FontWeight.w500)),
+        ]),
+      ),
+    );
   }
 
-  /// 保存海报到相册
+  Future<bool> _requestPermission() async {
+    if (Platform.isIOS) {
+      return await Permission.photosAddOnly.request().isGranted || await Permission.photos.request().isGranted;
+    }
+    if (await Permission.storage.request().isGranted) return true;
+    if (await Permission.photos.request().isGranted) return true;
+    return true;
+  }
+
   Future<void> _savePoster() async {
     setState(() => _isProcessing = true);
     try {
-      final hasPermission = await _requestPermission();
-      if (!hasPermission) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('需要相册权限才能保存海报，请在设置中开启')),
-          );
-        }
+      final ok = await _requestPermission();
+      if (!ok) {
+        if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('需要相册权限')));
         return;
       }
-
-      // 获取截图并处理清晰度
       final image = await _screenshotController.capture(pixelRatio: 3.0);
       if (image != null) {
-        final result = await ImageGallerySaver.saveImage(
-          image,
-          quality: 100,
-          name: 'zhiban_poster_${DateTime.now().millisecondsSinceEpoch}',
-        );
-        
-        if (mounted) {
-          if (result['isSuccess'] == true || result['isSuccess'] == "true") {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('🎉 海报已成功保存至相册')),
-            );
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('保存失败，请重试')),
-            );
-          }
-        }
+        final dir = await getTemporaryDirectory();
+        final path = '${dir.path}/zhiban_poster_${DateTime.now().millisecondsSinceEpoch}.png';
+        await File(path).writeAsBytes(image);
+        await Gal.putImage(path);
+        if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('🎉 海报已保存至相册')));
       }
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('保存出错: $e')),
-        );
-      }
+      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('保存出错: $e')));
     } finally {
       if (mounted) setState(() => _isProcessing = false);
     }
   }
 
-  /// 分享海报
   Future<void> _sharePoster() async {
     setState(() => _isProcessing = true);
     try {
@@ -244,11 +160,7 @@ class _PosterPageState extends State<PosterPage> {
         );
       }
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('分享失败: $e')),
-        );
-      }
+      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('分享失败: $e')));
     } finally {
       if (mounted) setState(() => _isProcessing = false);
     }
