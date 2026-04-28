@@ -4,8 +4,8 @@ import '../pages/home_page.dart';
 import '../pages/module_detail_page.dart';
 import '../pages/poster_page.dart';
 import '../pages/mine_page.dart';
+import 'theme.dart';
 
-/// 路由路径常量
 class RoutePaths {
   RoutePaths._();
   static const String home = '/';
@@ -15,7 +15,6 @@ class RoutePaths {
   static const String poster = '/poster';
 }
 
-/// 路由名称常量（用于导航）
 class RouteNames {
   RouteNames._();
   static const String home = 'home';
@@ -25,35 +24,30 @@ class RouteNames {
   static const String poster = 'poster';
 }
 
-/// 全局路由配置
 final GoRouter appRouter = GoRouter(
   initialLocation: RoutePaths.home,
-  debugLogDiagnostics: true,
+  debugLogDiagnostics: false,
   routes: [
-    // 底部导航 Shell 路由
     ShellRoute(
-      builder: (context, state, child) {
-        return MainShell(child: child);
-      },
+      builder: (context, state, child) => MainShell(child: child),
       routes: [
         GoRoute(
           path: RoutePaths.home,
           name: RouteNames.home,
-          builder: (context, state) => const HomePage(),
+          builder: (_, __) => const HomePage(),
         ),
         GoRoute(
           path: RoutePaths.discover,
           name: RouteNames.discover,
-          builder: (context, state) => const _DiscoverPage(),
+          builder: (_, __) => const _DiscoverPage(),
         ),
         GoRoute(
           path: RoutePaths.mine,
           name: RouteNames.mine,
-          builder: (context, state) => const MinePage(),
+          builder: (_, __) => const MinePage(),
         ),
       ],
     ),
-    // 独立页面（不在底部导航中）
     GoRoute(
       path: '/module/:moduleId',
       name: RouteNames.moduleDetail,
@@ -78,10 +72,8 @@ final GoRouter appRouter = GoRouter(
   ],
 );
 
-/// 主页面 Shell（包含底部导航栏）
 class MainShell extends StatelessWidget {
   final Widget child;
-
   const MainShell({super.key, required this.child});
 
   @override
@@ -90,46 +82,31 @@ class MainShell extends StatelessWidget {
       body: child,
       bottomNavigationBar: Builder(
         builder: (context) {
-          final String currentPath = GoRouterState.of(context).uri.path;
-          int currentIndex = 0;
-          if (currentPath.startsWith(RoutePaths.discover)) {
-            currentIndex = 1;
-          } else if (currentPath.startsWith(RoutePaths.mine)) {
-            currentIndex = 2;
-          }
+          final path = GoRouterState.of(context).uri.path;
+          int index = 0;
+          if (path.startsWith(RoutePaths.discover)) index = 1;
+          if (path.startsWith(RoutePaths.mine)) index = 2;
 
-          return BottomNavigationBar(
-            currentIndex: currentIndex,
-            onTap: (index) {
-              switch (index) {
-                case 0:
-                  context.go(RoutePaths.home);
-                  break;
-                case 1:
-                  context.go(RoutePaths.discover);
-                  break;
-                case 2:
-                  context.go(RoutePaths.mine);
-                  break;
-              }
-            },
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined),
-                activeIcon: Icon(Icons.home),
-                label: '首页',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.explore_outlined),
-                activeIcon: Icon(Icons.explore),
-                label: '发现',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person_outline),
-                activeIcon: Icon(Icons.person),
-                label: '我的',
-              ),
-            ],
+          return Container(
+            decoration: BoxDecoration(
+              color: AppTheme.pureWhite,
+              border: const Border(top: BorderSide(color: AppTheme.oatBorder)),
+            ),
+            child: BottomNavigationBar(
+              currentIndex: index,
+              onTap: (i) {
+                switch (i) {
+                  case 0: context.go(RoutePaths.home);
+                  case 1: context.go(RoutePaths.discover);
+                  case 2: context.go(RoutePaths.mine);
+                }
+              },
+              items: const [
+                BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home), label: '首页'),
+                BottomNavigationBarItem(icon: Icon(Icons.explore_outlined), activeIcon: Icon(Icons.explore), label: '发现'),
+                BottomNavigationBarItem(icon: Icon(Icons.person_outline), activeIcon: Icon(Icons.person), label: '我的'),
+              ],
+            ),
           );
         },
       ),
@@ -137,17 +114,13 @@ class MainShell extends StatelessWidget {
   }
 }
 
-/// 发现页占位
 class _DiscoverPage extends StatelessWidget {
   const _DiscoverPage();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('发现')),
-      body: const Center(
-        child: Text('发现页 - 开发中', style: TextStyle(fontSize: 16)),
-      ),
+      body: const Center(child: Text('发现页 - 开发中')),
     );
   }
 }
