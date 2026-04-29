@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 import 'package:flutter_application_zhiban/xui/pages/experts.dart';
 
 class ExpertDetailPage extends StatelessWidget {
@@ -13,8 +14,16 @@ class ExpertDetailPage extends StatelessWidget {
     final date = item['date'] ?? '';
 
     return Scaffold(
+      backgroundColor: xui.XuiTheme.warmCream,
       appBar: AppBar(
+        backgroundColor: xui.XuiTheme.pureWhite,
+        elevation: 0,
+        foregroundColor: xui.XuiTheme.clayBlack,
         title: const Text("详情"),
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
+        ),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -32,17 +41,7 @@ class ExpertDetailPage extends StatelessWidget {
                 padding: const EdgeInsets.all(24),
 
                 // ⭐ 卡片效果
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 10,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-                ),
+                decoration: xui.XuiTheme.cardDecoration(radius: 40, color: xui.XuiTheme.pureWhite),
 
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,12 +49,7 @@ class ExpertDetailPage extends StatelessWidget {
                     // ⭐ 标题
                     Text(
                       title,
-                      style: const TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        height: 1.4,
-                        color: Colors.black87
-                      ),
+                      style: xui.XuiTheme.sectionHeading(),
                     ),
 
                     const SizedBox(height: 12),
@@ -66,9 +60,9 @@ class ExpertDetailPage extends StatelessWidget {
                         // ⭐ 日期
                         Text(
                           date,
-                          style: TextStyle(
-                            color: Colors.grey[500],
+                          style: xui.XuiTheme.bodyStd().copyWith(
                             fontSize: 14,
+                            color: xui.XuiTheme.warmSilver,
                           ),
                         ),
 
@@ -85,11 +79,10 @@ class ExpertDetailPage extends StatelessWidget {
                     // ⭐ 正文（核心优化）
                     Text(
                       content,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        height: 1.8, // ⭐ 行高很关键
-                        color: Colors.black87,
+                      style: xui.XuiTheme.body().copyWith(
+                        height: 1.8,
                         fontFamily: 'NotoSerifSC-Regular',
+                        color: xui.XuiTheme.darkCharcoal,
                       ),
                       textAlign: TextAlign.left,
                     ),
@@ -100,7 +93,7 @@ class ExpertDetailPage extends StatelessWidget {
           );
         },
       ),
-      backgroundColor: const Color(0xFFF5F6FA), // ⭐ 页面背景灰
+    
     );
   }
 }

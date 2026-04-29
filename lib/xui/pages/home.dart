@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 import 'package:flutter_application_zhiban/xui/pages/ai_chat_page.dart';
 import 'package:flutter_application_zhiban/xui/pages/collections_grid.dart';
 import 'package:flutter_application_zhiban/xui/pages/collections_list.dart';
+import 'package:flutter_application_zhiban/xui/pages/search_result.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -14,9 +18,17 @@ class HomePage extends StatelessWidget {
     final desktop = isDesktop(context);
 
     return Scaffold(
+      backgroundColor: xui.XuiTheme.warmCream,
       appBar: AppBar(
-        title: const Text("智伴口袋"),
+        backgroundColor: xui.XuiTheme.pureWhite,
         centerTitle: true,
+        elevation: 0,
+        foregroundColor: xui.XuiTheme.clayBlack,
+        title: const Text("智伴口袋"),
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
+        ),
       ),
       body: Center(
         child: ConstrainedBox(
@@ -83,19 +95,16 @@ class HeroSection extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
-        padding: const EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Theme.of(context).colorScheme.primaryContainer,
-        ),
+        padding: const EdgeInsets.all(24),
+        decoration: xui.XuiTheme.cardDecoration(radius: 40, color: xui.XuiTheme.pureWhite),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Text("复合材料智能助手"),
-            SizedBox(height: 8),
-            Text("AI分析 · 材料查询 · 行情洞察"),
-            SizedBox(height: 16),
-            SearchSection(),
+          children: [
+            Text("复合材料智能助手", style: xui.XuiTheme.displayHero()),
+            const SizedBox(height: 8),
+            Text("AI分析 · 材料查询 · 行情洞察", style: xui.XuiTheme.subHeading()),
+            const SizedBox(height: 16),
+            const SearchSection(),
           ],
         ),
       ),
@@ -106,20 +115,59 @@ class HeroSection extends StatelessWidget {
 ////////////////////////////////////////////////////////////
 /// 🔍 搜索
 ////////////////////////////////////////////////////////////
-class SearchSection extends StatelessWidget {
+class SearchSection extends StatefulWidget {
   const SearchSection({super.key});
+
+  @override
+  State<SearchSection> createState() => _SearchSectionState();
+}
+
+class _SearchSectionState extends State<SearchSection> {
+  final TextEditingController _controller = TextEditingController();
+
+  void _goSearch() {
+    final query = _controller.text.trim();
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => SearchResultPage(query: query),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      decoration: InputDecoration(
-        hintText: "请输入问题，例如：玻璃钢为什么发白？",
+      controller: _controller,
+      textInputAction: TextInputAction.search,
+
+      // 👉 用户点击键盘搜索
+      onSubmitted: (_) => _goSearch(),
+
+      decoration: xui.XuiTheme.inputDecoration(
+        hintText: "请输入问题，例如：玻璃纤维的价格？",
+      ).copyWith(
         prefixIcon: const Icon(Icons.search),
-        filled: true,
-        fillColor: Colors.white,
+
+        // 👉 加一个搜索按钮（推荐）
+        suffixIcon: IconButton(
+          icon: const Icon(Icons.arrow_forward),
+          onPressed: _goSearch,
+        ),
+
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
           borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide:
+              const BorderSide(color: xui.XuiTheme.oatBorder, width: 1),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: const BorderSide(color: Color(0xFF146EF5), width: 2),
         ),
       ),
     );
@@ -184,11 +232,14 @@ class HotGridSliver extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       sliver: SliverGrid(
         delegate: SliverChildBuilderDelegate(
-          (_, i) => Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+          (_, i) => xui.ClayContainer(
+            borderRadius: 24,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: Center(
+              child: Text(items[i],
+                  textAlign: TextAlign.center,
+                  style: xui.XuiTheme.body()),
             ),
-            child: Center(child: Text(items[i], textAlign: TextAlign.center)),
           ),
           childCount: items.length,
         ),
@@ -226,22 +277,21 @@ class MarketGridSliver extends StatelessWidget {
             final item = items[i];
             final isUp = item.$3 == "上涨";
 
-            return Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
+            return xui.ClayContainer(
+              borderRadius: 24,
+              padding: const EdgeInsets.all(18),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(item.$1),
+                  Text(item.$1, style: xui.XuiTheme.featureTitle()),
                   const SizedBox(height: 8),
-                  Text(item.$2),
+                  Text(item.$2, style: xui.XuiTheme.cardHeading()),
                   const SizedBox(height: 8),
                   Icon(
                     isUp ? Icons.trending_up : Icons.trending_flat,
-                    color: isUp ? Colors.red : Colors.grey,
+                    color: isUp ? xui.XuiTheme.lemon700 : xui.XuiTheme.warmSilver,
                   ),
-                  Text(item.$3),
+                  Text(item.$3, style: xui.XuiTheme.body()),
                 ],
               ),
             );
@@ -282,17 +332,16 @@ class FeatureGridSliver extends StatelessWidget {
         delegate: SliverChildBuilderDelegate(
           (_, i) {
             final item = items[i];
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                color: Colors.grey.shade100,
-              ),
+            return xui.ClayContainer(
+              borderRadius: 24,
+              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+              color: xui.XuiTheme.pureWhite,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(item.$2),
+                  Icon(item.$2, color: xui.XuiTheme.blueberry800),
                   const SizedBox(height: 8),
-                  Text(item.$1),
+                  Text(item.$1, style: xui.XuiTheme.featureTitle()),
                 ],
               ),
             );
@@ -322,8 +371,8 @@ class SectionTitle extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
       child: Text(
-        title,
-        style: Theme.of(context).textTheme.titleLarge,
+        title.toUpperCase(),
+        style: xui.XuiTheme.uppercaseLabel(),
       ),
     );
   }
@@ -340,24 +389,19 @@ class _GridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(16),
+    return xui.ClayContainer(
       onTap: () {
         debugPrint("点击: $title");
       },
-      child: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primaryContainer,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon),
-            const SizedBox(height: 8),
-            Text(title),
-          ],
-        ),
+      borderRadius: 24,
+      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, color: xui.XuiTheme.slushie800),
+          const SizedBox(height: 8),
+          Text(title, style: xui.XuiTheme.featureTitle()),
+        ],
       ),
     );
   }
@@ -404,40 +448,26 @@ class AssistantGridSliver extends StatelessWidget {
           (context, i) {
             final item = items[i];
 
-            return InkWell(
-              borderRadius: BorderRadius.circular(20),
+            return xui.ClayContainer(
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => item.page),
                 );
               },
-              child: Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Theme.of(context)
-                      .colorScheme
-                      .primaryContainer
-                      .withOpacity(0.6),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(item.icon, size: 32),
-                    const SizedBox(height: 12),
-                    Text(
-                      item.title,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      item.desc,
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                  ],
-                ),
+              borderRadius: 24,
+              padding: const EdgeInsets.all(20),
+              color: xui.XuiTheme.pureWhite,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(item.icon, size: 32, color: xui.XuiTheme.blueberry800),
+                  const SizedBox(height: 12),
+                  Text(item.title, style: xui.XuiTheme.featureTitle()),
+                  const SizedBox(height: 6),
+                  Text(item.desc, style: xui.XuiTheme.bodyStd()),
+                ],
               ),
             );
           },
@@ -522,37 +552,26 @@ class OtherAssistantGridSliver extends StatelessWidget {
           (context, i) {
             final item = items[i];
 
-            return InkWell(
-              borderRadius: BorderRadius.circular(20),
+            return xui.ClayContainer(
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => item.page),
                 );
               },
-              child: Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.grey.shade100, // 👈 区别：弱化视觉
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(item.icon, size: 28),
-                    const SizedBox(height: 12),
-                    Text(
-                      item.title,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      item.desc,
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                  ],
-                ),
+              borderRadius: 24,
+              padding: const EdgeInsets.all(20),
+              color: xui.XuiTheme.pureWhite,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(item.icon, size: 28, color: xui.XuiTheme.matcha800),
+                  const SizedBox(height: 12),
+                  Text(item.title, style: xui.XuiTheme.featureTitle()),
+                  const SizedBox(height: 6),
+                  Text(item.desc, style: xui.XuiTheme.bodyStd()),
+                ],
               ),
             );
           },
@@ -603,27 +622,18 @@ class AiEntrySliver extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(20),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const AiChatPage(),
-              ),
-            );
-          },
-          child: Container(
+child: xui.ClayContainer(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const AiChatPage(),
+                ),
+              );
+            },
+            borderRadius: 24,
             padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              gradient: LinearGradient(
-                colors: [
-                  Theme.of(context).colorScheme.primary,
-                  Theme.of(context).colorScheme.primaryContainer,
-                ],
-              ),
-            ),
+            color: xui.XuiTheme.slushie500,
             child: Row(
               children: [
                 const Icon(Icons.smart_toy, size: 40, color: Colors.white),
@@ -656,7 +666,6 @@ class AiEntrySliver extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }

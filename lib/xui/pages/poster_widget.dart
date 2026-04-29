@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:intl/intl.dart';
 
@@ -53,13 +54,12 @@ class PosterWidget extends StatelessWidget {
 
 
     return AspectRatio(
-      aspectRatio: 3 / 4, // ⭐ 核心
-
+      aspectRatio: 3 / 4,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(28),
-
-          // ⭐ 更有品牌感的渐变
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: xui.XuiTheme.oatLight, width: 1),
+          boxShadow: xui.XuiTheme.clayShadow,
           gradient: const LinearGradient(
             colors: [Color(0xFFF8FAFF), Color(0xFFEFF3FF)],
             begin: Alignment.topLeft,

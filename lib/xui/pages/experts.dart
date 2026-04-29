@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 import 'package:flutter_application_zhiban/xui/pages/expert_detail.dart';
 import 'package:flutter_application_zhiban/xui/pages/poster_preview.dart';
 import 'package:flutter_application_zhiban/xui/pages/poster_widget.dart';
@@ -96,8 +97,16 @@ class _ExpertsPageState extends State<ExpertsPage> {
       agentName = module.name;
     }
     return Scaffold(
+      backgroundColor: xui.XuiTheme.warmCream,
       appBar: AppBar(
+        backgroundColor: xui.XuiTheme.pureWhite,
+        elevation: 0,
+        foregroundColor: xui.XuiTheme.clayBlack,
         title: Text(agentName),
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
+        ),
       ),
       body: RefreshIndicator(
         onRefresh: _refresh,
@@ -134,6 +143,14 @@ class _ExpertsPageState extends State<ExpertsPage> {
 
     return Center(
       child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: xui.XuiTheme.lemon500,
+          foregroundColor: xui.XuiTheme.clayBlack,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+        ),
         onPressed: _fetchData,
         child: const Text("加载更多"),
       ),
@@ -153,8 +170,7 @@ class _ExpertCard extends StatelessWidget {
     final date = item['date'] ?? '';
     final isAI = item['isAIGenerated'] ?? false;
 
-    return InkWell(
-      borderRadius: BorderRadius.circular(20),
+    return xui.ClayContainer(
       onTap: () {
         Navigator.push(
           context,
@@ -163,82 +179,61 @@ class _ExpertCard extends StatelessWidget {
           ),
         );
       },
-      child: Card(
-        elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        color: Colors.white,
-        clipBehavior: Clip.antiAlias, // ⭐ 防止点击溢出
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            
-            crossAxisAlignment: CrossAxisAlignment.start,
-            
+      borderRadius: 24,
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // ⭐ 顶部：标签 + 箭头
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // ⭐ 顶部：标签 + 箭头
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  if (isAI)
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 3),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.blue),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: const Text(
-                        "AI解读",
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: Colors.blue,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    )
-                  else
-                    const SizedBox(),
-
-                  const Icon(Icons.arrow_forward_ios, size: 14),
-                ],
-              ),
-
-              const SizedBox(height: 12),
-
-              // ⭐ 标题（核心）
-              Text(
-                title,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  height: 1.4,
-                  color: Colors.black87
-                ),
-              ),
-
-              const SizedBox(height: 10),
-
-              // ⭐ 内容摘要（优化重点）
-              Expanded(
-                child: Text(
-                  content,
-                  maxLines: 10, // ⭐ 控制在10行（最佳阅读）
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 18,
-                    height: 1.6,
-                    color: Colors.black87,
-                    fontFamily: "NotoSerifSC-Regular",
+              if (isAI)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: xui.XuiTheme.pureWhite,
+                    border: Border.all(color: xui.XuiTheme.pomegranate400),
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                ),
-              ),
+                  child: Text(
+                    "AI解读",
+                    style: xui.XuiTheme.bodyStd().copyWith(
+                      color: xui.XuiTheme.pomegranate400,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                )
+              else
+                const SizedBox(),
 
-              const SizedBox(height: 12),
+              const Icon(Icons.arrow_forward_ios, size: 14),
+            ],
+          ),
+
+          const SizedBox(height: 12),
+
+          // ⭐ 标题（核心）
+          Text(
+            title,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: xui.XuiTheme.cardHeading(),
+          ),
+
+          const SizedBox(height: 10),
+
+          // ⭐ 内容摘要（优化重点）
+          Expanded(
+            child: Text(
+              content,
+              maxLines: 10,
+              overflow: TextOverflow.ellipsis,
+              style: xui.XuiTheme.body().copyWith(fontFamily: "NotoSerifSC-Regular"),
+            ),
+          ),
+
+          const SizedBox(height: 12),
 
               // ⭐ 底部：日期 + 操作
               Row(
@@ -246,9 +241,9 @@ class _ExpertCard extends StatelessWidget {
                 children: [
                   Text(
                     date,
-                    style: TextStyle(
+                    style: xui.XuiTheme.bodyStd().copyWith(
                       fontSize: 11,
-                      color: Colors.grey[500],
+                      color: xui.XuiTheme.warmSilver,
                     ),
                   ),
 
@@ -261,9 +256,7 @@ class _ExpertCard extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
-    );
+        );
   }
 }
 
