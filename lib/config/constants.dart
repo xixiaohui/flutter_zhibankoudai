@@ -21,6 +21,10 @@ class AppConstants {
   // 腾讯云CloudBase配置
   static const String cloudbaseEnvId = 'YOUR_ENVID'; // TODO: 替换为实际环境ID
 
+  //默认模型
+  static const String defaultModel = 'hunyuan-exp';
+  static const String defaultSubModel = 'hunyuan-turbos-latest';
+
   // 模块类型枚举
   static const Map<String, String> moduleTypes = {
     'quote': '每日名言',
