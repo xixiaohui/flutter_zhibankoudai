@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 import 'package:http/http.dart' as http;
 import 'package:flutter_markdown/flutter_markdown.dart';
 
@@ -194,7 +195,17 @@ class _AiChatPageState extends State<AiChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("AI材料助手")),
+      backgroundColor: xui.XuiTheme.warmCream,
+      appBar: AppBar(
+        backgroundColor: xui.XuiTheme.pureWhite,
+        elevation: 0,
+        foregroundColor: xui.XuiTheme.clayBlack,
+        title: const Text("AI材料助手"),
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
+        ),
+      ),
       body: Column(
         children: [
           //////////////////////////////////////////////////////
@@ -222,10 +233,20 @@ class _AiChatPageState extends State<AiChatPage> {
                   Expanded(
                     child: TextField(
                       controller: _controller,
-                      decoration: InputDecoration(
+                      decoration: xui.XuiTheme.inputDecoration(
                         hintText: "输入材料问题...",
+                      ).copyWith(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
+                          borderSide: const BorderSide(color: xui.XuiTheme.oatBorder, width: 1),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: const BorderSide(color: xui.XuiTheme.oatBorder, width: 1),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: const BorderSide(color: Color(0xFF146EF5), width: 2),
                         ),
                       ),
                       onSubmitted: sendMessage,
@@ -234,6 +255,7 @@ class _AiChatPageState extends State<AiChatPage> {
                   const SizedBox(width: 8),
                   IconButton(
                     icon: const Icon(Icons.send),
+                    color: xui.XuiTheme.blueberry800,
                     onPressed: () => sendMessage(_controller.text),
                   ),
                 ],
@@ -264,18 +286,20 @@ class ChatBubble extends StatelessWidget {
           isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 6),
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(16),
         constraints: const BoxConstraints(maxWidth: 600),
         decoration: BoxDecoration(
           color: isUser
-              ? Colors.blue
-              : Theme.of(context).colorScheme.surfaceContainerHighest,
-          borderRadius: BorderRadius.circular(16),
+              ? xui.XuiTheme.slushie500
+              : xui.XuiTheme.pureWhite,
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: xui.XuiTheme.oatBorder, width: 1),
+          boxShadow: xui.XuiTheme.clayShadow,
         ),
         child: isUser
             ? Text(
                 message.content,
-                style: const TextStyle(color: Colors.white),
+                style: xui.XuiTheme.body().copyWith(color: xui.XuiTheme.pureWhite),
               )
             : _MarkdownWithCursor(text: message.content),
       ),

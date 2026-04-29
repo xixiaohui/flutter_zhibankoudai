@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 import 'package:flutter_application_zhiban/xui/pages/experts.dart';
 import 'package:flutter_application_zhiban/xui/utils/module.dart';
 import 'package:http/http.dart' as http;
@@ -101,7 +102,17 @@ class _CollectionsPageState extends State<CollectionsListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("数据库列表")),
+      backgroundColor: xui.XuiTheme.warmCream,
+      appBar: AppBar(
+        backgroundColor: xui.XuiTheme.pureWhite,
+        elevation: 0,
+        foregroundColor: xui.XuiTheme.clayBlack,
+        title: const Text("数据库列表"),
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
+        ),
+      ),
 
       body: NotificationListener<ScrollNotification>(
         onNotification: _onScroll,
@@ -243,7 +254,7 @@ class _CollectionItemState extends State<_CollectionItem> {
         constraints: const BoxConstraints(maxWidth: 800),
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
         child: InkWell(
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(24),
           onTap: () {
             Navigator.push(
               context,
@@ -267,14 +278,9 @@ class _CollectionItemState extends State<_CollectionItem> {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
-              borderRadius: BorderRadius.circular(18),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(isHover ? 0.12 : 0.06),
-                  blurRadius: isHover ? 20 : 12,
-                  offset: const Offset(0, 6),
-                ),
-              ],
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: xui.XuiTheme.clayShadow,
+              border: Border.all(color: xui.XuiTheme.oatBorder, width: 1),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
@@ -286,10 +292,10 @@ class _CollectionItemState extends State<_CollectionItem> {
                     height: 50,
                     decoration: BoxDecoration(
                       color: accentColor.withOpacity(0.12),
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(18),
                     ),
                     child: Center(
-                      child: Text(icon, style: const TextStyle(fontSize: 24)),
+                      child: Text(icon, style: xui.XuiTheme.bodyLarge().copyWith(fontSize: 24)),
                     ),
                   ),
 
@@ -302,16 +308,12 @@ class _CollectionItemState extends State<_CollectionItem> {
                       children: [
                         Text(
                           name,
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                            color: textColor,
-                          ),
+                          style: xui.XuiTheme.featureTitle().copyWith(color: textColor),
                         ),
                         const SizedBox(height: 6),
                         Text(
                           slogan,
-                          style: TextStyle(fontSize: 13, color: subTextColor),
+                          style: xui.XuiTheme.bodyStd().copyWith(color: subTextColor),
                         ),
                       ],
                     ),

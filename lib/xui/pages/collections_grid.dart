@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 import 'package:flutter_application_zhiban/xui/pages/experts.dart';
 import 'package:flutter_application_zhiban/xui/utils/module.dart';
 import 'package:http/http.dart' as http;
@@ -88,7 +89,17 @@ class _CollectionsGridPageState extends State<CollectionsGridPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("助理列表")),
+      backgroundColor: xui.XuiTheme.warmCream,
+      appBar: AppBar(
+        backgroundColor: xui.XuiTheme.pureWhite,
+        elevation: 0,
+        foregroundColor: xui.XuiTheme.clayBlack,
+        title: const Text("助理列表"),
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
+        ),
+      ),
 
       body: RefreshIndicator(
         onRefresh: () => _fetchData(isRefresh: true),
@@ -118,6 +129,14 @@ class _CollectionsGridPageState extends State<CollectionsGridPage> {
             }
 
             return ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: xui.XuiTheme.lemon500,
+                foregroundColor: xui.XuiTheme.clayBlack,
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
+              ),
               onPressed: _fetchData,
               child: const Text("加载更多"),
             );
@@ -203,7 +222,7 @@ class _CollectionItemState extends State<_CollectionItem> {
         colors != null ? hexToColor(colors.accent) : Colors.blue;
 
     return InkWell(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(24),
       onTap: () {
         Navigator.push(
           context,
@@ -215,20 +234,14 @@ class _CollectionItemState extends State<_CollectionItem> {
         );
       },
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 120), // ⭐ 更快更稳
+        duration: const Duration(milliseconds: 120),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [gradientStart, gradientEnd],
           ),
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              // ⭐ 只轻微变化，不要大幅
-              color: Colors.black.withOpacity(isHover ? 0.08 : 0.04),
-              blurRadius: isHover ? 12 : 8,
-              offset: const Offset(0, 3),
-            )
-          ],
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: xui.XuiTheme.clayShadow,
+          border: Border.all(color: xui.XuiTheme.oatBorder, width: 1),
         ),
 
         // ⭐ 不要 transform！！！
@@ -252,11 +265,7 @@ class _CollectionItemState extends State<_CollectionItem> {
                     name,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 34,
-                      fontWeight: FontWeight.bold,
-                      color: textColor,
-                    ),
+                    style: xui.XuiTheme.cardHeading().copyWith(color: textColor),
                   ),
                 ),
               ),
@@ -277,10 +286,7 @@ class _CollectionItemState extends State<_CollectionItem> {
                     slogan,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: subTextColor,
-                    ),
+                    style: xui.XuiTheme.bodyStd().copyWith(fontSize: 13, color: subTextColor),
                   ),
                   const SizedBox(height: 10),
 
@@ -291,7 +297,7 @@ class _CollectionItemState extends State<_CollectionItem> {
                       Expanded(
                         child: Text(
                           widget.name,
-                          style: const TextStyle(fontSize: 11),
+                          style: xui.XuiTheme.bodyStd().copyWith(fontSize: 11),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),

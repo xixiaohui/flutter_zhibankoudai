@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 
 import 'search_result.dart' show SearchResultPage;
 
@@ -40,10 +41,11 @@ class _AiHeroSectionState extends State<AiHeroSection> {
       padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 24),
       width: double.infinity,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        borderRadius: BorderRadius.circular(40),
+        gradient: const LinearGradient(
           colors: [
-            Theme.of(context).colorScheme.primaryContainer,
-            Theme.of(context).colorScheme.surface,
+            xui.XuiTheme.slushie500,
+            xui.XuiTheme.ube300,
           ],
         ),
       ),
@@ -51,12 +53,12 @@ class _AiHeroSectionState extends State<AiHeroSection> {
         children: [
           Text(
             '材料 AI 智能助手',
-            style: Theme.of(context).textTheme.headlineLarge,
+            style: xui.XuiTheme.sectionHeading().copyWith(color: xui.XuiTheme.pureWhite),
           ),
           const SizedBox(height: 16),
           Text(
             '输入问题，获取材料数据与分析结果',
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: xui.XuiTheme.bodyLarge().copyWith(color: xui.XuiTheme.pureWhite),
           ),
           const SizedBox(height: 40),
 
@@ -68,10 +70,20 @@ class _AiHeroSectionState extends State<AiHeroSection> {
                 Expanded(
                   child: TextField(
                     controller: controller,
-                    decoration: InputDecoration(
+                    decoration: xui.XuiTheme.inputDecoration(
                       hintText: "请输入材料、价格、应用场景...",
+                    ).copyWith(
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(24),
+                        borderSide: const BorderSide(color: xui.XuiTheme.oatBorder, width: 1),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(24),
+                        borderSide: const BorderSide(color: xui.XuiTheme.oatBorder, width: 1),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(24),
+                        borderSide: const BorderSide(color: Color(0xFF146EF5), width: 2),
                       ),
                     ),
                     onSubmitted: (_) => onSearch(),
@@ -79,6 +91,14 @@ class _AiHeroSectionState extends State<AiHeroSection> {
                 ),
                 const SizedBox(width: 12),
                 FilledButton(
+                  style: FilledButton.styleFrom(
+                    backgroundColor: xui.XuiTheme.blueberry800,
+                    foregroundColor: xui.XuiTheme.pureWhite,
+                    padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 26),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                  ),
                   onPressed: onSearch,
                   child: const Text("分析"),
                 ),

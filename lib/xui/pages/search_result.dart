@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -23,44 +24,20 @@ class _SearchResultPageState extends State<SearchResultPage> {
   void initState() {
     super.initState();
     controller = TextEditingController(text: widget.query);
-    fetchResult(widget.query);
+    final query = widget.query.trim();
+    if (query.isEmpty) {
+      loading = false;
+    } else {
+      fetchResult(query);
+    }
   }
 
-  //   Future<void> fetchResult(String query) async {
-  //     setState(() {
-  //       loading = true;
-  //       error = null;
-  //     });
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
-  //     try {
-  //       // 👉 模拟AI请求（后面换成你的API）
-  //       await Future.delayed(const Duration(seconds: 2));
-
-  //       final fakeResult = """
-  // 【价格趋势分析】
-
-  // 1. 2024年玻璃纤维价格整体上涨约12%
-  // 2. 原因：
-  //    - 原材料成本上升
-  //    - 市场需求增长
-  // 3. 预计短期仍将保持上涨趋势
-
-  // 【建议】
-  // - 提前备货
-  // - 关注上游原材料价格
-  // """;
-
-  //       setState(() {
-  //         result = fakeResult;
-  //         loading = false;
-  //       });
-  //     } catch (e) {
-  //       setState(() {
-  //         error = e.toString();
-  //         loading = false;
-  //       });
-  //     }
-  //   }
 
   Future<void> fetchResult(String query) async {
     setState(() {
@@ -100,7 +77,17 @@ class _SearchResultPageState extends State<SearchResultPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('AI 分析结果')),
+      backgroundColor: xui.XuiTheme.warmCream,
+      appBar: AppBar(
+        backgroundColor: xui.XuiTheme.pureWhite,
+        elevation: 0,
+        foregroundColor: xui.XuiTheme.clayBlack,
+        title: const Text('AI 查询'),
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -120,17 +107,38 @@ class _SearchResultPageState extends State<SearchResultPage> {
         Expanded(
           child: TextField(
             controller: controller,
-            decoration: InputDecoration(
-              hintText: "继续提问...",
+            decoration: xui.XuiTheme.inputDecoration(
+              hintText: "输入您的问题...",
+            ).copyWith(
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(24),
+                borderSide: const BorderSide(color: xui.XuiTheme.oatBorder, width: 1),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(24),
+                borderSide: const BorderSide(color: xui.XuiTheme.oatBorder, width: 1),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(24),
+                borderSide: const BorderSide(color: Color(0xFF146EF5), width: 2),
               ),
             ),
             onSubmitted: (_) => onSearch(),
           ),
         ),
         const SizedBox(width: 12),
-        FilledButton(onPressed: onSearch, child: const Text("分析")),
+        FilledButton(
+          style: FilledButton.styleFrom(
+            backgroundColor: xui.XuiTheme.blueberry800,
+            foregroundColor: xui.XuiTheme.pureWhite,
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24),
+            ),
+          ),
+          onPressed: onSearch,
+          child: const Text("分析"),
+        ),
       ],
     );
   }
@@ -144,12 +152,16 @@ class _SearchResultPageState extends State<SearchResultPage> {
       return Center(child: Text("出错了：$error"));
     }
 
+    if (result == null) {
+      return const Center(child: Text("请输入问题并点击分析"));
+    }
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "问题：${controller.text}",
+            "分析结果",
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
@@ -165,17 +177,25 @@ class _SearchResultPageState extends State<SearchResultPage> {
   }
 
   Widget _buildResultCard() {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Text(result ?? ""),
-      ),
+    return Container(
+      decoration: xui.XuiTheme.cardDecoration(radius: 24, color: xui.XuiTheme.pureWhite),
+      padding: const EdgeInsets.all(24),
+      child: Text(result ?? "", style: xui.XuiTheme.body()),
     );
   }
 
   Widget _buildSuggestions() {
     return Wrap(
-      children: [ActionChip(label: const Text("示例问题"), onPressed: () {})],
+      spacing: 12,
+      children: [
+        ActionChip(
+          backgroundColor: xui.XuiTheme.pureWhite,
+          label: const Text("复合材料"),
+          labelStyle: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.blueberry800),
+          side: const BorderSide(color: xui.XuiTheme.oatBorder),
+          onPressed: () {},
+        )
+      ],
     );
   }
 }
