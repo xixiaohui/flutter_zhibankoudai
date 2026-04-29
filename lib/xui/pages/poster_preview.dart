@@ -1,8 +1,10 @@
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_application_zhiban/xui/pages/poster_widget.dart';
+import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 
 import 'package:flutter_application_zhiban/xui/utils/save_image_stub.dart'
     if (dart.library.html) 'package:flutter_application_zhiban/xui/utils/save_image_web.dart'
@@ -19,104 +21,115 @@ class PosterPreview extends StatefulWidget {
 
 class _PosterPreviewState extends State<PosterPreview> {
   final GlobalKey posterKey = GlobalKey();
-
   Uint8List? imageBytes;
+  bool saving = false;
 
   @override
   void initState() {
     super.initState();
-
-    // ⭐ 等 UI 渲染完再截图（关键）
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _capture();
-    });
+    WidgetsBinding.instance.addPostFrameCallback((_) => _capture());
   }
 
-  /// ⭐ 核心截图方法
   Future<void> _capture() async {
     try {
-      final boundary =
-          posterKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      final context = posterKey.currentContext;
+      if (context == null) return;
 
-      // ⭐ 确保已渲染
+      final boundary = context.findRenderObject() as RenderRepaintBoundary;
       if (boundary.debugNeedsPaint) {
-        await Future.delayed(const Duration(milliseconds: 100));
+        await Future.delayed(const Duration(milliseconds: 80));
         return _capture();
       }
 
-      final ui.Image image = await boundary.toImage(pixelRatio: 3.0);
-
-      final byteData =
-          await image.toByteData(format: ui.ImageByteFormat.png);
-
+      final image = await boundary.toImage(pixelRatio: 3);
+      final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       final bytes = byteData?.buffer.asUint8List();
 
       if (!mounted) return;
-
-      setState(() {
-        imageBytes = bytes;
-      });
+      setState(() => imageBytes = bytes);
     } catch (e) {
-      debugPrint("❌ 导出失败: $e");
+      debugPrint("Export poster failed: $e");
     }
   }
 
-  /// ⭐ 下载
   Future<void> _download() async {
-    if (imageBytes == null) return;
+    if (imageBytes == null || saving) return;
 
-    await saveImage(imageBytes!);
+    setState(() => saving = true);
+    final ok = await saveImage(imageBytes!);
 
     if (!mounted) return;
+    setState(() => saving = false);
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("已下载")),
+      SnackBar(content: Text(ok ? "已保存到相册" : "保存失败，请检查相册权限")),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 600,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const SizedBox(height: 10),
+    final screen = MediaQuery.sizeOf(context);
+    final maxPreviewWidth = (screen.width - 48).clamp(280.0, 420.0).toDouble();
 
-          const Text(
-            "海报预览",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-
-          const SizedBox(height: 10),
-
-          /// ⭐ 关键：必须包 RepaintBoundary
-          RepaintBoundary(
-            key: posterKey,
-            child: Container(
-              color: Colors.white, // ⭐ 避免透明背景影响截图
-              child: PosterWidget(item: widget.item),
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    "海报预览",
+                    style: xui.XuiTheme.featureTitle(),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(Icons.close),
+                  tooltip: "关闭",
+                ),
+              ],
             ),
-          ),
-
-          const SizedBox(height: 16),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text("关闭"),
+            const SizedBox(height: 8),
+            Center(
+              child: SizedBox(
+                width: maxPreviewWidth,
+                child: RepaintBoundary(
+                  key: posterKey,
+                  child: Container(
+                    color: Colors.white,
+                    child: PosterWidget(item: widget.item),
+                  ),
+                ),
               ),
-              ElevatedButton(
-                onPressed: _download,
-                child: const Text("下载"),
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton.icon(
+                onPressed: imageBytes == null || saving ? null : _download,
+                icon: saving
+                    ? const SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Icon(Icons.download),
+                label: Text(imageBytes == null ? "生成中..." : "保存到相册"),
+                style: FilledButton.styleFrom(
+                  backgroundColor: xui.XuiTheme.blueberry800,
+                  foregroundColor: xui.XuiTheme.pureWhite,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                ),
               ),
-            ],
-          ),
-
-          const SizedBox(height: 12),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

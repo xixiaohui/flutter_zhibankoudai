@@ -1,21 +1,17 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 import 'package:flutter_application_zhiban/xui/pages/ai_chat_page.dart';
 import 'package:flutter_application_zhiban/xui/pages/collections_grid.dart';
 import 'package:flutter_application_zhiban/xui/pages/collections_list.dart';
 import 'package:flutter_application_zhiban/xui/pages/search_result.dart';
+import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  bool isDesktop(BuildContext context) =>
-      MediaQuery.of(context).size.width > 1000;
-
   @override
   Widget build(BuildContext context) {
-    final desktop = isDesktop(context);
+    final width = MediaQuery.sizeOf(context).width;
+    final maxWidth = width >= 900 ? 960.0 : double.infinity;
 
     return Scaffold(
       backgroundColor: xui.XuiTheme.warmCream,
@@ -32,48 +28,35 @@ class HomePage extends StatelessWidget {
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: desktop ? 1200 : double.infinity,
-          ),
+          constraints: BoxConstraints(maxWidth: maxWidth),
           child: CustomScrollView(
+            physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics(),
+            ),
             slivers: const [
-              SliverToBoxAdapter(child: SizedBox(height: 16)),
-
-              /// Hero
+              SliverToBoxAdapter(child: SizedBox(height: 12)),
               SliverToBoxAdapter(child: HeroSection()),
-              SliverToBoxAdapter(child: SizedBox(height: 16)),
-
-
-              /// 🔥 新增这里
+              SliverToBoxAdapter(child: SizedBox(height: 14)),
               AiEntrySliver(),
-              SliverToBoxAdapter(child: SizedBox(height: 24)),
-              /// 快捷入口
+              SliverToBoxAdapter(child: SizedBox(height: 22)),
+              SliverToBoxAdapter(child: SectionTitle("快捷入口")),
               QuickGridSliver(),
-              SliverToBoxAdapter(child: SizedBox(height: 24)),
-
-              /// 热门
+              SliverToBoxAdapter(child: SizedBox(height: 22)),
               SliverToBoxAdapter(child: SectionTitle("热门问题")),
               HotGridSliver(),
-              SliverToBoxAdapter(child: SizedBox(height: 24)),
-
-              /// 行情
+              SliverToBoxAdapter(child: SizedBox(height: 22)),
               SliverToBoxAdapter(child: SectionTitle("行情趋势")),
               MarketGridSliver(),
-              SliverToBoxAdapter(child: SizedBox(height: 24)),
-
-              /// 功能
+              SliverToBoxAdapter(child: SizedBox(height: 22)),
               SliverToBoxAdapter(child: SectionTitle("推荐功能")),
               FeatureGridSliver(),
-              SliverToBoxAdapter(child: SizedBox(height: 24)),
-
-              /// 我的助手
+              SliverToBoxAdapter(child: SizedBox(height: 22)),
               SliverToBoxAdapter(child: SectionTitle("智能助手")),
               AssistantGridSliver(),
-              SliverToBoxAdapter(child: SizedBox(height: 24)),
-
+              SliverToBoxAdapter(child: SizedBox(height: 22)),
               SliverToBoxAdapter(child: SectionTitle("其他助手")),
               OtherAssistantGridSliver(),
-              SliverToBoxAdapter(child: SizedBox(height: 80)),
+              SliverToBoxAdapter(child: SizedBox(height: 84)),
             ],
           ),
         ),
@@ -82,27 +65,40 @@ class HomePage extends StatelessWidget {
   }
 }
 
-
-
-////////////////////////////////////////////////////////////
-/// 🧠 Hero
-////////////////////////////////////////////////////////////
 class HeroSection extends StatelessWidget {
   const HeroSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final compact = _isCompact(context);
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: _pagePadding(context),
       child: Container(
-        padding: const EdgeInsets.all(24),
-        decoration: xui.XuiTheme.cardDecoration(radius: 40, color: xui.XuiTheme.pureWhite),
+        padding: EdgeInsets.all(compact ? 18 : 24),
+        decoration: xui.XuiTheme.cardDecoration(
+          radius: compact ? 28 : 36,
+          color: xui.XuiTheme.pureWhite,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("复合材料智能助手", style: xui.XuiTheme.displayHero()),
+            Text(
+              "复合材料智能助手",
+              style: xui.XuiTheme.displayHero().copyWith(
+                    fontSize: compact ? 34 : 48,
+                    height: 1.12,
+                    letterSpacing: 0,
+                  ),
+            ),
             const SizedBox(height: 8),
-            Text("AI分析 · 材料查询 · 行情洞察", style: xui.XuiTheme.subHeading()),
+            Text(
+              "AI分析 · 材料查询 · 行情洞察",
+              style: xui.XuiTheme.subHeading().copyWith(
+                    fontSize: compact ? 15 : 18,
+                    letterSpacing: 0,
+                  ),
+            ),
             const SizedBox(height: 16),
             const SearchSection(),
           ],
@@ -112,9 +108,6 @@ class HeroSection extends StatelessWidget {
   }
 }
 
-////////////////////////////////////////////////////////////
-/// 🔍 搜索
-////////////////////////////////////////////////////////////
 class SearchSection extends StatefulWidget {
   const SearchSection({super.key});
 
@@ -174,144 +167,124 @@ class _SearchSectionState extends State<SearchSection> {
   }
 }
 
-////////////////////////////////////////////////////////////
-/// ⚡ 快捷入口
-////////////////////////////////////////////////////////////
 class QuickGridSliver extends StatelessWidget {
   const QuickGridSliver({super.key});
 
   @override
   Widget build(BuildContext context) {
     final items = [
-      ("AI分析", Icons.smart_toy),
-      ("材料查询", Icons.search),
-      ("价格趋势", Icons.show_chart),
-      ("供应商", Icons.business),
+      _HomeAction("AI分析", Icons.smart_toy, const AiChatPage()),
+      _HomeAction("材料查询", Icons.search, const CollectionsGridPage()),
+      _HomeAction("价格趋势", Icons.show_chart, const MarketAiPage()),
+      _HomeAction("供应商", Icons.business, const CollectionsListPage()),
     ];
 
-    final count = _getGridCount(context);
-
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      sliver: SliverGrid(
-        delegate: SliverChildBuilderDelegate(
-          (context, i) {
-            final item = items[i];
-            return _GridItem(title: item.$1, icon: item.$2);
-          },
-          childCount: items.length,
-        ),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: count > items.length ? items.length : count,
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
-        ),
-      ),
+    return _AdaptiveGridSliver(
+      maxTileWidth: 176,
+      childAspectRatio: _isCompact(context) ? 1.12 : 1.18,
+      children: [
+        for (final item in items)
+          _IconTile(
+            title: item.title,
+            icon: item.icon,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => item.page),
+            ),
+          ),
+      ],
     );
   }
 }
 
-////////////////////////////////////////////////////////////
-/// 🔥 热门
-////////////////////////////////////////////////////////////
 class HotGridSliver extends StatelessWidget {
   const HotGridSliver({super.key});
 
   @override
   Widget build(BuildContext context) {
     final items = [
-      "格栅为什么发白？",
+      "玻璃钢为什么发白？",
       "FRP耐腐蚀吗？",
       "玻纤涨价原因",
       "树脂怎么选？",
     ];
 
-    final count = _getGridCount(context);
-
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      sliver: SliverGrid(
-        delegate: SliverChildBuilderDelegate(
-          (_, i) => xui.ClayContainer(
-            borderRadius: 24,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+    return _AdaptiveGridSliver(
+      maxTileWidth: 260,
+      minColumns: 1,
+      childAspectRatio: _isCompact(context) ? 3.2 : 2.5,
+      children: [
+        for (final text in items)
+          xui.ClayContainer(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => SearchResultPage(query: text)),
+            ),
+            borderRadius: 20,
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
             child: Center(
-              child: Text(items[i],
-                  textAlign: TextAlign.center,
-                  style: xui.XuiTheme.body()),
+              child: Text(
+                text,
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: xui.XuiTheme.bodyMed().copyWith(fontSize: 15),
+              ),
             ),
           ),
-          childCount: items.length,
-        ),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: count,
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
-          childAspectRatio: 1.8,
-        ),
-      ),
+      ],
     );
   }
 }
 
-////////////////////////////////////////////////////////////
-/// 📈 行情
-////////////////////////////////////////////////////////////
 class MarketGridSliver extends StatelessWidget {
   const MarketGridSliver({super.key});
 
   @override
   Widget build(BuildContext context) {
     final items = [
-      ("玻璃纤维纱", "¥4000-5200", "上涨"),
-      ("不饱和树脂", "¥9000-11000", "平稳"),
+      ("玻璃纤维纱", "¥4000-5200", "上涨", Icons.trending_up),
+      ("不饱和树脂", "¥9000-11000", "平稳", Icons.trending_flat),
     ];
 
-    final count = _getGridCount(context);
-
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      sliver: SliverGrid(
-        delegate: SliverChildBuilderDelegate(
-          (_, i) {
-            final item = items[i];
-            final isUp = item.$3 == "上涨";
-
-            return xui.ClayContainer(
-              borderRadius: 24,
-              padding: const EdgeInsets.all(18),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(item.$1, style: xui.XuiTheme.featureTitle()),
-                  const SizedBox(height: 8),
-                  Text(item.$2, style: xui.XuiTheme.cardHeading()),
-                  const SizedBox(height: 8),
-                  Icon(
-                    isUp ? Icons.trending_up : Icons.trending_flat,
-                    color: isUp ? xui.XuiTheme.lemon700 : xui.XuiTheme.warmSilver,
+    return _AdaptiveGridSliver(
+      maxTileWidth: 260,
+      minColumns: 1,
+      childAspectRatio: _isCompact(context) ? 2.35 : 1.9,
+      children: [
+        for (final item in items)
+          xui.ClayContainer(
+            borderRadius: 22,
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Icon(
+                  item.$4,
+                  color: item.$3 == "上涨"
+                      ? xui.XuiTheme.lemon700
+                      : xui.XuiTheme.warmSilver,
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(item.$1, style: xui.XuiTheme.featureTitle().copyWith(fontSize: 17)),
+                      const SizedBox(height: 4),
+                      Text(item.$2, style: xui.XuiTheme.bodyMed()),
+                    ],
                   ),
-                  Text(item.$3, style: xui.XuiTheme.body()),
-                ],
-              ),
-            );
-          },
-          childCount: items.length,
-        ),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: count,
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
-          childAspectRatio: 1.4,
-        ),
-      ),
+                ),
+                Text(item.$3, style: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.warmCharcoal)),
+              ],
+            ),
+          ),
+      ],
     );
   }
 }
 
-////////////////////////////////////////////////////////////
-/// 🧩 功能
-////////////////////////////////////////////////////////////
 class FeatureGridSliver extends StatelessWidget {
   const FeatureGridSliver({super.key});
 
@@ -324,100 +297,30 @@ class FeatureGridSliver extends StatelessWidget {
       ("报价工具", Icons.calculate),
     ];
 
-    final count = _getGridCount(context);
-
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      sliver: SliverGrid(
-        delegate: SliverChildBuilderDelegate(
-          (_, i) {
-            final item = items[i];
-            return xui.ClayContainer(
-              borderRadius: 24,
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-              color: xui.XuiTheme.pureWhite,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(item.$2, color: xui.XuiTheme.blueberry800),
-                  const SizedBox(height: 8),
-                  Text(item.$1, style: xui.XuiTheme.featureTitle()),
-                ],
-              ),
-            );
-          },
-          childCount: items.length,
-        ),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: count,
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
-          childAspectRatio: 1.3,
-        ),
-      ),
+    return _AdaptiveGridSliver(
+      maxTileWidth: 176,
+      childAspectRatio: _isCompact(context) ? 1.18 : 1.25,
+      children: [
+        for (final item in items)
+          _IconTile(title: item.$1, icon: item.$2),
+      ],
     );
   }
 }
 
-////////////////////////////////////////////////////////////
-/// 🧱 标题
-////////////////////////////////////////////////////////////
 class SectionTitle extends StatelessWidget {
   final String title;
+
   const SectionTitle(this.title, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-      child: Text(
-        title.toUpperCase(),
-        style: xui.XuiTheme.uppercaseLabel(),
-      ),
+      padding: EdgeInsets.fromLTRB(_horizontalInset(context), 0, _horizontalInset(context), 10),
+      child: Text(title, style: xui.XuiTheme.uppercaseLabel()),
     );
   }
 }
-
-////////////////////////////////////////////////////////////
-/// Grid Item
-////////////////////////////////////////////////////////////
-class _GridItem extends StatelessWidget {
-  final String title;
-  final IconData icon;
-
-  const _GridItem({required this.title, required this.icon});
-
-  @override
-  Widget build(BuildContext context) {
-    return xui.ClayContainer(
-      onTap: () {
-        debugPrint("点击: $title");
-      },
-      borderRadius: 24,
-      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: xui.XuiTheme.slushie800),
-          const SizedBox(height: 8),
-          Text(title, style: xui.XuiTheme.featureTitle()),
-        ],
-      ),
-    );
-  }
-}
-
-////////////////////////////////////////////////////////////
-/// 📐 响应式列数
-////////////////////////////////////////////////////////////
-int _getGridCount(BuildContext context) {
-  final width = MediaQuery.of(context).size.width;
-
-  if (width > 1200) return 4;
-  if (width > 800) return 3;
-  return 2;
-}
-
 
 class AssistantGridSliver extends StatelessWidget {
   const AssistantGridSliver({super.key});
@@ -427,61 +330,233 @@ class AssistantGridSliver extends StatelessWidget {
     final items = [
       _AssistantItem(
         title: "AI材料助手",
-        desc: "智能分析问题",
+        desc: "智能分析材料问题",
         icon: Icons.smart_toy,
         page: const AiChatPage(),
       ),
       _AssistantItem(
         title: "行情分析助手",
-        desc: "价格趋势 + 市场分析",
+        desc: "价格趋势与市场分析",
         icon: Icons.auto_graph,
         page: const MarketAiPage(),
       ),
     ];
 
-    final count = _getGridCount(context);
+    return _AssistantGrid(items: items);
+  }
+}
 
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      sliver: SliverGrid(
-        delegate: SliverChildBuilderDelegate(
-          (context, i) {
-            final item = items[i];
+class OtherAssistantGridSliver extends StatelessWidget {
+  const OtherAssistantGridSliver({super.key});
 
-            return xui.ClayContainer(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => item.page),
-                );
-              },
-              borderRadius: 24,
-              padding: const EdgeInsets.all(20),
-              color: xui.XuiTheme.pureWhite,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Icon(item.icon, size: 32, color: xui.XuiTheme.blueberry800),
-                  const SizedBox(height: 12),
-                  Text(item.title, style: xui.XuiTheme.featureTitle()),
-                  const SizedBox(height: 6),
-                  Text(item.desc, style: xui.XuiTheme.bodyStd()),
-                ],
+  @override
+  Widget build(BuildContext context) {
+    final items = [
+      _AssistantItem(
+        title: "报价助手",
+        desc: "成本估算与报价生成",
+        icon: Icons.calculate,
+        page: const QuoteAiPage(),
+      ),
+      _AssistantItem(
+        title: "外贸助手",
+        desc: "英文回复与客户沟通",
+        icon: Icons.language,
+        page: const TradeAiPage(),
+      ),
+      _AssistantItem(
+        title: "我的助手",
+        desc: "云端助手瀑布流",
+        icon: Icons.grid_3x3,
+        page: const CollectionsGridPage(),
+      ),
+      _AssistantItem(
+        title: "助手列表",
+        desc: "云端助手列表",
+        icon: Icons.list,
+        page: const CollectionsListPage(),
+      ),
+    ];
+
+    return _AssistantGrid(items: items);
+  }
+}
+
+class _AssistantGrid extends StatelessWidget {
+  final List<_AssistantItem> items;
+
+  const _AssistantGrid({required this.items});
+
+  @override
+  Widget build(BuildContext context) {
+    return _AdaptiveGridSliver(
+      maxTileWidth: 390,
+      minColumns: 1,
+      childAspectRatio: _isCompact(context) ? 2.9 : 2.6,
+      children: [
+        for (final item in items)
+          xui.ClayContainer(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => item.page),
+            ),
+            borderRadius: 22,
+            padding: const EdgeInsets.all(16),
+            color: xui.XuiTheme.pureWhite,
+            child: Row(
+              children: [
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: xui.XuiTheme.slushie500.withOpacity(0.14),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Icon(item.icon, color: xui.XuiTheme.blueberry800),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(item.title, style: xui.XuiTheme.featureTitle().copyWith(fontSize: 17)),
+                      const SizedBox(height: 4),
+                      Text(
+                        item.desc,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.warmCharcoal),
+                      ),
+                    ],
+                  ),
+                ),
+                const Icon(Icons.chevron_right, color: xui.XuiTheme.warmSilver),
+              ],
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+class AiEntrySliver extends StatelessWidget {
+  const AiEntrySliver({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: _pagePadding(context),
+        child: xui.ClayContainer(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const AiChatPage()),
+          ),
+          borderRadius: 24,
+          padding: const EdgeInsets.all(18),
+          color: xui.XuiTheme.slushie500,
+          child: Row(
+            children: [
+              const Icon(Icons.smart_toy, size: 36, color: Colors.white),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text(
+                      "AI材料助手",
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      "材料问题 · 行情趋势 · 采购建议",
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(color: Colors.white70, height: 1.35),
+                    ),
+                  ],
+                ),
               ),
-            );
-          },
-          childCount: items.length,
-        ),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: count,
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
-          childAspectRatio: 1.6,
+              const Icon(Icons.chevron_right, color: Colors.white),
+            ],
+          ),
         ),
       ),
     );
   }
+}
+
+class _AdaptiveGridSliver extends StatelessWidget {
+  final List<Widget> children;
+  final double maxTileWidth;
+  final double childAspectRatio;
+  final int minColumns;
+
+  const _AdaptiveGridSliver({
+    required this.children,
+    required this.maxTileWidth,
+    required this.childAspectRatio,
+    this.minColumns = 2,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width - _horizontalInset(context) * 2;
+    final columns = (width / maxTileWidth).floor().clamp(minColumns, 4).toInt();
+
+    return SliverPadding(
+      padding: _pagePadding(context),
+      sliver: SliverGrid(
+        delegate: SliverChildListDelegate(children),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: columns,
+          mainAxisSpacing: 12,
+          crossAxisSpacing: 12,
+          childAspectRatio: childAspectRatio,
+        ),
+      ),
+    );
+  }
+}
+
+class _IconTile extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  final VoidCallback? onTap;
+
+  const _IconTile({required this.title, required this.icon, this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return xui.ClayContainer(
+      onTap: onTap,
+      borderRadius: 22,
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, color: xui.XuiTheme.slushie800, size: 28),
+          const SizedBox(height: 8),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: xui.XuiTheme.featureTitle().copyWith(fontSize: 16),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _HomeAction {
+  final String title;
+  final IconData icon;
+  final Widget page;
+
+  const _HomeAction(this.title, this.icon, this.page);
 }
 
 class _AssistantItem {
@@ -490,7 +565,7 @@ class _AssistantItem {
   final IconData icon;
   final Widget page;
 
-  _AssistantItem({
+  const _AssistantItem({
     required this.title,
     required this.desc,
     required this.icon,
@@ -509,85 +584,6 @@ class MarketAiPage extends StatelessWidget {
     );
   }
 }
-
-
-class OtherAssistantGridSliver extends StatelessWidget {
-  const OtherAssistantGridSliver({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final items = [
-      _AssistantItem(
-        title: "报价助手",
-        desc: "成本估算 / 报价生成",
-        icon: Icons.calculate,
-        page: const QuoteAiPage(),
-      ),
-      _AssistantItem(
-        title: "外贸助手",
-        desc: "英文回复 / 客户沟通",
-        icon: Icons.language,
-        page: const TradeAiPage(),
-      ),
-       _AssistantItem(
-        title: "我的助手Grid",
-        desc: "云端助手",
-        icon: Icons.grid_3x3,
-        page: const CollectionsGridPage(),
-      ),
-       _AssistantItem(
-        title: "我的助手List",
-        desc: "云端助手",
-        icon: Icons.list,
-        page: const CollectionsListPage(),
-      ),
-    ];
-
-    final count = _getGridCount(context);
-
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      sliver: SliverGrid(
-        delegate: SliverChildBuilderDelegate(
-          (context, i) {
-            final item = items[i];
-
-            return xui.ClayContainer(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => item.page),
-                );
-              },
-              borderRadius: 24,
-              padding: const EdgeInsets.all(20),
-              color: xui.XuiTheme.pureWhite,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Icon(item.icon, size: 28, color: xui.XuiTheme.matcha800),
-                  const SizedBox(height: 12),
-                  Text(item.title, style: xui.XuiTheme.featureTitle()),
-                  const SizedBox(height: 6),
-                  Text(item.desc, style: xui.XuiTheme.bodyStd()),
-                ],
-              ),
-            );
-          },
-          childCount: items.length,
-        ),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: count,
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
-          childAspectRatio: 1.6,
-        ),
-      ),
-    );
-  }
-}
-
 
 class QuoteAiPage extends StatelessWidget {
   const QuoteAiPage({super.key});
@@ -613,59 +609,11 @@ class TradeAiPage extends StatelessWidget {
   }
 }
 
-/// 进入AI聊天页面
-class AiEntrySliver extends StatelessWidget {
-  const AiEntrySliver({super.key});
+bool _isCompact(BuildContext context) => MediaQuery.sizeOf(context).width < 600;
 
-  @override
-  Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-child: xui.ClayContainer(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => const AiChatPage(),
-                ),
-              );
-            },
-            borderRadius: 24,
-            padding: const EdgeInsets.all(20),
-            color: xui.XuiTheme.slushie500,
-            child: Row(
-              children: [
-                const Icon(Icons.smart_toy, size: 40, color: Colors.white),
-                const SizedBox(width: 16),
+double _horizontalInset(BuildContext context) => _isCompact(context) ? 14 : 18;
 
-                /// 文本
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        "AI材料助手",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(height: 6),
-                      Text(
-                        "智能分析材料问题 · 行情趋势 · 采购建议",
-                        style: TextStyle(color: Colors.white70),
-                      ),
-                    ],
-                  ),
-                ),
-
-                const Icon(Icons.arrow_forward_ios, color: Colors.white),
-              ],
-            ),
-          ),
-        ),
-      );
-  }
+EdgeInsets _pagePadding(BuildContext context) {
+  final horizontal = _horizontalInset(context);
+  return EdgeInsets.symmetric(horizontal: horizontal);
 }

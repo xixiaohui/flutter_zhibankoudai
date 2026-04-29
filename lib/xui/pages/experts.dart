@@ -1,14 +1,11 @@
 import 'dart:convert';
-import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 import 'package:flutter_application_zhiban/xui/pages/expert_detail.dart';
 import 'package:flutter_application_zhiban/xui/pages/poster_preview.dart';
-import 'package:flutter_application_zhiban/xui/pages/poster_widget.dart';
 import 'package:flutter_application_zhiban/xui/utils/module.dart';
+import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 import 'package:http/http.dart' as http;
-import 'package:screenshot/screenshot.dart';
-import 'package:path_provider/path_provider.dart';
 
 class ExpertsPage extends StatefulWidget {
   final String collectionName;
@@ -23,24 +20,22 @@ class ExpertsPage extends StatefulWidget {
 }
 
 class _ExpertsPageState extends State<ExpertsPage> {
+  static const baseUrl = "https://www.xclaw.living/api/hunyuan";
+
   final List<dynamic> _list = [];
+  final ScrollController _controller = ScrollController();
 
   int page = 1;
   bool isLoading = false;
   bool hasMore = true;
 
-  static const baseUrl = "https://www.xclaw.living/api/hunyuan";
-
-  final ScrollController _controller = ScrollController();
-
   @override
   void initState() {
     super.initState();
     _fetchData();
-
     _controller.addListener(() {
-      if (_controller.position.pixels >
-          _controller.position.maxScrollExtent - 200) {
+      if (!mounted || isLoading || !hasMore) return;
+      if (_controller.position.pixels >= _controller.position.maxScrollExtent - 240) {
         _fetchData();
       }
     });
@@ -50,7 +45,6 @@ class _ExpertsPageState extends State<ExpertsPage> {
     if (isLoading) return;
 
     setState(() => isLoading = true);
-
     if (isRefresh) {
       page = 1;
       _list.clear();
@@ -60,99 +54,84 @@ class _ExpertsPageState extends State<ExpertsPage> {
     try {
       final res = await http.get(
         Uri.parse(
-          '$baseUrl/experts?collection=${Uri.encodeComponent(widget.collectionName)}&page=$page&limit=2',
+          '$baseUrl/experts?collection=${Uri.encodeComponent(widget.collectionName)}&page=$page&limit=8',
         ),
       );
 
+      if (!mounted) return;
       final jsonData = json.decode(res.body);
-
       final List data = jsonData['data'] ?? [];
 
       setState(() {
         _list.addAll(data);
         hasMore = jsonData['hasMore'] ?? false;
-
         if (hasMore) page++;
       });
     } catch (e) {
-      debugPrint("请求异常: $e");
+      debugPrint("Fetch experts failed: $e");
     }
 
-    setState(() => isLoading = false);
+    if (mounted) setState(() => isLoading = false);
   }
 
-  Future<void> _refresh() async {
-    await _fetchData(isRefresh: true);
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final crossAxisCount = (width / 140).floor().clamp(2, 4);
-
     final module = findModuleByCollection(widget.collectionName);
-    String agentName = "";
+    final title = module?.name ?? widget.collectionName;
 
-    if(module!=null){
-      agentName = module.name;
-    }
     return Scaffold(
       backgroundColor: xui.XuiTheme.warmCream,
       appBar: AppBar(
         backgroundColor: xui.XuiTheme.pureWhite,
         elevation: 0,
         foregroundColor: xui.XuiTheme.clayBlack,
-        title: Text(agentName),
+        title: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(1),
           child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
         ),
       ),
       body: RefreshIndicator(
-        onRefresh: _refresh,
-        child: GridView.builder(
-          padding: const EdgeInsets.all(12),
-          itemCount: _list.length + 1,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: crossAxisCount,
-            crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
-            childAspectRatio: 0.8,
-          ),
-          itemBuilder: (context, index) {
-            if (index < _list.length) {
-              return _ExpertCard(item: _list[index]);
-            }
+        onRefresh: () => _fetchData(isRefresh: true),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final columns = constraints.maxWidth >= 720 ? 2 : 1;
 
-            // ⭐ 底部区域
-            return _buildLoadMore();
+            return GridView.builder(
+              controller: _controller,
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: EdgeInsets.fromLTRB(
+                columns == 1 ? 14 : 18,
+                14,
+                columns == 1 ? 14 : 18,
+                24 + MediaQuery.paddingOf(context).bottom,
+              ),
+              itemCount: _list.length + 1,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: columns,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: columns == 1 ? 1.85 : 1.45,
+              ),
+              itemBuilder: (context, index) {
+                if (index < _list.length) {
+                  return _ExpertCard(item: _list[index]);
+                }
+                return _LoadMoreTile(
+                  isLoading: isLoading,
+                  hasMore: hasMore,
+                  onPressed: _fetchData,
+                );
+              },
+            );
           },
         ),
-      ),
-    );
-  }
-
-  Widget _buildLoadMore() {
-    if (isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
-    if (!hasMore) {
-      return const Center(child: Text("没有更多数据"));
-    }
-
-    return Center(
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: xui.XuiTheme.lemon500,
-          foregroundColor: xui.XuiTheme.clayBlack,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
-          ),
-        ),
-        onPressed: _fetchData,
-        child: const Text("加载更多"),
       ),
     );
   }
@@ -174,128 +153,134 @@ class _ExpertCard extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (_) => ExpertDetailPage(item: item),
-          ),
+          MaterialPageRoute(builder: (_) => ExpertDetailPage(item: item)),
         );
       },
-      borderRadius: 24,
-      padding: const EdgeInsets.all(20),
+      borderRadius: 22,
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ⭐ 顶部：标签 + 箭头
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               if (isAI)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
                   decoration: BoxDecoration(
-                    color: xui.XuiTheme.pureWhite,
+                    color: xui.XuiTheme.pomegranate400.withOpacity(0.08),
                     border: Border.all(color: xui.XuiTheme.pomegranate400),
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(999),
                   ),
                   child: Text(
                     "AI解读",
                     style: xui.XuiTheme.bodyStd().copyWith(
-                      color: xui.XuiTheme.pomegranate400,
-                      fontWeight: FontWeight.w600,
-                    ),
+                          color: xui.XuiTheme.pomegranate400,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
                   ),
-                )
-              else
-                const SizedBox(),
-
-              const Icon(Icons.arrow_forward_ios, size: 14),
+                ),
+              const Spacer(),
+              IconButton(
+                visualDensity: VisualDensity.compact,
+                icon: const Icon(Icons.image_outlined, size: 20),
+                tooltip: "生成海报",
+                onPressed: () => showPosterPreview(context, item),
+              ),
             ],
           ),
-
-          const SizedBox(height: 12),
-
-          // ⭐ 标题（核心）
+          const SizedBox(height: 6),
           Text(
             title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: xui.XuiTheme.cardHeading(),
+            style: xui.XuiTheme.featureTitle().copyWith(fontSize: 18),
           ),
-
-          const SizedBox(height: 10),
-
-          // ⭐ 内容摘要（优化重点）
+          const SizedBox(height: 8),
           Expanded(
             child: Text(
               content,
-              maxLines: 10,
+              maxLines: 4,
               overflow: TextOverflow.ellipsis,
-              style: xui.XuiTheme.body().copyWith(fontFamily: "NotoSerifSC-Regular"),
+              style: xui.XuiTheme.bodyStd().copyWith(
+                    height: 1.55,
+                    color: xui.XuiTheme.darkCharcoal,
+                    fontFamily: "NotoSerifSC-Regular",
+                  ),
             ),
           ),
-
-          const SizedBox(height: 12),
-
-              // ⭐ 底部：日期 + 操作
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    date,
-                    style: xui.XuiTheme.bodyStd().copyWith(
-                      fontSize: 11,
-                      color: xui.XuiTheme.warmSilver,
-                    ),
-                  ),
-
-                  IconButton(
-                    icon: const Icon(Icons.image, size: 18),
-                    tooltip: "生成海报",
-                    onPressed: () => showPosterPreview(context, item),
-                  )
-                ],
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  date,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: xui.XuiTheme.bodyStd().copyWith(
+                        fontSize: 12,
+                        color: xui.XuiTheme.warmSilver,
+                      ),
+                ),
               ),
+              const Icon(Icons.chevron_right, color: xui.XuiTheme.warmSilver),
             ],
           ),
-        );
+        ],
+      ),
+    );
+  }
+}
+
+class _LoadMoreTile extends StatelessWidget {
+  final bool isLoading;
+  final bool hasMore;
+  final VoidCallback onPressed;
+
+  const _LoadMoreTile({
+    required this.isLoading,
+    required this.hasMore,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    if (!hasMore) {
+      return Center(
+        child: Text(
+          "没有更多数据",
+          style: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.warmSilver),
+        ),
+      );
+    }
+
+    return Center(
+      child: FilledButton(
+        onPressed: onPressed,
+        style: FilledButton.styleFrom(
+          backgroundColor: xui.XuiTheme.lemon500,
+          foregroundColor: xui.XuiTheme.clayBlack,
+          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 13),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+        ),
+        child: const Text("加载更多"),
+      ),
+    );
   }
 }
 
 void showPosterPreview(BuildContext context, Map item) {
-  showDialog(
+  showModalBottomSheet(
     context: context,
-    builder: (_) => Dialog(
-      insetPadding: const EdgeInsets.all(20),
-      child: PosterPreview(item: item),
+    isScrollControlled: true,
+    backgroundColor: xui.XuiTheme.pureWhite,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
     ),
+    builder: (_) => PosterPreview(item: item),
   );
-}
-
-final GlobalKey posterKey = GlobalKey();
-
-Widget buildPoster(Map item) {
-  return Center(
-    child: RepaintBoundary(
-      key: posterKey,
-      child: SizedBox(
-        width: 360,   // ⭐ UI缩小显示（适配屏幕）
-        height: 480,  // ⭐ 3:4比例
-        child: PosterWidget(item: item),
-      ),
-    ),
-  );
-}
-
-Future<void> generatePoster(Map item) async {
-  final controller = ScreenshotController();
-
-  final image = await controller.captureFromWidget(
-    buildPoster(item),
-    delay: const Duration(milliseconds: 100),
-  );
-
-  final dir = await getTemporaryDirectory();
-  final file = File('${dir.path}/poster.png');
-  await file.writeAsBytes(image);
-
-  print("海报路径: ${file.path}");
 }

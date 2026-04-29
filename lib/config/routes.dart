@@ -34,17 +34,17 @@ final GoRouter appRouter = GoRouter(
         GoRoute(
           path: RoutePaths.home,
           name: RouteNames.home,
-          builder: (_, __) => const HomePage(),
+          builder: (_, _) => const HomePage(),
         ),
         GoRoute(
           path: RoutePaths.discover,
           name: RouteNames.discover,
-          builder: (_, __) => const _DiscoverPage(),
+          builder: (_, _) => const _DiscoverPage(),
         ),
         GoRoute(
           path: RoutePaths.mine,
           name: RouteNames.mine,
-          builder: (_, __) => const MinePage(),
+          builder: (_, _) => const MinePage(),
         ),
       ],
     ),

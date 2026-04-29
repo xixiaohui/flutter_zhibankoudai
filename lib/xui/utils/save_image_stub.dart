@@ -1,9 +1,5 @@
+import 'dart:typed_data';
 
-Future<void> saveImage(List<int> bytes) async {
-  // 默认啥都不做（防止报错）
-  
-  // debugPrint(bytes.length.toString());
-
-
-
+Future<bool> saveImage(Uint8List bytes) async {
+  return false;
 }
