@@ -23,7 +23,7 @@ class ClayButton extends StatefulWidget {
 }
 
 class _ClayButtonState extends State<ClayButton> {
-  bool _hover = false;
+  final bool _hover = false;
 
   @override
   Widget build(BuildContext context) {

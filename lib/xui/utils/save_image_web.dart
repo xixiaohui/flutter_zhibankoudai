@@ -2,7 +2,7 @@
 import 'dart:html' as html;
 import 'dart:typed_data';
 
-Future<void> saveImage(Uint8List bytes) async {
+Future<bool> saveImage(Uint8List bytes) async {
   final blob = html.Blob([bytes], 'image/png');
   final url = html.Url.createObjectUrlFromBlob(blob);
 
@@ -16,4 +16,5 @@ Future<void> saveImage(Uint8List bytes) async {
   anchor.remove();
 
   html.Url.revokeObjectUrl(url);
+  return true;
 }

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 /// Xui 设计系统（基于 AppTheme + Clay 设计规范）
@@ -250,16 +251,23 @@ class ClayContainer extends StatefulWidget {
 
 class _ClayContainerState extends State<ClayContainer> {
   bool _hover = false;
+  bool _pressed = false;
+
   @override
   Widget build(BuildContext context) {
     final matrix = Matrix4.identity();
     if (_hover && widget.onTap != null) {
       final dy = widget.isButton ? -8.0 : -4.0;
       if (widget.isButton) {
-        matrix..translateByDouble(0.0, dy, 0.0, 1.0)..rotateZ(-0.14);
+        matrix
+          ..translate(0.0, dy)
+          ..rotateZ(-0.14);
       } else {
-        matrix.translateByDouble(0.0, dy, 0.0, 1.0);
+        matrix.translate(0.0, dy);
       }
+    }
+    if (_pressed && widget.onTap != null) {
+      matrix.scale(0.985, 0.985);
     }
 
     return MouseRegion(
@@ -267,6 +275,9 @@ class _ClayContainerState extends State<ClayContainer> {
       onExit: (_) => setState(() => _hover = false),
       child: GestureDetector(
         onTap: widget.onTap,
+        onTapDown: widget.onTap == null ? null : (_) => setState(() => _pressed = true),
+        onTapCancel: widget.onTap == null ? null : () => setState(() => _pressed = false),
+        onTapUp: widget.onTap == null ? null : (_) => setState(() => _pressed = false),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 150),
           transform: matrix,
@@ -300,4 +311,3 @@ class SectionTitle extends StatelessWidget {
     );
   }
 }
-

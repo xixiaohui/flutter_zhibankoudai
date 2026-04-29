@@ -1,63 +1,44 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
-import 'package:http/http.dart' as http;
 import 'package:flutter_markdown/flutter_markdown.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-////////////////////////////////////////////////////////////
-/// 🧠 Message Model
-////////////////////////////////////////////////////////////
 class Message {
   final String role;
   final String content;
 
   Message({required this.role, required this.content});
 
-  Map<String, dynamic> toJson() => {
-        "role": role,
-        "content": content,
-      };
+  Map<String, dynamic> toJson() => {"role": role, "content": content};
 
   factory Message.fromJson(Map<String, dynamic> json) {
     return Message(
-      role: json["role"],
-      content: json["content"],
+      role: json["role"] ?? "assistant",
+      content: json["content"] ?? "",
     );
   }
 }
 
-////////////////////////////////////////////////////////////
-/// 💾 存储
-////////////////////////////////////////////////////////////
 Future<void> saveSession(List<Message> messages) async {
   final prefs = await SharedPreferences.getInstance();
-
-  final jsonList = messages.map((e) => e.toJson()).toList();
-
   await prefs.setString(
     "current_chat_session",
-    jsonEncode(jsonList),
+    jsonEncode(messages.map((e) => e.toJson()).toList()),
   );
 }
 
 Future<List<Message>> loadSession() async {
   final prefs = await SharedPreferences.getInstance();
-
   final data = prefs.getString("current_chat_session");
-
   if (data == null) return [];
-
   final list = jsonDecode(data) as List;
-
   return list.map((e) => Message.fromJson(e)).toList();
 }
 
-////////////////////////////////////////////////////////////
-/// 🚀 Page
-////////////////////////////////////////////////////////////
 class AiChatPage extends StatefulWidget {
   const AiChatPage({super.key});
 
@@ -70,12 +51,9 @@ class _AiChatPageState extends State<AiChatPage> {
   final ScrollController _scrollController = ScrollController();
 
   List<Message> messages = [];
-
   bool loading = false;
+  Timer? _saveTimer;
 
-  ////////////////////////////////////////////////////////////
-  /// 🚀 初始化加载历史
-  ////////////////////////////////////////////////////////////
   @override
   void initState() {
     super.initState();
@@ -84,114 +62,81 @@ class _AiChatPageState extends State<AiChatPage> {
 
   Future<void> _init() async {
     final history = await loadSession();
-    setState(() {
-      messages = history;
-    });
+    if (!mounted) return;
+    setState(() => messages = history);
   }
 
-  ////////////////////////////////////////////////////////////
-  /// 🚀 保存（节流版）
-  ////////////////////////////////////////////////////////////
-  Timer? _saveTimer;
+  @override
+  void dispose() {
+    _saveTimer?.cancel();
+    _controller.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   void scheduleSave() {
     _saveTimer?.cancel();
-    _saveTimer = Timer(const Duration(seconds: 1), () {
+    _saveTimer = Timer(const Duration(milliseconds: 600), () {
       saveSession(messages);
     });
   }
 
-
-  ////////////////////////////////////////////////////////////
-  /// 🚀 流式请求
-  ////////////////////////////////////////////////////////////
   Future<void> sendMessage(String text) async {
-    if (text.trim().isEmpty) return;
+    final query = text.trim();
+    if (query.isEmpty || loading) return;
 
     setState(() {
-      messages.add(Message(role: "user", content: text));
-      messages.add(Message(role: "assistant", content: "")); // 占位
+      messages.add(Message(role: "user", content: query));
+      messages.add(Message(role: "assistant", content: ""));
       loading = true;
     });
-
+    scheduleSave();
     _controller.clear();
     _scrollToBottom();
 
-    final request = http.Request(
-      "POST",
-      Uri.parse("https://www.xclaw.living/api/hunyuan/ai-stream"),
-    );
+    final assistantIndex = messages.length - 1;
+    try {
+      final request = http.Request(
+        "POST",
+        Uri.parse("https://www.xclaw.living/api/hunyuan/ai-stream"),
+      );
+      request.headers["Content-Type"] = "application/json";
+      request.body = jsonEncode({"query": query});
 
-    request.headers["Content-Type"] = "application/json";
-    request.body = jsonEncode({"query": text});
-
-    final response = await request.send();
-
-    String buffer = "";
-    int assistantIndex = messages.length - 1;
-
-    response.stream.transform(utf8.decoder).listen(
-      (chunk) {
+      final response = await request.send();
+      String buffer = "";
+      await for (final chunk in response.stream.transform(utf8.decoder)) {
         buffer += chunk;
-
-        _typewriterUpdate(buffer, assistantIndex);
-      },
-      onDone: () {
+        if (!mounted) return;
         setState(() {
-          loading = false;
+          messages[assistantIndex] = Message(role: "assistant", content: buffer);
         });
-      },
-      onError: (e) {
-        setState(() {
-          messages[assistantIndex] =
-              Message(role: "assistant", content: "❌ 请求失败");
-          loading = false;
-        });
-      },
-    );
-  }
-
-  ////////////////////////////////////////////////////////////
-  /// ✨ 打字动画（核心）
-  ////////////////////////////////////////////////////////////
-  void _typewriterUpdate(String fullText, int index) {
-    const speed = 10; // 数值越小越快
-
-    Timer.periodic(const Duration(milliseconds: speed), (timer) {
-      if (!mounted) {
-        timer.cancel();
-        return;
-      }
-
-      final current = messages[index].content;
-
-      if (current.length >= fullText.length) {
-        timer.cancel();
-      } else {
-        setState(() {
-          messages[index] = Message(
-            role: "assistant",
-            content: fullText.substring(0, current.length + 1),
-          );
-        });
-
+        scheduleSave();
         _scrollToBottom();
       }
-    });
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        messages[assistantIndex] = Message(role: "assistant", content: "请求失败，请稍后再试。");
+      });
+    }
+
+    if (!mounted) return;
+    setState(() => loading = false);
+    scheduleSave();
   }
 
-  ////////////////////////////////////////////////////////////
   void _scrollToBottom() {
-    Future.delayed(const Duration(milliseconds: 50), () {
-      if (_scrollController.hasClients) {
-        _scrollController.jumpTo(
-          _scrollController.position.maxScrollExtent,
-        );
-      }
+    Future.delayed(const Duration(milliseconds: 80), () {
+      if (!_scrollController.hasClients) return;
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 180),
+        curve: Curves.easeOut,
+      );
     });
   }
 
-  ////////////////////////////////////////////////////////////
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -208,34 +153,42 @@ class _AiChatPageState extends State<AiChatPage> {
       ),
       body: Column(
         children: [
-          //////////////////////////////////////////////////////
-          /// 聊天区
-          //////////////////////////////////////////////////////
           Expanded(
-            child: ListView.builder(
-              controller: _scrollController,
-              padding: const EdgeInsets.all(12),
-              itemCount: messages.length,
-              itemBuilder: (_, i) {
-                return ChatBubble(message: messages[i]);
-              },
-            ),
+            child: messages.isEmpty
+                ? Center(
+                    child: Text(
+                      "输入材料问题，开始分析",
+                      style: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.warmCharcoal),
+                    ),
+                  )
+                : ListView.builder(
+                    controller: _scrollController,
+                    physics: const BouncingScrollPhysics(),
+                    padding: const EdgeInsets.fromLTRB(14, 14, 14, 18),
+                    itemCount: messages.length,
+                    itemBuilder: (_, i) => ChatBubble(message: messages[i]),
+                  ),
           ),
-
-          //////////////////////////////////////////////////////
-          /// 输入区
-          //////////////////////////////////////////////////////
           SafeArea(
+            top: false,
             child: Container(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.fromLTRB(12, 8, 12, 10),
+              decoration: const BoxDecoration(
+                color: xui.XuiTheme.pureWhite,
+                border: Border(top: BorderSide(color: xui.XuiTheme.oatBorder)),
+              ),
               child: Row(
                 children: [
                   Expanded(
                     child: TextField(
                       controller: _controller,
+                      minLines: 1,
+                      maxLines: 4,
+                      textInputAction: TextInputAction.send,
                       decoration: xui.XuiTheme.inputDecoration(
                         hintText: "输入材料问题...",
                       ).copyWith(
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: const BorderSide(color: xui.XuiTheme.oatBorder, width: 1),
@@ -253,10 +206,17 @@ class _AiChatPageState extends State<AiChatPage> {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  IconButton(
-                    icon: const Icon(Icons.send),
-                    color: xui.XuiTheme.blueberry800,
-                    onPressed: () => sendMessage(_controller.text),
+                  IconButton.filled(
+                    icon: loading
+                        ? const SizedBox(
+                            width: 18,
+                            height: 18,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : const Icon(Icons.send),
+                    color: xui.XuiTheme.pureWhite,
+                    style: IconButton.styleFrom(backgroundColor: xui.XuiTheme.blueberry800),
+                    onPressed: loading ? null : () => sendMessage(_controller.text),
                   ),
                 ],
               ),
@@ -268,10 +228,6 @@ class _AiChatPageState extends State<AiChatPage> {
   }
 }
 
-
-////////////////////////////////////////////////////////////
-/// 💬 气泡
-////////////////////////////////////////////////////////////
 class ChatBubble extends StatelessWidget {
   final Message message;
 
@@ -280,69 +236,32 @@ class ChatBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isUser = message.role == "user";
+    final maxWidth = MediaQuery.sizeOf(context).width * 0.84;
 
     return Align(
-      alignment:
-          isUser ? Alignment.centerRight : Alignment.centerLeft,
+      alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 6),
-        padding: const EdgeInsets.all(16),
-        constraints: const BoxConstraints(maxWidth: 600),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        constraints: BoxConstraints(maxWidth: maxWidth.clamp(260, 640).toDouble()),
         decoration: BoxDecoration(
-          color: isUser
-              ? xui.XuiTheme.slushie500
-              : xui.XuiTheme.pureWhite,
-          borderRadius: BorderRadius.circular(24),
+          color: isUser ? xui.XuiTheme.slushie500 : xui.XuiTheme.pureWhite,
+          borderRadius: BorderRadius.only(
+            topLeft: const Radius.circular(20),
+            topRight: const Radius.circular(20),
+            bottomLeft: Radius.circular(isUser ? 20 : 6),
+            bottomRight: Radius.circular(isUser ? 6 : 20),
+          ),
           border: Border.all(color: xui.XuiTheme.oatBorder, width: 1),
           boxShadow: xui.XuiTheme.clayShadow,
         ),
         child: isUser
             ? Text(
                 message.content,
-                style: xui.XuiTheme.body().copyWith(color: xui.XuiTheme.pureWhite),
+                style: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.pureWhite, height: 1.55),
               )
-            : _MarkdownWithCursor(text: message.content),
+            : MarkdownBody(data: message.content),
       ),
     );
   }
 }
-
-////////////////////////////////////////////////////////////
-/// ✨ Markdown + 光标闪动
-////////////////////////////////////////////////////////////
-class _MarkdownWithCursor extends StatefulWidget {
-  final String text;
-
-  const _MarkdownWithCursor({required this.text});
-
-  @override
-  State<_MarkdownWithCursor> createState() =>
-      _MarkdownWithCursorState();
-}
-
-class _MarkdownWithCursorState extends State<_MarkdownWithCursor> {
-  bool showCursor = true;
-
-  @override
-  void initState() {
-    super.initState();
-
-    Timer.periodic(const Duration(milliseconds: 500), (timer) {
-      if (!mounted) {
-        timer.cancel();
-        return;
-      }
-      setState(() {
-        showCursor = !showCursor;
-      });
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MarkdownBody(
-      data: widget.text + (showCursor ? "▍" : ""),
-    );
-  }
-}
-

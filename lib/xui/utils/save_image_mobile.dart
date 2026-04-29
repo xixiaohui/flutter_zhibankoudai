@@ -1,27 +1,27 @@
-import 'dart:typed_data';
+
+import 'package:flutter/foundation.dart';
 import 'package:gal/gal.dart';
 
-Future<void> saveImage(Uint8List bytes) async {
+Future<bool> saveImage(Uint8List bytes) async {
   try {
-    // 1️⃣ 检查权限
     final hasAccess = await Gal.hasAccess();
+    final granted = hasAccess || await Gal.requestAccess();
 
-    if (!hasAccess) {
-      final granted = await Gal.requestAccess();
-      if (!granted) {
-        print("❌ 用户拒绝权限");
-        return;
-      }
+    if (!granted) {
+      debugPrint("Save image denied: no gallery access");
+      return false;
     }
 
-    // 2️⃣ 保存图片
     await Gal.putImageBytes(
       bytes,
-      name: "poster_${DateTime.now().millisecondsSinceEpoch}.png",
+      name: "poster_${DateTime.now().millisecondsSinceEpoch}",
     );
-
-    print("✅ 保存成功");
+    return true;
+  } on GalException catch (e) {
+    debugPrint("Save image failed: ${e.type.message}");
+    return false;
   } catch (e) {
-    print("❌ 保存失败: $e");
+    debugPrint("Save image failed: $e");
+    return false;
   }
 }

@@ -1,7 +1,7 @@
-﻿import 'package:flutter/material.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
-
 import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 import 'package:http/http.dart' as http;
 
 class SearchResultPage extends StatefulWidget {
@@ -14,10 +14,10 @@ class SearchResultPage extends StatefulWidget {
 }
 
 class _SearchResultPageState extends State<SearchResultPage> {
-  late TextEditingController controller;
+  late final TextEditingController controller;
 
   String? result;
-  bool loading = true;
+  bool loading = false;
   String? error;
 
   @override
@@ -25,9 +25,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
     super.initState();
     controller = TextEditingController(text: widget.query);
     final query = widget.query.trim();
-    if (query.isEmpty) {
-      loading = false;
-    } else {
+    if (query.isNotEmpty) {
       fetchResult(query);
     }
   }
@@ -38,29 +36,28 @@ class _SearchResultPageState extends State<SearchResultPage> {
     super.dispose();
   }
 
-
   Future<void> fetchResult(String query) async {
     setState(() {
       loading = true;
       error = null;
+      result = null;
     });
 
     try {
       final res = await http.post(
         Uri.parse("https://www.xclaw.living/api/hunyuan/ai"),
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: {"Content-Type": "application/json"},
         body: jsonEncode({"query": query}),
       );
 
       final data = jsonDecode(res.body);
-
+      if (!mounted) return;
       setState(() {
-        result = data["result"];
+        result = data["result"]?.toString() ?? "";
         loading = false;
       });
     } catch (e) {
+      if (!mounted) return;
       setState(() {
         error = e.toString();
         loading = false;
@@ -69,9 +66,9 @@ class _SearchResultPageState extends State<SearchResultPage> {
   }
 
   void onSearch() {
-    final q = controller.text.trim();
-    if (q.isEmpty) return;
-    fetchResult(q);
+    final query = controller.text.trim();
+    if (query.isEmpty) return;
+    fetchResult(query);
   }
 
   @override
@@ -82,19 +79,25 @@ class _SearchResultPageState extends State<SearchResultPage> {
         backgroundColor: xui.XuiTheme.pureWhite,
         elevation: 0,
         foregroundColor: xui.XuiTheme.clayBlack,
-        title: const Text('AI 查询'),
+        title: const Text('AI 分析结果'),
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(1),
           child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(24),
+      body: SafeArea(
         child: Column(
           children: [
-            _buildSearchBar(),
-            const SizedBox(height: 24),
-            Expanded(child: _buildContent()),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(14, 14, 14, 10),
+              child: _buildSearchBar(),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(14, 0, 14, 14),
+                child: _buildContent(),
+              ),
+            ),
           ],
         ),
       ),
@@ -107,36 +110,37 @@ class _SearchResultPageState extends State<SearchResultPage> {
         Expanded(
           child: TextField(
             controller: controller,
+            textInputAction: TextInputAction.search,
             decoration: xui.XuiTheme.inputDecoration(
-              hintText: "输入您的问题...",
+              hintText: "继续提问...",
             ).copyWith(
+              prefixIcon: const Icon(Icons.search),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(24),
+                borderRadius: BorderRadius.circular(22),
                 borderSide: const BorderSide(color: xui.XuiTheme.oatBorder, width: 1),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(24),
+                borderRadius: BorderRadius.circular(22),
                 borderSide: const BorderSide(color: xui.XuiTheme.oatBorder, width: 1),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(24),
+                borderRadius: BorderRadius.circular(22),
                 borderSide: const BorderSide(color: Color(0xFF146EF5), width: 2),
               ),
             ),
             onSubmitted: (_) => onSearch(),
           ),
         ),
-        const SizedBox(width: 12),
+        const SizedBox(width: 8),
         FilledButton(
           style: FilledButton.styleFrom(
             backgroundColor: xui.XuiTheme.blueberry800,
             foregroundColor: xui.XuiTheme.pureWhite,
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(24),
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
           ),
-          onPressed: onSearch,
+          onPressed: loading ? null : onSearch,
           child: const Text("分析"),
         ),
       ],
@@ -153,49 +157,55 @@ class _SearchResultPageState extends State<SearchResultPage> {
     }
 
     if (result == null) {
-      return const Center(child: Text("请输入问题并点击分析"));
+      return Center(
+        child: Text(
+          "请输入问题并点击分析",
+          style: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.warmCharcoal),
+        ),
+      );
     }
 
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "分析结果",
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            "问题：${controller.text}",
+            style: xui.XuiTheme.bodyMed(),
+          ),
+          const SizedBox(height: 12),
+          Container(
+            width: double.infinity,
+            decoration: xui.XuiTheme.cardDecoration(radius: 22, color: xui.XuiTheme.pureWhite),
+            padding: const EdgeInsets.all(18),
+            child: Text(result ?? "", style: xui.XuiTheme.body().copyWith(letterSpacing: 0)),
           ),
           const SizedBox(height: 16),
-
-          _buildResultCard(),
-
-          const SizedBox(height: 24),
-
-          _buildSuggestions(),
+          Wrap(
+            spacing: 10,
+            runSpacing: 8,
+            children: [
+              _suggestion("玻璃纤维价格趋势"),
+              _suggestion("FRP耐腐蚀吗？"),
+              _suggestion("树脂怎么选？"),
+            ],
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildResultCard() {
-    return Container(
-      decoration: xui.XuiTheme.cardDecoration(radius: 24, color: xui.XuiTheme.pureWhite),
-      padding: const EdgeInsets.all(24),
-      child: Text(result ?? "", style: xui.XuiTheme.body()),
-    );
-  }
-
-  Widget _buildSuggestions() {
-    return Wrap(
-      spacing: 12,
-      children: [
-        ActionChip(
-          backgroundColor: xui.XuiTheme.pureWhite,
-          label: const Text("复合材料"),
-          labelStyle: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.blueberry800),
-          side: const BorderSide(color: xui.XuiTheme.oatBorder),
-          onPressed: () {},
-        )
-      ],
+  Widget _suggestion(String text) {
+    return ActionChip(
+      backgroundColor: xui.XuiTheme.pureWhite,
+      label: Text(text),
+      labelStyle: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.blueberry800),
+      side: const BorderSide(color: xui.XuiTheme.oatBorder),
+      onPressed: () {
+        controller.text = text;
+        onSearch();
+      },
     );
   }
 }

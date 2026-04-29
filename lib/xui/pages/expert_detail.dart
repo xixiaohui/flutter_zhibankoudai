@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 import 'package:flutter_application_zhiban/xui/pages/experts.dart';
+import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 
 class ExpertDetailPage extends StatelessWidget {
   final Map item;
@@ -10,8 +10,9 @@ class ExpertDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final title = item['title'] ?? '';
-    final content = item['content'] ?? item['summary']??'';
+    final content = item['content'] ?? item['summary'] ?? '';
     final date = item['date'] ?? '';
+    final compact = MediaQuery.sizeOf(context).width < 600;
 
     return Scaffold(
       backgroundColor: xui.XuiTheme.warmCream,
@@ -20,80 +21,72 @@ class ExpertDetailPage extends StatelessWidget {
         elevation: 0,
         foregroundColor: xui.XuiTheme.clayBlack,
         title: const Text("详情"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.image_outlined),
+            tooltip: "生成海报",
+            onPressed: () => showPosterPreview(context, item),
+          ),
+        ],
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(1),
           child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
         ),
       ),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          // ⭐ 控制阅读宽度（核心）
-          double maxWidth = 800;
-          double width = constraints.maxWidth;
-
-          double contentWidth = width > maxWidth ? maxWidth : width;
-
-          return Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(vertical: 24),
-              child: Container(
-                width: contentWidth,
-                padding: const EdgeInsets.all(24),
-
-                // ⭐ 卡片效果
-                decoration: xui.XuiTheme.cardDecoration(radius: 40, color: xui.XuiTheme.pureWhite),
-
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // ⭐ 标题
-                    Text(
-                      title,
-                      style: xui.XuiTheme.sectionHeading(),
-                    ),
-
-                    const SizedBox(height: 12),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // ⭐ 日期
-                        Text(
-                          date,
-                          style: xui.XuiTheme.bodyStd().copyWith(
-                            fontSize: 14,
-                            color: xui.XuiTheme.warmSilver,
-                          ),
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 760),
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            padding: EdgeInsets.fromLTRB(
+              compact ? 14 : 24,
+              compact ? 14 : 24,
+              compact ? 14 : 24,
+              28 + MediaQuery.paddingOf(context).bottom,
+            ),
+            child: Container(
+              padding: EdgeInsets.all(compact ? 18 : 26),
+              decoration: xui.XuiTheme.cardDecoration(
+                radius: compact ? 24 : 32,
+                color: xui.XuiTheme.pureWhite,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: xui.XuiTheme.sectionHeading().copyWith(
+                          fontSize: compact ? 28 : 36,
+                          height: 1.2,
+                          letterSpacing: 0,
                         ),
-
-                        IconButton(
-                          icon: const Icon(Icons.image, size: 18),
-                          tooltip: "生成海报",
-                          onPressed: () => showPosterPreview(context, item),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    date,
+                    style: xui.XuiTheme.bodyStd().copyWith(
+                          fontSize: 13,
+                          color: xui.XuiTheme.warmSilver,
                         ),
-                      ],
-                    ),
-
-                    const Divider(height: 32),
-
-                    // ⭐ 正文（核心优化）
-                    Text(
-                      content,
-                      style: xui.XuiTheme.body().copyWith(
-                        height: 1.8,
-                        fontFamily: 'NotoSerifSC-Regular',
-                        color: xui.XuiTheme.darkCharcoal,
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
+                  ),
+                  const Divider(height: 30),
+                  Text(
+                    content,
+                    textAlign: TextAlign.left,
+                    style: xui.XuiTheme.body().copyWith(
+                          fontSize: compact ? 17 : 18,
+                          height: 1.75,
+                          letterSpacing: 0,
+                          fontFamily: 'NotoSerifSC-Regular',
+                          color: xui.XuiTheme.darkCharcoal,
+                        ),
+                  ),
+                ],
               ),
             ),
-          );
-        },
+          ),
+        ),
       ),
-    
     );
   }
 }

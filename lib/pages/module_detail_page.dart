@@ -57,7 +57,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
           ),
         ),
         Consumer<DailyContentProvider>(
-          builder: (_, cp, __) {
+          builder: (_, cp, _) {
             final content = cp.getContent(widget.moduleId);
             final isLoading = cp.isLoading(widget.moduleId);
             final isGenerating = cp.isGenerating(widget.moduleId);

@@ -1,11 +1,10 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 import 'package:flutter_application_zhiban/xui/pages/experts.dart';
 import 'package:flutter_application_zhiban/xui/utils/module.dart';
+import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
 
 class CollectionsGridPage extends StatefulWidget {
@@ -27,12 +26,9 @@ class _CollectionsGridPageState extends State<CollectionsGridPage> {
   void initState() {
     super.initState();
     _fetchData();
-
     _controller.addListener(() {
       if (!mounted || isLoading || !hasMore) return;
-
-      if (_controller.position.pixels >
-          _controller.position.maxScrollExtent - 200) {
+      if (_controller.position.pixels >= _controller.position.maxScrollExtent - 240) {
         _fetchData();
       }
     });
@@ -42,7 +38,6 @@ class _CollectionsGridPageState extends State<CollectionsGridPage> {
     if (isLoading) return;
 
     setState(() => isLoading = true);
-
     if (isRefresh) {
       page = 1;
       _list.clear();
@@ -51,21 +46,19 @@ class _CollectionsGridPageState extends State<CollectionsGridPage> {
 
     try {
       final res = await http.get(
-        Uri.parse('https://www.xclaw.living/api/hunyuan/meta?page=$page&limit=10'),
+        Uri.parse('https://www.xclaw.living/api/hunyuan/meta?page=$page&limit=12'),
       );
-
       if (!mounted) return;
 
       final jsonData = json.decode(res.body);
       final List data = jsonData['data'] ?? [];
-
       setState(() {
         _list.addAll(data);
         hasMore = jsonData['hasMore'] ?? false;
         if (hasMore) page++;
       });
     } catch (e) {
-      debugPrint("请求异常: $e");
+      debugPrint("Fetch collections failed: $e");
     }
 
     if (mounted) setState(() => isLoading = false);
@@ -77,12 +70,8 @@ class _CollectionsGridPageState extends State<CollectionsGridPage> {
     super.dispose();
   }
 
-  int _getCrossAxisCount(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-
-    if (width > 1400) return 6;
-    if (width > 1000) return 4;
-    if (width > 600) return 3;
+  int _columnsForWidth(double width) {
+    if (width >= 900) return 3;
     return 2;
   }
 
@@ -94,51 +83,40 @@ class _CollectionsGridPageState extends State<CollectionsGridPage> {
         backgroundColor: xui.XuiTheme.pureWhite,
         elevation: 0,
         foregroundColor: xui.XuiTheme.clayBlack,
-        title: const Text("助理列表"),
+        title: const Text("助手广场"),
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(1),
           child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
         ),
       ),
-
       body: RefreshIndicator(
         onRefresh: () => _fetchData(isRefresh: true),
-
-        child: MasonryGridView.count(
-          controller: _controller,
-          physics: const AlwaysScrollableScrollPhysics(),
-          crossAxisCount: _getCrossAxisCount(context),
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
-          padding: const EdgeInsets.all(12),
-          itemCount: _list.length + 1,
-
-          itemBuilder: (context, index) {
-            if (index < _list.length) {
-              final item = _list[index];
-              return _CollectionItem(name: item['name']);
-            }
-
-            // 底部状态
-            if (isLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
-            if (!hasMore) {
-              return const Center(child: Text("没有更多数据"));
-            }
-
-            return ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: xui.XuiTheme.lemon500,
-                foregroundColor: xui.XuiTheme.clayBlack,
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24),
-                ),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return MasonryGridView.count(
+              controller: _controller,
+              physics: const AlwaysScrollableScrollPhysics(),
+              crossAxisCount: _columnsForWidth(constraints.maxWidth),
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
+              padding: EdgeInsets.fromLTRB(
+                14,
+                14,
+                14,
+                24 + MediaQuery.paddingOf(context).bottom,
               ),
-              onPressed: _fetchData,
-              child: const Text("加载更多"),
+              itemCount: _list.length + 1,
+              itemBuilder: (context, index) {
+                if (index < _list.length) {
+                  final item = _list[index];
+                  return _CollectionTile(collection: item['name'] ?? '');
+                }
+                return _LoadMoreTile(
+                  isLoading: isLoading,
+                  hasMore: hasMore,
+                  onPressed: _fetchData,
+                );
+              },
             );
           },
         ),
@@ -147,169 +125,121 @@ class _CollectionsGridPageState extends State<CollectionsGridPage> {
   }
 }
 
-class _CollectionItem extends StatefulWidget {
-  final String name;
+class _CollectionTile extends StatelessWidget {
+  final String collection;
 
-  const _CollectionItem({required this.name});
-
-  @override
-  State<_CollectionItem> createState() => _CollectionItemState();
-}
-
-
-class _CollectionItemState extends State<_CollectionItem> {
-  bool isHover = false;
-
-  // ⭐ 固定高度（关键！避免抖动）
-  late final double dynamicHeight;
-
-  @override
-  void initState() {
-    super.initState();
-
-    // ⭐ 每个卡片只生成一次高度
-    dynamicHeight = 120 + Random().nextInt(80).toDouble();
-  }
-
-  Color hexToColor(String hex) {
-    final buffer = StringBuffer();
-    if (hex.length == 6 || hex.length == 7) buffer.write('ff');
-    buffer.write(hex.replaceFirst('#', ''));
-    return Color(int.parse(buffer.toString(), radix: 16));
-  }
-
-  Module? findModuleByCollection(String collection) {
-    try {
-      return defaultModuleConfig.modules.firstWhere(
-        (m) => m.collection == collection,
-      );
-    } catch (e) {
-      return null;
-    }
-  }
+  const _CollectionTile({required this.collection});
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) => setState(() => isHover = true),
-      onExit: (_) => setState(() => isHover = false),
-      child: _buildCard(context),
-    );
-  }
-
-  Widget _buildCard(BuildContext context) {
-    final module = findModuleByCollection(widget.name);
-
-    final name = module?.name ?? widget.name;
-    final icon = module?.icon ?? '📁';
-    final slogan = module?.slogan ?? "点击查看该数据集合";
-
+    final module = _findModuleByCollection(collection);
+    final name = module?.name ?? collection;
+    final icon = module?.icon ?? "📁";
+    final slogan = module?.slogan ?? "点击查看该数据集";
     final colors = module?.colors;
+    final accent = colors != null ? _hexToColor(colors.accent) : xui.XuiTheme.slushie800;
+    final start = colors != null ? _hexToColor(colors.gradientStart) : xui.XuiTheme.pureWhite;
+    final end = colors != null ? _hexToColor(colors.gradientEnd) : const Color(0xFFEFF7FF);
+    final textColor = colors != null ? _hexToColor(colors.text) : xui.XuiTheme.clayBlack;
+    final subTextColor = colors != null ? _hexToColor(colors.textSecondary) : xui.XuiTheme.warmCharcoal;
 
-    final gradientStart = colors != null
-        ? hexToColor(colors.gradientStart)
-        : Colors.white;
-
-    final gradientEnd = colors != null
-        ? hexToColor(colors.gradientEnd)
-        : Colors.blue.shade50;
-
-    final textColor = colors != null ? hexToColor(colors.text) : Colors.black;
-    final subTextColor =
-        colors != null ? hexToColor(colors.textSecondary) : Colors.grey;
-
-    final accentColor =
-        colors != null ? hexToColor(colors.accent) : Colors.blue;
-
-    return InkWell(
-      borderRadius: BorderRadius.circular(24),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => ExpertsPage(
-              collectionName: widget.name,
-            ),
-          ),
-        );
-      },
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 120),
+    return xui.ClayContainer(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => ExpertsPage(collectionName: collection)),
+      ),
+      borderRadius: 22,
+      padding: EdgeInsets.zero,
+      child: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [gradientStart, gradientEnd],
-          ),
-          borderRadius: BorderRadius.circular(24),
-          boxShadow: xui.XuiTheme.clayShadow,
-          border: Border.all(color: xui.XuiTheme.oatBorder, width: 1),
+          gradient: LinearGradient(colors: [start, end], begin: Alignment.topLeft, end: Alignment.bottomRight),
+          borderRadius: BorderRadius.circular(22),
         ),
-
-        // ⭐ 不要 transform！！！
+        padding: const EdgeInsets.all(14),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 封面
             Container(
-              height: dynamicHeight,
+              width: 46,
+              height: 46,
               decoration: BoxDecoration(
-                color: accentColor.withOpacity(0.12),
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(16),
-                ),
+                color: accent.withOpacity(0.14),
+                borderRadius: BorderRadius.circular(16),
               ),
-              child: Center(
-                child: AnimatedOpacity(
-                  duration: const Duration(milliseconds: 120),
-                  opacity: isHover ? 0.9 : 1,
-                  child: Text(
-                    name,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: xui.XuiTheme.cardHeading().copyWith(color: textColor),
-                  ),
-                ),
-              ),
+              child: Center(child: Text(icon, style: const TextStyle(fontSize: 23))),
             ),
-
-            // 内容
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    icon,
-                    style: const TextStyle(fontSize: 15),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    slogan,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: xui.XuiTheme.bodyStd().copyWith(fontSize: 13, color: subTextColor),
-                  ),
-                  const SizedBox(height: 10),
-
-                  Row(
-                    children: [
-                      const Icon(Icons.folder, size: 14),
-                      const SizedBox(width: 4),
-                      Expanded(
-                        child: Text(
-                          widget.name,
-                          style: xui.XuiTheme.bodyStd().copyWith(fontSize: 11),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      const Icon(Icons.arrow_forward_ios, size: 12),
-                    ],
-                  )
-                ],
-              ),
-            )
+            const SizedBox(height: 12),
+            Text(
+              name,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: xui.XuiTheme.featureTitle().copyWith(fontSize: 17, color: textColor),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              slogan,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: xui.XuiTheme.bodyStd().copyWith(fontSize: 13, color: subTextColor, height: 1.45),
+            ),
+            const SizedBox(height: 12),
+            const Align(
+              alignment: Alignment.centerRight,
+              child: Icon(Icons.chevron_right, size: 20, color: xui.XuiTheme.warmSilver),
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+class _LoadMoreTile extends StatelessWidget {
+  final bool isLoading;
+  final bool hasMore;
+  final VoidCallback onPressed;
+
+  const _LoadMoreTile({
+    required this.isLoading,
+    required this.hasMore,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (isLoading) return const Center(child: Padding(padding: EdgeInsets.all(18), child: CircularProgressIndicator()));
+    if (!hasMore) {
+      return Padding(
+        padding: const EdgeInsets.all(16),
+        child: Center(child: Text("没有更多数据", style: xui.XuiTheme.bodyStd())),
+      );
+    }
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: FilledButton(
+        onPressed: onPressed,
+        style: FilledButton.styleFrom(
+          backgroundColor: xui.XuiTheme.lemon500,
+          foregroundColor: xui.XuiTheme.clayBlack,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+        ),
+        child: const Text("加载更多"),
+      ),
+    );
+  }
+}
+
+Module? _findModuleByCollection(String collection) {
+  try {
+    return defaultModuleConfig.modules.firstWhere((m) => m.collection == collection);
+  } catch (_) {
+    return null;
+  }
+}
+
+Color _hexToColor(String hex) {
+  final buffer = StringBuffer();
+  if (hex.length == 6 || hex.length == 7) buffer.write('ff');
+  buffer.write(hex.replaceFirst('#', ''));
+  return Color(int.parse(buffer.toString(), radix: 16));
 }

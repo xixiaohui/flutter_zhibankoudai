@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
         SliverToBoxAdapter(child: _header()),
 
         Consumer2<DailyContentProvider, ModuleProvider>(
-          builder: (_, cp, mp, __) {
+          builder: (_, cp, mp, _) {
             if (mp.modules.isEmpty) return const SliverToBoxAdapter(child: SizedBox.shrink());
             final fm = mp.modules.first;
             final content = cp.getContent(fm.id);
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
         SliverToBoxAdapter(child: _sectionTitle(context, '更多模块')),
 
         Consumer<ModuleProvider>(
-          builder: (_, provider, __) {
+          builder: (_, provider, _) {
             if (provider.isLoading) return SliverFillRemaining(child: _loadingGrid());
             if (provider.modules.isEmpty) return const SliverFillRemaining(child: Center(child: Text('暂无模块')));
             final others = provider.modules.skip(1).toList();
@@ -133,7 +133,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
         crossAxisCount: 3, mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 0.85,
       ),
       itemCount: 6,
-      itemBuilder: (_, __) => Container(
+      itemBuilder: (_, _) => Container(
         decoration: BoxDecoration(
           color: AppTheme.oatLight, borderRadius: BorderRadius.circular(24),
         ),
