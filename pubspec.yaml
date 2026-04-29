@@ -26,6 +26,7 @@ dependencies:
   permission_handler: ^12.0.1
   flutter_markdown: ^0.7.0
   gal: ^2.3.2
+  flutter_dotenv: ^6.0.1
 
 dev_dependencies:
   flutter_test:
@@ -37,6 +38,7 @@ flutter:
   assets:
     - assets/images/
     - assets/data/
+    - assets/cloudData/prompts/aiPrompts.json
   fonts:
     - family: NotoSansSC-Bold
       fonts:

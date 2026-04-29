@@ -1,0 +1,141 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/config/constants.dart';
+import 'package:flutter_application_zhiban/services/local_config.dart';
+import 'package:http/http.dart' as http;
+
+import 'cloudbase_client.dart';
+import 'cloudbase_file.dart';
+
+Future<String?> streamText(
+  String model,
+  String subModel,
+  List<Map<String, String>> messages,
+) async {
+  final payload = {
+    'model': subModel,
+    'messages': messages,
+    'stream': true,
+  };
+
+  final url = '${cloudbase.baseUrl}/v1/ai/$model/chat/completions';
+  final headers = Map<String, String>.from(cloudbase.headers);
+  headers['Accept'] = 'text/event-stream';
+
+  try {
+    final request = http.Request('POST', Uri.parse(url));
+    request.headers.addAll(headers);
+    request.body = jsonEncode(payload);
+
+    final streamedResponse = await request.send();
+
+    if (streamedResponse.statusCode >= 200 &&
+        streamedResponse.statusCode < 300) {
+      debugPrint('AI 流式响应:');
+      String fullContent = '';
+
+      await for (final chunk
+          in streamedResponse.stream.transform(utf8.decoder)) {
+        final lines = chunk.split('\n');
+        for (final line in lines) {
+          if (!line.startsWith('data: ')) continue;
+
+          final dataStr = line.substring(6);
+          if (dataStr.trim() == '[DONE]') continue;
+
+          try {
+            final chunkData = jsonDecode(dataStr);
+            final content =
+                chunkData['choices']?[0]?['delta']?['content'] ?? '';
+            if (content.isNotEmpty) {
+              debugPrint(content);
+              fullContent += content.toString();
+            }
+          } catch (_) {
+            // Ignore incomplete SSE JSON fragments.
+          }
+        }
+      }
+
+      return fullContent;
+    }
+
+    debugPrint('AI 调用失败: ${streamedResponse.statusCode}');
+    return null;
+  } catch (e) {
+    debugPrint('AI 调用失败: $e');
+    return null;
+  }
+}
+
+Future<String?> streamTextWithSystemPrompt(
+  String systemPrompt, {
+  String userPrompt = '春天',
+  String model = AppConstants.defaultModel,
+  String subModel = AppConstants.defaultSubModel,
+}) {
+  return streamText(
+    model,
+    subModel,
+    [
+      {'role': 'system', 'content': systemPrompt},
+      {'role': 'user', 'content': userPrompt},
+    ],
+  );
+}
+
+Future<String?> streamTextWithCloudPrompt(
+  String promptKey, {
+  String userPrompt = '生成今日内容',
+  String model = AppConstants.defaultModel,
+  String subModel = AppConstants.defaultSubModel,
+  bool forceRefreshPrompt = false,
+}) async {
+  final systemPrompt = await getGeneratePrompt(
+    promptKey,
+    forceRefresh: forceRefreshPrompt,
+  );
+
+  if (systemPrompt == null) {
+    debugPrint('未找到 AI Prompt: $promptKey');
+    return null;
+  }
+
+  return streamTextWithSystemPrompt(
+    systemPrompt,
+    userPrompt: userPrompt,
+    model: model,
+    subModel: subModel,
+  );
+}
+
+
+Future<String?> streamTextWithLocalPrompt(
+  String promptKey, {
+  String userPrompt = '生成今日内容',
+  String model = AppConstants.defaultModel,
+  String subModel = AppConstants.defaultSubModel,
+  bool forceRefreshPrompt = false,
+}) async {
+
+  debugPrint('尝试使用本地 Prompt: $promptKey');
+  
+  final systemPrompt = await getLocalGeneratePrompt(promptKey, forceRefresh: forceRefreshPrompt);
+
+  debugPrint('使用本地 Prompt: $promptKey -> ${systemPrompt != null ? "找到" : "未找到"}');
+
+  debugPrint('本地 Prompt 内容: ${systemPrompt ?? "无"}');
+  
+  if (systemPrompt == null) {
+    debugPrint('未找到 AI Prompt: $promptKey');
+    return null;
+  }
+
+  return streamTextWithSystemPrompt(
+    systemPrompt,
+    userPrompt: userPrompt,
+    model: model,
+    subModel: subModel,
+  );
+}

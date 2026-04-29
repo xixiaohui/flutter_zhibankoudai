@@ -6,32 +6,44 @@ import '../services/cache_service.dart';
 
 class DataService {
   final Logger _logger = Logger(printer: PrettyPrinter(methodCount: 0));
-  late final CacheService _cache;
 
-  DataService() {
-    _initCache();
+  /// ✅ 单例
+  static final DataService _instance = DataService._internal();
+  factory DataService() => _instance;
+
+  DataService._internal() {
+    _cacheFuture = CacheService.instance;
   }
 
-  Future<void> _initCache() async {
-    _cache = await CacheService.instance;
-  }
+  /// ✅ 用 Future 缓存，避免重复初始化
+  late final Future<CacheService> _cacheFuture;
 
+  /// ✅ 获取缓存实例（统一入口）
+  Future<CacheService> get _cache async => await _cacheFuture;
+
+  // ================================
+  // 模块配置
+  // ================================
   Future<List<ModuleConfig>> getModuleConfigs() async {
-    await _initCache();
-    final cached = _cache.getWithExpiry(AppConstants.keyModuleConfig);
+    final cache = await _cache;
+
+    final cached = cache.getWithExpiry(AppConstants.keyModuleConfig);
     if (cached != null) {
       try {
         final list = jsonDecode(cached) as List<dynamic>;
         _logger.d('Module configs loaded from cache');
-        return list.map((e) => ModuleConfig.fromJson(e as Map<String, dynamic>)).toList();
+        return list
+            .map((e) => ModuleConfig.fromJson(e as Map<String, dynamic>))
+            .toList();
       } catch (e) {
         _logger.e('Cache parse error: $e');
       }
     }
+
     try {
       final cloudConfigs = await _fetchModuleConfigsFromCloud();
       if (cloudConfigs.isNotEmpty) {
-        await _cache.setWithExpiry(
+        await cache.setWithExpiry(
           AppConstants.keyModuleConfig,
           jsonEncode(cloudConfigs.map((e) => e.toJson()).toList()),
           const Duration(hours: AppConstants.cacheExpireHours),
@@ -42,49 +54,78 @@ class DataService {
     } catch (e) {
       _logger.e('Cloud fetch error: $e');
     }
-    _logger.d('Module configs loaded from fallback defaults');
-    return AppConstants.defaultModules.map((e) => ModuleConfig.fromJson(e)).toList();
+
+    _logger.d('Module configs loaded from fallback');
+    return AppConstants.defaultModules
+        .map((e) => ModuleConfig.fromJson(e))
+        .toList();
   }
 
   Future<List<ModuleConfig>> _fetchModuleConfigsFromCloud() async {
-    // TODO: 对接腾讯云CloudBase数据库
+    // TODO: 接 CloudBase / API
     return [];
   }
 
+  // ================================
+  // 每日内容
+  // ================================
   Future<Map<String, dynamic>?> getDailyContent(String moduleId) async {
-    await _initCache();
+    final cache = await _cache;
+
     final cacheKey = '${AppConstants.keyDailyContentPrefix}$moduleId';
-    final cached = _cache.getWithExpiry(cacheKey);
+    final cached = cache.getWithExpiry(cacheKey);
+
     if (cached != null) {
       try {
-        _logger.d('Daily content for $moduleId loaded from cache');
+        _logger.d('Daily content for $moduleId from cache');
         return jsonDecode(cached) as Map<String, dynamic>;
       } catch (e) {
         _logger.e('Cache parse error for $moduleId: $e');
       }
     }
+
     try {
       final cloudContent = await _fetchDailyContentFromCloud(moduleId);
       if (cloudContent != null) {
-        await _cache.setWithExpiry(cacheKey, jsonEncode(cloudContent), const Duration(hours: AppConstants.cacheExpireHours));
-        _logger.d('Daily content for $moduleId loaded from cloud');
+        await cache.setWithExpiry(
+          cacheKey,
+          jsonEncode(cloudContent),
+          const Duration(hours: AppConstants.cacheExpireHours),
+        );
+        _logger.d('Daily content for $moduleId from cloud');
         return cloudContent;
       }
     } catch (e) {
       _logger.e('Cloud fetch error for $moduleId: $e');
     }
+
     return null;
   }
 
-  Future<Map<String, dynamic>?> _fetchDailyContentFromCloud(String moduleId) async {
-    // TODO: 对接腾讯云CloudBase数据库
+  Future<Map<String, dynamic>?> _fetchDailyContentFromCloud(
+    String moduleId,
+  ) async {
+    // TODO: 接 CloudBase / API
     return null;
   }
 
-  Future<void> saveDailyContent(String moduleId, Map<String, dynamic> content) async {
-    await _initCache();
+  // ================================
+  // 保存内容
+  // ================================
+  Future<void> saveDailyContent(
+    String moduleId,
+    Map<String, dynamic> content,
+  ) async {
+    final cache = await _cache;
+
     final cacheKey = '${AppConstants.keyDailyContentPrefix}$moduleId';
-    await _cache.setWithExpiry(cacheKey, jsonEncode(content), const Duration(hours: AppConstants.cacheExpireHours));
+
+    await cache.setWithExpiry(
+      cacheKey,
+      jsonEncode(content),
+      const Duration(hours: AppConstants.cacheExpireHours),
+    );
+
     _logger.d('Daily content saved for $moduleId');
   }
 }

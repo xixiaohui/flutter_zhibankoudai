@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'config/routes.dart';
 import 'config/theme.dart';
@@ -23,7 +24,13 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  runApp(const ZbApp());
+
+  WidgetsFlutterBinding.ensureInitialized(); // ⭐ 必须
+
+  await dotenv.load(fileName: "../.env"); // ⭐ 必须先加载
+
+  // runApp(const ZbApp());
+  runApp(const ZhiBanKouDaiApp());
 }
 
 class MyScrollBehavior extends MaterialScrollBehavior {
