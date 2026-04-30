@@ -119,20 +119,96 @@ Future<String?> streamTextWithLocalPrompt(
   bool forceRefreshPrompt = false,
 }) async {
 
-  debugPrint('尝试使用本地 Prompt: $promptKey');
-  
   final systemPrompt = await getLocalGeneratePrompt(promptKey, forceRefresh: forceRefreshPrompt);
 
-  debugPrint('使用本地 Prompt: $promptKey -> ${systemPrompt != null ? "找到" : "未找到"}');
-
-  debugPrint('本地 Prompt 内容: ${systemPrompt ?? "无"}');
-  
   if (systemPrompt == null) {
     debugPrint('未找到 AI Prompt: $promptKey');
     return null;
   }
 
   return streamTextWithSystemPrompt(
+    systemPrompt,
+    userPrompt: userPrompt,
+    model: model,
+    subModel: subModel,
+  );
+}
+
+
+Future<String?> generateText(
+  String model,
+  String subModel,
+  List<Map<String, String>> messages,
+) async {
+  final payload = {
+    'model': subModel,
+    'messages': messages,
+    'stream': false, // ⭐ 关键
+  };
+
+  final url = '${cloudbase.baseUrl}/v1/ai/$model/chat/completions';
+  final headers = Map<String, String>.from(cloudbase.headers);
+  headers['Content-Type'] = 'application/json';
+
+  try {
+    final response = await http.post(
+      Uri.parse(url),
+      headers: headers,
+      body: jsonEncode(payload),
+    );
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      final data = jsonDecode(response.body);
+
+      final content =
+          data['choices']?[0]?['message']?['content']?.toString();
+
+      debugPrint('AI 返回: $content');
+
+      return content;
+    }
+
+    debugPrint('AI 调用失败: ${response.statusCode}');
+    debugPrint(response.body);
+    return null;
+  } catch (e) {
+    debugPrint('AI 调用异常: $e');
+    return null;
+  }
+}
+
+Future<String?> generateWithSystemPrompt(
+  String systemPrompt, {
+  String userPrompt = '春天',
+  String model = AppConstants.defaultModel,
+  String subModel = AppConstants.defaultSubModel,
+}) {
+  return generateText(
+    model,
+    subModel,
+    [
+      {'role': 'system', 'content': systemPrompt},
+      {'role': 'user', 'content': userPrompt},
+    ],
+  );
+}
+
+Future<String?> generateTextWithLocalPrompt(
+  String promptKey, {
+  String userPrompt = '生成今日内容',
+  String model = AppConstants.defaultModel,
+  String subModel = AppConstants.defaultSubModel,
+  bool forceRefreshPrompt = false,
+}) async {
+
+  final systemPrompt = await getLocalGeneratePrompt(promptKey, forceRefresh: forceRefreshPrompt);
+
+  if (systemPrompt == null) {
+    debugPrint('未找到 AI Prompt: $promptKey');
+    return null;
+  }
+
+  return generateWithSystemPrompt(
     systemPrompt,
     userPrompt: userPrompt,
     model: model,

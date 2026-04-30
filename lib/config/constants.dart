@@ -31,8 +31,9 @@ class AppConstants {
     'joke': '幽默笑话',
     'psychology': '心理学',
     'finance': '财经',
-    'idiom': '歇后语俗语',
-    'seoExpert': 'SEO专家',
+    'love': '爱情语录',
+    'movie': '电影推荐',
+    'xinStudy': '新知学堂',
   };
 
   // 默认模块配置（兜底数据）
@@ -70,20 +71,28 @@ class AppConstants {
       'generate': '请生成一条实用的理财小知识',
     },
     {
-      'id': 'idiom',
-      'name': '歇后语俗语',
-      'icon': '📝',
-      'color': '#FFEAA7',
-      'description': '民间智慧，传承文化',
-      'generate': '请生成一个有趣的歇后语并解释',
+      'id': 'love',
+      'name': '爱情语录',
+      'icon': '�',
+      'color': '#FF69B4',
+      'description': '浪漫语录，温暖你的心',
+      'generate': '请生成一句浪漫的爱情语录',
     },
     {
-      'id': 'seoExpert',
-      'name': 'SEO专家',
-      'icon': '🔍',
-      'color': '#DDA0DD',
-      'description': '搜索引擎优化，让内容被更多人看到',
-      'generate': '请生成一条SEO优化技巧',
+      'id': 'movie',
+      'name': '电影推荐',
+      'icon': '🎬',
+      'color': '#FFD700',
+      'description': '精彩电影，不容错过',
+      'generate': '请生成一部值得观看的电影推荐',
+    },
+    {
+      'id': 'xinStudy',
+      'name': '新知学堂',
+      'icon': '📚',
+      'color': '#98FB98',
+      'description': '知识学习，提升自我',
+      'generate': '请生成一条有趣的知识点',
     },
   ];
 }
