@@ -68,6 +68,10 @@ Future<String?> getLocalGeneratePrompt(
   bool forceRefresh = false,
 }) async {
   final prompt = await getLocalAiPrompt(promptKey, forceRefresh: forceRefresh);
+
+  debugPrint('获取本地生成提示: promptKey="$promptKey", found=${prompt != null}');
+  debugPrint('生成提示内容: ${prompt?.generate ?? "null"}');
+  
   final generate = prompt?.generate.trim();
   return generate == null || generate.isEmpty ? null : generate;
 }

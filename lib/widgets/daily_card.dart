@@ -115,7 +115,7 @@ class _DailyCardState extends State<DailyCard> {
           child: Text('${c.categoryIcon} ${c.category}', style: const TextStyle(color: Colors.white, fontSize: 11)),
         ),
       Text(c.content, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500, height: 1.5),
-        maxLines: 5, overflow: TextOverflow.ellipsis),
+        maxLines: 20, overflow: TextOverflow.ellipsis),
       if (c.title.isNotEmpty) ...[
         const SizedBox(height: 10),
         Text('— ${c.title}', style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 14, fontStyle: FontStyle.italic)),

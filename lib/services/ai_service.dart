@@ -63,13 +63,10 @@ class AiService {
     String prompt,
   ) async {
     try {
-      debugPrint('Calling Hunyuan model for module: $moduleId with prompt: $prompt');
       final contentStr =
-          await streamTextWithLocalPrompt(moduleId, userPrompt: '生成今日内容') ??
+          await generateTextWithLocalPrompt(moduleId, userPrompt: '生成今日内容') ??
           await streamTextWithCloudPrompt(moduleId, userPrompt: '生成今日内容') ??
           await streamTextWithSystemPrompt(prompt, userPrompt: '生成今日内容');
-
-      debugPrint('Raw AI response for module $moduleId: ${contentStr ?? "null"}');
 
       if (contentStr == null || contentStr.trim().isEmpty) {
         return null;
@@ -82,11 +79,17 @@ class AiService {
     return null;
   }
 
+
   Map<String, dynamic>? _parseAiContent(String contentStr) {
     try {
       final json = _tryParseJson(contentStr);
-      if (json != null) return json;
 
+      if (json != null){
+
+        debugPrint('解析AI 内容为JSON Parsed AI content as JSON: $json');
+        return json;
+      }
+      debugPrint('没有解析AI 内容为JSON Parsed AI content as JSON: $json');
       return {
         'content': contentStr,
         'title': '',
@@ -100,20 +103,73 @@ class AiService {
     }
   }
 
-  Map<String, dynamic>? _tryParseJson(String str) {
-    try {
-      return Map<String, dynamic>.from(jsonDecode(str) as Map);
-    } catch (_) {
-      final jsonMatch = RegExp(r'\{[\s\S]*\}').firstMatch(str);
-      if (jsonMatch != null) {
-        try {
-          return Map<String, dynamic>.from(
-            jsonDecode(jsonMatch.group(0)!) as Map,
-          );
-        } catch (_) {}
+
+  String sanitizeJsonString(String input) {
+  final buffer = StringBuffer();
+  bool inString = false;
+
+  for (int i = 0; i < input.length; i++) {
+    final char = input[i];
+
+    // 判断字符串开始/结束
+    if (char == '"') {
+      final isEscaped = i > 0 && input[i - 1] == '\\';
+      if (!isEscaped) {
+        inString = !inString;
+      }
+      buffer.write(char);
+      continue;
+    }
+
+    if (inString) {
+      // ⭐ 修复换行
+      if (char == '\n') {
+        buffer.write(r'\n');
+        continue;
+      }
+      if (char == '\r') {
+        buffer.write(r'\r');
+        continue;
+      }
+
+      // ⭐ 修复未转义引号（核心🔥）
+      if (char == '"' && (i == 0 || input[i - 1] != '\\')) {
+        buffer.write(r'\"');
+        continue;
       }
     }
-    return null;
+
+    buffer.write(char);
+  }
+
+  return buffer.toString();
+}
+  Map<String, dynamic>? _tryParseJson(String str) {
+    debugPrint('尝试解析AI内容为JSON: $str');
+
+    try {
+      // 1️⃣ 去掉 markdown 包裹
+      var cleaned = str
+          .replaceAll('```json', '')
+          .replaceAll('```', '')
+          .trim();
+
+      // 2️⃣ 提取 JSON 主体
+      final start = cleaned.indexOf('{');
+      final end = cleaned.lastIndexOf('}');
+      if (start != -1 && end != -1 && end > start) {
+        cleaned = cleaned.substring(start, end + 1);
+      }
+
+      // 3️⃣ ⭐ 修复非法换行（关键）
+      cleaned = sanitizeJsonString(cleaned);
+
+      // 4️⃣ 解析
+      return Map<String, dynamic>.from(jsonDecode(cleaned));
+    } catch (e) {
+      debugPrint('JSON解析失败: $e');
+      return null;
+    }
   }
 
   DailyContent _useFallback(String moduleId, List<FallbackContent> fallback) {

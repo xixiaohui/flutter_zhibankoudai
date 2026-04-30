@@ -27,8 +27,11 @@ class DailyContentProvider extends ChangeNotifier {
   /// 加载模块内容
   /// 流程：检查内存缓存 → 本地缓存 → 云端数据库 → AI生成 → 兜底数据
   Future<void> loadContent(ModuleConfig module) async {
+
+
     // 内存缓存命中
     if (_contents.containsKey(module.id)) return;
+
 
     _loadingMap[module.id] = true;
     notifyListeners();
@@ -40,6 +43,7 @@ class DailyContentProvider extends ChangeNotifier {
         _contents[module.id] = DailyContent.fromJson(cachedData);
         _loadingMap[module.id] = false;
         notifyListeners();
+
         return;
       }
 

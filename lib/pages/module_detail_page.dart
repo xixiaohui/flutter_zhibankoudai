@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/widgets/content_card.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import '../config/routes.dart';
 import '../config/theme.dart';
 import '../models/daily_content.dart';
 import '../providers/module_provider.dart';
 import '../providers/daily_content_provider.dart';
+
 
 class ModuleDetailPage extends StatefulWidget {
   final String moduleId;
@@ -79,7 +82,39 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
 
                   // 内容
                   if (content != null) ...[
-                    Text(content.content, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500, height: 1.8, color: AppTheme.clayBlack)),
+
+                    ContentCard(
+                      title: content.title,
+                      content: content.content,
+                      color: mc,
+                      isAi: content.isAiGenerated,
+                    ),
+
+                    Text("markdown"),
+                    MarkdownBody(
+                      selectable: true, // ⭐ 可复制
+                      data: content.content,
+                      styleSheet: MarkdownStyleSheet(
+                        p: const TextStyle(
+                          fontSize: 18,
+                          height: 1.8,
+                          color: AppTheme.clayBlack,
+                        ),
+                        h1: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        h2: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        strong: const TextStyle(fontWeight: FontWeight.bold),
+                        blockquote: TextStyle(
+                          color: Colors.grey.shade600,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ),
 
                     if (content.title.isNotEmpty) ...[
                       const SizedBox(height: 20),
