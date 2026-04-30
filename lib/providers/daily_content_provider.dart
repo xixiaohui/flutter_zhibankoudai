@@ -27,37 +27,34 @@ class DailyContentProvider extends ChangeNotifier {
   /// 加载模块内容
   /// 流程：检查内存缓存 → 本地缓存 → 云端数据库 → AI生成 → 兜底数据
   Future<void> loadContent(ModuleConfig module) async {
-
-
     // 内存缓存命中
     if (_contents.containsKey(module.id)) return;
-
 
     _loadingMap[module.id] = true;
     notifyListeners();
 
     try {
-      // 1. 尝试从本地缓存/云端获取
-      final cachedData = await _dataService.getDailyContent(module.id);
-      if (cachedData != null) {
-        _contents[module.id] = DailyContent.fromJson(cachedData);
-        _loadingMap[module.id] = false;
-        notifyListeners();
+      // 1. 使用兜底数据
+      _contents[module.id] = _useFallback(module);
 
-        return;
-      }
-
-      // 2. 尝试AI生成
       if (module.generatePrompt != null && module.generatePrompt!.isNotEmpty) {
+        // 2. 尝试从本地缓存/云端获取
+        final cachedData = await _dataService.getDailyContent(module.id);
+        if (cachedData != null) {
+          _contents[module.id] = DailyContent.fromJson(cachedData);
+          _loadingMap[module.id] = false;
+          notifyListeners();
+
+          return;
+        }
+      } else {
+        // 3. 尝试AI生成
         final aiContent = await _aiService.generateContent(
           moduleId: module.id,
           prompt: module.generatePrompt!,
           fallback: module.fallback,
         );
         _contents[module.id] = aiContent;
-      } else {
-        // 3. 使用兜底数据
-        _contents[module.id] = _useFallback(module);
       }
     } catch (e) {
       // 出错时使用兜底数据
