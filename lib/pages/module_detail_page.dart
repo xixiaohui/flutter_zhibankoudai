@@ -90,7 +90,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                       isAi: content.isAiGenerated,
                     ),
 
-                    Text("markdown"),
+                    Text("---markdown---"),
                     MarkdownBody(
                       selectable: true, // ⭐ 可复制
                       data: content.content,

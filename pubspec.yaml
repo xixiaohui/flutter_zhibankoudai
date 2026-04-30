@@ -1,7 +1,7 @@
 name: flutter_application_zhiban
 description: ZhiBanKouDai - Personal Expert Knowledge Base
 publish_to: 'none'
-version: 2026.04.29+1777434489
+version: 2026.04.30+1777522084
 
 environment:
   sdk: ^3.11.5
@@ -39,6 +39,7 @@ flutter:
     - assets/images/
     - assets/data/
     - assets/cloudData/prompts/aiPrompts.json
+    - .env
   fonts:
     - family: NotoSansSC-Bold
       fonts:
