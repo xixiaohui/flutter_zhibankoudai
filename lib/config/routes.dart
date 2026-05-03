@@ -22,6 +22,7 @@ class RouteNames {
   static const String mine = 'mine';
   static const String moduleDetail = 'moduleDetail';
   static const String poster = 'poster';
+  
 }
 
 final GoRouter appRouter = GoRouter(

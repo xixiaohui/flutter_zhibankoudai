@@ -79,28 +79,28 @@ cp build/app/outputs/flutter-apk/app-release.apk $OUTPUT/
 # ======================
 # 7. iOS（半自动）
 # ======================
-# if [[ "$OSTYPE" == "darwin"* ]]; then
-#   echo "🍎 iOS 构建..."
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  echo "🍎 iOS 构建..."
 
-#   flutter build ios \
-#     --release \
-#     --no-codesign \
-#     --dart-define=API_URL=$API_URL \
-#     --dart-define=APP_NAME="$APP_NAME" \
-#     --dart-define=ENV=$ENV
+  flutter build ios \
+    --release \
+    --no-codesign \
+    --dart-define=API_URL=$API_URL \
+    --dart-define=APP_NAME="$APP_NAME" \
+    --dart-define=ENV=$ENV
 
-#   echo "👉 用 Xcode archive 上传"
-# fi
+  echo "👉 用 Xcode archive 上传"
+fi
 
 # ======================
 # 8. Web（可选）
 # ======================
-# flutter build web \
-#   --dart-define=API_URL=$API_URL \
-#   --dart-define=APP_NAME="$APP_NAME" \
-#   --dart-define=ENV=$ENV
+flutter build web \
+  --dart-define=API_URL=$API_URL \
+  --dart-define=APP_NAME="$APP_NAME" \
+  --dart-define=ENV=$ENV
 
-# cp -r build/web $OUTPUT/web
+cp -r build/web $OUTPUT/web
 
 # ======================
 # 9. changelog
