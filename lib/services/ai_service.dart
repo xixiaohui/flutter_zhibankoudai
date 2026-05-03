@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/services/cloudbase_db.dart';
+import 'package:flutter_application_zhiban/xui/utils/module.dart';
 import 'package:logger/logger.dart';
 
 import '../models/daily_content.dart';
@@ -10,6 +12,8 @@ import 'data_service.dart';
 
 class AiService {
   final Logger _logger = Logger(printer: PrettyPrinter(methodCount: 0));
+
+  
 
   Future<DailyContent> generateContent({
     required String moduleId,
@@ -49,6 +53,18 @@ class AiService {
         final dataService = DataService();
         await dataService.saveDailyContent(moduleId, content.toJson());
         _logger.d('AI content generated and cached for module: $moduleId');
+
+
+        //同步上传到云数据库
+        final Module? module = findModuleById(moduleId);
+        if(module != null){
+          debugPrint(module.collection);
+
+          final result = await addModelData(module.collection, response);
+          _logger.d('db result id $result');
+        }
+        
+
         return content;
       }
     } catch (e) {
@@ -200,3 +216,5 @@ class AiService {
     );
   }
 }
+
+

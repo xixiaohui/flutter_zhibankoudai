@@ -1887,13 +1887,20 @@ const defaultModuleConfig = ModuleConfig(
   ],
 );
 
-
 Module? findModuleByCollection(String collection) {
-    try {
-      return defaultModuleConfig.modules.firstWhere(
-        (m) => m.collection == collection,
-      );
-    } catch (e) {
-      return null;
-    }
+  try {
+    return defaultModuleConfig.modules.firstWhere(
+      (m) => m.collection == collection,
+    );
+  } catch (e) {
+    return null;
   }
+}
+
+Module? findModuleById(String id) {
+  try {
+    return defaultModuleConfig.modules.firstWhere((m) => m.id == id);
+  } catch (_) {
+    return null;
+  }
+}

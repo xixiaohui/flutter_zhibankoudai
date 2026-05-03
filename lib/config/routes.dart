@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/main.dart';
 import 'package:go_router/go_router.dart';
 import '../pages/home_page.dart';
 import '../pages/module_detail_page.dart';
@@ -13,6 +14,7 @@ class RoutePaths {
   static const String mine = '/mine';
   static const String moduleDetail = '/module/:moduleId';
   static const String poster = '/poster';
+  static const String agent = '/agent';
 }
 
 class RouteNames {
@@ -22,7 +24,7 @@ class RouteNames {
   static const String mine = 'mine';
   static const String moduleDetail = 'moduleDetail';
   static const String poster = 'poster';
-  
+  static const String agent = 'agent';
 }
 
 final GoRouter appRouter = GoRouter(
@@ -47,6 +49,12 @@ final GoRouter appRouter = GoRouter(
           name: RouteNames.mine,
           builder: (_, _) => const MinePage(),
         ),
+        GoRoute(
+          path: RoutePaths.agent,
+          name: RouteNames.agent,
+          builder: (_, _) => const ZbApp(),
+        ),
+        
       ],
     ),
     GoRoute(
@@ -99,12 +107,14 @@ class MainShell extends StatelessWidget {
                 switch (i) {
                   case 0: context.go(RoutePaths.home);
                   case 1: context.go(RoutePaths.discover);
-                  case 2: context.go(RoutePaths.mine);
+                  case 2: context.go(RoutePaths.agent);
+                  case 3: context.go(RoutePaths.mine);
                 }
               },
               items: const [
                 BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home), label: '首页'),
                 BottomNavigationBarItem(icon: Icon(Icons.explore_outlined), activeIcon: Icon(Icons.explore), label: '发现'),
+                BottomNavigationBarItem(icon: Icon(Icons.bolt_outlined), activeIcon: Icon(Icons.bolt), label: '助理'),
                 BottomNavigationBarItem(icon: Icon(Icons.person_outline), activeIcon: Icon(Icons.person), label: '我的'),
               ],
             ),

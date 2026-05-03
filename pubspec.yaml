@@ -1,7 +1,7 @@
 name: flutter_application_zhiban
 description: ZhiBanKouDai - Personal Expert Knowledge Base
 publish_to: 'none'
-version: 2026.05.03+1777766209
+version: 2026.05.03+1777771265
 
 environment:
   sdk: ^3.11.5
