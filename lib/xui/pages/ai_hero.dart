@@ -83,7 +83,7 @@ class _AiHeroSectionState extends State<AiHeroSection> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(24),
-                        borderSide: const BorderSide(color: Color(0xFF146EF5), width: 2),
+                        borderSide: const BorderSide(color: xui.XuiTheme.focusRing, width: 2),
                       ),
                     ),
                     onSubmitted: (_) => onSearch(),
@@ -96,7 +96,7 @@ class _AiHeroSectionState extends State<AiHeroSection> {
                     foregroundColor: xui.XuiTheme.pureWhite,
                     padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 26),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                   ),
                   onPressed: onSearch,

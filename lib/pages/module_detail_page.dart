@@ -52,10 +52,10 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
           expandedHeight: 200, pinned: true,
           backgroundColor: mc,
           flexibleSpace: FlexibleSpaceBar(
-            title: Text(module.name, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+            title: Text(module.name, style: const TextStyle(color: AppTheme.pureWhite, fontWeight: FontWeight.w600)),
             background: Container(
               decoration: BoxDecoration(gradient: LinearGradient(colors: [mc, mc.withValues(alpha: 0.7)], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-              child: Center(child: Text(module.icon, style: TextStyle(fontSize: 64, color: Colors.white.withValues(alpha: 0.3)))),
+              child: Center(child: Text(module.icon, style: TextStyle(fontSize: 64, color: AppTheme.pureWhite.withValues(alpha: 0.3)))),
             ),
           ),
         ),
@@ -76,7 +76,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                     Container(
                       margin: const EdgeInsets.only(bottom: 16),
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(color: mc.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(1584)),
+                      decoration: BoxDecoration(color: mc.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(AppTheme.radiusPill)),
                       child: Text('${content.categoryIcon} ${content.category}', style: TextStyle(color: mc, fontSize: 13)),
                     ),
 
@@ -110,7 +110,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                         ),
                         strong: const TextStyle(fontWeight: FontWeight.bold),
                         blockquote: TextStyle(
-                          color: Colors.grey.shade600,
+                          color: AppTheme.warmSilver,
                           fontStyle: FontStyle.italic,
                         ),
                       ),
@@ -133,7 +133,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                       const SizedBox(height: 16),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                        decoration: BoxDecoration(color: AppTheme.matcha300.withValues(alpha: 0.3), borderRadius: BorderRadius.circular(1584)),
+                        decoration: BoxDecoration(color: AppTheme.matcha300.withValues(alpha: 0.3), borderRadius: BorderRadius.circular(AppTheme.radiusPill)),
                         child: const Row(mainAxisSize: MainAxisSize.min, children: [
                           Icon(Icons.auto_awesome, size: 14, color: AppTheme.matcha600),
                           SizedBox(width: 4),
@@ -184,7 +184,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         decoration: BoxDecoration(
           color: AppTheme.pureWhite,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(AppTheme.radiusCard),
           border: Border.all(color: AppTheme.oatBorder),
           boxShadow: AppTheme.clayShadow,
         ),
@@ -207,8 +207,8 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         decoration: BoxDecoration(
           color: Colors.transparent,
-          borderRadius: BorderRadius.circular(4),
-          border: Border.all(color: const Color(0xFF717989), width: 1),
+          borderRadius: BorderRadius.circular(AppTheme.radiusSharp),
+          border: Border.all(color: AppTheme.ghostBorder, width: 1),
         ),
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Icon(icon, size: 18, color: AppTheme.clayBlack),

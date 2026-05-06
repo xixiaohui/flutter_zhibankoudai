@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_zhiban/xui/pages/experts.dart';
+import 'package:flutter_application_zhiban/config/theme.dart';
 import 'package:flutter_application_zhiban/xui/utils/module.dart';
 import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -132,16 +133,16 @@ class _CollectionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final module = _findModuleByCollection(collection);
+    final module = findModuleByCollection(collection);
     final name = module?.name ?? collection;
     final icon = module?.icon ?? "📁";
     final slogan = module?.slogan ?? "点击查看该数据集";
     final colors = module?.colors;
-    final accent = colors != null ? _hexToColor(colors.accent) : xui.XuiTheme.slushie800;
-    final start = colors != null ? _hexToColor(colors.gradientStart) : xui.XuiTheme.pureWhite;
-    final end = colors != null ? _hexToColor(colors.gradientEnd) : const Color(0xFFEFF7FF);
-    final textColor = colors != null ? _hexToColor(colors.text) : xui.XuiTheme.clayBlack;
-    final subTextColor = colors != null ? _hexToColor(colors.textSecondary) : xui.XuiTheme.warmCharcoal;
+    final accent = colors != null ? AppTheme.fromHex(colors.accent) : xui.XuiTheme.slushie800;
+    final start = colors != null ? AppTheme.fromHex(colors.gradientStart) : xui.XuiTheme.pureWhite;
+    final end = colors != null ? AppTheme.fromHex(colors.gradientEnd) : xui.XuiTheme.lightFrost;
+    final textColor = colors != null ? AppTheme.fromHex(colors.text) : xui.XuiTheme.clayBlack;
+    final subTextColor = colors != null ? AppTheme.fromHex(colors.textSecondary) : xui.XuiTheme.warmCharcoal;
 
     return xui.ClayContainer(
       onTap: () => Navigator.push(
@@ -221,25 +222,10 @@ class _LoadMoreTile extends StatelessWidget {
         style: FilledButton.styleFrom(
           backgroundColor: xui.XuiTheme.lemon500,
           foregroundColor: xui.XuiTheme.clayBlack,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
         child: const Text("加载更多"),
       ),
     );
   }
-}
-
-Module? _findModuleByCollection(String collection) {
-  try {
-    return defaultModuleConfig.modules.firstWhere((m) => m.collection == collection);
-  } catch (_) {
-    return null;
-  }
-}
-
-Color _hexToColor(String hex) {
-  final buffer = StringBuffer();
-  if (hex.length == 6 || hex.length == 7) buffer.write('ff');
-  buffer.write(hex.replaceFirst('#', ''));
-  return Color(int.parse(buffer.toString(), radix: 16));
 }

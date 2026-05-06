@@ -160,7 +160,7 @@ class _SearchSectionState extends State<SearchSection> {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
-          borderSide: const BorderSide(color: Color(0xFF146EF5), width: 2),
+          borderSide: const BorderSide(color: xui.XuiTheme.focusRing, width: 2),
         ),
       ),
     );
@@ -220,7 +220,7 @@ class HotGridSliver extends StatelessWidget {
               context,
               MaterialPageRoute(builder: (_) => SearchResultPage(query: text)),
             ),
-            borderRadius: 20,
+            borderRadius: 24,
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
             child: Center(
               child: Text(
@@ -254,7 +254,7 @@ class MarketGridSliver extends StatelessWidget {
       children: [
         for (final item in items)
           xui.ClayContainer(
-            borderRadius: 22,
+            borderRadius: 24,
             padding: const EdgeInsets.all(16),
             child: Row(
               children: [
@@ -400,7 +400,7 @@ class _AssistantGrid extends StatelessWidget {
               context,
               MaterialPageRoute(builder: (_) => item.page),
             ),
-            borderRadius: 22,
+            borderRadius: 24,
             padding: const EdgeInsets.all(16),
             color: xui.XuiTheme.pureWhite,
             child: Row(
@@ -458,7 +458,7 @@ class AiEntrySliver extends StatelessWidget {
           color: xui.XuiTheme.slushie500,
           child: Row(
             children: [
-              const Icon(Icons.smart_toy, size: 36, color: Colors.white),
+              const Icon(Icons.smart_toy, size: 36, color: xui.XuiTheme.pureWhite),
               const SizedBox(width: 14),
               Expanded(
                 child: Column(
@@ -466,19 +466,19 @@ class AiEntrySliver extends StatelessWidget {
                   children: const [
                     Text(
                       "AI材料助手",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: xui.XuiTheme.pureWhite),
                     ),
                     SizedBox(height: 4),
                     Text(
                       "材料问题 · 行情趋势 · 采购建议",
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: Colors.white70, height: 1.35),
+                      style: TextStyle(color: xui.XuiTheme.pureWhite, height: 1.35),
                     ),
                   ],
                 ),
               ),
-              const Icon(Icons.chevron_right, color: Colors.white),
+              const Icon(Icons.chevron_right, color: xui.XuiTheme.pureWhite),
             ],
           ),
         ),

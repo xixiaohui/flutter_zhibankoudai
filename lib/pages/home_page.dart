@@ -8,6 +8,7 @@ import '../providers/module_provider.dart';
 import '../providers/daily_content_provider.dart';
 import '../widgets/daily_card.dart';
 import '../widgets/module_grid_item.dart';
+import '../xui/x_design.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -91,26 +92,22 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 60, 20, 20),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(_dateStr(),
-          style: const TextStyle(fontSize: 14, color: AppTheme.warmSilver, letterSpacing: -0.14)),
+        Text(_dateStr(), style: XuiTheme.caption()),
         const SizedBox(height: 8),
         Row(children: [
-          const Text('智伴口袋',
-            style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600, color: AppTheme.clayBlack, letterSpacing: -0.64)),
+          Text('智伴口袋', style: XuiTheme.cardHeading()),
           const SizedBox(width: 8),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
             decoration: BoxDecoration(
               color: AppTheme.lemon400.withValues(alpha: 0.4),
-              borderRadius: BorderRadius.circular(1584),
+              borderRadius: BorderRadius.circular(AppTheme.radiusPill),
             ),
-            child: const Text('每日更新',
-              style: TextStyle(fontSize: 10, color: AppTheme.clayBlack, fontWeight: FontWeight.w600)),
+            child: Text('每日更新', style: XuiTheme.badge()),
           ),
         ]),
         const SizedBox(height: 6),
-        const Text('您的个人专家知识库',
-          style: TextStyle(fontSize: 15, color: AppTheme.warmSilver, letterSpacing: -0.16)),
+        Text('您的个人专家知识库', style: XuiTheme.navLink()),
       ]),
     );
   }
@@ -118,10 +115,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   Widget _sectionTitle(BuildContext context, String title) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 12),
-      child: Text(title.toUpperCase(),
-        style: const TextStyle(
-          fontSize: 12, fontWeight: FontWeight.w600, color: AppTheme.warmCharcoal,
-          letterSpacing: 1.08)),
+      child: Text(title.toUpperCase(), style: XuiTheme.uppercaseLabel()),
     );
   }
 
@@ -135,7 +129,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
       itemCount: 6,
       itemBuilder: (_, _) => Container(
         decoration: BoxDecoration(
-          color: AppTheme.oatLight, borderRadius: BorderRadius.circular(24),
+          color: AppTheme.oatLight, borderRadius: BorderRadius.circular(AppTheme.radiusFeature),
         ),
       ),
     );

@@ -3,7 +3,6 @@ import '../config/theme.dart';
 import '../models/daily_content.dart';
 import '../models/module_config.dart';
 
-/// DailyCard — Clay 风格卡片
 class DailyCard extends StatefulWidget {
   final ModuleConfig module;
   final DailyContent? content;
@@ -34,39 +33,48 @@ class _DailyCardState extends State<DailyCard> {
   @override
   Widget build(BuildContext context) {
     final color = AppTheme.fromHex(widget.module.color);
+    final onBgColor = color.computeLuminance() > 0.5
+        ? AppTheme.clayBlack
+        : AppTheme.pureWhite;
 
     return GestureDetector(
       onTap: widget.onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        transform: _hover ? (Matrix4.identity()..rotateZ(-0.14)..translateByDouble(0.0, -16.0, 0.0, 1.0)) : Matrix4.identity(),
+        transform: _hover
+            ? (Matrix4.identity()
+              ..rotateZ(-0.14)
+              ..translateByDouble(0.0, -16.0, 0.0, 1.0))
+            : Matrix4.identity(),
         transformAlignment: Alignment.center,
         decoration: BoxDecoration(
           color: color.withValues(alpha: 0.92),
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(AppTheme.radiusFeature),
           border: Border.all(color: AppTheme.oatBorder, width: 1),
           boxShadow: _hover
-              ? [const BoxShadow(color: Colors.black, blurRadius: 0, offset: Offset(-7, 7))]
+              ? const [BoxShadow(color: AppTheme.clayBlack, blurRadius: 0, offset: Offset(-7, 7))]
               : AppTheme.clayShadow,
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(AppTheme.radiusFeature),
           child: Stack(
             children: [
-              Positioned(right: -20, top: -20,
-                child: Text(widget.module.icon, style: const TextStyle(fontSize: 80, color: Color(0x22FFFFFF))),
+              Positioned(
+                right: -20, top: -20,
+                child: Text(widget.module.icon,
+                  style: TextStyle(fontSize: 80, color: onBgColor.withValues(alpha: 0.13))),
               ),
               Padding(
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _header(color),
+                    _header(onBgColor),
                     const SizedBox(height: 16),
-                    _body(context),
+                    _body(context, onBgColor),
                     const SizedBox(height: 16),
-                    _footer(),
+                    _footer(onBgColor),
                   ],
                 ),
               ),
@@ -77,33 +85,37 @@ class _DailyCardState extends State<DailyCard> {
     );
   }
 
-  Widget _header(Color c) {
+  Widget _header(Color onBgColor) {
     return Row(
       children: [
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-          decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.25), borderRadius: BorderRadius.circular(1584)),
+          decoration: BoxDecoration(
+            color: onBgColor.withValues(alpha: 0.25),
+            borderRadius: BorderRadius.circular(AppTheme.radiusPill)),
           child: Row(mainAxisSize: MainAxisSize.min, children: [
             Text(widget.module.icon, style: const TextStyle(fontSize: 14)),
             const SizedBox(width: 4),
-            Text(widget.module.name, style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w600)),
+            Text(widget.module.name, style: TextStyle(color: onBgColor, fontSize: 13, fontWeight: FontWeight.w600)),
           ]),
         ),
         const Spacer(),
         if (widget.isGenerating)
-          const SizedBox(width: 16, height: 16,
-            child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)),
+          SizedBox(width: 16, height: 16,
+            child: CircularProgressIndicator(
+              strokeWidth: 2,
+              valueColor: AlwaysStoppedAnimation<Color>(onBgColor)),
           ),
       ],
     );
   }
 
-  Widget _body(BuildContext context) {
-    if (widget.isLoading) return _shimmer();
+  Widget _body(BuildContext context, Color onBgColor) {
+    if (widget.isLoading) return _shimmer(onBgColor);
 
     final c = widget.content;
     if (c == null || c.content.isEmpty) {
-      return const Text('暂无内容', style: TextStyle(color: Colors.white70, fontSize: 16));
+      return Text('暂无内容', style: TextStyle(color: onBgColor.withValues(alpha: 0.7), fontSize: 16));
     }
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -111,43 +123,47 @@ class _DailyCardState extends State<DailyCard> {
         Container(
           margin: const EdgeInsets.only(bottom: 10),
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-          decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(1584)),
-          child: Text('${c.categoryIcon} ${c.category}', style: const TextStyle(color: Colors.white, fontSize: 11)),
+          decoration: BoxDecoration(
+            color: onBgColor.withValues(alpha: 0.2),
+            borderRadius: BorderRadius.circular(AppTheme.radiusPill)),
+          child: Text('${c.categoryIcon} ${c.category}', style: TextStyle(color: onBgColor, fontSize: 11)),
         ),
-      Text(c.content, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500, height: 1.5),
+      Text(c.content, style: TextStyle(color: onBgColor, fontSize: 18, fontWeight: FontWeight.w500, height: 1.5),
         maxLines: 7, overflow: TextOverflow.ellipsis),
       if (c.title.isNotEmpty) ...[
         const SizedBox(height: 10),
-        Text('— ${c.title}', style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 14, fontStyle: FontStyle.italic)),
+        Text('— ${c.title}', style: TextStyle(color: onBgColor.withValues(alpha: 0.8), fontSize: 14, fontStyle: FontStyle.italic)),
       ],
       if (c.subtitle.isNotEmpty) ...[
         const SizedBox(height: 2),
-        Text(c.subtitle, style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 12)),
+        Text(c.subtitle, style: TextStyle(color: onBgColor.withValues(alpha: 0.6), fontSize: 12)),
       ],
       if (c.isAiGenerated) ...[
         const SizedBox(height: 8),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-          decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(1584)),
-          child: const Row(mainAxisSize: MainAxisSize.min, children: [
-            Icon(Icons.auto_awesome, size: 12, color: Colors.white),
-            SizedBox(width: 3),
-            Text('AI 生成', style: TextStyle(color: Colors.white, fontSize: 10)),
+          decoration: BoxDecoration(
+            color: onBgColor.withValues(alpha: 0.2),
+            borderRadius: BorderRadius.circular(AppTheme.radiusPill)),
+          child: Row(mainAxisSize: MainAxisSize.min, children: [
+            Icon(Icons.auto_awesome, size: 12, color: onBgColor),
+            const SizedBox(width: 3),
+            Text('AI 生成', style: TextStyle(color: onBgColor, fontSize: 10)),
           ]),
         ),
       ],
     ]);
   }
 
-  Widget _footer() {
+  Widget _footer(Color onBgColor) {
     return Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-      _actionBtn(Icons.refresh, '换一条', widget.onRefresh),
+      _actionBtn(Icons.refresh, '换一条', onBgColor, widget.onRefresh),
       const SizedBox(width: 12),
-      _actionBtn(Icons.share, '分享', widget.onShare),
+      _actionBtn(Icons.share, '分享', onBgColor, widget.onShare),
     ]);
   }
 
-  Widget _actionBtn(IconData icon, String label, VoidCallback? onTap) {
+  Widget _actionBtn(IconData icon, String label, Color onBgColor, VoidCallback? onTap) {
     return GestureDetector(
       onTap: () {
         setState(() => _hover = true);
@@ -156,23 +172,27 @@ class _DailyCardState extends State<DailyCard> {
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(1584)),
+        decoration: BoxDecoration(
+          color: onBgColor.withValues(alpha: 0.2),
+          borderRadius: BorderRadius.circular(AppTheme.radiusPill)),
         child: Row(mainAxisSize: MainAxisSize.min, children: [
-          Icon(icon, size: 14, color: Colors.white),
+          Icon(icon, size: 14, color: onBgColor),
           const SizedBox(width: 4),
-          Text(label, style: const TextStyle(color: Colors.white, fontSize: 12)),
+          Text(label, style: TextStyle(color: onBgColor, fontSize: 12)),
         ]),
       ),
     );
   }
 
-  Widget _shimmer() {
+  Widget _shimmer(Color onBgColor) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: List.generate(4, (i) => Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: Container(
         width: [80.0, double.infinity, 240.0, 160.0][i],
         height: 14,
-        decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(7)),
+        decoration: BoxDecoration(
+          color: onBgColor.withValues(alpha: 0.15),
+          borderRadius: BorderRadius.circular(7)),
       ),
     )));
   }

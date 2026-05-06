@@ -77,7 +77,7 @@ class ExpertDetailPage extends StatelessWidget {
                           fontSize: compact ? 17 : 18,
                           height: 1.75,
                           letterSpacing: 0,
-                          fontFamily: 'NotoSerifSC-Regular',
+                          fontFamily: 'NotoSerifSC',
                           color: xui.XuiTheme.darkCharcoal,
                         ),
                   ),

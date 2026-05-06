@@ -40,11 +40,11 @@ class _ClayButtonState extends State<ClayButton> {
           color: widget.outlined ? Colors.transparent : AppTheme.pureWhite,
           borderRadius: BorderRadius.circular(widget.outlined ? 4 : 12),
           border: Border.all(
-            color: widget.outlined ? const Color(0xFF717989) : AppTheme.oatBorder,
+            color: widget.outlined ? AppTheme.ghostBorder : AppTheme.oatBorder,
             width: widget.outlined ? 1 : 1,
           ),
           boxShadow: _hover
-              ? [const BoxShadow(color: Colors.black, blurRadius: 0, offset: Offset(-7, 7))]
+              ? [const BoxShadow(color: AppTheme.clayBlack, blurRadius: 0, offset: Offset(-7, 7))]
               : widget.outlined ? [] : AppTheme.clayShadow,
         ),
         child: Row(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../config/theme.dart';
+import '../xui/x_design.dart';
 
 class MinePage extends StatelessWidget {
   const MinePage({super.key});
@@ -21,7 +22,7 @@ class MinePage extends StatelessWidget {
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
               color: AppTheme.ube800,
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(AppTheme.radiusFeature),
               border: Border.all(color: AppTheme.oatBorder),
               boxShadow: AppTheme.clayShadow,
             ),
@@ -29,16 +30,16 @@ class MinePage extends StatelessWidget {
               Container(
                 width: 64, height: 64,
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.2),
-                  borderRadius: BorderRadius.circular(1584),
+                  color: AppTheme.pureWhite.withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(AppTheme.radiusPill),
                 ),
-                child: const Icon(Icons.person, size: 32, color: Colors.white),
+                child: const Icon(Icons.person, size: 32, color: AppTheme.pureWhite),
               ),
               const SizedBox(width: 16),
               Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                const Text('智伴口袋用户', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600)),
+                Text('智伴口袋用户', style: XuiTheme.featureTitle().copyWith(color: AppTheme.pureWhite)),
                 const SizedBox(height: 4),
-                Text('每日知识，伴你成长', style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 13)),
+                Text('每日知识，伴你成长', style: XuiTheme.caption().copyWith(color: AppTheme.pureWhite.withValues(alpha: 0.7))),
               ])),
             ]),
           ),
@@ -80,8 +81,8 @@ class MinePage extends StatelessWidget {
           return Column(children: [
             ListTile(
               leading: Icon(item.icon, color: AppTheme.clayBlack, size: 22),
-              title: Text(item.title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: AppTheme.clayBlack)),
-              subtitle: Text(item.subtitle, style: const TextStyle(fontSize: 14, color: AppTheme.warmSilver, letterSpacing: -0.14)),
+              title: Text(item.title, style: XuiTheme.bodyMed()),
+              subtitle: Text(item.subtitle, style: XuiTheme.caption()),
               trailing: const Icon(Icons.chevron_right, size: 20, color: AppTheme.warmSilver),
               onTap: () => _handleTap(context, item),
             ),

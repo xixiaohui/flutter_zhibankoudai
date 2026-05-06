@@ -205,7 +205,7 @@ class _ExpertCard extends StatelessWidget {
               style: xui.XuiTheme.bodyStd().copyWith(
                     height: 1.55,
                     color: xui.XuiTheme.darkCharcoal,
-                    fontFamily: "NotoSerifSC-Regular",
+                    fontFamily: "NotoSerifSC",
                   ),
             ),
           ),
@@ -265,7 +265,7 @@ class _LoadMoreTile extends StatelessWidget {
           backgroundColor: xui.XuiTheme.lemon500,
           foregroundColor: xui.XuiTheme.clayBlack,
           padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 13),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
         child: const Text("加载更多"),
       ),

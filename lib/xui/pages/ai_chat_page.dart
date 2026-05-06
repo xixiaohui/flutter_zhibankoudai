@@ -199,7 +199,7 @@ class _AiChatPageState extends State<AiChatPage> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
-                          borderSide: const BorderSide(color: Color(0xFF146EF5), width: 2),
+                          borderSide: const BorderSide(color: xui.XuiTheme.focusRing, width: 2),
                         ),
                       ),
                       onSubmitted: sendMessage,

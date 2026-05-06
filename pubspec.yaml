@@ -41,12 +41,28 @@ flutter:
     - assets/cloudData/prompts/aiPrompts.json
     - .env
   fonts:
-    - family: NotoSansSC-Bold
+    - family: NotoSansSC
       fonts:
+        - asset: assets/fonts/NotoSansSC-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/NotoSansSC-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/NotoSansSC-Light.ttf
+          weight: 300
+        - asset: assets/fonts/NotoSansSC-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/NotoSansSC-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/NotoSansSC-SemiBold.ttf
+          weight: 600
         - asset: assets/fonts/NotoSansSC-Bold.ttf
           weight: 700
+        - asset: assets/fonts/NotoSansSC-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/NotoSansSC-Black.ttf
+          weight: 900
 
-    - family: NotoSerifSC-Regular
+    - family: NotoSerifSC
       fonts:
         - asset: assets/fonts/NotoSerifSC-Regular.ttf
           weight: 400

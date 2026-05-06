@@ -99,7 +99,7 @@ class _PosterPreviewState extends State<PosterPreview> {
                 child: RepaintBoundary(
                   key: posterKey,
                   child: Container(
-                    color: Colors.white,
+                    color: xui.XuiTheme.pureWhite,
                     child: PosterWidget(item: widget.item),
                   ),
                 ),
@@ -123,7 +123,7 @@ class _PosterPreviewState extends State<PosterPreview> {
                   foregroundColor: xui.XuiTheme.pureWhite,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
               ),

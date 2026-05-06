@@ -25,8 +25,8 @@ class ContentCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 20),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        color: AppTheme.pureWhite,
+        borderRadius: BorderRadius.circular(AppTheme.radiusFeature),
         boxShadow: AppTheme.clayShadow,
         border: Border.all(color: AppTheme.oatBorder),
       ),
@@ -39,7 +39,7 @@ class ContentCard extends StatelessWidget {
               title,
               style: TextStyle(
                 fontSize: 20,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w600,
                 color: color,
                 height: 1.4,
               ),
@@ -58,7 +58,7 @@ class ContentCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
                 color: AppTheme.matcha300.withValues(alpha: 0.3),
-                borderRadius: BorderRadius.circular(999),
+                borderRadius: BorderRadius.circular(AppTheme.radiusPill),
               ),
               child: const Row(
                 mainAxisSize: MainAxisSize.min,
@@ -88,7 +88,7 @@ class ContentCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 14),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: const Color(0xFFF6F7FB),
+          color: AppTheme.lightFrost,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Text(

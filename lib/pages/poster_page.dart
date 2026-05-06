@@ -64,21 +64,21 @@ class _PosterPageState extends State<PosterPage> {
                   Row(children: [
                     Text(widget.categoryIcon, style: const TextStyle(fontSize: 24)),
                     const SizedBox(width: 8),
-                    const Text('智伴口袋', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600, letterSpacing: -0.4)),
+                    const Text('智伴口袋', style: TextStyle(color: AppTheme.pureWhite, fontSize: 16, fontWeight: FontWeight.w600, letterSpacing: -0.4)),
                   ]),
                   const SizedBox(height: 32),
                   // 内容
-                  Text(widget.content, style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w500, height: 1.8)),
+                  Text(widget.content, style: const TextStyle(color: AppTheme.pureWhite, fontSize: 22, fontWeight: FontWeight.w500, height: 1.8)),
                   if (widget.title.isNotEmpty) ...[
                     const SizedBox(height: 24),
-                    Text('— ${widget.title}', style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 16, fontStyle: FontStyle.italic)),
+                    Text('— ${widget.title}', style: TextStyle(color: AppTheme.pureWhite.withValues(alpha: 0.8), fontSize: 16, fontStyle: FontStyle.italic)),
                   ],
                   if (widget.subtitle.isNotEmpty) ...[
                     const SizedBox(height: 4),
-                    Text(widget.subtitle, style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 14)),
+                    Text(widget.subtitle, style: TextStyle(color: AppTheme.pureWhite.withValues(alpha: 0.6), fontSize: 14)),
                   ],
                   const SizedBox(height: 40),
-                  Align(alignment: Alignment.centerRight, child: Text('每日知识陪伴', style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 12))),
+                  Align(alignment: Alignment.centerRight, child: Text('每日知识陪伴', style: TextStyle(color: AppTheme.pureWhite.withValues(alpha: 0.5), fontSize: 12))),
                 ]),
               ),
             ),

@@ -126,7 +126,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(22),
-                borderSide: const BorderSide(color: Color(0xFF146EF5), width: 2),
+                borderSide: const BorderSide(color: xui.XuiTheme.focusRing, width: 2),
               ),
             ),
             onSubmitted: (_) => onSearch(),
@@ -138,7 +138,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
             backgroundColor: xui.XuiTheme.blueberry800,
             foregroundColor: xui.XuiTheme.pureWhite,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),
           onPressed: loading ? null : onSearch,
           child: const Text("分析"),

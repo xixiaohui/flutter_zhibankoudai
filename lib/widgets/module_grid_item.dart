@@ -18,7 +18,7 @@ class ModuleGridItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: AppTheme.pureWhite,
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(AppTheme.radiusFeature),
           border: Border.all(color: AppTheme.oatBorder, width: 1),
           boxShadow: AppTheme.clayShadow,
         ),
@@ -29,7 +29,7 @@ class ModuleGridItem extends StatelessWidget {
               width: 48, height: 48,
               decoration: BoxDecoration(
                 color: c.withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(14),
+                borderRadius: BorderRadius.circular(AppTheme.radiusCard),
               ),
               child: Center(child: Text(module.icon, style: const TextStyle(fontSize: 24))),
             ),

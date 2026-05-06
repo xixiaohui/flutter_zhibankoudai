@@ -94,8 +94,17 @@ class ZhiBanKouDaiApp extends StatelessWidget {
       child: MaterialApp.router(
         title: '智伴口袋',
         debugShowCheckedModeBanner: false,
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
+        theme: AppTheme.lightTheme.copyWith(
+          textTheme: AppTheme.lightTheme.textTheme.apply(
+            fontFamily: 'NotoSansSC',
+          ),
+        ),
+
+        darkTheme: AppTheme.darkTheme.copyWith(
+          textTheme: AppTheme.darkTheme.textTheme.apply(
+            fontFamily: 'NotoSansSC',
+          ),
+        ),
         themeMode: ThemeMode.system,
         routerConfig: appRouter,
       ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_zhiban/main.dart';
 import 'package:go_router/go_router.dart';
 import '../pages/home_page.dart';
 import '../pages/module_detail_page.dart';
 import '../pages/poster_page.dart';
 import '../pages/mine_page.dart';
+import '../xui/pages/home.dart' as xui;
 import 'theme.dart';
 
 class RoutePaths {
@@ -52,7 +52,7 @@ final GoRouter appRouter = GoRouter(
         GoRoute(
           path: RoutePaths.agent,
           name: RouteNames.agent,
-          builder: (_, _) => const ZbApp(),
+          builder: (_, _) => const xui.HomePage(),
         ),
         
       ],
@@ -100,6 +100,7 @@ class MainShell extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppTheme.pureWhite,
               border: const Border(top: BorderSide(color: AppTheme.oatBorder)),
+              boxShadow: AppTheme.clayShadow,
             ),
             child: BottomNavigationBar(
               currentIndex: index,
