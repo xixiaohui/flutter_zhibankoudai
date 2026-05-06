@@ -59,6 +59,7 @@ class AiService {
         final Module? module = findModuleById(moduleId);
         if(module != null){
           debugPrint(module.collection);
+          debugPrint(response.toString());
 
           final result = await addModelData(module.collection, response);
           _logger.d('db result id $result');

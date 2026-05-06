@@ -25,6 +25,7 @@ class CloudBaseClient {
       'Accept': 'application/json',
       'Authorization': 'Bearer $accessToken',
     };
+    debugPrint('CloudBaseClient初始化完成...');
   }
 
   /// 更新访问令牌
@@ -33,7 +34,7 @@ class CloudBaseClient {
   void updateAccessToken(String newToken) {
     accessToken = newToken;
     headers['Authorization'] = 'Bearer $newToken';
-    print('访问令牌已更新');
+    debugPrint('访问令牌已更新');
   }
 
   /// 统一的HTTP请求方法
@@ -98,11 +99,11 @@ class CloudBaseClient {
         }
         return jsonDecode(response.body);
       } else {
-        print('请求失败: ${response.statusCode} ${response.body}');
+        debugPrint('请求失败: ${response.statusCode} ${response.body}');
         return null;
       }
     } catch (e) {
-      print('请求失败: $e');
+      debugPrint('请求失败: $e');
       return null;
     }
   }
