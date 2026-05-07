@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/xui/pages/collections_list.dart';
 import 'package:go_router/go_router.dart';
 import '../pages/home_page.dart';
 import '../pages/module_detail_page.dart';
@@ -94,7 +95,8 @@ class MainShell extends StatelessWidget {
           final path = GoRouterState.of(context).uri.path;
           int index = 0;
           if (path.startsWith(RoutePaths.discover)) index = 1;
-          if (path.startsWith(RoutePaths.mine)) index = 2;
+          if (path.startsWith(RoutePaths.agent)) index = 2;
+          if (path.startsWith(RoutePaths.mine)) index = 3;
 
           return Container(
             decoration: BoxDecoration(
@@ -130,9 +132,6 @@ class _DiscoverPage extends StatelessWidget {
   const _DiscoverPage();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('发现')),
-      body: const Center(child: Text('发现页 - 开发中')),
-    );
+    return const CollectionsListPage();
   }
 }

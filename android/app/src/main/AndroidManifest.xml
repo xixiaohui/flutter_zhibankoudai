@@ -8,7 +8,7 @@
 
     
     <application
-        android:label="flutter_application_zhiban"
+        android:label="智伴口袋"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">
