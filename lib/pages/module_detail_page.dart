@@ -108,12 +108,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                       ),
                     ),
 
-                    ContentCard(
-                      title: content.title,
-                      content: content.content,
-                      color: mc,
-                      isAi: content.isAiGenerated,
-                    ),
+                    
 
                     if (content.title.isNotEmpty) ...[
                       const SizedBox(height: 20),
@@ -140,12 +135,14 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                         ]),
                       ),
                     ],
+
                   ],
 
                   if (content == null)
                     const Padding(padding: EdgeInsets.only(top: 40), child: Center(child: Text('暂无内容', style: TextStyle(color: AppTheme.warmSilver)))),
 
                   const SizedBox(height: 32),
+
 
                   // Clay 风格按钮组
                   Row(children: [
@@ -167,6 +164,16 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                       ),
                     ),
                   ]),
+
+                  const SizedBox(height: 32),
+                  if (content != null)
+                    ContentCard(
+                      title: content.title,
+                      content: content.content,
+                      color: mc,
+                      isAi: content.isAiGenerated,
+                    ),
+
                 ]),
               ),
             );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/config/constants.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../config/routes.dart';
@@ -89,7 +90,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
 
           return CustomScrollView(slivers: slivers);
         },
-      ),
+      )
     );
   }
 
@@ -104,7 +105,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     final featured = featuredIds.map((id) => moduleMap[id]).whereType<ModuleConfig>().toList();
     if (featured.isNotEmpty) {
       slivers.add(SliverToBoxAdapter(child: _buildFeaturedRow(featured)));
-      slivers.add(const SliverToBoxAdapter(child: SizedBox(height: 8)));
+      slivers.add(const SliverToBoxAdapter(child: SizedBox(height: 10)));
     }
 
     // ── 各分类模块网格 ──
@@ -159,7 +160,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
           ]),
         ),
         SizedBox(
-          height: 130,
+          height: 140,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 20),

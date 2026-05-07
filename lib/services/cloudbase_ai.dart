@@ -135,15 +135,50 @@ Future<String?> streamTextWithLocalPrompt(
 }
 
 
+const _variationHints = [
+  '请换一个角度来阐述',
+  '请用不同的例子来说明',
+  '请从一个新颖的视角来分析',
+  '请结合实际案例来讲解',
+  '请用比喻的方式来呈现',
+  '请从历史发展的角度来解读',
+  '请关注细节层面',
+  '请从宏观层面来概括',
+  '请用对比的方式来分析',
+  '请给出不同的观点',
+  '请深入探讨核心概念',
+  '请用通俗易懂的方式来解释',
+  '请从跨界融合的角度来思考',
+  '请关注最新趋势',
+  '请从实用技巧的角度来分享',
+];
+
+List<Map<String, String>> _withSeedVariation(List<Map<String, String>> messages) {
+  final seed = DateTime.now().minute;
+  final hint = _variationHints[seed % _variationHints.length];
+  final modified = List<Map<String, String>>.from(messages);
+  for (int i = modified.length - 1; i >= 0; i--) {
+    if (modified[i]['role'] == 'user') {
+      modified[i] = {
+        'role': 'user',
+        'content': '${modified[i]['content']}\n\n[$hint]',
+      };
+      break;
+    }
+  }
+  return modified;
+}
+
 Future<String?> generateText(
   String model,
   String subModel,
   List<Map<String, String>> messages,
 ) async {
+  final varied = _withSeedVariation(messages);
   final payload = {
     'model': subModel,
-    'messages': messages,
-    'stream': false, // ⭐ 关键
+    'messages': varied,
+    'stream': false,
   };
 
   final url = '${cloudbase.baseUrl}/v1/ai/$model/chat/completions';
