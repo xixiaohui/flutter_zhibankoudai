@@ -60,3 +60,14 @@ node_modules
 ./ai-server/.env
 
 .env
+
+
+# Flutter
+/build/
+
+# APK/AAB
+*.apk
+*.aab
+
+# Output
+build_output/
