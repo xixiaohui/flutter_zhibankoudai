@@ -4,11 +4,24 @@ import 'package:provider/provider.dart';
 import '../config/routes.dart';
 import '../config/theme.dart';
 import '../models/daily_content.dart';
+import '../models/module_config.dart';
 import '../providers/module_provider.dart';
 import '../providers/daily_content_provider.dart';
 import '../widgets/daily_card.dart';
 import '../widgets/module_grid_item.dart';
 import '../xui/x_design.dart';
+
+/// 模块分类映射 — 每个模块归属于一个展示分组
+const Map<String, List<String>> _moduleCategories = {
+  '热门精选': ['wisdomBag', 'quote', 'joke', 'movie', 'music', 'programming'],
+  '财经商业': ['finance', 'investment', 'stock', 'economics', 'business', 'tax', 'foreignTrade', 'ecommerce', 'futures'],
+  '学习成长': ['english', 'math', 'literature', 'history', 'idiom', 'apple', 'xinStudy', 'liStudy'],
+  '生活休闲': ['travel', 'fishing', 'fitness', 'pet', 'fashion', 'outfit', 'beauty', 'floral', 'decoration', 'photography', 'love'],
+  '科技设计': ['tech', 'robotAi', 'softwareArchitect', 'solidityEngineer', 'uiDesigner', 'growth', 'seoExpert', 'xiaohongshuExpert', 'glassFiber', 'resin'],
+  '健康养生': ['tcm', 'fortune'],
+  '人文社科': ['anthropologist', 'geographer', 'historian', 'narratologist', 'psychologist', 'freud'],
+  '实用资讯': ['official', 'handling', 'law', 'fashionBrand', 'military', 'news'],
+};
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -41,52 +54,187 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     super.build(context);
     return Scaffold(
       backgroundColor: AppTheme.warmCream,
-      body: CustomScrollView(slivers: [
-        SliverToBoxAdapter(child: _header()),
+      body: Consumer2<ModuleProvider, DailyContentProvider>(
+        builder: (_, mp, cp, _) {
+          final slivers = <Widget>[
+            SliverToBoxAdapter(child: _header()),
+          ];
 
-        Consumer2<DailyContentProvider, ModuleProvider>(
-          builder: (_, cp, mp, _) {
-            if (mp.modules.isEmpty) return const SliverToBoxAdapter(child: SizedBox.shrink());
+          // Hero card — 第一个模块
+          if (mp.modules.isNotEmpty) {
             final fm = mp.modules.first;
             final content = cp.getContent(fm.id);
-            return SliverToBoxAdapter(
+            slivers.add(SliverToBoxAdapter(
               child: DailyCard(
-                module: fm, content: content,
-                isLoading: cp.isLoading(fm.id), isGenerating: cp.isGenerating(fm.id),
+                module: fm,
+                content: content,
+                isLoading: cp.isLoading(fm.id),
+                isGenerating: cp.isGenerating(fm.id),
                 onTap: () => _navigateToDetail(fm.id),
                 onRefresh: () => cp.refreshWithAi(fm),
                 onShare: () => _navigateToPoster(content),
               ),
-            );
-          },
+            ));
+          }
+
+          slivers.add(SliverToBoxAdapter(child: _sectionTitle(context, '更多模块')));
+
+          if (mp.isLoading) {
+            slivers.add(SliverFillRemaining(child: _loadingGrid()));
+          } else if (mp.modules.isEmpty) {
+            slivers.add(const SliverFillRemaining(child: Center(child: Text('暂无模块'))));
+          } else {
+            slivers.addAll(_buildModuleSections(mp.modules.skip(1).toList()));
+          }
+
+          return CustomScrollView(slivers: slivers);
+        },
+      ),
+    );
+  }
+
+  // ========== 模块分类区域构建 ==========
+
+  List<Widget> _buildModuleSections(List<ModuleConfig> modules) {
+    final moduleMap = <String, ModuleConfig>{for (final m in modules) m.id: m};
+    final slivers = <Widget>[];
+
+    // ── 横向滚动「热门精选」 ──
+    final featuredIds = _moduleCategories['热门精选']!;
+    final featured = featuredIds.map((id) => moduleMap[id]).whereType<ModuleConfig>().toList();
+    if (featured.isNotEmpty) {
+      slivers.add(SliverToBoxAdapter(child: _buildFeaturedRow(featured)));
+      slivers.add(const SliverToBoxAdapter(child: SizedBox(height: 8)));
+    }
+
+    // ── 各分类模块网格 ──
+    for (final entry in _moduleCategories.entries) {
+      // 热门精选已在上方横向展示，这里跳过
+      if (entry.key == '热门精选') continue;
+
+      final catModules = entry.value
+          .map((id) => moduleMap[id])
+          .whereType<ModuleConfig>()
+          .toList();
+      if (catModules.isEmpty) continue;
+
+      slivers.add(SliverToBoxAdapter(
+        child: _categoryLabel(entry.key, catModules.length),
+      ));
+      slivers.add(SliverPadding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        sliver: SliverGrid(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 0.85,
+          ),
+          delegate: SliverChildBuilderDelegate(
+            (_, i) => ModuleGridItem(
+              module: catModules[i],
+              onTap: () => _navigateToDetail(catModules[i].id),
+            ),
+            childCount: catModules.length,
+          ),
         ),
+      ));
+      slivers.add(const SliverToBoxAdapter(child: SizedBox(height: 20)));
+    }
 
-        SliverToBoxAdapter(child: _sectionTitle(context, '更多模块')),
+    slivers.add(const SliverToBoxAdapter(child: SizedBox(height: 80)));
+    return slivers;
+  }
 
-        Consumer<ModuleProvider>(
-          builder: (_, provider, _) {
-            if (provider.isLoading) return SliverFillRemaining(child: _loadingGrid());
-            if (provider.modules.isEmpty) return const SliverFillRemaining(child: Center(child: Text('暂无模块')));
-            final others = provider.modules.skip(1).toList();
-            return SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              sliver: SliverGrid(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 0.85,
-                ),
-                delegate: SliverChildBuilderDelegate(
-                  (_, i) => ModuleGridItem(module: others[i], onTap: () => _navigateToDetail(others[i].id)),
-                  childCount: others.length,
-                ),
+  // ── 横向滚动热门卡片行 ──
+  Widget _buildFeaturedRow(List<ModuleConfig> items) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20, 4, 20, 10),
+          child: Row(children: [
+            const Text('🔥 ', style: TextStyle(fontSize: 14)),
+            Text('热门精选'.toUpperCase(), style: XuiTheme.uppercaseLabel()),
+          ]),
+        ),
+        SizedBox(
+          height: 130,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            itemCount: items.length,
+            separatorBuilder: (_, _) => const SizedBox(width: 12),
+            itemBuilder: (_, i) => _featuredCard(items[i]),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _featuredCard(ModuleConfig m) {
+    final c = AppTheme.fromHex(m.color);
+    return GestureDetector(
+      onTap: () => _navigateToDetail(m.id),
+      child: Container(
+        width: 110,
+        decoration: BoxDecoration(
+          color: AppTheme.pureWhite,
+          borderRadius: BorderRadius.circular(AppTheme.radiusFeature),
+          border: Border.all(color: AppTheme.oatBorder, width: 1),
+          boxShadow: AppTheme.clayShadow,
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 42,
+              height: 42,
+              decoration: BoxDecoration(
+                color: c.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(AppTheme.radiusCard),
               ),
-            );
-          },
+              child: Center(child: Text(m.icon, style: const TextStyle(fontSize: 22))),
+            ),
+            const SizedBox(height: 10),
+            Text(m.name,
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.clayBlack),
+              textAlign: TextAlign.center, maxLines: 1, overflow: TextOverflow.ellipsis),
+            const SizedBox(height: 4),
+            Text(
+              m.description,
+              style: const TextStyle(fontSize: 9, color: AppTheme.warmSilver),
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
         ),
+      ),
+    );
+  }
 
-        const SliverToBoxAdapter(child: SizedBox(height: 100)),
+  // ── 分类标签 ──
+  Widget _categoryLabel(String title, int count) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 4, 20, 10),
+      child: Row(children: [
+        Text(title, style: XuiTheme.cardHeading().copyWith(fontSize: 16)),
+        const SizedBox(width: 8),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+          decoration: BoxDecoration(
+            color: AppTheme.oatLight,
+            borderRadius: BorderRadius.circular(AppTheme.radiusPill),
+          ),
+          child: Text('$count', style: XuiTheme.badge()),
+        ),
       ]),
     );
   }
+
+  // ========== 原有部件 ==========
 
   Widget _header() {
     return Container(
