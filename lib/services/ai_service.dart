@@ -64,7 +64,6 @@ class AiService {
           final result = await addModelData(module.collection, response);
           _logger.d('db result id $result');
         }
-        
 
         return content;
       }
@@ -208,14 +207,15 @@ class AiService {
       );
     }
 
+    final lastModule = findModuleById(moduleId);
+
     return DailyContent(
       id: '${moduleId}_default_${DateTime.now().millisecondsSinceEpoch}',
       moduleId: moduleId,
-      content: '暂无内容，请稍后再试',
+      title: lastModule?.slogan ?? '暂无内容',
+      content: lastModule?.placeholderText ?? '暂无内容，请稍后再试',
       date: DateTime.now(),
       isAiGenerated: false,
     );
   }
 }
-
-

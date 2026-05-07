@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/xui/utils/module.dart' as utils show Module, defaultModuleConfig;
+
 import '../models/module_config.dart';
 import '../models/daily_content.dart';
 import '../services/data_service.dart';
@@ -105,10 +107,13 @@ class DailyContentProvider extends ChangeNotifier {
       );
     }
 
+    final lastModule = findModuleById(module.id);
+
     return DailyContent(
       id: '${module.id}_default_${DateTime.now().millisecondsSinceEpoch}',
       moduleId: module.id,
-      content: '暂无内容，请稍后再试',
+      title: lastModule?.slogan ?? '暂无内容',
+      content: lastModule?.placeholderText ?? '暂无内容,点击AI生成',
       date: DateTime.now(),
     );
   }
@@ -125,5 +130,14 @@ class DailyContentProvider extends ChangeNotifier {
     _loadingMap.clear();
     _generatingMap.clear();
     notifyListeners();
+  }
+}
+
+
+utils.Module? findModuleById(String id) {
+  try {
+    return utils.defaultModuleConfig.modules.firstWhere((m) => m.id == id);
+  } catch (_) {
+    return null;
   }
 }

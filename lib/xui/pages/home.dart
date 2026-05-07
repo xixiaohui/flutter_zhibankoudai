@@ -84,7 +84,7 @@ class HeroSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "复合材料智能助手",
+              "复合材料AI助手",
               style: xui.XuiTheme.displayHero().copyWith(
                     fontSize: compact ? 34 : 48,
                     height: 1.12,
@@ -175,7 +175,7 @@ class QuickGridSliver extends StatelessWidget {
     final items = [
       _HomeAction("AI分析", Icons.smart_toy, const AiChatPage()),
       _HomeAction("材料查询", Icons.search, const CollectionsGridPage()),
-      _HomeAction("价格趋势", Icons.show_chart, const MarketAiPage()),
+      _HomeAction("价格趋势", Icons.show_chart, const AiChatPage()),
       _HomeAction("供应商", Icons.business, const CollectionsListPage()),
     ];
 
@@ -256,6 +256,10 @@ class MarketGridSliver extends StatelessWidget {
           xui.ClayContainer(
             borderRadius: 24,
             padding: const EdgeInsets.all(16),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => SearchResultPage(query: '${item.$1}价格趋势')),
+            ),
             child: Row(
               children: [
                 Icon(
@@ -291,10 +295,10 @@ class FeatureGridSliver extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = [
-      ("AI助手", Icons.smart_toy),
-      ("趋势分析", Icons.auto_graph),
-      ("材料数据库", Icons.storage),
-      ("报价工具", Icons.calculate),
+      _HomeAction("AI助手", Icons.smart_toy, const AiChatPage()),
+      _HomeAction("趋势分析", Icons.auto_graph, const AiChatPage()),
+      _HomeAction("材料数据库", Icons.storage, const CollectionsGridPage()),
+      _HomeAction("报价工具", Icons.calculate, const AiChatPage()),
     ];
 
     return _AdaptiveGridSliver(
@@ -302,7 +306,14 @@ class FeatureGridSliver extends StatelessWidget {
       childAspectRatio: _isCompact(context) ? 1.18 : 1.25,
       children: [
         for (final item in items)
-          _IconTile(title: item.$1, icon: item.$2),
+          _IconTile(
+            title: item.title,
+            icon: item.icon,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => item.page),
+            ),
+          ),
       ],
     );
   }
@@ -338,7 +349,7 @@ class AssistantGridSliver extends StatelessWidget {
         title: "行情分析助手",
         desc: "价格趋势与市场分析",
         icon: Icons.auto_graph,
-        page: const MarketAiPage(),
+        page: const AiChatPage(),
       ),
     ];
 
@@ -356,13 +367,13 @@ class OtherAssistantGridSliver extends StatelessWidget {
         title: "报价助手",
         desc: "成本估算与报价生成",
         icon: Icons.calculate,
-        page: const QuoteAiPage(),
+        page: const AiChatPage(),
       ),
       _AssistantItem(
         title: "外贸助手",
         desc: "英文回复与客户沟通",
         icon: Icons.language,
-        page: const TradeAiPage(),
+        page: const AiChatPage(),
       ),
       _AssistantItem(
         title: "我的助手",
@@ -573,41 +584,6 @@ class _AssistantItem {
   });
 }
 
-class MarketAiPage extends StatelessWidget {
-  const MarketAiPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("行情分析助手")),
-      body: const Center(child: Text("行情 AI 分析页面")),
-    );
-  }
-}
-
-class QuoteAiPage extends StatelessWidget {
-  const QuoteAiPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("报价助手")),
-      body: const Center(child: Text("报价生成 / 成本分析")),
-    );
-  }
-}
-
-class TradeAiPage extends StatelessWidget {
-  const TradeAiPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("外贸助手")),
-      body: const Center(child: Text("外贸询盘回复 / 英文生成")),
-    );
-  }
-}
 
 bool _isCompact(BuildContext context) => MediaQuery.sizeOf(context).width < 600;
 

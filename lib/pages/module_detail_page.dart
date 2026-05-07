@@ -83,14 +83,6 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                   // 内容
                   if (content != null) ...[
 
-                    ContentCard(
-                      title: content.title,
-                      content: content.content,
-                      color: mc,
-                      isAi: content.isAiGenerated,
-                    ),
-
-                    Text("---markdown---"),
                     MarkdownBody(
                       selectable: true, // ⭐ 可复制
                       data: content.content,
@@ -114,6 +106,13 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                           fontStyle: FontStyle.italic,
                         ),
                       ),
+                    ),
+
+                    ContentCard(
+                      title: content.title,
+                      content: content.content,
+                      color: mc,
+                      isAi: content.isAiGenerated,
                     ),
 
                     if (content.title.isNotEmpty) ...[

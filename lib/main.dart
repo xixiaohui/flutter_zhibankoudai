@@ -6,6 +6,7 @@ import 'config/routes.dart';
 import 'config/theme.dart';
 import 'providers/module_provider.dart';
 import 'providers/daily_content_provider.dart';
+import 'providers/theme_provider.dart';
 import 'xui/pages/home.dart';
 import 'package:flutter/gestures.dart';
 
@@ -90,23 +91,25 @@ class ZhiBanKouDaiApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => ModuleProvider()),
         ChangeNotifierProvider(create: (_) => DailyContentProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
       ],
-      child: MaterialApp.router(
-        title: '智伴口袋',
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.lightTheme.copyWith(
-          textTheme: AppTheme.lightTheme.textTheme.apply(
-            fontFamily: 'NotoSansSC',
+      child: Consumer<ThemeProvider>(
+        builder: (_, themeProvider, __) => MaterialApp.router(
+          title: '智伴口袋',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.lightTheme.copyWith(
+            textTheme: AppTheme.lightTheme.textTheme.apply(
+              fontFamily: 'NotoSansSC',
+            ),
           ),
-        ),
-
-        darkTheme: AppTheme.darkTheme.copyWith(
-          textTheme: AppTheme.darkTheme.textTheme.apply(
-            fontFamily: 'NotoSansSC',
+          darkTheme: AppTheme.darkTheme.copyWith(
+            textTheme: AppTheme.darkTheme.textTheme.apply(
+              fontFamily: 'NotoSansSC',
+            ),
           ),
+          themeMode: themeProvider.mode,
+          routerConfig: appRouter,
         ),
-        themeMode: ThemeMode.system,
-        routerConfig: appRouter,
       ),
     );
   }

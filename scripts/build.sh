@@ -27,13 +27,13 @@ fi
 # ======================
 if [ "$ENV" == "dev" ]; then
   API_URL="https://www.xclaw.living/"
-  APP_NAME="ZHIBANKOUDAI Dev"
+  APP_NAME="PocketMind Dev"
 elif [ "$ENV" == "test" ]; then
   API_URL="https://www.xclaw.living/"
-  APP_NAME="ZHIBANKOUDAI Test"
+  APP_NAME="PocketMind Test"
 else
   API_URL="https://www.xclaw.living/"
-  APP_NAME="ZHIBANKOUDAI"
+  APP_NAME="PocketMind"
 fi
 
 # ======================
