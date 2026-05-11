@@ -5,6 +5,7 @@ import '../pages/home_page.dart';
 import '../pages/module_detail_page.dart';
 import '../pages/poster_page.dart';
 import '../pages/mine_page.dart';
+import '../pages/ai_friend_page.dart';
 import '../xui/pages/home.dart' as xui;
 import 'theme.dart';
 
@@ -78,6 +79,11 @@ final GoRouter appRouter = GoRouter(
           categoryIcon: extra['categoryIcon'] ?? '',
         );
       },
+    ),
+    GoRoute(
+      path: '/ai-friend',
+      name: 'aiFriend',
+      builder: (_, _) => const AIFriendPage(),
     ),
   ],
 );

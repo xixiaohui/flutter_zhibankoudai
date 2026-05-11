@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_zhiban/config/constants.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../config/routes.dart';
@@ -78,6 +77,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
             ));
           }
 
+          slivers.add(SliverToBoxAdapter(child: _aiFriendCard(context)));
           slivers.add(SliverToBoxAdapter(child: _sectionTitle(context, '更多模块')));
 
           if (mp.isLoading) {
@@ -232,6 +232,69 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
           child: Text('$count', style: XuiTheme.badge()),
         ),
       ]),
+    );
+  }
+
+  // ========== AI 情感陪伴卡片 ==========
+
+  Widget _aiFriendCard(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+      child: GestureDetector(
+        onTap: () => context.push('/ai-friend'),
+        child: Container(
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFFFFF5F5), Color(0xFFFFF0E8)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(AppTheme.radiusFeature),
+            border: Border.all(color: const Color(0x33FF9A9E)),
+            boxShadow: AppTheme.clayShadow,
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFFFF9A9E), Color(0xFFFAD0C4)],
+                  ),
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: const [
+                    BoxShadow(color: Color(0x33FF9A9E), blurRadius: 8, offset: Offset(0, 2)),
+                  ],
+                ),
+                child: const Center(child: Text('🧸', style: TextStyle(fontSize: 26))),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('情感陪伴',
+                      style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600, color: AppTheme.clayBlack)),
+                    const SizedBox(height: 4),
+                    Text('和"小智"聊聊天，分享你的心情',
+                      style: XuiTheme.caption()),
+                  ],
+                ),
+              ),
+              Container(
+                width: 32, height: 32,
+                decoration: BoxDecoration(
+                  color: AppTheme.pureWhite.withValues(alpha: 0.8),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Icon(Icons.arrow_forward_rounded, size: 18, color: AppTheme.warmCharcoal),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 

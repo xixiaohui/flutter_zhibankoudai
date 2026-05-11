@@ -7,7 +7,7 @@ class AppConstants {
   // 应用信息
   static const String appName = '智伴口袋';
   static const String appNameEn = 'PocketMind';
-  static const String appVersion = '1.2.0';
+  static const String appVersion = '1.2.1';
 
   // 缓存Key
   static const String keyModuleConfig = 'moduleConfig';
