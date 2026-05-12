@@ -50,6 +50,7 @@ flutter:
     - assets/images/
     - assets/data/
     - assets/cloudData/prompts/aiPrompts.json
+    - assets/career/
     - .env
   fonts:
     - family: NotoSansSC

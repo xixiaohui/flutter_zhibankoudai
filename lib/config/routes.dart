@@ -6,6 +6,9 @@ import '../pages/module_detail_page.dart';
 import '../pages/poster_page.dart';
 import '../pages/mine_page.dart';
 import '../pages/ai_friend_page.dart';
+import '../pages/ai_career_page.dart';
+import '../pages/ai_career_detail_page.dart';
+import '../models/career.dart';
 import '../xui/pages/home.dart' as xui;
 import 'theme.dart';
 
@@ -84,6 +87,19 @@ final GoRouter appRouter = GoRouter(
       path: '/ai-friend',
       name: 'aiFriend',
       builder: (_, _) => const AIFriendPage(),
+    ),
+    GoRoute(
+      path: '/career',
+      name: 'career',
+      builder: (_, _) => const AICareerPage(),
+    ),
+    GoRoute(
+      path: '/career/:careerId',
+      name: 'careerDetail',
+      builder: (context, state) {
+        final career = state.extra as Career;
+        return AICareerDetailPage(career: career);
+      },
     ),
   ],
 );

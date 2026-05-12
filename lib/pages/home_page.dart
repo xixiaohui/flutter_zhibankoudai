@@ -78,6 +78,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
           }
 
           slivers.add(SliverToBoxAdapter(child: _aiFriendCard(context)));
+          slivers.add(SliverToBoxAdapter(child: _aiCareerCard(context)));
           slivers.add(SliverToBoxAdapter(child: _sectionTitle(context, '更多模块')));
 
           if (mp.isLoading) {
@@ -279,6 +280,69 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                       style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600, color: AppTheme.clayBlack)),
                     const SizedBox(height: 4),
                     Text('和"小智"聊聊天，分享你的心情',
+                      style: XuiTheme.caption()),
+                  ],
+                ),
+              ),
+              Container(
+                width: 32, height: 32,
+                decoration: BoxDecoration(
+                  color: AppTheme.pureWhite.withValues(alpha: 0.8),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Icon(Icons.arrow_forward_rounded, size: 18, color: AppTheme.warmCharcoal),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ========== AI 职业专家卡片 ==========
+
+  Widget _aiCareerCard(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+      child: GestureDetector(
+        onTap: () => context.push('/career'),
+        child: Container(
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFFF0F4FF), Color(0xFFEDE9FE)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(AppTheme.radiusFeature),
+            border: Border.all(color: const Color(0x336366F1)),
+            boxShadow: AppTheme.clayShadow,
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF6366F1), Color(0xFF8B5CF6)],
+                  ),
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: const [
+                    BoxShadow(color: Color(0x336366F1), blurRadius: 8, offset: Offset(0, 2)),
+                  ],
+                ),
+                child: const Center(child: Text('💼', style: TextStyle(fontSize: 26))),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('领域专家',
+                      style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600, color: AppTheme.clayBlack)),
+                    const SizedBox(height: 4),
+                    Text('与180+行业专家深度对话，获取专业见解',
                       style: XuiTheme.caption()),
                   ],
                 ),
