@@ -228,6 +228,104 @@ Future<String?> generateWithSystemPrompt(
   );
 }
 
+/// Non-streaming version of the xclaw.living API.
+Future<String?> generateTextXclaw({
+  required String model,
+  required List<Map<String, String>> messages,
+  String subModel = 'hunyuan-turbos-latest',
+}) async {
+  final url = 'https://www.xclaw.living/api/hunyuan/$model/ai-generate';
+
+  try {
+    final request = http.Request('POST', Uri.parse(url));
+    request.headers.addAll({
+      'Content-Type': 'application/json',
+    });
+    request.body = jsonEncode({
+      'messages': messages,
+      'subModel': subModel,
+      'stream': false,
+    });
+
+    final streamedResponse = await request.send();
+    final response = await http.Response.fromStream(streamedResponse);
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      final data = jsonDecode(response.body);
+      final content = data['choices']?[0]?['message']?['content']?.toString();
+      return content;
+    }
+
+    debugPrint('xclaw generateText failed: ${response.statusCode}');
+    return null;
+  } catch (e) {
+    debugPrint('xclaw generateText error: $e');
+    return null;
+  }
+}
+
+/// Calls the xclaw.living API (OpenAI-compatible SSE stream).
+/// Used by ai_friend_page and ai_career_detail_page.
+Future<String?> streamTextXclaw({
+  required String model,
+  required List<Map<String, String>> messages,
+  String subModel = 'hunyuan-turbos-latest',
+}) async {
+  final url = 'https://www.xclaw.living/api/hunyuan/$model/ai-generate';
+
+  try {
+    final request = http.Request('POST', Uri.parse(url));
+    request.headers.addAll({
+      'Content-Type': 'application/json',
+      'Accept': 'text/event-stream',
+    });
+    request.body = jsonEncode({
+      'messages': messages,
+      'subModel': subModel,
+      'stream': true,
+    });
+
+    final streamedResponse = await request.send();
+
+    if (streamedResponse.statusCode >= 200 && streamedResponse.statusCode < 300) {
+      String fullContent = '';
+
+      await for (final chunk in streamedResponse.stream.transform(utf8.decoder)) {
+        final lines = chunk.split('\n');
+        for (final line in lines) {
+          if (!line.startsWith('data: ')) continue;
+
+          final dataStr = line.substring(6);
+          if (dataStr.trim() == '[DONE]') continue;
+
+          try {
+            final chunkData = jsonDecode(dataStr);
+            // Check for error in stream
+            if (chunkData['error'] != null) {
+              debugPrint('AI stream error: ${chunkData['error']['message']}');
+              return fullContent.isEmpty ? null : fullContent;
+            }
+            final content = chunkData['choices']?[0]?['delta']?['content'] ?? '';
+            if (content.isNotEmpty) {
+              fullContent += content.toString();
+            }
+          } catch (_) {
+            // Ignore incomplete SSE JSON fragments.
+          }
+        }
+      }
+
+      return fullContent;
+    }
+
+    debugPrint('xclaw AI call failed: ${streamedResponse.statusCode}');
+    return null;
+  } catch (e) {
+    debugPrint('xclaw AI call error: $e');
+    return null;
+  }
+}
+
 Future<String?> generateTextWithLocalPrompt(
   String promptKey, {
   String userPrompt = '生成今日内容',

@@ -524,10 +524,10 @@ class _AIFriendPageState extends State<AIFriendPage> {
 
     final messages = _promptBuilder.buildMessages(text);
 
-    final response = await streamText(
-      _config.model,
-      _config.subModel,
-      messages,
+    final response = await streamTextXclaw(
+      model: _config.model,
+      subModel: _config.subModel,
+      messages: messages,
     );
 
     if (!mounted) return;

@@ -74,10 +74,11 @@ class _AICareerPageState extends State<AICareerPage> {
       );
     }
 
-    final careers = _careers!;
+    final careers = _careers!.where((c) => c.name.isNotEmpty).toList();
     final grouped = <String, List<Career>>{};
     for (final c in careers) {
-      grouped.putIfAbsent(c.category, () => []).add(c);
+      final catKey = c.category.isNotEmpty ? c.category : '其他';
+      grouped.putIfAbsent(catKey, () => []).add(c);
     }
 
     final categories = grouped.entries.toList()
@@ -92,6 +93,10 @@ class _AICareerPageState extends State<AICareerPage> {
 
   Widget _buildCategorySection(MapEntry<String, List<Career>> entry) {
     final cat = entry.value.first;
+    final icon = cat.categoryIcon.isNotEmpty ? cat.categoryIcon : '📋';
+    final name = cat.categoryName.isNotEmpty
+        ? cat.categoryName
+        : (cat.category.isNotEmpty ? cat.category : '其他');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -100,10 +105,10 @@ class _AICareerPageState extends State<AICareerPage> {
           padding: const EdgeInsets.only(left: 4, bottom: 10, top: 4),
           child: Row(
             children: [
-              Text(cat.categoryIcon, style: const TextStyle(fontSize: 20)),
+              Text(icon, style: const TextStyle(fontSize: 20)),
               const SizedBox(width: 8),
               Text(
-                cat.categoryName.isNotEmpty ? cat.categoryName : cat.category,
+                name,
                 style: const TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w700,

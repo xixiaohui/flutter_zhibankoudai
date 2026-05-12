@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../config/constants.dart';
 import '../config/theme.dart';
 import '../models/career.dart';
 import '../services/cloudbase_ai.dart';
@@ -42,6 +43,7 @@ class _AICareerDetailPageState extends State<AICareerDetailPage> {
     final raw = _prefs?.getString(_storageKey);
     if (raw == null || raw.isEmpty) {
       _addGreeting();
+      setState(() {});
       return;
     }
     try {
@@ -114,27 +116,35 @@ class _AICareerDetailPageState extends State<AICareerDetailPage> {
     _scrollToBottom();
     _persistMessages();
 
-    final systemPrompt = _buildSystemPrompt();
-    final response = await streamText(
-      'hunyuan-exp',
-      'hunyuan-turbos-latest',
-      [
-        {'role': 'system', 'content': systemPrompt},
-        {'role': 'user', 'content': text},
-      ],
-    );
+    try {
+      final systemPrompt = _buildSystemPrompt();
+      final response = await streamTextXclaw(
+        model: AppConstants.defaultModel,
+        subModel: AppConstants.defaultSubModel,
+        messages: [
+          {'role': 'system', 'content': systemPrompt},
+          {'role': 'user', 'content': text},
+        ],
+      );
 
-    if (!mounted) return;
+      if (!mounted) return;
 
-    setState(() {
-      _isThinking = false;
-      if (response != null && response.isNotEmpty) {
-        _messages.last = ChatMessage(text: response, isUser: false);
-        _history.add({'user': text, 'assistant': response});
-      } else {
-        _messages.last = ChatMessage(text: '抱歉，我暂时无法回复。请稍后再试。', isUser: false);
-      }
-    });
+      setState(() {
+        _isThinking = false;
+        if (response != null && response.isNotEmpty) {
+          _messages.last = ChatMessage(text: response, isUser: false);
+          _history.add({'user': text, 'assistant': response});
+        } else {
+          _messages.last = ChatMessage(text: '抱歉，我暂时无法回复。请稍后再试。', isUser: false);
+        }
+      });
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _isThinking = false;
+        _messages.last = ChatMessage(text: '出错了：$e', isUser: false);
+      });
+    }
 
     _scrollToBottom();
     _persistMessages();

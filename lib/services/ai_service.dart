@@ -79,7 +79,16 @@ class AiService {
     String prompt,
   ) async {
     try {
+      // Use xclaw API (non-streaming) as primary
       final contentStr =
+          await generateTextXclaw(
+            model: 'hunyuan-exp',
+            subModel: 'hunyuan-turbos-latest',
+            messages: [
+              {'role': 'system', 'content': prompt},
+              {'role': 'user', 'content': '生成今日内容'},
+            ],
+          ) ??
           await generateTextWithLocalPrompt(moduleId, userPrompt: '生成今日内容') ??
           await streamTextWithCloudPrompt(moduleId, userPrompt: '生成今日内容') ??
           await streamTextWithSystemPrompt(prompt, userPrompt: '生成今日内容');

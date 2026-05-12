@@ -127,39 +127,38 @@ class Career {
     return results.toList();
   }
 
-  /// Build a system prompt for AI role-play from career persona fields
+  /// Build a compact system prompt for AI role-play.
+  /// Kept under ~1500 chars so the model handles it reliably.
   String buildSystemPrompt() {
     final buf = StringBuffer();
-    buf.writeln('你是「$nameZh」($name)，一位$descriptionZh');
+    buf.writeln('你是「$nameZh」($name)，$descriptionZh');
+    buf.writeln('风格：$vibeZh');
     buf.writeln();
 
     if (background.isNotEmpty) {
-      buf.writeln('【背景设定】');
       for (final line in background) {
-        if (line.trim().isNotEmpty) buf.writeln(line.trim());
-      }
-      buf.writeln();
-    }
-
-    if (personality.isNotEmpty) {
-      buf.writeln('【性格特质】');
-      for (final line in personality) {
-        if (line.trim().isNotEmpty) buf.writeln(line.trim());
+        final t = line.trim();
+        if (t.isNotEmpty) {
+          buf.writeln(t);
+          break; // first background line is usually the role summary
+        }
       }
       buf.writeln();
     }
 
     if (coreMission.isNotEmpty) {
-      buf.writeln('【核心使命】');
-      for (final line in coreMission) {
+      buf.writeln('【核心职责】');
+      final items = coreMission.length > 5 ? coreMission.sublist(0, 5) : coreMission;
+      for (final line in items) {
         if (line.trim().isNotEmpty) buf.writeln(line.trim());
       }
       buf.writeln();
     }
 
     if (criticalRules.isNotEmpty) {
-      buf.writeln('【关键规则 - 必须遵守】');
-      for (final line in criticalRules) {
+      buf.writeln('【必须遵守】');
+      final rules = criticalRules.length > 4 ? criticalRules.sublist(0, 4) : criticalRules;
+      for (final line in rules) {
         if (line.trim().isNotEmpty) buf.writeln(line.trim());
       }
       buf.writeln();
@@ -167,23 +166,17 @@ class Career {
 
     if (communicationStyle.isNotEmpty) {
       buf.writeln('【沟通风格】');
-      for (final line in communicationStyle) {
+      final styles = communicationStyle.length > 2 ? communicationStyle.sublist(0, 2) : communicationStyle;
+      for (final line in styles) {
         if (line.trim().isNotEmpty) buf.writeln(line.trim());
       }
       buf.writeln();
     }
 
-    if (workflow.isNotEmpty) {
-      buf.writeln('【工作流程】');
-      for (final line in workflow) {
-        if (line.trim().isNotEmpty) buf.writeln(line.trim());
-      }
-      buf.writeln();
-    }
+    buf.writeln('请以上述专家身份回复用户。用中文，简洁专业。');
 
-    buf.writeln('请始终以上述专家身份与用户交流。用中文回复，保持专业、深度、实用的风格。');
-
-    return buf.toString();
+    final result = buf.toString();
+    return result.length > 2000 ? '${result.substring(0, 2000)}...' : result;
   }
 
   /// All career IDs registered in assets/career/
@@ -212,7 +205,7 @@ class Career {
     'git-workflow-master', 'governance-architect', 'graph-operator', 'growth-hacker',
     'guest-services', 'historian', 'identity-trust', 'image-prompt-engineer',
     'immersive-developer', 'incident-response-commander',
-    'inclusive-visuals-specialist', 'index-engineer', 'index',
+    'inclusive-visuals-specialist', 'index-engineer',
     'infrastructure-maintainer', 'instagram-curator', 'integration-specialist',
     'interface-architect', 'investment-researcher', 'korean-business-navigator',
     'kuaishou-strategist', 'legal-compliance-checker', 'linkedin-content-creator',
