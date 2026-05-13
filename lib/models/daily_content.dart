@@ -9,6 +9,7 @@ class DailyContent {
   final String categoryIcon;
   final DateTime? date;
   final bool isAiGenerated;
+  final Map<String, dynamic> extra;
 
   const DailyContent({
     required this.id,
@@ -20,6 +21,7 @@ class DailyContent {
     this.categoryIcon = '',
     this.date,
     this.isAiGenerated = false,
+    this.extra = const <String, dynamic>{},
   });
 
   factory DailyContent.fromJson(Map<String, dynamic> json) {
@@ -33,6 +35,7 @@ class DailyContent {
       categoryIcon: json['categoryIcon'] as String? ?? '',
       date: json['date'] != null ? DateTime.tryParse(json['date'] as String) : null,
       isAiGenerated: json['isAiGenerated'] as bool? ?? false,
+      extra: _safeParseExtra(json['extra']),
     );
   }
 
@@ -47,6 +50,7 @@ class DailyContent {
       'categoryIcon': categoryIcon,
       'date': date?.toIso8601String(),
       'isAiGenerated': isAiGenerated,
+      'extra': extra,
     };
   }
 
@@ -63,6 +67,12 @@ class DailyContent {
       date: DateTime.now(),
       isAiGenerated: false,
     );
+  }
+
+  static Map<String, dynamic> _safeParseExtra(dynamic raw) {
+    if (raw is Map<String, dynamic>) return raw;
+    if (raw is Map) return Map<String, dynamic>.from(raw);
+    return const <String, dynamic>{};
   }
 }
 

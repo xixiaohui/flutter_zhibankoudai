@@ -420,8 +420,6 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   void _navigateToDetail(String id) => context.push('/module/$id');
   void _navigateToPoster(DailyContent? c) {
     if (c == null) return;
-    context.push(RoutePaths.poster, extra: {
-      'content': c.content, 'title': c.title, 'subtitle': c.subtitle, 'categoryIcon': c.categoryIcon,
-    });
+    context.push(RoutePaths.poster, extra: c);
   }
 }

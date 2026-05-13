@@ -9,6 +9,7 @@ import '../pages/ai_friend_page.dart';
 import '../pages/ai_career_page.dart';
 import '../pages/ai_career_detail_page.dart';
 import '../models/career.dart';
+import '../models/daily_content.dart';
 import '../xui/pages/home.dart' as xui;
 import 'theme.dart';
 
@@ -74,13 +75,7 @@ final GoRouter appRouter = GoRouter(
       path: RoutePaths.poster,
       name: RouteNames.poster,
       builder: (context, state) {
-        final extra = state.extra as Map<String, dynamic>? ?? {};
-        return PosterPage(
-          content: extra['content'] ?? '',
-          title: extra['title'] ?? '',
-          subtitle: extra['subtitle'] ?? '',
-          categoryIcon: extra['categoryIcon'] ?? '',
-        );
+        return PosterPage(dailyContent: state.extra as DailyContent);
       },
     ),
     GoRoute(

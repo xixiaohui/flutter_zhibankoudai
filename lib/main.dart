@@ -94,7 +94,7 @@ class ZhiBanKouDaiApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
       ],
       child: Consumer<ThemeProvider>(
-        builder: (_, themeProvider, __) => MaterialApp.router(
+        builder: (_, themeProvider, _) => MaterialApp.router(
           title: '智伴口袋',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme.copyWith(

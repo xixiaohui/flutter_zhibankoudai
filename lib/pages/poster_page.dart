@@ -5,21 +5,14 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:gal/gal.dart';
 import 'dart:io';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import '../config/theme.dart';
+import '../models/daily_content.dart';
 
 class PosterPage extends StatefulWidget {
-  final String content;
-  final String title;
-  final String subtitle;
-  final String categoryIcon;
+  final DailyContent dailyContent;
 
-  const PosterPage({
-    super.key,
-    required this.content,
-    this.title = '',
-    this.subtitle = '',
-    this.categoryIcon = '',
-  });
+  const PosterPage({super.key, required this.dailyContent});
 
   @override
   State<PosterPage> createState() => _PosterPageState();
@@ -36,13 +29,160 @@ class _PosterPageState extends State<PosterPage> {
         (codeUnit >= 0x3400 && codeUnit <= 0x4dbf);
   }
 
-  static const _bodyStyle = TextStyle(
+  static final _posterMarkdownStyle = MarkdownStyleSheet(
+  /// 正文
+  p: TextStyle(
+    color: AppTheme.pureWhite.withValues(alpha: 0.96),
+    fontSize: 52,
+    fontWeight: FontWeight.w400,
+    height: 2.15,
+    letterSpacing: 0.8,
+    fontFamily: 'NotoSerifSC',
+  ),
+
+  /// 一级标题
+  h1: TextStyle(
     color: AppTheme.pureWhite,
-    fontSize: 44,
+    fontSize: 76,
+    fontWeight: FontWeight.w700,
+    height: 1.45,
+    letterSpacing: 1.2,
+    fontFamily: 'NotoSerifSC',
+  ),
+
+  /// 二级标题
+  h2: TextStyle(
+    color: AppTheme.pureWhite.withValues(alpha: 0.98),
+    fontSize: 66,
+    fontWeight: FontWeight.w600,
+    height: 1.55,
+    letterSpacing: 1,
+    fontFamily: 'NotoSerifSC',
+  ),
+
+  /// 三级标题
+  h3: TextStyle(
+    color: AppTheme.pureWhite.withValues(alpha: 0.95),
+    fontSize: 58,
+    fontWeight: FontWeight.w600,
+    height: 1.65,
+    letterSpacing: 0.8,
+    fontFamily: 'NotoSerifSC',
+  ),
+
+  /// 加粗
+  strong: TextStyle(
+    color: AppTheme.pureWhite,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 0.5,
+    fontFamily: 'NotoSerifSC',
+  ),
+
+  /// 引用（手杖感核心）
+  blockquote: TextStyle(
+    color: AppTheme.ube200,
+    fontSize: 50,
+    fontWeight: FontWeight.w400,
+    height: 2.2,
+    letterSpacing: 1,
+    fontStyle: FontStyle.italic,
+    fontFamily: 'NotoSerifSC',
+  ),
+
+  blockquoteDecoration: BoxDecoration(
+    color: AppTheme.pureWhite.withValues(alpha: 0.04),
+    border: Border(
+      left: BorderSide(
+        color: AppTheme.ube300,
+        width: 6,
+      ),
+    ),
+    borderRadius: BorderRadius.circular(18),
+  ),
+
+  blockquotePadding: const EdgeInsets.symmetric(
+    horizontal: 28,
+    vertical: 18,
+  ),
+
+  /// 列表
+  listBullet: TextStyle(
+    color: AppTheme.ube100,
+    fontSize: 52,
+    height: 2.1,
     fontWeight: FontWeight.w500,
-    height: 1.9,
-    letterSpacing: 0.3,
-  );
+    fontFamily: 'NotoSerifSC',
+  ),
+
+  /// 行内代码
+  code: TextStyle(
+    color: AppTheme.ube100,
+    fontSize: 46,
+    height: 1.8,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.4,
+    fontFamily: 'JetBrainsMono',
+  ),
+
+  /// 代码块
+  codeblockDecoration: BoxDecoration(
+    color: AppTheme.pureWhite.withValues(alpha: 0.06),
+    borderRadius: BorderRadius.circular(20),
+    border: Border.all(
+      color: AppTheme.pureWhite.withValues(alpha: 0.08),
+    ),
+  ),
+
+  codeblockPadding: const EdgeInsets.all(24),
+
+  /// 分割线
+  horizontalRuleDecoration: BoxDecoration(
+    border: Border(
+      top: BorderSide(
+        color: AppTheme.pureWhite.withValues(alpha: 0.12),
+        width: 1.5,
+      ),
+    ),
+  ),
+);
+
+  static const _fieldLabels = {
+    'author': '作者',
+    'artist': '歌手',
+    'director': '导演',
+    'source': '出处',
+    'era': '年代',
+    'region': '地区',
+    'location': '位置',
+    'album': '专辑',
+    'luckyDirection': '吉利方位',
+    'luckyNumber': '吉利数字',
+    'luckyColor': '吉利颜色',
+    'keyPoint': '核心金句',
+  };
+
+  static const _fieldIcons = {
+    'author': Icons.person,
+    'artist': Icons.mic,
+    'director': Icons.movie,
+    'source': Icons.menu_book,
+    'era': Icons.history,
+    'region': Icons.public,
+    'location': Icons.location_on,
+    'album': Icons.album,
+    'luckyDirection': Icons.explore,
+    'luckyNumber': Icons.tag,
+    'luckyColor': Icons.palette,
+    'keyPoint': Icons.format_quote,
+  };
+
+  static const _skipInMetadata = {
+    'content',
+    'title',
+    'subtitle',
+    'category',
+    'categoryIcon',
+  };
 
   final ScrollController _scrollController = ScrollController();
   final List<GlobalKey> _posterKeys = [];
@@ -50,9 +190,13 @@ class _PosterPageState extends State<PosterPage> {
   List<String> _contentChunks = [];
   bool _isProcessing = false;
 
-  String? _lastContent;
-  String? _lastTitle;
-  String? _lastSubtitle;
+  DailyContent? _lastDailyContent;
+
+  @override
+  void initState() {
+    super.initState();
+    _recalculatePages();
+  }
 
   @override
   void didChangeDependencies() {
@@ -63,31 +207,25 @@ class _PosterPageState extends State<PosterPage> {
   @override
   void didUpdateWidget(PosterPage oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.content != widget.content ||
-        oldWidget.title != widget.title ||
-        oldWidget.subtitle != widget.subtitle ||
-        oldWidget.categoryIcon != widget.categoryIcon) {
+    if (oldWidget.dailyContent != widget.dailyContent) {
       _recalculatePages();
     }
   }
 
   void _recalculatePages() {
-    if (_lastContent == widget.content &&
-        _lastTitle == widget.title &&
-        _lastSubtitle == widget.subtitle &&
-        _controllers.isNotEmpty) {
+    if (_lastDailyContent == widget.dailyContent && _controllers.isNotEmpty) {
       return;
     }
-    _lastContent = widget.content;
-    _lastTitle = widget.title;
-    _lastSubtitle = widget.subtitle;
+    _lastDailyContent = widget.dailyContent;
 
-    final newChunks = _splitContent(widget.content);
+    final newChunks = _splitContent(widget.dailyContent.content);
 
     setState(() {
       _contentChunks = newChunks;
-      _controllers =
-          List.generate(newChunks.length, (_) => ScreenshotController());
+      _controllers = List.generate(
+        newChunks.length,
+        (_) => ScreenshotController(),
+      );
       _posterKeys
         ..clear()
         ..addAll(List.generate(newChunks.length, (_) => GlobalKey()));
@@ -205,6 +343,7 @@ class _PosterPageState extends State<PosterPage> {
 
   Widget _buildPageCard(int pageIndex) {
     final isFirstPage = pageIndex == 0;
+    final dc = widget.dailyContent;
     return Container(
       width: _posterWidth,
       padding: const EdgeInsets.all(_posterPadding),
@@ -224,13 +363,13 @@ class _PosterPageState extends State<PosterPage> {
         children: [
           Row(
             children: [
-              Text(widget.categoryIcon, style: const TextStyle(fontSize: 36)),
+              Text(dc.categoryIcon, style: const TextStyle(fontSize: 76)),
               const SizedBox(width: 12),
               const Text(
                 '智伴口袋',
                 style: TextStyle(
-                  color: AppTheme.pureWhite,
-                  fontSize: 24,
+                  color: AppTheme.ube300,
+                  fontSize: 76,
                   fontWeight: FontWeight.w600,
                   letterSpacing: -0.4,
                 ),
@@ -238,11 +377,14 @@ class _PosterPageState extends State<PosterPage> {
             ],
           ),
           const SizedBox(height: 48),
-          Text(_contentChunks[pageIndex], style: _bodyStyle),
-          if (isFirstPage && widget.title.isNotEmpty) ...[
+          MarkdownBody(
+            data: _contentChunks[pageIndex],
+            styleSheet: _posterMarkdownStyle,
+          ),
+          if (isFirstPage && dc.title.isNotEmpty) ...[
             const SizedBox(height: 32),
             Text(
-              '— ${widget.title}',
+              '— ${dc.title}',
               style: TextStyle(
                 color: AppTheme.pureWhite.withValues(alpha: 0.8),
                 fontSize: 24,
@@ -250,16 +392,17 @@ class _PosterPageState extends State<PosterPage> {
               ),
             ),
           ],
-          if (isFirstPage && widget.subtitle.isNotEmpty) ...[
+          if (isFirstPage && dc.subtitle.isNotEmpty) ...[
             const SizedBox(height: 6),
             Text(
-              widget.subtitle,
+              dc.subtitle,
               style: TextStyle(
                 color: AppTheme.pureWhite.withValues(alpha: 0.6),
                 fontSize: 20,
               ),
             ),
           ],
+          if (isFirstPage) _buildPosterMetadata(dc),
           const SizedBox(height: 56),
           Align(
             alignment: Alignment.centerRight,
@@ -272,6 +415,71 @@ class _PosterPageState extends State<PosterPage> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildPosterMetadata(DailyContent dc) {
+    final rows = <Widget>[];
+    dc.extra.forEach((key, value) {
+      if (_skipInMetadata.contains(key)) return;
+      final str = value?.toString() ?? '';
+      if (str.isEmpty) return;
+
+      final icon = _fieldIcons[key] ?? Icons.info_outline;
+      final label = _fieldLabels[key] ?? key;
+
+      rows.add(
+        Padding(
+          padding: const EdgeInsets.only(bottom: 12),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(
+                icon,
+                size: 24,
+                color: AppTheme.pureWhite.withValues(alpha: 0.6),
+              ),
+              const SizedBox(width: 10),
+              Text(
+                '$label：',
+                style: TextStyle(
+                  color: AppTheme.pureWhite.withValues(alpha: 0.5),
+                  fontSize: 22,
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  str,
+                  style: TextStyle(
+                    color: AppTheme.pureWhite.withValues(alpha: 0.8),
+                    fontSize: 22,
+                    height: 1.5,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    });
+
+    if (rows.isEmpty) return const SizedBox.shrink();
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 32),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: AppTheme.pureWhite.withValues(alpha: 0.06),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: AppTheme.pureWhite.withValues(alpha: 0.1)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: rows,
+        ),
       ),
     );
   }
@@ -330,8 +538,7 @@ class _PosterPageState extends State<PosterPage> {
       final ok = await _requestPermission();
       if (!ok) {
         if (mounted) {
-          messenger
-              .showSnackBar(const SnackBar(content: Text('需要相册权限')));
+          messenger.showSnackBar(const SnackBar(content: Text('需要相册权限')));
         }
         setState(() => _isProcessing = false);
         return;
@@ -342,10 +549,12 @@ class _PosterPageState extends State<PosterPage> {
       final total = controllers.length;
       for (int i = 0; i < total; i++) {
         if (mounted && total > 1) {
-          messenger.showSnackBar(SnackBar(
-            content: Text('保存中 ${i + 1}/$total...'),
-            duration: const Duration(seconds: 1),
-          ));
+          messenger.showSnackBar(
+            SnackBar(
+              content: Text('保存中 ${i + 1}/$total...'),
+              duration: const Duration(seconds: 1),
+            ),
+          );
         }
 
         final keyCtx = _posterKeys[i].currentContext;
@@ -357,8 +566,9 @@ class _PosterPageState extends State<PosterPage> {
         if (!mounted) return;
         await _waitForRender();
 
-        final image =
-            await controllers[i].capture(pixelRatio: _capturePixelRatio);
+        final image = await controllers[i].capture(
+          pixelRatio: _capturePixelRatio,
+        );
         if (image != null) {
           final dir = await getTemporaryDirectory();
           final ts = DateTime.now().microsecondsSinceEpoch;
@@ -369,10 +579,9 @@ class _PosterPageState extends State<PosterPage> {
       }
 
       if (mounted) {
-        messenger.showSnackBar(SnackBar(
-          content: Text(
-              total > 1 ? '$total 张海报已保存至相册' : '海报已保存至相册'),
-        ));
+        messenger.showSnackBar(
+          SnackBar(content: Text(total > 1 ? '$total 张海报已保存至相册' : '海报已保存至相册')),
+        );
       }
     } catch (e) {
       if (mounted) {
@@ -402,23 +611,23 @@ class _PosterPageState extends State<PosterPage> {
         if (!mounted) return;
         await _waitForRender();
 
-        final image =
-            await controllers[i].capture(pixelRatio: _capturePixelRatio);
+        final image = await controllers[i].capture(
+          pixelRatio: _capturePixelRatio,
+        );
         if (image != null) {
-          files.add(XFile.fromData(
-            image,
-            name: 'zhiban_poster_$i.png',
-            mimeType: 'image/png',
-          ));
+          files.add(
+            XFile.fromData(
+              image,
+              name: 'zhiban_poster_$i.png',
+              mimeType: 'image/png',
+            ),
+          );
         }
       }
 
       if (files.isNotEmpty) {
         await SharePlus.instance.share(
-          ShareParams(
-            files: files,
-            text: '来自「智伴口袋」的每日知识分享',
-          ),
+          ShareParams(files: files, text: '来自「智伴口袋」的每日知识分享'),
         );
       }
     } catch (e) {

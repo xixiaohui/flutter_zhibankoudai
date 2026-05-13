@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_zhiban/services/cloudbase_db.dart';
+import 'package:flutter_application_zhiban/services/local_config.dart';
 import 'package:flutter_application_zhiban/xui/utils/module.dart';
 import 'package:logger/logger.dart';
 
@@ -13,7 +14,6 @@ import 'data_service.dart';
 class AiService {
   final Logger _logger = Logger(printer: PrettyPrinter(methodCount: 0));
 
-  
 
   Future<DailyContent> generateContent({
     required String moduleId,
@@ -22,6 +22,8 @@ class AiService {
   }) async {
     try {
       _logger.d('AI generating content for module: $moduleId');
+      _logger.d('Prompt for module $moduleId: $prompt');
+
       final response = await _callHunyuanModel(moduleId, prompt);
 
 
@@ -48,6 +50,7 @@ class AiService {
               '',
           date: DateTime.now(),
           isAiGenerated: true,
+          extra: response,
         );
 
         final dataService = DataService();
@@ -79,13 +82,20 @@ class AiService {
     String prompt,
   ) async {
     try {
+
+      var systemPrompt = await getLocalGeneratePrompt(moduleId, forceRefresh:false);
+
+      if (systemPrompt == null) {
+        debugPrint('未找到 AI Prompt: $moduleId');
+        systemPrompt=prompt;
+      }
       // Use xclaw API (non-streaming) as primary
       final contentStr =
           await generateTextXclaw(
             model: 'hunyuan-exp',
             subModel: 'hunyuan-turbos-latest',
             messages: [
-              {'role': 'system', 'content': prompt},
+              {'role': 'system', 'content': systemPrompt},
               {'role': 'user', 'content': '生成今日内容'},
             ],
           ) ??

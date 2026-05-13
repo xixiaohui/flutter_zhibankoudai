@@ -32,6 +32,8 @@ class AppTheme {
   static const Color lemon700 = Color(0xFFd08a11);
   static const Color lemon800 = Color(0xFF9d6a09);
 
+  static const Color ube100 = Color(0xFFE9E2FF);
+  static const Color ube200 = Color(0xFFD8CBFF);
   static const Color ube300 = Color(0xFFc1b0ff);
   static const Color ube800 = Color(0xFF43089f);
   static const Color ube900 = Color(0xFF32037d);
