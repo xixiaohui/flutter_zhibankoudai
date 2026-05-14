@@ -35,7 +35,7 @@ class ZhiBanKouDaiApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
       ],
       child: Consumer<ThemeProvider>(
-        builder: (_, themeProvider, __) {
+        builder: (_, themeProvider, _) {
           final brightness = switch (themeProvider.mode) {
             ThemeMode.light => Brightness.light,
             ThemeMode.dark => Brightness.dark,

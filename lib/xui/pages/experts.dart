@@ -86,15 +86,15 @@ class _ExpertsPageState extends State<ExpertsPage> {
     final title = module?.name ?? widget.collectionName;
 
     return Scaffold(
-      backgroundColor: xui.XuiTheme.warmCream,
+      backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
       appBar: AppBar(
-        backgroundColor: xui.XuiTheme.pureWhite,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0,
-        foregroundColor: xui.XuiTheme.clayBlack,
+        foregroundColor: Theme.of(context).colorScheme.onSurface,
         title: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
-        bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(1),
-          child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Divider(height: 1, thickness: 1, color: Theme.of(context).colorScheme.outlineVariant),
         ),
       ),
       body: RefreshIndicator(
@@ -144,89 +144,75 @@ class _ExpertCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     final title = item['title'] ?? '';
     final content = item['content'] ?? item['summary'] ?? '';
     final date = item['date'] ?? '';
     final isAI = item['isAIGenerated'] ?? false;
 
-    return xui.ClayContainer(
+    return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (_) => ExpertDetailPage(item: item)),
         );
       },
-      borderRadius: 22,
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              if (isAI)
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: xui.XuiTheme.pomegranate400.withValues(alpha: 0.08),
-                    border: Border.all(color: xui.XuiTheme.pomegranate400),
-                    borderRadius: BorderRadius.circular(999),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: colorScheme.surface,
+          borderRadius: BorderRadius.circular(22),
+          border: Border.all(color: colorScheme.outline, width: 0.5),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                if (isAI)
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: xui.XuiTheme.pomegranate400.withValues(alpha: 0.08),
+                      border: Border.all(color: xui.XuiTheme.pomegranate400),
+                      borderRadius: BorderRadius.circular(999),
+                    ),
+                    child: Text("AI解读",
+                      style: textTheme.labelSmall?.copyWith(
+                        color: xui.XuiTheme.pomegranate400,
+                        fontWeight: FontWeight.w600,
+                      )),
                   ),
-                  child: Text(
-                    "AI解读",
-                    style: xui.XuiTheme.bodyStd().copyWith(
-                          color: xui.XuiTheme.pomegranate400,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
-                  ),
+                const Spacer(),
+                IconButton(
+                  visualDensity: VisualDensity.compact,
+                  icon: Icon(Icons.image_outlined, size: 20, color: colorScheme.onSurface),
+                  tooltip: "生成海报",
+                  onPressed: () => showPosterPreview(context, item),
                 ),
-              const Spacer(),
-              IconButton(
-                visualDensity: VisualDensity.compact,
-                icon: const Icon(Icons.image_outlined, size: 20),
-                tooltip: "生成海报",
-                onPressed: () => showPosterPreview(context, item),
-              ),
-            ],
-          ),
-          const SizedBox(height: 6),
-          Text(
-            title,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: xui.XuiTheme.featureTitle().copyWith(fontSize: 18),
-          ),
-          const SizedBox(height: 8),
-          Expanded(
-            child: Text(
-              content,
-              maxLines: 4,
-              overflow: TextOverflow.ellipsis,
-              style: xui.XuiTheme.bodyStd().copyWith(
-                    height: 1.55,
-                    color: xui.XuiTheme.darkCharcoal,
-                    fontFamily: "NotoSerifSC",
-                  ),
+              ],
             ),
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  date,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: xui.XuiTheme.bodyStd().copyWith(
-                        fontSize: 12,
-                        color: xui.XuiTheme.warmSilver,
-                      ),
+            const SizedBox(height: 6),
+            Text(title, maxLines: 2, overflow: TextOverflow.ellipsis,
+              style: textTheme.titleSmall?.copyWith(fontSize: 18, color: colorScheme.onSurface)),
+            const SizedBox(height: 8),
+            Expanded(
+              child: Text(content, maxLines: 4, overflow: TextOverflow.ellipsis,
+                style: textTheme.bodySmall?.copyWith(height: 1.55, color: colorScheme.secondary)),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(date, maxLines: 1, overflow: TextOverflow.ellipsis,
+                    style: textTheme.bodySmall?.copyWith(fontSize: 12, color: colorScheme.secondary)),
                 ),
-              ),
-              const Icon(Icons.chevron_right, color: xui.XuiTheme.warmSilver),
-            ],
-          ),
-        ],
+                Icon(Icons.chevron_right, color: colorScheme.secondary),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -245,16 +231,15 @@ class _LoadMoreTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     if (isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
 
     if (!hasMore) {
       return Center(
-        child: Text(
-          "没有更多数据",
-          style: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.warmSilver),
-        ),
+        child: Text("没有更多数据", style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary)),
       );
     }
 
@@ -262,8 +247,8 @@ class _LoadMoreTile extends StatelessWidget {
       child: FilledButton(
         onPressed: onPressed,
         style: FilledButton.styleFrom(
-          backgroundColor: xui.XuiTheme.lemon500,
-          foregroundColor: xui.XuiTheme.clayBlack,
+          backgroundColor: colorScheme.primary,
+          foregroundColor: colorScheme.onPrimary,
           padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 13),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
@@ -274,10 +259,11 @@ class _LoadMoreTile extends StatelessWidget {
 }
 
 void showPosterPreview(BuildContext context, Map item) {
+  final colorScheme = Theme.of(context).colorScheme;
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
-    backgroundColor: xui.XuiTheme.pureWhite,
+    backgroundColor: colorScheme.surface,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
     ),

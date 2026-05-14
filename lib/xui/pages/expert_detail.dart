@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_zhiban/xui/pages/experts.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 
 class ExpertDetailPage extends StatelessWidget {
   final Map item;
@@ -14,12 +13,14 @@ class ExpertDetailPage extends StatelessWidget {
     final date = item['date'] ?? '';
     final compact = MediaQuery.sizeOf(context).width < 600;
 
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      backgroundColor: xui.XuiTheme.warmCream,
+      backgroundColor: colorScheme.surfaceContainerLowest,
       appBar: AppBar(
-        backgroundColor: xui.XuiTheme.pureWhite,
+        backgroundColor: colorScheme.surface,
         elevation: 0,
-        foregroundColor: xui.XuiTheme.clayBlack,
+        foregroundColor: colorScheme.onSurface,
         title: const Text("详情"),
         actions: [
           IconButton(
@@ -28,9 +29,9 @@ class ExpertDetailPage extends StatelessWidget {
             onPressed: () => showPosterPreview(context, item),
           ),
         ],
-        bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(1),
-          child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Divider(height: 1, thickness: 1, color: colorScheme.outlineVariant),
         ),
       ),
       body: Center(
@@ -46,41 +47,35 @@ class ExpertDetailPage extends StatelessWidget {
             ),
             child: Container(
               padding: EdgeInsets.all(compact ? 18 : 26),
-              decoration: xui.XuiTheme.cardDecoration(
-                radius: compact ? 24 : 32,
-                color: xui.XuiTheme.pureWhite,
+              decoration: BoxDecoration(
+                color: colorScheme.surface,
+                borderRadius: BorderRadius.circular(compact ? 24 : 32),
+                border: Border.all(color: colorScheme.outline, width: 0.5),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,
-                    style: xui.XuiTheme.sectionHeading().copyWith(
-                          fontSize: compact ? 28 : 36,
-                          height: 1.2,
-                          letterSpacing: 0,
-                        ),
+                    style: textTheme.headlineMedium?.copyWith(
+                      fontSize: compact ? 28 : 36,
+                      height: 1.2,
+                      letterSpacing: 0,
+                      color: colorScheme.onSurface,
+                    ),
                   ),
                   const SizedBox(height: 12),
-                  Text(
-                    date,
-                    style: xui.XuiTheme.bodyStd().copyWith(
-                          fontSize: 13,
-                          color: xui.XuiTheme.warmSilver,
-                        ),
-                  ),
-                  const Divider(height: 30),
-                  Text(
-                    content,
+                  Text(date,
+                    style: textTheme.bodySmall?.copyWith(fontSize: 13, color: colorScheme.secondary)),
+                  Divider(height: 30, color: colorScheme.outlineVariant),
+                  Text(content,
                     textAlign: TextAlign.left,
-                    style: xui.XuiTheme.body().copyWith(
-                          fontSize: compact ? 17 : 18,
-                          height: 1.75,
-                          letterSpacing: 0,
-                          fontFamily: 'NotoSerifSC',
-                          color: xui.XuiTheme.darkCharcoal,
-                        ),
-                  ),
+                    style: textTheme.bodyLarge?.copyWith(
+                      fontSize: compact ? 17 : 18,
+                      height: 1.75,
+                      letterSpacing: 0,
+                      color: colorScheme.onSurface,
+                    )),
                 ],
               ),
             ),

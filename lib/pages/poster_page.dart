@@ -235,9 +235,11 @@ class _PosterPageState extends State<PosterPage> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: AppTheme.warmCream,
+      backgroundColor: colorScheme.surfaceContainerLowest,
       appBar: AppBar(
+        backgroundColor: colorScheme.surface,
         title: const Text('生成海报'),
         actions: [
           IconButton(

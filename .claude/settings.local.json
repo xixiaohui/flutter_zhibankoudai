@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Read(//c/Users/Administrator/.claude/plugins/cache/ui-ux-pro-max-skill/ui-ux-pro-max/2.5.0/.claude/skills/ui-ux-pro-max/**)",
-      "Bash(\"C:\\\\Users\\\\Administrator\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python313\\\\python.exe\" scripts/search.py \"AI tool education knowledge\" --domain color -n 5)"
+      "Bash(\"C:\\\\Users\\\\Administrator\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python313\\\\python.exe\" scripts/search.py \"AI tool education knowledge\" --domain color -n 5)",
+      "Bash(flutter analyze *)"
     ]
   }
 }

@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerLowest,
       body: Consumer2<ModuleProvider, DailyContentProvider>(
-        builder: (_, mp, cp, __) {
+        builder: (_, mp, cp, _) {
           final slivers = <Widget>[
             SliverToBoxAdapter(child: _header(textTheme, colorScheme)),
           ];
@@ -224,6 +224,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   }
 
   Widget _aiFriendCard(BuildContext context, TextTheme textTheme, ColorScheme colorScheme) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
       child: GestureDetector(
@@ -231,13 +232,15 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
         child: Container(
           padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [Color(0xFFFFF5F5), Color(0xFFFFF0E8)],
+            gradient: LinearGradient(
+              colors: isDark
+                  ? const [Color(0xFF3D2025), Color(0xFF3D2A20)]
+                  : const [Color(0xFFFFF5F5), Color(0xFFFFF0E8)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(AppRadius.feature),
-            border: Border.all(color: const Color(0x33FF9A9E)),
+            border: Border.all(color: isDark ? const Color(0x33FF9A9E) : const Color(0x33FF9A9E)),
             boxShadow: AppElevation.card,
           ),
           child: Row(children: [
@@ -274,6 +277,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   }
 
   Widget _aiCareerCard(BuildContext context, TextTheme textTheme, ColorScheme colorScheme) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
       child: GestureDetector(
@@ -281,13 +285,15 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
         child: Container(
           padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [Color(0xFFF0F4FF), Color(0xFFEDE9FE)],
+            gradient: LinearGradient(
+              colors: isDark
+                  ? const [Color(0xFF1E2440), Color(0xFF1E1E40)]
+                  : const [Color(0xFFF0F4FF), Color(0xFFEDE9FE)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(AppRadius.feature),
-            border: Border.all(color: const Color(0x336366F1)),
+            border: Border.all(color: isDark ? const Color(0x336366F1) : const Color(0x336366F1)),
             boxShadow: AppElevation.card,
           ),
           child: Row(children: [

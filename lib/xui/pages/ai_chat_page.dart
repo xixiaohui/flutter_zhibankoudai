@@ -139,16 +139,18 @@ class _AiChatPageState extends State<AiChatPage> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      backgroundColor: xui.XuiTheme.warmCream,
+      backgroundColor: colorScheme.surfaceContainerLowest,
       appBar: AppBar(
-        backgroundColor: xui.XuiTheme.pureWhite,
+        backgroundColor: colorScheme.surface,
         elevation: 0,
-        foregroundColor: xui.XuiTheme.clayBlack,
+        foregroundColor: colorScheme.onSurface,
         title: const Text("AI材料助手"),
-        bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(1),
-          child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Divider(height: 1, thickness: 1, color: colorScheme.outlineVariant),
         ),
       ),
       body: Column(
@@ -158,7 +160,7 @@ class _AiChatPageState extends State<AiChatPage> {
                 ? Center(
                     child: Text(
                       "输入材料问题，开始分析",
-                      style: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.warmCharcoal),
+                      style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary),
                     ),
                   )
                 : ListView.builder(
@@ -173,9 +175,9 @@ class _AiChatPageState extends State<AiChatPage> {
             top: false,
             child: Container(
               padding: const EdgeInsets.fromLTRB(12, 8, 12, 10),
-              decoration: const BoxDecoration(
-                color: xui.XuiTheme.pureWhite,
-                border: Border(top: BorderSide(color: xui.XuiTheme.oatBorder)),
+              decoration: BoxDecoration(
+                color: colorScheme.surface,
+                border: Border(top: BorderSide(color: colorScheme.outline)),
               ),
               child: Row(
                 children: [
@@ -185,21 +187,24 @@ class _AiChatPageState extends State<AiChatPage> {
                       minLines: 1,
                       maxLines: 4,
                       textInputAction: TextInputAction.send,
-                      decoration: xui.XuiTheme.inputDecoration(
+                      style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface),
+                      decoration: InputDecoration(
                         hintText: "输入材料问题...",
-                      ).copyWith(
+                        hintStyle: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary),
+                        filled: true,
+                        fillColor: colorScheme.surfaceContainerHighest,
                         contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
-                          borderSide: const BorderSide(color: xui.XuiTheme.oatBorder, width: 1),
+                          borderSide: BorderSide(color: colorScheme.outline, width: 1),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
-                          borderSide: const BorderSide(color: xui.XuiTheme.oatBorder, width: 1),
+                          borderSide: BorderSide(color: colorScheme.outline, width: 1),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
-                          borderSide: const BorderSide(color: xui.XuiTheme.focusRing, width: 2),
+                          borderSide: BorderSide(color: colorScheme.primary, width: 2),
                         ),
                       ),
                       onSubmitted: sendMessage,
@@ -211,11 +216,11 @@ class _AiChatPageState extends State<AiChatPage> {
                         ? const SizedBox(
                             width: 18,
                             height: 18,
-                            child: CircularProgressIndicator(strokeWidth: 2),
+                            child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
                           )
                         : const Icon(Icons.send),
-                    color: xui.XuiTheme.pureWhite,
-                    style: IconButton.styleFrom(backgroundColor: xui.XuiTheme.blueberry800),
+                    color: colorScheme.onPrimary,
+                    style: IconButton.styleFrom(backgroundColor: colorScheme.primary),
                     onPressed: loading ? null : () => sendMessage(_controller.text),
                   ),
                 ],
@@ -237,6 +242,8 @@ class ChatBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     final isUser = message.role == "user";
     final maxWidth = MediaQuery.sizeOf(context).width * 0.84;
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
 
     return Align(
       alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
@@ -245,22 +252,28 @@ class ChatBubble extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         constraints: BoxConstraints(maxWidth: maxWidth.clamp(260, 640).toDouble()),
         decoration: BoxDecoration(
-          color: isUser ? xui.XuiTheme.slushie500 : xui.XuiTheme.pureWhite,
+          color: isUser ? xui.XuiTheme.slushie500 : colorScheme.surface,
           borderRadius: BorderRadius.only(
             topLeft: const Radius.circular(20),
             topRight: const Radius.circular(20),
             bottomLeft: Radius.circular(isUser ? 20 : 6),
             bottomRight: Radius.circular(isUser ? 6 : 20),
           ),
-          border: Border.all(color: xui.XuiTheme.oatBorder, width: 1),
-          boxShadow: xui.XuiTheme.clayShadow,
+          border: Border.all(color: colorScheme.outline, width: 1),
         ),
         child: isUser
             ? Text(
                 message.content,
                 style: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.pureWhite, height: 1.55),
               )
-            : MarkdownBody(data: message.content),
+            : MarkdownBody(
+                data: message.content,
+                styleSheet: MarkdownStyleSheet(
+                  p: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface, height: 1.55),
+                  strong: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface),
+                  code: textTheme.bodySmall?.copyWith(color: colorScheme.onSurface),
+                ),
+              ),
       ),
     );
   }

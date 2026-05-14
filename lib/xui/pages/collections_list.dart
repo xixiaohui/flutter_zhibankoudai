@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_zhiban/xui/pages/experts.dart';
 import 'package:flutter_application_zhiban/config/theme.dart';
 import 'package:flutter_application_zhiban/xui/utils/module.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 import 'package:http/http.dart' as http;
 
 class CollectionsListPage extends StatefulWidget {
@@ -72,16 +71,17 @@ class _CollectionsListPageState extends State<CollectionsListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: xui.XuiTheme.warmCream,
+      backgroundColor: colorScheme.surfaceContainerLowest,
       appBar: AppBar(
-        backgroundColor: xui.XuiTheme.pureWhite,
+        backgroundColor: colorScheme.surface,
         elevation: 0,
-        foregroundColor: xui.XuiTheme.clayBlack,
+        foregroundColor: colorScheme.onSurface,
         title: const Text("助手列表"),
-        bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(1),
-          child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Divider(height: 1, thickness: 1, color: colorScheme.outlineVariant),
         ),
       ),
       body: RefreshIndicator(
@@ -89,12 +89,7 @@ class _CollectionsListPageState extends State<CollectionsListPage> {
         child: ListView.builder(
           controller: _controller,
           physics: const AlwaysScrollableScrollPhysics(),
-          padding: EdgeInsets.fromLTRB(
-            14,
-            14,
-            14,
-            24 + MediaQuery.paddingOf(context).bottom,
-          ),
+          padding: EdgeInsets.fromLTRB(14, 14, 14, 24 + MediaQuery.paddingOf(context).bottom),
           itemCount: _list.length + 1,
           itemBuilder: (context, index) {
             if (index < _list.length) {
@@ -120,58 +115,57 @@ class _CollectionRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     final module = findModuleByCollection(collection);
     final name = module?.name ?? collection;
     final icon = module?.icon ?? "📁";
     final slogan = module?.slogan ?? "点击查看该数据集";
     final colors = module?.colors;
-    final accent = colors != null ? AppTheme.fromHex(colors.accent) : xui.XuiTheme.slushie800;
-    final textColor = colors != null ? AppTheme.fromHex(colors.text) : xui.XuiTheme.clayBlack;
-    final subTextColor = colors != null ? AppTheme.fromHex(colors.textSecondary) : xui.XuiTheme.warmCharcoal;
+    final accent = colors != null ? AppTheme.fromHex(colors.accent) : colorScheme.primary;
+    final textColor = colors != null ? AppTheme.fromHex(colors.text) : colorScheme.onSurface;
+    final subTextColor = colors != null ? AppTheme.fromHex(colors.textSecondary) : colorScheme.secondary;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
-      child: xui.ClayContainer(
+      child: GestureDetector(
         onTap: () => Navigator.push(
           context,
           MaterialPageRoute(builder: (_) => ExpertsPage(collectionName: collection)),
         ),
-        borderRadius: 22,
-        padding: const EdgeInsets.all(14),
-        child: Row(
-          children: [
-            Container(
-              width: 52,
-              height: 52,
-              decoration: BoxDecoration(
-                color: accent.withValues(alpha: 0.13),
-                borderRadius: BorderRadius.circular(18),
+        child: Container(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: colorScheme.surface,
+            borderRadius: BorderRadius.circular(22),
+            border: Border.all(color: colorScheme.outline, width: 0.5),
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 52, height: 52,
+                decoration: BoxDecoration(
+                  color: accent.withValues(alpha: 0.13),
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: Center(child: Text(icon, style: const TextStyle(fontSize: 24))),
               ),
-              child: Center(child: Text(icon, style: const TextStyle(fontSize: 24))),
-            ),
-            const SizedBox(width: 14),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    name,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: xui.XuiTheme.featureTitle().copyWith(fontSize: 17, color: textColor),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    slogan,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: xui.XuiTheme.bodyStd().copyWith(fontSize: 13, color: subTextColor),
-                  ),
-                ],
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(name, maxLines: 1, overflow: TextOverflow.ellipsis,
+                      style: textTheme.titleSmall?.copyWith(fontSize: 17, color: textColor)),
+                    const SizedBox(height: 4),
+                    Text(slogan, maxLines: 2, overflow: TextOverflow.ellipsis,
+                      style: textTheme.bodySmall?.copyWith(fontSize: 13, color: subTextColor)),
+                  ],
+                ),
               ),
-            ),
-            const Icon(Icons.chevron_right, color: xui.XuiTheme.warmSilver),
-          ],
+              Icon(Icons.chevron_right, color: colorScheme.secondary),
+            ],
+          ),
         ),
       ),
     );
@@ -183,24 +177,19 @@ class _LoadMoreRow extends StatelessWidget {
   final bool hasMore;
   final VoidCallback onPressed;
 
-  const _LoadMoreRow({
-    required this.isLoading,
-    required this.hasMore,
-    required this.onPressed,
-  });
+  const _LoadMoreRow({required this.isLoading, required this.hasMore, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     if (isLoading) {
-      return const Padding(
-        padding: EdgeInsets.all(18),
-        child: Center(child: CircularProgressIndicator()),
-      );
+      return const Padding(padding: EdgeInsets.all(18), child: Center(child: CircularProgressIndicator()));
     }
     if (!hasMore) {
       return Padding(
         padding: const EdgeInsets.all(18),
-        child: Center(child: Text("没有更多数据", style: xui.XuiTheme.bodyStd())),
+        child: Center(child: Text("没有更多数据", style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary))),
       );
     }
     return Padding(
@@ -208,8 +197,8 @@ class _LoadMoreRow extends StatelessWidget {
       child: FilledButton(
         onPressed: onPressed,
         style: FilledButton.styleFrom(
-          backgroundColor: xui.XuiTheme.lemon500,
-          foregroundColor: xui.XuiTheme.clayBlack,
+          backgroundColor: colorScheme.primary,
+          foregroundColor: colorScheme.onPrimary,
           padding: const EdgeInsets.symmetric(vertical: 13),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),

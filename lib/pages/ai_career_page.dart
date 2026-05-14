@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../config/theme.dart';
 import '../models/career.dart';
-import '../xui/x_design.dart';
 
 class AICareerPage extends StatefulWidget {
   const AICareerPage({super.key});
@@ -41,23 +39,26 @@ class _AICareerPageState extends State<AICareerPage> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
-      backgroundColor: AppTheme.warmCream,
+      backgroundColor: colorScheme.surfaceContainerLowest,
       appBar: AppBar(
-        backgroundColor: AppTheme.pureWhite,
+        backgroundColor: colorScheme.surface,
         elevation: 0,
         surfaceTintColor: Colors.transparent,
-        title: const Text(
+        title: Text(
           'AI Career',
-          style: TextStyle(color: AppTheme.clayBlack, fontWeight: FontWeight.w600),
+          style: textTheme.titleSmall?.copyWith(color: colorScheme.onSurface, fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
       ),
-      body: _buildBody(),
+      body: _buildBody(colorScheme, textTheme),
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(ColorScheme colorScheme, TextTheme textTheme) {
     if (_loading) {
       return const Center(child: CircularProgressIndicator());
     }
@@ -66,7 +67,7 @@ class _AICareerPageState extends State<AICareerPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('加载失败', style: XuiTheme.bodyStd()),
+            Text('加载失败', style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface)),
             const SizedBox(height: 8),
             TextButton(onPressed: _loadCareers, child: const Text('重试')),
           ],
@@ -87,11 +88,11 @@ class _AICareerPageState extends State<AICareerPage> {
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       itemCount: categories.length,
-      itemBuilder: (_, i) => _buildCategorySection(categories[i]),
+      itemBuilder: (_, i) => _buildCategorySection(categories[i], colorScheme, textTheme),
     );
   }
 
-  Widget _buildCategorySection(MapEntry<String, List<Career>> entry) {
+  Widget _buildCategorySection(MapEntry<String, List<Career>> entry, ColorScheme colorScheme, TextTheme textTheme) {
     final cat = entry.value.first;
     final icon = cat.categoryIcon.isNotEmpty ? cat.categoryIcon : '📋';
     final name = cat.categoryName.isNotEmpty
@@ -109,34 +110,33 @@ class _AICareerPageState extends State<AICareerPage> {
               const SizedBox(width: 8),
               Text(
                 name,
-                style: const TextStyle(
-                  fontSize: 17,
+                style: textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.w700,
-                  color: AppTheme.clayBlack,
+                  color: colorScheme.onSurface,
                 ),
               ),
               const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
-                  color: AppTheme.oatLight,
-                  borderRadius: BorderRadius.circular(AppTheme.radiusPill),
+                  color: colorScheme.outlineVariant,
+                  borderRadius: BorderRadius.circular(24),
                 ),
                 child: Text(
                   '${entry.value.length}',
-                  style: XuiTheme.badge(),
+                  style: textTheme.labelSmall?.copyWith(color: colorScheme.secondary),
                 ),
               ),
             ],
           ),
         ),
-        ...entry.value.map((career) => _buildCareerCard(career)),
+        ...entry.value.map((career) => _buildCareerCard(career, colorScheme, textTheme)),
         const SizedBox(height: 4),
       ],
     );
   }
 
-  Widget _buildCareerCard(Career career) {
+  Widget _buildCareerCard(Career career, ColorScheme colorScheme, TextTheme textTheme) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: GestureDetector(
@@ -146,10 +146,9 @@ class _AICareerPageState extends State<AICareerPage> {
         child: Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: AppTheme.pureWhite,
-            borderRadius: BorderRadius.circular(AppTheme.radiusCard),
-            border: Border.all(color: AppTheme.oatBorder),
-            boxShadow: AppTheme.clayShadow,
+            color: colorScheme.surface,
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(color: colorScheme.outline, width: 0.5),
           ),
           child: Row(
             children: [
@@ -171,10 +170,9 @@ class _AICareerPageState extends State<AICareerPage> {
                   children: [
                     Text(
                       career.nameZh.isNotEmpty ? career.nameZh : career.name,
-                      style: const TextStyle(
-                        fontSize: 15,
+                      style: textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.w600,
-                        color: AppTheme.clayBlack,
+                        color: colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(height: 3),
@@ -182,15 +180,14 @@ class _AICareerPageState extends State<AICareerPage> {
                       career.vibeZh.isNotEmpty ? career.vibeZh : career.vibe,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: AppTheme.warmCharcoal,
+                      style: textTheme.bodySmall?.copyWith(
+                        color: colorScheme.secondary,
                       ),
                     ),
                   ],
                 ),
               ),
-              const Icon(Icons.chevron_right, color: AppTheme.warmSilver, size: 20),
+              Icon(Icons.chevron_right, color: colorScheme.secondary, size: 20),
             ],
           ),
         ),

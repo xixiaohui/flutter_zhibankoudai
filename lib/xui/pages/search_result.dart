@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 import 'package:http/http.dart' as http;
 
 class SearchResultPage extends StatefulWidget {
@@ -73,16 +72,17 @@ class _SearchResultPageState extends State<SearchResultPage> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: xui.XuiTheme.warmCream,
+      backgroundColor: colorScheme.surfaceContainerLowest,
       appBar: AppBar(
-        backgroundColor: xui.XuiTheme.pureWhite,
+        backgroundColor: colorScheme.surface,
         elevation: 0,
-        foregroundColor: xui.XuiTheme.clayBlack,
+        foregroundColor: colorScheme.onSurface,
         title: const Text('AI 分析结果'),
-        bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(1),
-          child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Divider(height: 1, thickness: 1, color: colorScheme.outlineVariant),
         ),
       ),
       body: SafeArea(
@@ -105,28 +105,34 @@ class _SearchResultPageState extends State<SearchResultPage> {
   }
 
   Widget _buildSearchBar() {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return Row(
       children: [
         Expanded(
           child: TextField(
             controller: controller,
             textInputAction: TextInputAction.search,
-            decoration: xui.XuiTheme.inputDecoration(
+            style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface),
+            decoration: InputDecoration(
               hintText: "继续提问...",
-            ).copyWith(
-              prefixIcon: const Icon(Icons.search),
+              hintStyle: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary),
+              filled: true,
+              fillColor: colorScheme.surfaceContainerHighest,
+              prefixIcon: Icon(Icons.search, color: colorScheme.secondary),
               contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(22),
-                borderSide: const BorderSide(color: xui.XuiTheme.oatBorder, width: 1),
+                borderSide: BorderSide(color: colorScheme.outline, width: 1),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(22),
-                borderSide: const BorderSide(color: xui.XuiTheme.oatBorder, width: 1),
+                borderSide: BorderSide(color: colorScheme.outline, width: 1),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(22),
-                borderSide: const BorderSide(color: xui.XuiTheme.focusRing, width: 2),
+                borderSide: BorderSide(color: colorScheme.primary, width: 2),
               ),
             ),
             onSubmitted: (_) => onSearch(),
@@ -135,8 +141,8 @@ class _SearchResultPageState extends State<SearchResultPage> {
         const SizedBox(width: 8),
         FilledButton(
           style: FilledButton.styleFrom(
-            backgroundColor: xui.XuiTheme.blueberry800,
-            foregroundColor: xui.XuiTheme.pureWhite,
+            backgroundColor: colorScheme.primary,
+            foregroundColor: colorScheme.onPrimary,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),
@@ -148,20 +154,21 @@ class _SearchResultPageState extends State<SearchResultPage> {
   }
 
   Widget _buildContent() {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     if (loading) {
       return const Center(child: CircularProgressIndicator());
     }
 
     if (error != null) {
-      return Center(child: Text("出错了：$error"));
+      return Center(child: Text("出错了：$error", style: textTheme.bodyMedium?.copyWith(color: colorScheme.error)));
     }
 
     if (result == null) {
       return Center(
-        child: Text(
-          "请输入问题并点击分析",
-          style: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.warmCharcoal),
-        ),
+        child: Text("请输入问题并点击分析",
+          style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary)),
       );
     }
 
@@ -170,16 +177,19 @@ class _SearchResultPageState extends State<SearchResultPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "问题：${controller.text}",
-            style: xui.XuiTheme.bodyMed(),
-          ),
+          Text("问题：${controller.text}",
+            style: textTheme.titleSmall?.copyWith(color: colorScheme.onSurface)),
           const SizedBox(height: 12),
           Container(
             width: double.infinity,
-            decoration: xui.XuiTheme.cardDecoration(radius: 22, color: xui.XuiTheme.pureWhite),
+            decoration: BoxDecoration(
+              color: colorScheme.surface,
+              borderRadius: BorderRadius.circular(22),
+              border: Border.all(color: colorScheme.outline, width: 0.5),
+            ),
             padding: const EdgeInsets.all(18),
-            child: Text(result ?? "", style: xui.XuiTheme.body().copyWith(letterSpacing: 0)),
+            child: Text(result ?? "",
+              style: textTheme.bodyLarge?.copyWith(color: colorScheme.onSurface, letterSpacing: 0)),
           ),
           const SizedBox(height: 16),
           Wrap(
@@ -197,11 +207,14 @@ class _SearchResultPageState extends State<SearchResultPage> {
   }
 
   Widget _suggestion(String text) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return ActionChip(
-      backgroundColor: xui.XuiTheme.pureWhite,
+      backgroundColor: colorScheme.surfaceContainerHighest,
       label: Text(text),
-      labelStyle: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.blueberry800),
-      side: const BorderSide(color: xui.XuiTheme.oatBorder),
+      labelStyle: textTheme.labelMedium?.copyWith(color: colorScheme.primary),
+      side: BorderSide(color: colorScheme.outline),
       onPressed: () {
         controller.text = text;
         onSearch();
