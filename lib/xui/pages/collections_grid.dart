@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_zhiban/xui/pages/experts.dart';
-import 'package:flutter_application_zhiban/config/theme.dart';
+import 'package:flutter_application_zhiban/design/colors.dart';
 import 'package:flutter_application_zhiban/xui/utils/module.dart';
 import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -138,11 +138,11 @@ class _CollectionTile extends StatelessWidget {
     final icon = module?.icon ?? "📁";
     final slogan = module?.slogan ?? "点击查看该数据集";
     final colors = module?.colors;
-    final accent = colors != null ? AppTheme.fromHex(colors.accent) : xui.XuiTheme.slushie800;
-    final start = colors != null ? AppTheme.fromHex(colors.gradientStart) : xui.XuiTheme.pureWhite;
-    final end = colors != null ? AppTheme.fromHex(colors.gradientEnd) : xui.XuiTheme.lightFrost;
-    final textColor = colors != null ? AppTheme.fromHex(colors.text) : xui.XuiTheme.clayBlack;
-    final subTextColor = colors != null ? AppTheme.fromHex(colors.textSecondary) : xui.XuiTheme.warmCharcoal;
+    final accent = colors != null ? AppColors.fromHex(colors.accent) : xui.XuiTheme.slushie800;
+    final start = colors != null ? AppColors.fromHex(colors.gradientStart) : xui.XuiTheme.pureWhite;
+    final end = colors != null ? AppColors.fromHex(colors.gradientEnd) : xui.XuiTheme.lightFrost;
+    final textColor = colors != null ? AppColors.fromHex(colors.text) : xui.XuiTheme.clayBlack;
+    final subTextColor = colors != null ? AppColors.fromHex(colors.textSecondary) : xui.XuiTheme.warmCharcoal;
 
     return xui.ClayContainer(
       onTap: () => Navigator.push(

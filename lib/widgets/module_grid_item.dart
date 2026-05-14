@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../design/radius.dart';
+import '../design/colors.dart';
 import '../design/spacing.dart';
 import '../models/module_config.dart';
 
@@ -10,18 +11,11 @@ class ModuleGridItem extends StatelessWidget {
 
   const ModuleGridItem({super.key, required this.module, this.onTap});
 
-  static Color _fromHex(String hex) {
-    final buffer = StringBuffer();
-    if (hex.length == 6 || hex.length == 7) buffer.write('ff');
-    buffer.write(hex.replaceFirst('#', ''));
-    return Color(int.parse(buffer.toString(), radix: 16));
-  }
-
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
-    final moduleColor = _fromHex(module.color);
+    final moduleColor = AppColors.fromHex(module.color);
 
     return Semantics(
       label: '${module.name}模块',

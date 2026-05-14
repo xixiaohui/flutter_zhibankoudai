@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import '../config/routes.dart';
 import '../design/radius.dart';
+import '../design/colors.dart';
 import '../design/elevation.dart';
 import '../models/daily_content.dart';
 import '../models/field_metadata.dart';
@@ -33,13 +34,6 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
     if (m != null && cp.getContent(widget.moduleId) == null) cp.loadContent(m);
   }
 
-  static Color _fromHex(String hex) {
-    final buffer = StringBuffer();
-    if (hex.length == 6 || hex.length == 7) buffer.write('ff');
-    buffer.write(hex.replaceFirst('#', ''));
-    return Color(int.parse(buffer.toString(), radix: 16));
-  }
-
   @override
   Widget build(BuildContext context) {
     final mp = context.read<ModuleProvider>();
@@ -54,7 +48,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
       );
     }
 
-    final mc = _fromHex(module.color);
+    final mc = AppColors.fromHex(module.color);
 
     return Scaffold(
       body: CustomScrollView(

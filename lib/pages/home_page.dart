@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../config/routes.dart';
 import '../design/radius.dart';
 import '../design/spacing.dart';
+import '../design/colors.dart';
 import '../design/elevation.dart';
 import '../models/daily_content.dart';
 import '../models/module_config.dart';
@@ -168,7 +169,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   }
 
   Widget _featuredCard(ModuleConfig m, TextTheme textTheme, ColorScheme colorScheme) {
-    final c = _fromHex(m.color);
+    final c = AppColors.fromHex(m.color);
     return GestureDetector(
       onTap: () => _navigateToDetail(m.id),
       child: Container(
@@ -372,13 +373,6 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
         ),
       ),
     );
-  }
-
-  static Color _fromHex(String hex) {
-    final buffer = StringBuffer();
-    if (hex.length == 6 || hex.length == 7) buffer.write('ff');
-    buffer.write(hex.replaceFirst('#', ''));
-    return Color(int.parse(buffer.toString(), radix: 16));
   }
 
   String _dateStr() {
