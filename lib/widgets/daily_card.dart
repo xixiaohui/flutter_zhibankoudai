@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import '../config/theme.dart';
+import '../design/radius.dart';
+import '../design/spacing.dart';
 import '../models/daily_content.dart';
 import '../models/module_config.dart';
+import 'skeleton_loader.dart';
 
-class DailyCard extends StatefulWidget {
+class DailyCard extends StatelessWidget {
   final ModuleConfig module;
   final DailyContent? content;
   final bool isLoading;
@@ -23,99 +25,160 @@ class DailyCard extends StatefulWidget {
     this.onShare,
   });
 
-  @override
-  State<DailyCard> createState() => _DailyCardState();
-}
-
-class _DailyCardState extends State<DailyCard> {
-  bool _hover = false;
+  static Color _fromHex(String hex) {
+    final buffer = StringBuffer();
+    if (hex.length == 6 || hex.length == 7) buffer.write('ff');
+    buffer.write(hex.replaceFirst('#', ''));
+    return Color(int.parse(buffer.toString(), radix: 16));
+  }
 
   @override
   Widget build(BuildContext context) {
-    final color = AppTheme.fromHex(widget.module.color);
-    final onBgColor = color.computeLuminance() > 0.5
-        ? AppTheme.clayBlack
-        : AppTheme.pureWhite;
+    final textTheme = Theme.of(context).textTheme;
+    final moduleColor = _fromHex(module.color);
+    final useDarkText = moduleColor.computeLuminance() > 0.5;
+    final fg = useDarkText ? Colors.black : Colors.white;
 
-    return GestureDetector(
-      onTap: widget.onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        transform: _hover
-            ? (Matrix4.identity()
-              ..rotateZ(-0.14)
-              ..translateByDouble(0.0, -16.0, 0.0, 1.0))
-            : Matrix4.identity(),
-        transformAlignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: color.withValues(alpha: 0.92),
-          borderRadius: BorderRadius.circular(AppTheme.radiusFeature),
-          border: Border.all(color: AppTheme.oatBorder, width: 1),
-          boxShadow: _hover
-              ? const [BoxShadow(color: AppTheme.clayBlack, blurRadius: 0, offset: Offset(-7, 7))]
-              : AppTheme.clayShadow,
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(AppTheme.radiusFeature),
-          child: Stack(
-            children: [
-              Positioned(
-                right: -20, top: -20,
-                child: Text(widget.module.icon,
-                  style: TextStyle(fontSize: 80, color: onBgColor.withValues(alpha: 0.13))),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _header(onBgColor),
-                    const SizedBox(height: 16),
-                    _body(context, onBgColor),
-                    const SizedBox(height: 16),
-                    _footer(onBgColor),
-                  ],
+    return Semantics(
+      label: '${module.name}每日内容卡片',
+      button: true,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          margin: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.screenHorizontal,
+            vertical: AppSpacing.sm,
+          ),
+          decoration: BoxDecoration(
+            color: moduleColor.withValues(alpha: 0.92),
+            borderRadius: BorderRadius.circular(AppRadius.feature),
+            border: Border.all(
+              color: moduleColor.withValues(alpha: 0.3),
+              width: 0.5,
+            ),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(AppRadius.feature),
+            child: Stack(
+              children: [
+                Positioned(
+                  right: -16,
+                  top: -16,
+                  child: Text(
+                    module.icon,
+                    style: TextStyle(
+                      fontSize: 72,
+                      color: fg.withValues(alpha: 0.1),
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(AppSpacing.lg),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _Header(
+                        icon: module.icon,
+                        name: module.name,
+                        isGenerating: isGenerating,
+                        fg: fg,
+                        textTheme: textTheme,
+                      ),
+                      const SizedBox(height: AppSpacing.md),
+                      _Body(
+                        isLoading: isLoading,
+                        content: content,
+                        fg: fg,
+                        textTheme: textTheme,
+                      ),
+                      const SizedBox(height: AppSpacing.md),
+                      _Footer(
+                        fg: fg,
+                        textTheme: textTheme,
+                        onRefresh: onRefresh,
+                        onShare: onShare,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+}
 
-  Widget _header(Color onBgColor) {
+class _Header extends StatelessWidget {
+  final String icon;
+  final String name;
+  final bool isGenerating;
+  final Color fg;
+  final TextTheme textTheme;
+
+  const _Header({
+    required this.icon,
+    required this.name,
+    required this.isGenerating,
+    required this.fg,
+    required this.textTheme,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       children: [
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
           decoration: BoxDecoration(
-            color: onBgColor.withValues(alpha: 0.25),
-            borderRadius: BorderRadius.circular(AppTheme.radiusPill)),
+            color: fg.withValues(alpha: 0.2),
+            borderRadius: BorderRadius.circular(AppRadius.pill),
+          ),
           child: Row(mainAxisSize: MainAxisSize.min, children: [
-            Text(widget.module.icon, style: const TextStyle(fontSize: 14)),
+            Text(icon, style: const TextStyle(fontSize: 14)),
             const SizedBox(width: 4),
-            Text(widget.module.name, style: TextStyle(color: onBgColor, fontSize: 13, fontWeight: FontWeight.w600)),
+            Text(name, style: textTheme.labelMedium?.copyWith(color: fg)),
           ]),
         ),
         const Spacer(),
-        if (widget.isGenerating)
-          SizedBox(width: 16, height: 16,
+        if (isGenerating)
+          SizedBox(
+            width: 16,
+            height: 16,
             child: CircularProgressIndicator(
               strokeWidth: 2,
-              valueColor: AlwaysStoppedAnimation<Color>(onBgColor)),
+              valueColor: AlwaysStoppedAnimation<Color>(fg),
+            ),
           ),
       ],
     );
   }
+}
 
-  Widget _body(BuildContext context, Color onBgColor) {
-    if (widget.isLoading) return _shimmer(onBgColor);
+class _Body extends StatelessWidget {
+  final bool isLoading;
+  final DailyContent? content;
+  final Color fg;
+  final TextTheme textTheme;
 
-    final c = widget.content;
+  const _Body({
+    required this.isLoading,
+    required this.content,
+    required this.fg,
+    required this.textTheme,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (isLoading) return const SkeletonParagraph(lines: 4);
+
+    final c = content;
     if (c == null || c.content.isEmpty) {
-      return Text('暂无内容', style: TextStyle(color: onBgColor.withValues(alpha: 0.7), fontSize: 16));
+      return Text(
+        '暂无内容',
+        style: textTheme.bodyLarge?.copyWith(color: fg.withValues(alpha: 0.6)),
+      );
     }
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -124,76 +187,110 @@ class _DailyCardState extends State<DailyCard> {
           margin: const EdgeInsets.only(bottom: 10),
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
           decoration: BoxDecoration(
-            color: onBgColor.withValues(alpha: 0.2),
-            borderRadius: BorderRadius.circular(AppTheme.radiusPill)),
-          child: Text('${c.categoryIcon} ${c.category}', style: TextStyle(color: onBgColor, fontSize: 11)),
+            color: fg.withValues(alpha: 0.15),
+            borderRadius: BorderRadius.circular(AppRadius.pill),
+          ),
+          child: Text(
+            '${c.categoryIcon} ${c.category}',
+            style: textTheme.labelSmall?.copyWith(color: fg),
+          ),
         ),
-      Text(c.content, style: TextStyle(color: onBgColor, fontSize: 18, fontWeight: FontWeight.w500, height: 1.5),
-        maxLines: 7, overflow: TextOverflow.ellipsis),
+      Text(
+        c.content,
+        style: textTheme.bodyLarge?.copyWith(color: fg, height: 1.6),
+        maxLines: 7,
+        overflow: TextOverflow.ellipsis,
+      ),
       if (c.title.isNotEmpty) ...[
         const SizedBox(height: 10),
-        Text('— ${c.title}', style: TextStyle(color: onBgColor.withValues(alpha: 0.8), fontSize: 14, fontStyle: FontStyle.italic)),
+        Text(
+          '— ${c.title}',
+          style: textTheme.bodyMedium?.copyWith(
+            color: fg.withValues(alpha: 0.75),
+            fontStyle: FontStyle.italic,
+          ),
+        ),
       ],
       if (c.subtitle.isNotEmpty) ...[
         const SizedBox(height: 2),
-        Text(c.subtitle, style: TextStyle(color: onBgColor.withValues(alpha: 0.6), fontSize: 12)),
+        Text(
+          c.subtitle,
+          style: textTheme.bodySmall?.copyWith(color: fg.withValues(alpha: 0.55)),
+        ),
       ],
       if (c.isAiGenerated) ...[
         const SizedBox(height: 8),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
           decoration: BoxDecoration(
-            color: onBgColor.withValues(alpha: 0.2),
-            borderRadius: BorderRadius.circular(AppTheme.radiusPill)),
+            color: fg.withValues(alpha: 0.15),
+            borderRadius: BorderRadius.circular(AppRadius.pill),
+          ),
           child: Row(mainAxisSize: MainAxisSize.min, children: [
-            Icon(Icons.auto_awesome, size: 12, color: onBgColor),
+            Icon(Icons.auto_awesome, size: 11, color: fg),
             const SizedBox(width: 3),
-            Text('AI 生成', style: TextStyle(color: onBgColor, fontSize: 10)),
+            Text('AI 生成', style: textTheme.labelSmall?.copyWith(color: fg)),
           ]),
         ),
       ],
     ]);
   }
+}
 
-  Widget _footer(Color onBgColor) {
+class _Footer extends StatelessWidget {
+  final Color fg;
+  final TextTheme textTheme;
+  final VoidCallback? onRefresh;
+  final VoidCallback? onShare;
+
+  const _Footer({
+    required this.fg,
+    required this.textTheme,
+    this.onRefresh,
+    this.onShare,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-      _actionBtn(Icons.refresh, '换一条', onBgColor, widget.onRefresh),
+      _ActionBtn(icon: Icons.refresh, label: '换一条', fg: fg, textTheme: textTheme, onTap: onRefresh),
       const SizedBox(width: 12),
-      _actionBtn(Icons.share, '分享', onBgColor, widget.onShare),
+      _ActionBtn(icon: Icons.share, label: '分享', fg: fg, textTheme: textTheme, onTap: onShare),
     ]);
   }
+}
 
-  Widget _actionBtn(IconData icon, String label, Color onBgColor, VoidCallback? onTap) {
+class _ActionBtn extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final Color fg;
+  final TextTheme textTheme;
+  final VoidCallback? onTap;
+
+  const _ActionBtn({
+    required this.icon,
+    required this.label,
+    required this.fg,
+    required this.textTheme,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        setState(() => _hover = true);
-        Future.delayed(const Duration(milliseconds: 200), () { if (mounted) setState(() => _hover = false); });
-        onTap?.call();
-      },
+      onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: onBgColor.withValues(alpha: 0.2),
-          borderRadius: BorderRadius.circular(AppTheme.radiusPill)),
+          color: fg.withValues(alpha: 0.15),
+          borderRadius: BorderRadius.circular(AppRadius.pill),
+        ),
         child: Row(mainAxisSize: MainAxisSize.min, children: [
-          Icon(icon, size: 14, color: onBgColor),
+          Icon(icon, size: 14, color: fg),
           const SizedBox(width: 4),
-          Text(label, style: TextStyle(color: onBgColor, fontSize: 12)),
+          Text(label, style: textTheme.labelSmall?.copyWith(color: fg)),
         ]),
       ),
     );
-  }
-
-  Widget _shimmer(Color onBgColor) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: List.generate(4, (i) => Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Container(
-        width: [80.0, double.infinity, 240.0, 160.0][i],
-        height: 14,
-        decoration: BoxDecoration(
-          color: onBgColor.withValues(alpha: 0.15),
-          borderRadius: BorderRadius.circular(7)),
-      ),
-    )));
   }
 }

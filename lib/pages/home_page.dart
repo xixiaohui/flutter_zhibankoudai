@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../config/routes.dart';
-import '../config/theme.dart';
+import '../design/radius.dart';
+import '../design/spacing.dart';
+import '../design/elevation.dart';
 import '../models/daily_content.dart';
 import '../models/module_config.dart';
 import '../providers/module_provider.dart';
 import '../providers/daily_content_provider.dart';
 import '../widgets/daily_card.dart';
 import '../widgets/module_grid_item.dart';
-import '../xui/x_design.dart';
 
-/// 模块分类映射 — 每个模块归属于一个展示分组
 const Map<String, List<String>> _moduleCategories = {
   '热门精选': ['wisdomBag', 'quote', 'joke', 'movie', 'music', 'programming'],
   '财经商业': ['finance', 'investment', 'stock', 'economics', 'business', 'tax', 'foreignTrade', 'ecommerce', 'futures'],
@@ -52,15 +52,17 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
-      backgroundColor: AppTheme.warmCream,
+      backgroundColor: colorScheme.surfaceContainerLowest,
       body: Consumer2<ModuleProvider, DailyContentProvider>(
-        builder: (_, mp, cp, _) {
+        builder: (_, mp, cp, __) {
           final slivers = <Widget>[
-            SliverToBoxAdapter(child: _header()),
+            SliverToBoxAdapter(child: _header(textTheme, colorScheme)),
           ];
 
-          // Hero card — 第一个模块
           if (mp.modules.isNotEmpty) {
             final fm = mp.modules.first;
             final content = cp.getContent(fm.id);
@@ -77,54 +79,43 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
             ));
           }
 
-          slivers.add(SliverToBoxAdapter(child: _aiFriendCard(context)));
-          slivers.add(SliverToBoxAdapter(child: _aiCareerCard(context)));
-          slivers.add(SliverToBoxAdapter(child: _sectionTitle(context, '更多模块')));
+          slivers.add(SliverToBoxAdapter(child: _aiFriendCard(context, textTheme, colorScheme)));
+          slivers.add(SliverToBoxAdapter(child: _aiCareerCard(context, textTheme, colorScheme)));
+          slivers.add(SliverToBoxAdapter(child: _sectionTitle(textTheme, colorScheme, '更多模块')));
 
           if (mp.isLoading) {
-            slivers.add(SliverFillRemaining(child: _loadingGrid()));
+            slivers.add(SliverFillRemaining(child: _loadingGrid(colorScheme)));
           } else if (mp.modules.isEmpty) {
             slivers.add(const SliverFillRemaining(child: Center(child: Text('暂无模块'))));
           } else {
-            slivers.addAll(_buildModuleSections(mp.modules.skip(1).toList()));
+            slivers.addAll(_buildModuleSections(mp.modules.skip(1).toList(), textTheme, colorScheme));
           }
 
           return CustomScrollView(slivers: slivers);
         },
-      )
+      ),
     );
   }
 
-  // ========== 模块分类区域构建 ==========
-
-  List<Widget> _buildModuleSections(List<ModuleConfig> modules) {
+  List<Widget> _buildModuleSections(List<ModuleConfig> modules, TextTheme textTheme, ColorScheme colorScheme) {
     final moduleMap = <String, ModuleConfig>{for (final m in modules) m.id: m};
     final slivers = <Widget>[];
 
-    // ── 横向滚动「热门精选」 ──
     final featuredIds = _moduleCategories['热门精选']!;
     final featured = featuredIds.map((id) => moduleMap[id]).whereType<ModuleConfig>().toList();
     if (featured.isNotEmpty) {
-      slivers.add(SliverToBoxAdapter(child: _buildFeaturedRow(featured)));
+      slivers.add(SliverToBoxAdapter(child: _buildFeaturedRow(featured, textTheme, colorScheme)));
       slivers.add(const SliverToBoxAdapter(child: SizedBox(height: 10)));
     }
 
-    // ── 各分类模块网格 ──
     for (final entry in _moduleCategories.entries) {
-      // 热门精选已在上方横向展示，这里跳过
       if (entry.key == '热门精选') continue;
-
-      final catModules = entry.value
-          .map((id) => moduleMap[id])
-          .whereType<ModuleConfig>()
-          .toList();
+      final catModules = entry.value.map((id) => moduleMap[id]).whereType<ModuleConfig>().toList();
       if (catModules.isEmpty) continue;
 
-      slivers.add(SliverToBoxAdapter(
-        child: _categoryLabel(entry.key, catModules.length),
-      ));
+      slivers.add(SliverToBoxAdapter(child: _categoryLabel(entry.key, catModules.length, textTheme, colorScheme)));
       slivers.add(SliverPadding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.screenHorizontal),
         sliver: SliverGrid(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
@@ -148,8 +139,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     return slivers;
   }
 
-  // ── 横向滚动热门卡片行 ──
-  Widget _buildFeaturedRow(List<ModuleConfig> items) {
+  Widget _buildFeaturedRow(List<ModuleConfig> items, TextTheme textTheme, ColorScheme colorScheme) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -157,88 +147,83 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
           padding: const EdgeInsets.fromLTRB(20, 4, 20, 10),
           child: Row(children: [
             const Text('🔥 ', style: TextStyle(fontSize: 14)),
-            Text('热门精选'.toUpperCase(), style: XuiTheme.uppercaseLabel()),
+            Text('热门精选', style: textTheme.labelMedium?.copyWith(
+              color: colorScheme.onSurfaceVariant,
+              letterSpacing: 1.0,
+            )),
           ]),
         ),
         SizedBox(
-          height: 140,
+          height: 157,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             itemCount: items.length,
             separatorBuilder: (_, _) => const SizedBox(width: 12),
-            itemBuilder: (_, i) => _featuredCard(items[i]),
+            itemBuilder: (_, i) => _featuredCard(items[i], textTheme, colorScheme),
           ),
         ),
       ],
     );
   }
 
-  Widget _featuredCard(ModuleConfig m) {
-    final c = AppTheme.fromHex(m.color);
+  Widget _featuredCard(ModuleConfig m, TextTheme textTheme, ColorScheme colorScheme) {
+    final c = _fromHex(m.color);
     return GestureDetector(
       onTap: () => _navigateToDetail(m.id),
       child: Container(
         width: 110,
         decoration: BoxDecoration(
-          color: AppTheme.pureWhite,
-          borderRadius: BorderRadius.circular(AppTheme.radiusFeature),
-          border: Border.all(color: AppTheme.oatBorder, width: 1),
-          boxShadow: AppTheme.clayShadow,
+          color: colorScheme.surface,
+          borderRadius: BorderRadius.circular(AppRadius.feature),
+          border: Border.all(color: colorScheme.outline, width: 0.5),
+          boxShadow: AppElevation.card,
         ),
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 42,
-              height: 42,
+              width: 42, height: 42,
               decoration: BoxDecoration(
                 color: c.withValues(alpha: 0.12),
-                borderRadius: BorderRadius.circular(AppTheme.radiusCard),
+                borderRadius: BorderRadius.circular(AppRadius.standard),
               ),
               child: Center(child: Text(m.icon, style: const TextStyle(fontSize: 22))),
             ),
             const SizedBox(height: 10),
             Text(m.name,
-              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.clayBlack),
+              style: textTheme.labelMedium?.copyWith(color: colorScheme.onSurface),
               textAlign: TextAlign.center, maxLines: 1, overflow: TextOverflow.ellipsis),
             const SizedBox(height: 4),
-            Text(
-              m.description,
-              style: const TextStyle(fontSize: 9, color: AppTheme.warmSilver),
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
+            Text(m.description,
+              style: textTheme.bodySmall?.copyWith(color: colorScheme.secondary),
+              textAlign: TextAlign.center, maxLines: 2, overflow: TextOverflow.ellipsis),
           ],
         ),
       ),
     );
   }
 
-  // ── 分类标签 ──
-  Widget _categoryLabel(String title, int count) {
+  Widget _categoryLabel(String title, int count, TextTheme textTheme, ColorScheme colorScheme) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 4, 20, 10),
       child: Row(children: [
-        Text(title, style: XuiTheme.cardHeading().copyWith(fontSize: 16)),
+        Text(title, style: textTheme.titleSmall?.copyWith(color: colorScheme.onSurface)),
         const SizedBox(width: 8),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
           decoration: BoxDecoration(
-            color: AppTheme.oatLight,
-            borderRadius: BorderRadius.circular(AppTheme.radiusPill),
+            color: colorScheme.outlineVariant,
+            borderRadius: BorderRadius.circular(AppRadius.pill),
           ),
-          child: Text('$count', style: XuiTheme.badge()),
+          child: Text('$count', style: textTheme.labelSmall?.copyWith(color: colorScheme.secondary)),
         ),
       ]),
     );
   }
 
-  // ========== AI 情感陪伴卡片 ==========
-
-  Widget _aiFriendCard(BuildContext context) {
+  Widget _aiFriendCard(BuildContext context, TextTheme textTheme, ColorScheme colorScheme) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
       child: GestureDetector(
@@ -251,57 +236,44 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(AppTheme.radiusFeature),
+            borderRadius: BorderRadius.circular(AppRadius.feature),
             border: Border.all(color: const Color(0x33FF9A9E)),
-            boxShadow: AppTheme.clayShadow,
+            boxShadow: AppElevation.card,
           ),
-          child: Row(
-            children: [
-              Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFFFF9A9E), Color(0xFFFAD0C4)],
-                  ),
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: const [
-                    BoxShadow(color: Color(0x33FF9A9E), blurRadius: 8, offset: Offset(0, 2)),
-                  ],
-                ),
-                child: const Center(child: Text('🧸', style: TextStyle(fontSize: 26))),
+          child: Row(children: [
+            Container(
+              width: 50, height: 50,
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(colors: [Color(0xFFFF9A9E), Color(0xFFFAD0C4)]),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: const [BoxShadow(color: Color(0x33FF9A9E), blurRadius: 8, offset: Offset(0, 2))],
               ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('情感陪伴',
-                      style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600, color: AppTheme.clayBlack)),
-                    const SizedBox(height: 4),
-                    Text('和"小智"聊聊天，分享你的心情',
-                      style: XuiTheme.caption()),
-                  ],
-                ),
+              child: const Center(child: Text('🧸', style: TextStyle(fontSize: 26))),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text('情感陪伴', style: textTheme.titleSmall?.copyWith(color: colorScheme.onSurface)),
+                const SizedBox(height: 4),
+                Text('和"小智"聊聊天，分享你的心情',
+                  style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant)),
+              ]),
+            ),
+            Container(
+              width: 32, height: 32,
+              decoration: BoxDecoration(
+                color: colorScheme.surface.withValues(alpha: 0.8),
+                borderRadius: BorderRadius.circular(10),
               ),
-              Container(
-                width: 32, height: 32,
-                decoration: BoxDecoration(
-                  color: AppTheme.pureWhite.withValues(alpha: 0.8),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Icon(Icons.arrow_forward_rounded, size: 18, color: AppTheme.warmCharcoal),
-              ),
-            ],
-          ),
+              child: Icon(Icons.arrow_forward_rounded, size: 18, color: colorScheme.onSurfaceVariant),
+            ),
+          ]),
         ),
       ),
     );
   }
 
-  // ========== AI 职业专家卡片 ==========
-
-  Widget _aiCareerCard(BuildContext context) {
+  Widget _aiCareerCard(BuildContext context, TextTheme textTheme, ColorScheme colorScheme) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
       child: GestureDetector(
@@ -314,88 +286,78 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(AppTheme.radiusFeature),
+            borderRadius: BorderRadius.circular(AppRadius.feature),
             border: Border.all(color: const Color(0x336366F1)),
-            boxShadow: AppTheme.clayShadow,
+            boxShadow: AppElevation.card,
           ),
-          child: Row(
-            children: [
-              Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFF6366F1), Color(0xFF8B5CF6)],
-                  ),
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: const [
-                    BoxShadow(color: Color(0x336366F1), blurRadius: 8, offset: Offset(0, 2)),
-                  ],
-                ),
-                child: const Center(child: Text('💼', style: TextStyle(fontSize: 26))),
+          child: Row(children: [
+            Container(
+              width: 50, height: 50,
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(colors: [Color(0xFF6366F1), Color(0xFF8B5CF6)]),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: const [BoxShadow(color: Color(0x336366F1), blurRadius: 8, offset: Offset(0, 2))],
               ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('领域专家',
-                      style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600, color: AppTheme.clayBlack)),
-                    const SizedBox(height: 4),
-                    Text('与180+行业专家深度对话，获取专业见解',
-                      style: XuiTheme.caption()),
-                  ],
-                ),
+              child: const Center(child: Text('💼', style: TextStyle(fontSize: 26))),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text('领域专家', style: textTheme.titleSmall?.copyWith(color: colorScheme.onSurface)),
+                const SizedBox(height: 4),
+                Text('与180+行业专家深度对话，获取专业见解',
+                  style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant)),
+              ]),
+            ),
+            Container(
+              width: 32, height: 32,
+              decoration: BoxDecoration(
+                color: colorScheme.surface.withValues(alpha: 0.8),
+                borderRadius: BorderRadius.circular(10),
               ),
-              Container(
-                width: 32, height: 32,
-                decoration: BoxDecoration(
-                  color: AppTheme.pureWhite.withValues(alpha: 0.8),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Icon(Icons.arrow_forward_rounded, size: 18, color: AppTheme.warmCharcoal),
-              ),
-            ],
-          ),
+              child: Icon(Icons.arrow_forward_rounded, size: 18, color: colorScheme.onSurfaceVariant),
+            ),
+          ]),
         ),
       ),
     );
   }
 
-  // ========== 原有部件 ==========
-
-  Widget _header() {
+  Widget _header(TextTheme textTheme, ColorScheme colorScheme) {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 60, 20, 20),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(_dateStr(), style: XuiTheme.caption()),
+        Text(_dateStr(), style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant)),
         const SizedBox(height: 8),
         Row(children: [
-          Text('智伴口袋', style: XuiTheme.cardHeading()),
+          Text('智伴口袋', style: textTheme.headlineMedium?.copyWith(color: colorScheme.onSurface)),
           const SizedBox(width: 8),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
             decoration: BoxDecoration(
-              color: AppTheme.lemon400.withValues(alpha: 0.4),
-              borderRadius: BorderRadius.circular(AppTheme.radiusPill),
+              color: const Color(0xFFf8cc65).withValues(alpha: 0.4),
+              borderRadius: BorderRadius.circular(AppRadius.pill),
             ),
-            child: Text('每日更新', style: XuiTheme.badge()),
+            child: Text('每日更新', style: textTheme.labelSmall?.copyWith(color: colorScheme.onSurface)),
           ),
         ]),
         const SizedBox(height: 6),
-        Text('您的个人专家知识库', style: XuiTheme.navLink()),
+        Text('您的个人专家知识库', style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary)),
       ]),
     );
   }
 
-  Widget _sectionTitle(BuildContext context, String title) {
+  Widget _sectionTitle(TextTheme textTheme, ColorScheme colorScheme, String title) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 12),
-      child: Text(title.toUpperCase(), style: XuiTheme.uppercaseLabel()),
+      child: Text(title, style: textTheme.labelMedium?.copyWith(
+        color: colorScheme.onSurfaceVariant,
+        letterSpacing: 1.0,
+      )),
     );
   }
 
-  Widget _loadingGrid() {
+  Widget _loadingGrid(ColorScheme colorScheme) {
     return GridView.builder(
       padding: const EdgeInsets.all(16),
       physics: const NeverScrollableScrollPhysics(),
@@ -405,10 +367,18 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
       itemCount: 6,
       itemBuilder: (_, _) => Container(
         decoration: BoxDecoration(
-          color: AppTheme.oatLight, borderRadius: BorderRadius.circular(AppTheme.radiusFeature),
+          color: colorScheme.outlineVariant,
+          borderRadius: BorderRadius.circular(AppRadius.feature),
         ),
       ),
     );
+  }
+
+  static Color _fromHex(String hex) {
+    final buffer = StringBuffer();
+    if (hex.length == 6 || hex.length == 7) buffer.write('ff');
+    buffer.write(hex.replaceFirst('#', ''));
+    return Color(int.parse(buffer.toString(), radix: 16));
   }
 
   String _dateStr() {

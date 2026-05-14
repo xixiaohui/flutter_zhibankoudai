@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../config/constants.dart';
-import '../config/theme.dart';
+import '../design/radius.dart';
 import '../providers/theme_provider.dart';
 import '../services/cache_service.dart';
-import '../xui/x_design.dart';
 
 class MinePage extends StatelessWidget {
   const MinePage({super.key});
@@ -13,8 +12,11 @@ class MinePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = context.watch<ThemeProvider>();
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
-      backgroundColor: AppTheme.warmCream,
+      backgroundColor: colorScheme.surfaceContainerLowest,
       appBar: AppBar(
         title: const Text('我的'),
         backgroundColor: Colors.transparent,
@@ -23,15 +25,15 @@ class MinePage extends StatelessWidget {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(children: [
-          _UserCard(),
+          _UserCard(textTheme: textTheme, colorScheme: colorScheme),
           const SizedBox(height: 24),
-          _clayMenuGroup(context, [
+          _menuGroup(context, textTheme, colorScheme, [
             _MenuItem(Icons.color_lens, '主题设置', themeProvider.modeLabel, _onTheme),
             _MenuItem(Icons.notifications, '通知提醒', '设置每日推送时间', _onNotification),
             _MenuItem(Icons.cleaning_services, '清除缓存', '清理本地缓存数据', _onClearCache),
           ]),
           const SizedBox(height: 16),
-          _clayMenuGroup(context, [
+          _menuGroup(context, textTheme, colorScheme, [
             _MenuItem(Icons.info, '关于我们', '版本 ${AppConstants.appVersion}', _onAbout),
             _MenuItem(Icons.star, '给个好评', '您的支持是我们前进的动力', _onRate),
             _MenuItem(Icons.share, '分享给朋友', '推荐给更多人', _onShare),
@@ -39,7 +41,7 @@ class MinePage extends StatelessWidget {
           const SizedBox(height: 32),
           Text(
             '© ${DateTime.now().year} ${AppConstants.appNameEn}',
-            style: XuiTheme.small().copyWith(color: AppTheme.warmSilver),
+            style: textTheme.bodySmall?.copyWith(color: colorScheme.secondary),
           ),
           const SizedBox(height: 24),
         ]),
@@ -47,36 +49,31 @@ class MinePage extends StatelessWidget {
     );
   }
 
-  Widget _clayMenuGroup(BuildContext context, List<_MenuItem> items) {
+  Widget _menuGroup(BuildContext context, TextTheme textTheme, ColorScheme colorScheme, List<_MenuItem> items) {
     return Container(
       decoration: BoxDecoration(
-        color: AppTheme.pureWhite,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppTheme.oatBorder),
-        boxShadow: AppTheme.clayShadow,
+        color: colorScheme.surface,
+        borderRadius: BorderRadius.circular(AppRadius.card),
+        border: Border.all(color: colorScheme.outline, width: 0.5),
       ),
       child: Column(
         children: items.asMap().entries.map((e) {
           final last = e.key == items.length - 1;
           return Column(children: [
             ListTile(
-              leading: Icon(e.value.icon, color: AppTheme.clayBlack, size: 22),
-              title: Text(e.value.title, style: XuiTheme.bodyMed()),
-              subtitle: Text(e.value.subtitle, style: XuiTheme.caption()),
-              trailing: const Icon(Icons.chevron_right, size: 20, color: AppTheme.warmSilver),
+              leading: Icon(e.value.icon, color: colorScheme.onSurface, size: 22),
+              title: Text(e.value.title, style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500, color: colorScheme.onSurface)),
+              subtitle: Text(e.value.subtitle, style: textTheme.bodySmall?.copyWith(color: colorScheme.secondary)),
+              trailing: Icon(Icons.chevron_right, size: 20, color: colorScheme.secondary),
               onTap: () => e.value.onTap(context),
             ),
-            if (!last) const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Divider(height: 1, color: AppTheme.oatLight),
-            ),
+            if (!last) Divider(height: 1, indent: 16, endIndent: 16, color: colorScheme.outlineVariant),
           ]);
         }).toList(),
       ),
     );
   }
 
-  // ═══════ 主题设置 ═══════
   void _onTheme(BuildContext context) {
     final provider = context.read<ThemeProvider>();
     showModalBottomSheet(
@@ -86,27 +83,23 @@ class MinePage extends StatelessWidget {
     );
   }
 
-  // ═══════ 通知设置 ═══════
   void _onNotification(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) => const _NotificationDialog(),
-    );
+    showDialog(context: context, builder: (_) => const _NotificationDialog());
   }
 
-  // ═══════ 清除缓存 ═══════
   void _onClearCache(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: AppTheme.pureWhite,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        backgroundColor: colorScheme.surface,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.card)),
         title: const Text('清除缓存'),
         content: const Text('确定要清除所有本地缓存数据吗？\n这将清除已保存的内容和设置。'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('取消', style: TextStyle(color: AppTheme.warmSilver)),
+            child: Text('取消', style: TextStyle(color: colorScheme.secondary)),
           ),
           TextButton(
             onPressed: () async {
@@ -115,76 +108,67 @@ class MinePage extends StatelessWidget {
               await cache.clear();
               if (ctx.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('缓存已清除'), backgroundColor: AppTheme.matcha600),
+                  SnackBar(content: const Text('缓存已清除'), backgroundColor: const Color(0xFF059669)),
                 );
               }
             },
-            child: const Text('确定', style: TextStyle(color: AppTheme.pomegranate400)),
+            child: const Text('确定', style: TextStyle(color: Color(0xFFDC2626))),
           ),
         ],
       ),
     );
   }
 
-  // ═══════ 关于我们 ═══════
   void _onAbout(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     showDialog(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        backgroundColor: AppTheme.pureWhite,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        backgroundColor: colorScheme.surface,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.card)),
         title: Row(children: [
           Container(
             width: 48, height: 48,
             decoration: BoxDecoration(
-              color: AppTheme.ube800,
-              borderRadius: BorderRadius.circular(AppTheme.radiusCard),
+              color: const Color(0xFF43089f),
+              borderRadius: BorderRadius.circular(AppRadius.standard),
             ),
-            child: const Icon(Icons.auto_awesome, color: AppTheme.pureWhite, size: 28),
+            child: const Icon(Icons.auto_awesome, color: Colors.white, size: 28),
           ),
           const SizedBox(width: 12),
           const Text(AppConstants.appName),
         ]),
-        content: const Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('每日知识，伴你成长', style: TextStyle(color: AppTheme.warmCharcoal)),
-            SizedBox(height: 16),
-            _AboutRow('版本', AppConstants.appVersion),
-            _AboutRow('构建', 'Flutter · Tencent CloudBase'),
-            _AboutRow('设计', 'Clay Design System'),
-          ],
-        ),
+        content: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text('每日知识，伴你成长', style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant)),
+          const SizedBox(height: 16),
+          _AboutRow('版本', AppConstants.appVersion, textTheme, colorScheme),
+          _AboutRow('构建', 'Flutter · Tencent CloudBase', textTheme, colorScheme),
+          _AboutRow('设计', 'Editorial Precision Design System', textTheme, colorScheme),
+        ]),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(),
-            child: const Text('知道了'),
-          ),
+          TextButton(onPressed: () => Navigator.of(dialogContext).pop(), child: const Text('知道了')),
         ],
       ),
     );
   }
 
-  // ═══════ 评分 ═══════
   void _onRate(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: AppTheme.pureWhite,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-        title: const Text('给个好评 🌟'),
+        backgroundColor: colorScheme.surface,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.card)),
+        title: const Text('给个好评'),
         content: const Text('感谢您的支持！您的每一次好评都是我们前进的动力。\n\n请前往应用商店为我们评分，或分享给更多朋友。'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('稍后再说', style: TextStyle(color: AppTheme.warmSilver)),
+            child: Text('稍后再说', style: TextStyle(color: colorScheme.secondary)),
           ),
           TextButton(
-            onPressed: () {
-              Navigator.pop(ctx);
-              _onShare(context);
-            },
+            onPressed: () { Navigator.pop(ctx); _onShare(context); },
             child: const Text('分享给朋友'),
           ),
         ],
@@ -192,86 +176,65 @@ class MinePage extends StatelessWidget {
     );
   }
 
-  // ═══════ 分享 ═══════
   void _onShare(BuildContext context) {
-    SharePlus.instance.share(
-      ShareParams(
-        text: '智伴口袋 — 每日知识，伴你成长！\n'
-            '60+专家模块，每天为你推送优质内容。\n'
-            '快来下载体验吧！',
-        subject: AppConstants.appName,
-      ),
-    );
+    SharePlus.instance.share(ShareParams(
+      text: '智伴口袋 — 每日知识，伴你成长！\n60+专家模块，每天为你推送优质内容。\n快来下载体验吧！',
+      subject: AppConstants.appName,
+    ));
   }
 }
 
-// ═══════════════════════════════════════════════
-// 主题切换底部弹窗
-// ═══════════════════════════════════════════════
+// ═══════ 主题切换底部弹窗 ═══════
 class _ThemeSheet extends StatelessWidget {
   final ThemeProvider provider;
   const _ThemeSheet({required this.provider});
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
-      decoration: const BoxDecoration(
-        color: AppTheme.pureWhite,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      decoration: BoxDecoration(
+        color: colorScheme.surface,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
       ),
       padding: const EdgeInsets.fromLTRB(24, 12, 24, 36),
       child: SafeArea(
         top: false,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 36, height: 4,
-              decoration: BoxDecoration(
-                color: AppTheme.oatLight,
-                borderRadius: BorderRadius.circular(2),
-              ),
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+          Container(
+            width: 36, height: 4,
+            decoration: BoxDecoration(color: colorScheme.outlineVariant, borderRadius: BorderRadius.circular(2)),
+          ),
+          const SizedBox(height: 20),
+          Text('主题设置', style: textTheme.titleLarge?.copyWith(color: colorScheme.onSurface)),
+          const SizedBox(height: 16),
+          for (final mode in ThemeMode.values)
+            _ThemeOption(
+              icon: _themeIcon(mode),
+              label: _themeLabel(mode),
+              selected: provider.mode == mode,
+              onTap: () { provider.setMode(mode); Navigator.pop(context); },
+              textTheme: textTheme,
+              colorScheme: colorScheme,
             ),
-            const SizedBox(height: 20),
-            Text('主题设置', style: XuiTheme.featureTitle()),
-            const SizedBox(height: 16),
-            for (final mode in ThemeMode.values)
-              _ThemeOption(
-                icon: _themeIcon(mode),
-                label: _themeLabel(mode),
-                selected: provider.mode == mode,
-                onTap: () {
-                  provider.setMode(mode);
-                  Navigator.pop(context);
-                },
-              ),
-          ],
-        ),
+        ]),
       ),
     );
   }
 
-  IconData _themeIcon(ThemeMode mode) {
-    switch (mode) {
-      case ThemeMode.light:
-        return Icons.light_mode;
-      case ThemeMode.dark:
-        return Icons.dark_mode;
-      case ThemeMode.system:
-        return Icons.settings_suggest;
-    }
-  }
+  IconData _themeIcon(ThemeMode mode) => switch (mode) {
+    ThemeMode.light => Icons.light_mode,
+    ThemeMode.dark => Icons.dark_mode,
+    ThemeMode.system => Icons.settings_suggest,
+  };
 
-  String _themeLabel(ThemeMode mode) {
-    switch (mode) {
-      case ThemeMode.light:
-        return '浅色模式';
-      case ThemeMode.dark:
-        return '深色模式';
-      case ThemeMode.system:
-        return '跟随系统';
-    }
-  }
+  String _themeLabel(ThemeMode mode) => switch (mode) {
+    ThemeMode.light => '浅色模式',
+    ThemeMode.dark => '深色模式',
+    ThemeMode.system => '跟随系统',
+  };
 }
 
 class _ThemeOption extends StatelessWidget {
@@ -279,12 +242,12 @@ class _ThemeOption extends StatelessWidget {
   final String label;
   final bool selected;
   final VoidCallback onTap;
+  final TextTheme textTheme;
+  final ColorScheme colorScheme;
 
   const _ThemeOption({
-    required this.icon,
-    required this.label,
-    required this.selected,
-    required this.onTap,
+    required this.icon, required this.label, required this.selected,
+    required this.onTap, required this.textTheme, required this.colorScheme,
   });
 
   @override
@@ -292,7 +255,7 @@ class _ThemeOption extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Material(
-        color: selected ? AppTheme.ube300.withValues(alpha: 0.15) : Colors.transparent,
+        color: selected ? const Color(0xFFc1b0ff).withValues(alpha: 0.15) : Colors.transparent,
         borderRadius: BorderRadius.circular(16),
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
@@ -300,11 +263,10 @@ class _ThemeOption extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             child: Row(children: [
-              Icon(icon, color: selected ? AppTheme.ube800 : AppTheme.clayBlack, size: 24),
+              Icon(icon, color: selected ? const Color(0xFF43089f) : colorScheme.onSurface, size: 24),
               const SizedBox(width: 14),
-              Expanded(child: Text(label, style: XuiTheme.bodyMed())),
-              if (selected)
-                const Icon(Icons.check, color: AppTheme.ube800, size: 22),
+              Expanded(child: Text(label, style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface))),
+              if (selected) const Icon(Icons.check, color: Color(0xFF43089f), size: 22),
             ]),
           ),
         ),
@@ -313,9 +275,7 @@ class _ThemeOption extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════
-// 通知时间设置弹窗
-// ═══════════════════════════════════════════════
+// ═══════ 通知时间设置弹窗 ═══════
 class _NotificationDialog extends StatefulWidget {
   const _NotificationDialog();
 
@@ -336,55 +296,47 @@ class _NotificationDialogState extends State<_NotificationDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return AlertDialog(
-      backgroundColor: AppTheme.pureWhite,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      backgroundColor: colorScheme.surface,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.card)),
       title: const Text('通知提醒'),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            title: const Text('开启每日推送'),
-            value: _enabled,
-            onChanged: (v) => setState(() => _enabled = v),
-            activeTrackColor: AppTheme.ube300,
-            activeThumbColor: AppTheme.ube800,
+      content: Column(mainAxisSize: MainAxisSize.min, children: [
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          title: const Text('开启每日推送'),
+          value: _enabled,
+          onChanged: (v) => setState(() => _enabled = v),
+          activeTrackColor: const Color(0xFFc1b0ff).withValues(alpha: 0.3),
+          activeThumbColor: const Color(0xFF43089f),
+        ),
+        const SizedBox(height: 8),
+        Text('选择每日推送时间（当前为示例设置，具体推送由后端支持）',
+          style: textTheme.bodySmall?.copyWith(color: colorScheme.secondary)),
+        const SizedBox(height: 16),
+        for (final t in _times)
+          _TimeTile(
+            label: t.$1, desc: t.$4, selected: _hour == t.$2,
+            onTap: _enabled ? () => setState(() { _hour = t.$2; _minute = t.$3; }) : null,
+            textTheme: textTheme, colorScheme: colorScheme,
           ),
-          const SizedBox(height: 8),
-          const Text(
-            '选择每日推送时间（当前为示例设置，具体推送由后端支持）',
-            style: TextStyle(fontSize: 13, color: AppTheme.warmSilver),
-          ),
-          const SizedBox(height: 16),
-          for (final t in _times)
-            _TimeTile(
-              label: t.$1,
-              desc: t.$4,
-              selected: _hour == t.$2,
-              onTap: _enabled
-                  ? () => setState(() {
-                        _hour = t.$2;
-                        _minute = t.$3;
-                      })
-                  : null,
-            ),
-        ],
-      ),
+      ]),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('取消', style: TextStyle(color: AppTheme.warmSilver)),
+          child: Text('取消', style: TextStyle(color: colorScheme.secondary)),
         ),
         TextButton(
           onPressed: () {
             Navigator.pop(context);
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(_enabled ? '已设置每日 ${_hour.toString().padLeft(2, '0')}:${_minute.toString().padLeft(2, '0')} 推送' : '已关闭每日推送'),
-                backgroundColor: AppTheme.matcha600,
-              ),
-            );
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(_enabled
+                ? '已设置每日 ${_hour.toString().padLeft(2, '0')}:${_minute.toString().padLeft(2, '0')} 推送'
+                : '已关闭每日推送'),
+              backgroundColor: const Color(0xFF059669),
+            ));
           },
           child: const Text('保存'),
         ),
@@ -394,16 +346,15 @@ class _NotificationDialogState extends State<_NotificationDialog> {
 }
 
 class _TimeTile extends StatelessWidget {
-  final String label;
-  final String desc;
+  final String label, desc;
   final bool selected;
   final VoidCallback? onTap;
+  final TextTheme textTheme;
+  final ColorScheme colorScheme;
 
   const _TimeTile({
-    required this.label,
-    required this.desc,
-    required this.selected,
-    required this.onTap,
+    required this.label, required this.desc, required this.selected,
+    required this.onTap, required this.textTheme, required this.colorScheme,
   });
 
   @override
@@ -411,7 +362,7 @@ class _TimeTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Material(
-        color: selected ? AppTheme.ube300.withValues(alpha: 0.15) : Colors.transparent,
+        color: selected ? const Color(0xFFc1b0ff).withValues(alpha: 0.15) : Colors.transparent,
         borderRadius: BorderRadius.circular(16),
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
@@ -420,15 +371,12 @@ class _TimeTile extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             child: Row(children: [
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(label, style: XuiTheme.bodyMed()),
-                    Text(desc, style: XuiTheme.caption()),
-                  ],
-                ),
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text(label, style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500, color: colorScheme.onSurface)),
+                  Text(desc, style: textTheme.bodySmall?.copyWith(color: colorScheme.secondary)),
+                ]),
               ),
-              if (selected) const Icon(Icons.check, color: AppTheme.ube800, size: 22),
+              if (selected) const Icon(Icons.check, color: Color(0xFF43089f), size: 22),
             ]),
           ),
         ),
@@ -437,63 +385,58 @@ class _TimeTile extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════
-// 用户头像卡片
-// ═══════════════════════════════════════════════
+// ═══════ 用户头像卡片 ═══════
 class _UserCard extends StatelessWidget {
+  final TextTheme textTheme;
+  final ColorScheme colorScheme;
+
+  const _UserCard({required this.textTheme, required this.colorScheme});
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: AppTheme.ube800,
-        borderRadius: BorderRadius.circular(AppTheme.radiusFeature),
-        border: Border.all(color: AppTheme.oatBorder),
-        boxShadow: AppTheme.clayShadow,
+        color: const Color(0xFF43089f),
+        borderRadius: BorderRadius.circular(AppRadius.feature),
       ),
       child: Row(children: [
         Container(
           width: 64, height: 64,
           decoration: BoxDecoration(
-            color: AppTheme.pureWhite.withValues(alpha: 0.2),
-            borderRadius: BorderRadius.circular(AppTheme.radiusPill),
+            color: Colors.white.withValues(alpha: 0.2),
+            borderRadius: BorderRadius.circular(AppRadius.pill),
           ),
-          child: const Icon(Icons.person, size: 32, color: AppTheme.pureWhite),
+          child: const Icon(Icons.person, size: 32, color: Colors.white),
         ),
         const SizedBox(width: 16),
         Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('智伴口袋用户', style: XuiTheme.featureTitle().copyWith(color: AppTheme.pureWhite)),
-              const SizedBox(height: 4),
-              Text('每日知识，伴你成长', style: XuiTheme.caption().copyWith(color: AppTheme.pureWhite.withValues(alpha: 0.7))),
-            ],
-          ),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text('智伴口袋用户', style: textTheme.titleLarge?.copyWith(color: Colors.white)),
+            const SizedBox(height: 4),
+            Text('每日知识，伴你成长', style: textTheme.bodySmall?.copyWith(color: Colors.white.withValues(alpha: 0.7))),
+          ]),
         ),
-        Icon(Icons.edit, color: AppTheme.pureWhite.withValues(alpha: 0.5), size: 20),
+        Icon(Icons.edit, color: Colors.white.withValues(alpha: 0.5), size: 20),
       ]),
     );
   }
 }
 
-// ═══════════════════════════════════════════════
-
 class _AboutRow extends StatelessWidget {
-  final String label;
-  final String value;
-  const _AboutRow(this.label, this.value);
+  final String label, value;
+  final TextTheme textTheme;
+  final ColorScheme colorScheme;
+
+  const _AboutRow(this.label, this.value, this.textTheme, this.colorScheme);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(children: [
-        SizedBox(
-          width: 60,
-          child: Text(label, style: const TextStyle(color: AppTheme.warmSilver, fontSize: 14)),
-        ),
-        Expanded(child: Text(value, style: const TextStyle(fontSize: 14))),
+        SizedBox(width: 60, child: Text(label, style: textTheme.bodySmall?.copyWith(color: colorScheme.secondary))),
+        Expanded(child: Text(value, style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurface))),
       ]),
     );
   }

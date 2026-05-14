@@ -397,14 +397,14 @@ class _ClayContainerState extends State<ClayContainer> {
       final dy = widget.isButton ? -8.0 : -4.0;
       if (widget.isButton) {
         matrix
-          ..translate(0.0, dy)
+          ..translateByDouble(0.0, dy, 0.0, 1.0)
           ..rotateZ(-0.14);
       } else {
-        matrix.translate(0.0, dy);
+        matrix.translateByDouble(0.0, dy, 0.0, 1.0);
       }
     }
     if (_pressed && widget.onTap != null) {
-      matrix.scale(0.985, 0.985);
+      matrix.scaleByDouble(0.985, 0.985, 1.0, 1.0);
     }
 
     return MouseRegion(

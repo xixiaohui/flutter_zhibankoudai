@@ -167,7 +167,7 @@ class _ExpertCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
                   decoration: BoxDecoration(
-                    color: xui.XuiTheme.pomegranate400.withOpacity(0.08),
+                    color: xui.XuiTheme.pomegranate400.withValues(alpha: 0.08),
                     border: Border.all(color: xui.XuiTheme.pomegranate400),
                     borderRadius: BorderRadius.circular(999),
                   ),

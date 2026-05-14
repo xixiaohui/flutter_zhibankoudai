@@ -4,8 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import '../config/routes.dart';
-import '../config/theme.dart';
+import '../design/radius.dart';
+import '../design/elevation.dart';
 import '../models/daily_content.dart';
+import '../models/field_metadata.dart';
 import '../providers/module_provider.dart';
 import '../providers/daily_content_provider.dart';
 
@@ -31,10 +33,19 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
     if (m != null && cp.getContent(widget.moduleId) == null) cp.loadContent(m);
   }
 
+  static Color _fromHex(String hex) {
+    final buffer = StringBuffer();
+    if (hex.length == 6 || hex.length == 7) buffer.write('ff');
+    buffer.write(hex.replaceFirst('#', ''));
+    return Color(int.parse(buffer.toString(), radix: 16));
+  }
+
   @override
   Widget build(BuildContext context) {
     final mp = context.read<ModuleProvider>();
     final module = mp.getModuleById(widget.moduleId);
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     if (module == null) {
       return Scaffold(
@@ -43,7 +54,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
       );
     }
 
-    final mc = AppTheme.fromHex(module.color);
+    final mc = _fromHex(module.color);
 
     return Scaffold(
       body: CustomScrollView(
@@ -53,13 +64,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
             pinned: true,
             backgroundColor: mc,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text(
-                module.name,
-                style: const TextStyle(
-                  color: AppTheme.pureWhite,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+              title: Text(module.name, style: textTheme.titleMedium?.copyWith(color: Colors.white)),
               background: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -69,19 +74,13 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                   ),
                 ),
                 child: Center(
-                  child: Text(
-                    module.icon,
-                    style: TextStyle(
-                      fontSize: 64,
-                      color: AppTheme.pureWhite.withValues(alpha: 0.3),
-                    ),
-                  ),
+                  child: Text(module.icon, style: TextStyle(fontSize: 64, color: Colors.white.withValues(alpha: 0.3))),
                 ),
               ),
             ),
           ),
           Consumer<DailyContentProvider>(
-            builder: (_, cp, _) {
+            builder: (_, cp, __) {
               final content = cp.getContent(widget.moduleId);
               final isLoading = cp.isLoading(widget.moduleId);
               final isGenerating = cp.isGenerating(widget.moduleId);
@@ -95,183 +94,110 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
               return SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.all(20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // 分类标签
-                      if (content != null &&
-                          (content.categoryIcon.isNotEmpty ||
-                              content.category.isNotEmpty))
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 16),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 6,
-                          ),
-                          decoration: BoxDecoration(
-                            color: mc.withValues(alpha: 0.1),
-                            borderRadius: BorderRadius.circular(
-                              AppTheme.radiusPill,
-                            ),
-                          ),
-                          child: Text(
-                            '${content.categoryIcon} ${content.category}',
-                            style: TextStyle(color: mc, fontSize: 13),
-                          ),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    if (content != null && (content.categoryIcon.isNotEmpty || content.category.isNotEmpty))
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 16),
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: mc.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(AppRadius.pill),
                         ),
-
-                      // 内容
-                      if (content != null) ...[
-                        MarkdownBody(
-                          selectable: true, // ⭐ 可复制
-                          data: content.content,
-                          styleSheet: MarkdownStyleSheet(
-                            p: const TextStyle(
-                              fontSize: 18,
-                              height: 1.8,
-                              color: AppTheme.clayBlack,
-                            ),
-                            h1: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            h2: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            strong: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                            blockquote: TextStyle(
-                              color: AppTheme.warmSilver,
-                              fontStyle: FontStyle.italic,
-                            ),
-                          ),
-                        ),
-
-                        if (content.title.isNotEmpty) ...[
-                          const SizedBox(height: 20),
-                          Container(
-                            padding: const EdgeInsets.only(left: 16),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                left: BorderSide(color: mc, width: 3),
-                              ),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  content.title,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: mc,
-                                  ),
-                                ),
-                                if (content.subtitle.isNotEmpty)
-                                  Text(
-                                    content.subtitle,
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: mc.withValues(alpha: 0.7),
-                                    ),
-                                  ),
-                              ],
-                            ),
-                          ),
-                        ],
-
-                        if (content.extra.isNotEmpty)
-                          _buildMetadataSection(content.extra, mc),
-
-                        if (content.isAiGenerated) ...[
-                          const SizedBox(height: 16),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 5,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppTheme.matcha300.withValues(alpha: 0.3),
-                              borderRadius: BorderRadius.circular(
-                                AppTheme.radiusPill,
-                              ),
-                            ),
-                            child: const Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.auto_awesome,
-                                  size: 14,
-                                  color: AppTheme.matcha600,
-                                ),
-                                SizedBox(width: 4),
-                                Text(
-                                  'AI 生成',
-                                  style: TextStyle(
-                                    color: AppTheme.matcha600,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ],
-
-                      if (content == null)
-                        const Padding(
-                          padding: EdgeInsets.only(top: 40),
-                          child: Center(
-                            child: Text(
-                              '暂无内容',
-                              style: TextStyle(color: AppTheme.warmSilver),
-                            ),
-                          ),
-                        ),
-
-                      const SizedBox(height: 32),
-
-                      // Clay 风格按钮组
-                      Row(
-                        children: [
-                          Expanded(
-                            child: _clayButton(
-                              label: isGenerating ? '生成中...' : 'AI 换一条',
-                              icon: isGenerating
-                                  ? Icons.hourglass_empty
-                                  : Icons.refresh,
-                              loading: isGenerating,
-                              onTap: isGenerating
-                                  ? null
-                                  : () => cp.refreshWithAi(module),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: _clayOutlined(
-                              label: '生成海报',
-                              icon: Icons.share,
-                              color: mc,
-                              onTap: content != null
-                                  ? () => _navigateToPoster(context, content)
-                                  : null,
-                            ),
-                          ),
-                        ],
+                        child: Text('${content.categoryIcon} ${content.category}',
+                          style: textTheme.labelMedium?.copyWith(color: mc)),
                       ),
 
-                      const SizedBox(height: 32),
-                      if (content != null)
-                        ContentCard(
-                          title: content.title,
-                          content: content.content,
-                          color: mc,
-                          isAi: content.isAiGenerated,
+                    if (content != null) ...[
+                      MarkdownBody(
+                        selectable: true,
+                        data: content.content,
+                        styleSheet: MarkdownStyleSheet(
+                          p: textTheme.bodyLarge?.copyWith(height: 1.8, color: colorScheme.onSurface),
+                          h1: textTheme.headlineSmall?.copyWith(color: colorScheme.onSurface),
+                          h2: textTheme.titleLarge?.copyWith(color: colorScheme.onSurface),
+                          strong: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface),
+                          blockquote: textTheme.bodyMedium?.copyWith(
+                            color: colorScheme.secondary,
+                            fontStyle: FontStyle.italic,
+                          ),
                         ),
+                      ),
+
+                      if (content.title.isNotEmpty) ...[
+                        const SizedBox(height: 20),
+                        Container(
+                          padding: const EdgeInsets.only(left: 16),
+                          decoration: BoxDecoration(
+                            border: Border(left: BorderSide(color: mc, width: 3)),
+                          ),
+                          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                            Text(content.title, style: textTheme.titleSmall?.copyWith(color: mc)),
+                            if (content.subtitle.isNotEmpty)
+                              Text(content.subtitle,
+                                style: textTheme.bodySmall?.copyWith(color: mc.withValues(alpha: 0.7))),
+                          ]),
+                        ),
+                      ],
+
+                      if (content.extra.isNotEmpty) _buildMetadataSection(content.extra, mc, textTheme, colorScheme),
+
+                      if (content.isAiGenerated) ...[
+                        const SizedBox(height: 16),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF84e7a5).withValues(alpha: 0.3),
+                            borderRadius: BorderRadius.circular(AppRadius.pill),
+                          ),
+                          child: Row(mainAxisSize: MainAxisSize.min, children: [
+                            Icon(Icons.auto_awesome, size: 14, color: const Color(0xFF078a52)),
+                            const SizedBox(width: 4),
+                            Text('AI 生成', style: textTheme.labelSmall?.copyWith(color: const Color(0xFF078a52))),
+                          ]),
+                        ),
+                      ],
                     ],
-                  ),
+
+                    if (content == null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 40),
+                        child: Center(child: Text('暂无内容', style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary))),
+                      ),
+
+                    const SizedBox(height: 32),
+
+                    Row(children: [
+                      Expanded(
+                        child: _actionButton(
+                          label: isGenerating ? '生成中...' : 'AI 换一条',
+                          icon: isGenerating ? Icons.hourglass_empty : Icons.refresh,
+                          loading: isGenerating,
+                          onTap: isGenerating ? null : () => cp.refreshWithAi(module),
+                          colorScheme: colorScheme,
+                          textTheme: textTheme,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: _outlinedButton(
+                          label: '生成海报',
+                          icon: Icons.share,
+                          onTap: content != null ? () => _navigateToPoster(context, content) : null,
+                          colorScheme: colorScheme,
+                          textTheme: textTheme,
+                        ),
+                      ),
+                    ]),
+
+                    const SizedBox(height: 32),
+                    if (content != null)
+                      ContentCard(
+                        title: content.title,
+                        content: content.content,
+                        color: mc,
+                        isAi: content.isAiGenerated,
+                      ),
+                  ]),
                 ),
               );
             },
@@ -281,83 +207,25 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
     );
   }
 
-  static const _fieldLabels = {
-    'author': '作者',
-    'artist': '歌手',
-    'director': '导演',
-    'source': '出处',
-    'era': '年代',
-    'region': '地区',
-    'location': '位置',
-    'album': '专辑',
-    'luckyDirection': '吉利方位',
-    'luckyNumber': '吉利数字',
-    'luckyColor': '吉利颜色',
-    'keyPoint': '核心金句',
-  };
-
-  static const _fieldIcons = {
-    'author': Icons.person,
-    'artist': Icons.mic,
-    'director': Icons.movie,
-    'source': Icons.menu_book,
-    'era': Icons.history,
-    'region': Icons.public,
-    'location': Icons.location_on,
-    'album': Icons.album,
-    'luckyDirection': Icons.explore,
-    'luckyNumber': Icons.tag,
-    'luckyColor': Icons.palette,
-    'keyPoint': Icons.format_quote,
-  };
-
-  static const _skipInMetadata = {
-    'content',
-    'title',
-    'subtitle',
-    'category',
-    'categoryIcon',
-  };
-
-  Widget _buildMetadataSection(Map<String, dynamic> extra, Color mc) {
+  Widget _buildMetadataSection(Map<String, dynamic> extra, Color mc, TextTheme textTheme, ColorScheme colorScheme) {
     final rows = <Widget>[];
     extra.forEach((key, value) {
-      if (_skipInMetadata.contains(key)) return;
+      if (FieldMetadata.skip(key)) return;
       final str = value?.toString() ?? '';
       if (str.isEmpty) return;
 
-      final icon = _fieldIcons[key] ?? Icons.info_outline;
-      final label = _fieldLabels[key] ?? key;
+      final icon = FieldMetadata.icon(key);
+      final label = FieldMetadata.label(key);
 
-      rows.add(
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(icon, size: 16, color: mc),
-              const SizedBox(width: 8),
-              Text(
-                '$label：',
-                style: const TextStyle(
-                  fontSize: 13,
-                  color: AppTheme.warmSilver,
-                ),
-              ),
-              Expanded(
-                child: Text(
-                  str,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    color: AppTheme.clayBlack,
-                    height: 1.5,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
+      rows.add(Padding(
+        padding: const EdgeInsets.only(bottom: 10),
+        child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Icon(icon, size: 16, color: mc),
+          const SizedBox(width: 8),
+          Text('$label：', style: textTheme.bodySmall?.copyWith(color: colorScheme.secondary)),
+          Expanded(child: Text(str, style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurface, height: 1.5))),
+        ]),
+      ));
     });
 
     if (rows.isEmpty) return const SizedBox.shrink();
@@ -372,61 +240,47 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: mc.withValues(alpha: 0.12)),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: rows,
-        ),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: rows),
       ),
     );
   }
 
-  Widget _clayButton({
+  Widget _actionButton({
     required String label,
     required IconData icon,
     bool loading = false,
     VoidCallback? onTap,
+    required ColorScheme colorScheme,
+    required TextTheme textTheme,
   }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         decoration: BoxDecoration(
-          color: AppTheme.pureWhite,
-          borderRadius: BorderRadius.circular(AppTheme.radiusCard),
-          border: Border.all(color: AppTheme.oatBorder),
-          boxShadow: AppTheme.clayShadow,
+          color: colorScheme.surface,
+          borderRadius: BorderRadius.circular(AppRadius.card),
+          border: Border.all(color: colorScheme.outline, width: 0.5),
+          boxShadow: AppElevation.card,
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (loading)
-              const SizedBox(
-                width: 16,
-                height: 16,
-                child: CircularProgressIndicator(strokeWidth: 2),
-              )
-            else
-              Icon(icon, size: 18, color: AppTheme.clayBlack),
-            const SizedBox(width: 6),
-            Text(
-              label,
-              style: const TextStyle(
-                color: AppTheme.clayBlack,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
+        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          if (loading)
+            const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
+          else
+            Icon(icon, size: 18, color: colorScheme.onSurface),
+          const SizedBox(width: 6),
+          Text(label, style: textTheme.labelLarge?.copyWith(color: colorScheme.onSurface)),
+        ]),
       ),
     );
   }
 
-  Widget _clayOutlined({
+  Widget _outlinedButton({
     required String label,
     required IconData icon,
-    required Color color,
     VoidCallback? onTap,
+    required ColorScheme colorScheme,
+    required TextTheme textTheme,
   }) {
     return GestureDetector(
       onTap: onTap,
@@ -434,24 +288,14 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         decoration: BoxDecoration(
           color: Colors.transparent,
-          borderRadius: BorderRadius.circular(AppTheme.radiusSharp),
-          border: Border.all(color: AppTheme.ghostBorder, width: 1),
+          borderRadius: BorderRadius.circular(AppRadius.standard),
+          border: Border.all(color: colorScheme.outline),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 18, color: AppTheme.clayBlack),
-            const SizedBox(width: 6),
-            Text(
-              label,
-              style: const TextStyle(
-                color: AppTheme.clayBlack,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
+        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Icon(icon, size: 18, color: colorScheme.onSurface),
+          const SizedBox(width: 6),
+          Text(label, style: textTheme.labelLarge?.copyWith(color: colorScheme.onSurface)),
+        ]),
       ),
     );
   }

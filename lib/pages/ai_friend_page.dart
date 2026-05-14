@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../config/theme.dart';
+import '../models/chat_message.dart';
 import '../services/cloudbase_ai.dart';
-import '../xui/x_design.dart';
+import '../widgets/chat_bubble.dart';
 
 // ============================================================================
 // 1. 可配置的 Prompt 模板 — 不写死，全部通过 AIFriendConfig 注入
@@ -352,47 +352,8 @@ class PromptBuilder {
 }
 
 // ============================================================================
-// 6. 聊天消息模型
+// 6. 聊天消息模型 — 见 lib/models/chat_message.dart
 // ============================================================================
-
-class ChatMessage {
-  final String text;
-  final bool isUser;
-  final DateTime time;
-  final String? emotionType;
-  final int? emotionConfidence;
-
-  ChatMessage({
-    required this.text,
-    required this.isUser,
-    DateTime? time,
-    EmotionResult? emotion,
-  })  : time = time ?? DateTime.now(),
-        emotionType = emotion?.type.name,
-        emotionConfidence = emotion?.confidence;
-
-  Map<String, dynamic> toJson() => {
-    'text': text,
-    'isUser': isUser,
-    'time': time.millisecondsSinceEpoch,
-    if (emotionType != null) 'emotionType': emotionType,
-    if (emotionConfidence != null) 'emotionConfidence': emotionConfidence,
-  };
-
-  factory ChatMessage.fromJson(Map<String, dynamic> json) {
-    return ChatMessage(
-      text: json['text'] ?? '',
-      isUser: json['isUser'] ?? false,
-      time: DateTime.fromMillisecondsSinceEpoch(json['time'] ?? 0),
-      emotion: json['emotionType'] != null
-          ? EmotionResult(
-              EmotionType.values.firstWhere((e) => e.name == json['emotionType'], orElse: () => EmotionType.neutral),
-              json['emotionConfidence'] ?? 0,
-            )
-          : null,
-    );
-  }
-}
 
 // ============================================================================
 // 7. AI 好友聊天页面
@@ -512,7 +473,7 @@ class _AIFriendPageState extends State<AIFriendPage> {
     final emotion = EmotionClassifier.classify(text);
     setState(() {
       _currentEmotion = emotion;
-      _messages.add(ChatMessage(text: text, isUser: true, emotion: emotion));
+      _messages.add(ChatMessage(text: text, isUser: true, emotionType: emotion.type.name, emotionConfidence: emotion.confidence));
       _messages.add(ChatMessage(text: '', isUser: false));
       _isThinking = true;
       _currentScene = _promptBuilder.currentScene;
@@ -570,263 +531,131 @@ class _AIFriendPageState extends State<AIFriendPage> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
-      backgroundColor: AppTheme.warmCream,
+      backgroundColor: colorScheme.surfaceContainerLowest,
       appBar: AppBar(
-        backgroundColor: AppTheme.pureWhite,
+        backgroundColor: colorScheme.surface,
         elevation: 0,
         surfaceTintColor: Colors.transparent,
         title: Row(
           children: [
             Container(
-              width: 36,
-              height: 36,
+              width: 36, height: 36,
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFFFF9A9E), Color(0xFFFAD0C4)],
-                ),
+                gradient: const LinearGradient(colors: [Color(0xFFFF9A9E), Color(0xFFFAD0C4)]),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: const Center(child: Text('🧸', style: TextStyle(fontSize: 20))),
             ),
             const SizedBox(width: 10),
-            const Text('小智', style: TextStyle(color: AppTheme.clayBlack, fontWeight: FontWeight.w600)),
+            Text('小智', style: textTheme.titleSmall?.copyWith(color: colorScheme.onSurface)),
           ],
         ),
         actions: [
-          // 删除聊天记录
           if (_messages.length > 1)
             IconButton(
               onPressed: _clearHistory,
               icon: const Icon(Icons.delete_outline, size: 20),
               tooltip: '删除聊天记录',
             ),
-          // 场景标签
           Padding(
             padding: const EdgeInsets.only(right: 16),
-            child: _sceneChip(),
+            child: _sceneChip(textTheme),
           ),
         ],
       ),
       body: Column(
         children: [
-          // emotion indicator
-          if (_currentEmotion != null && !_isThinking) _emotionBar(),
-          // 消息列表
+          if (_currentEmotion != null && !_isThinking) _emotionBar(textTheme),
           Expanded(
             child: ListView.builder(
               controller: _scrollCtrl,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               itemCount: _messages.length,
-              itemBuilder: (_, i) => _buildBubble(_messages[i], i),
+              itemBuilder: (_, i) {
+                final msg = _messages[i];
+                final isLoading = msg.text.isEmpty && !msg.isUser;
+                return ChatBubbleWidget(
+                  text: msg.text,
+                  isUser: msg.isUser,
+                  isLoading: isLoading,
+                  avatar: ChatAvatar(
+                    label: msg.isUser ? '我' : '智',
+                    backgroundColor: msg.isUser ? null : null,
+                    textColor: Colors.white,
+                  ),
+                );
+              },
             ),
           ),
-          // 输入区域
-          _inputBar(),
+          ChatInputBar(
+            controller: _textCtrl,
+            hintText: '说点什么...',
+            isThinking: _isThinking,
+            sendButtonColor: const Color(0xFFfbbd41),
+            onSend: _sendMessage,
+            leading: _sceneQuickButton(textTheme, colorScheme),
+          ),
         ],
       ),
     );
   }
 
-  Widget _sceneChip() {
+  Widget _sceneChip(TextTheme textTheme) {
     final cfg = _config.scenePrompts[_currentScene];
     final label = cfg?.name ?? _currentScene;
     final isCrisis = _currentScene == 'crisis';
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
-        color: isCrisis ? const Color(0x33E53935) : AppTheme.oatLight,
-        borderRadius: BorderRadius.circular(AppTheme.radiusPill),
+        color: isCrisis ? const Color(0x33E53935) : Theme.of(context).colorScheme.outlineVariant,
+        borderRadius: BorderRadius.circular(999),
         border: isCrisis ? Border.all(color: const Color(0x66E53935)) : null,
       ),
       child: Text(label, style: isCrisis
-        ? XuiTheme.badge().copyWith(color: const Color(0xFFC62828))
-        : XuiTheme.badge()),
+        ? textTheme.labelSmall?.copyWith(color: const Color(0xFFC62828))
+        : textTheme.labelSmall?.copyWith(color: Theme.of(context).colorScheme.onSurface)),
     );
   }
 
-  Widget _emotionBar() {
+  Widget _emotionBar(TextTheme textTheme) {
     final e = _currentEmotion!;
     final isCrisis = e.type == EmotionType.crisis;
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-      color: isCrisis ? const Color(0x1AE53935) : AppTheme.oatLight.withValues(alpha: 0.5),
+      color: isCrisis ? const Color(0x1AE53935) : colorScheme.outlineVariant.withValues(alpha: 0.5),
       child: Row(
         children: [
           Text(e.type.emoji, style: const TextStyle(fontSize: 16)),
           const SizedBox(width: 6),
           Text('识别情绪: ${e.type.label}',
             style: isCrisis
-              ? XuiTheme.small().copyWith(color: const Color(0xFFC62828), fontWeight: FontWeight.w600)
-              : XuiTheme.small()),
+              ? textTheme.bodySmall?.copyWith(color: const Color(0xFFC62828), fontWeight: FontWeight.w600)
+              : textTheme.bodySmall?.copyWith(color: colorScheme.onSurface)),
           if (!isCrisis) ...[
             const Spacer(),
-            Text('置信度: ${e.confidence}', style: XuiTheme.small()),
+            Text('置信度: ${e.confidence}', style: textTheme.bodySmall?.copyWith(color: colorScheme.secondary)),
           ],
         ],
       ),
     );
   }
 
-  Widget _buildBubble(ChatMessage msg, int index) {
-    if (msg.text.isEmpty && !msg.isUser) {
-      // 加载中
-      return Padding(
-        padding: const EdgeInsets.only(bottom: 12),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _avatar(false),
-            const SizedBox(width: 8),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              decoration: BoxDecoration(
-                color: AppTheme.pureWhite,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(18),
-                  topRight: Radius.circular(18),
-                  bottomRight: Radius.circular(18),
-                ),
-              ),
-              child: const SizedBox(
-                width: 24, height: 24,
-                child: CircularProgressIndicator(strokeWidth: 2),
-              ),
-            ),
-          ],
-        ),
-      );
-    }
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: msg.isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
-        children: msg.isUser ? _userBubble(msg) : _aiBubble(msg),
-      ),
-    );
-  }
-
-  List<Widget> _userBubble(ChatMessage msg) {
-    return [
-      Flexible(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            color: AppTheme.lemon400.withValues(alpha: 0.35),
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(18),
-              topRight: Radius.circular(4),
-              bottomLeft: Radius.circular(18),
-              bottomRight: Radius.circular(18),
-            ),
-          ),
-          child: Text(msg.text, style: XuiTheme.bodyStd()),
-        ),
-      ),
-      const SizedBox(width: 8),
-      _avatar(true),
-    ];
-  }
-
-  List<Widget> _aiBubble(ChatMessage msg) {
-    return [
-      _avatar(false),
-      const SizedBox(width: 8),
-      Flexible(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            color: AppTheme.pureWhite,
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(4),
-              topRight: Radius.circular(18),
-              bottomLeft: Radius.circular(18),
-              bottomRight: Radius.circular(18),
-            ),
-            border: Border.all(color: AppTheme.oatBorder),
-          ),
-          child: Text(msg.text, style: XuiTheme.bodyStd()),
-        ),
-      ),
-    ];
-  }
-
-  Widget _avatar(bool isUser) {
-    return Container(
-      width: 32,
-      height: 32,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        gradient: isUser
-            ? const LinearGradient(colors: [Color(0xFFFFD700), Color(0xFFFFA500)])
-            : const LinearGradient(colors: [Color(0xFFFF9A9E), Color(0xFFFAD0C4)]),
-      ),
-      child: Center(
-        child: Text(isUser ? '我' : '智', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white)),
-      ),
-    );
-  }
-
-  Widget _inputBar() {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
-      decoration: BoxDecoration(
-        color: AppTheme.pureWhite,
-        border: const Border(top: BorderSide(color: AppTheme.oatBorder)),
-      ),
-      child: SafeArea(
-        top: false,
-        child: Row(
-          children: [
-            // 场景切换快捷按钮
-            _sceneQuickButton(),
-            const SizedBox(width: 8),
-            Expanded(
-              child: TextField(
-                controller: _textCtrl,
-                style: XuiTheme.bodyStd(),
-                decoration: XuiTheme.inputDecoration(hintText: '说点什么...'),
-                textInputAction: TextInputAction.send,
-                onSubmitted: _sendMessage,
-                maxLines: 3,
-                minLines: 1,
-              ),
-            ),
-            const SizedBox(width: 8),
-            GestureDetector(
-              onTap: () => _sendMessage(_textCtrl.text),
-              child: Container(
-                width: 40, height: 40,
-                decoration: BoxDecoration(
-                  color: _isThinking ? AppTheme.oatLight : AppTheme.lemon500,
-                  borderRadius: BorderRadius.circular(AppTheme.radiusCard),
-                ),
-                child: Icon(
-                  Icons.send_rounded,
-                  size: 20,
-                  color: _isThinking ? AppTheme.warmSilver : AppTheme.clayBlack,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _sceneQuickButton() {
+  Widget _sceneQuickButton(TextTheme textTheme, ColorScheme colorScheme) {
     return PopupMenuButton<String>(
       offset: const Offset(0, -300),
       child: Container(
         width: 40, height: 40,
         decoration: BoxDecoration(
-          color: AppTheme.oatLight,
-          borderRadius: BorderRadius.circular(AppTheme.radiusCard),
+          color: colorScheme.outlineVariant,
+          borderRadius: BorderRadius.circular(8),
         ),
-        child: const Icon(Icons.auto_awesome, size: 20, color: AppTheme.warmCharcoal),
+        child: Icon(Icons.auto_awesome, size: 20, color: colorScheme.onSurfaceVariant),
       ),
       onSelected: (scene) {
         setState(() {
@@ -837,7 +666,7 @@ class _AIFriendPageState extends State<AIFriendPage> {
       itemBuilder: (_) => _config.scenePrompts.entries.map((e) {
         return PopupMenuItem<String>(
           value: e.key,
-          child: Text(e.value.name, style: XuiTheme.bodyStd()),
+          child: Text(e.value.name, style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface)),
         );
       }).toList(),
     );

@@ -8,6 +8,7 @@ import 'dart:io';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import '../config/theme.dart';
 import '../models/daily_content.dart';
+import '../models/field_metadata.dart';
 
 class PosterPage extends StatefulWidget {
   final DailyContent dailyContent;
@@ -145,44 +146,6 @@ class _PosterPageState extends State<PosterPage> {
     ),
   ),
 );
-
-  static const _fieldLabels = {
-    'author': '作者',
-    'artist': '歌手',
-    'director': '导演',
-    'source': '出处',
-    'era': '年代',
-    'region': '地区',
-    'location': '位置',
-    'album': '专辑',
-    'luckyDirection': '吉利方位',
-    'luckyNumber': '吉利数字',
-    'luckyColor': '吉利颜色',
-    'keyPoint': '核心金句',
-  };
-
-  static const _fieldIcons = {
-    'author': Icons.person,
-    'artist': Icons.mic,
-    'director': Icons.movie,
-    'source': Icons.menu_book,
-    'era': Icons.history,
-    'region': Icons.public,
-    'location': Icons.location_on,
-    'album': Icons.album,
-    'luckyDirection': Icons.explore,
-    'luckyNumber': Icons.tag,
-    'luckyColor': Icons.palette,
-    'keyPoint': Icons.format_quote,
-  };
-
-  static const _skipInMetadata = {
-    'content',
-    'title',
-    'subtitle',
-    'category',
-    'categoryIcon',
-  };
 
   final ScrollController _scrollController = ScrollController();
   final List<GlobalKey> _posterKeys = [];
@@ -422,12 +385,12 @@ class _PosterPageState extends State<PosterPage> {
   Widget _buildPosterMetadata(DailyContent dc) {
     final rows = <Widget>[];
     dc.extra.forEach((key, value) {
-      if (_skipInMetadata.contains(key)) return;
+      if (FieldMetadata.skip(key)) return;
       final str = value?.toString() ?? '';
       if (str.isEmpty) return;
 
-      final icon = _fieldIcons[key] ?? Icons.info_outline;
-      final label = _fieldLabels[key] ?? key;
+      final icon = FieldMetadata.icon(key);
+      final label = FieldMetadata.label(key);
 
       rows.add(
         Padding(

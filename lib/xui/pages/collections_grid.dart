@@ -164,7 +164,7 @@ class _CollectionTile extends StatelessWidget {
               width: 46,
               height: 46,
               decoration: BoxDecoration(
-                color: accent.withOpacity(0.14),
+                color: accent.withValues(alpha: 0.14),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Center(child: Text(icon, style: const TextStyle(fontSize: 23))),

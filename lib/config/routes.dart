@@ -11,7 +11,6 @@ import '../pages/ai_career_detail_page.dart';
 import '../models/career.dart';
 import '../models/daily_content.dart';
 import '../xui/pages/home.dart' as xui;
-import 'theme.dart';
 
 class RoutePaths {
   RoutePaths._();
@@ -115,29 +114,22 @@ class MainShell extends StatelessWidget {
           if (path.startsWith(RoutePaths.agent)) index = 2;
           if (path.startsWith(RoutePaths.mine)) index = 3;
 
-          return Container(
-            decoration: BoxDecoration(
-              color: AppTheme.pureWhite,
-              border: const Border(top: BorderSide(color: AppTheme.oatBorder)),
-              boxShadow: AppTheme.clayShadow,
-            ),
-            child: BottomNavigationBar(
-              currentIndex: index,
-              onTap: (i) {
-                switch (i) {
-                  case 0: context.go(RoutePaths.home);
-                  case 1: context.go(RoutePaths.discover);
-                  case 2: context.go(RoutePaths.agent);
-                  case 3: context.go(RoutePaths.mine);
-                }
-              },
-              items: const [
-                BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home), label: '首页'),
-                BottomNavigationBarItem(icon: Icon(Icons.explore_outlined), activeIcon: Icon(Icons.explore), label: '发现'),
-                BottomNavigationBarItem(icon: Icon(Icons.bolt_outlined), activeIcon: Icon(Icons.bolt), label: '助理'),
-                BottomNavigationBarItem(icon: Icon(Icons.person_outline), activeIcon: Icon(Icons.person), label: '我的'),
-              ],
-            ),
+          return NavigationBar(
+            selectedIndex: index,
+            onDestinationSelected: (i) {
+              switch (i) {
+                case 0: context.go(RoutePaths.home);
+                case 1: context.go(RoutePaths.discover);
+                case 2: context.go(RoutePaths.agent);
+                case 3: context.go(RoutePaths.mine);
+              }
+            },
+            destinations: const [
+              NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home), label: '首页'),
+              NavigationDestination(icon: Icon(Icons.explore_outlined), selectedIcon: Icon(Icons.explore), label: '发现'),
+              NavigationDestination(icon: Icon(Icons.bolt_outlined), selectedIcon: Icon(Icons.bolt), label: '助理'),
+              NavigationDestination(icon: Icon(Icons.person_outline), selectedIcon: Icon(Icons.person), label: '我的'),
+            ],
           );
         },
       ),

@@ -144,7 +144,7 @@ class _CollectionRow extends StatelessWidget {
               width: 52,
               height: 52,
               decoration: BoxDecoration(
-                color: accent.withOpacity(0.13),
+                color: accent.withValues(alpha: 0.13),
                 borderRadius: BorderRadius.circular(18),
               ),
               child: Center(child: Text(icon, style: const TextStyle(fontSize: 24))),

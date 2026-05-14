@@ -420,7 +420,7 @@ class _AssistantGrid extends StatelessWidget {
                   width: 48,
                   height: 48,
                   decoration: BoxDecoration(
-                    color: xui.XuiTheme.slushie500.withOpacity(0.14),
+                    color: xui.XuiTheme.slushie500.withValues(alpha: 0.14),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Icon(item.icon, color: xui.XuiTheme.blueberry800),

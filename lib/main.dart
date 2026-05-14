@@ -3,83 +3,24 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'config/routes.dart';
-import 'config/theme.dart';
+import 'design/theme_data.dart';
 import 'providers/module_provider.dart';
 import 'providers/daily_content_provider.dart';
 import 'providers/theme_provider.dart';
-import 'xui/pages/home.dart';
-import 'package:flutter/gestures.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-    ),
-  );
+  SystemChrome.setSystemUIOverlayStyle(AppThemeData.overlayStyle(Brightness.light));
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
+  await dotenv.load(fileName: ".env");
 
-  WidgetsFlutterBinding.ensureInitialized(); // ⭐ 必须
-
-  await dotenv.load(fileName: ".env"); // ⭐ 必须先加载
-
-  // runApp(const ZbApp());
   runApp(const ZhiBanKouDaiApp());
-  // runApp(const MyXiaoMiApp());
-}
-
-class MyScrollBehavior extends MaterialScrollBehavior {
-  @override
-  Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-      };
-}
-
-class ZbApp extends StatelessWidget {
-  const ZbApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '智伴口袋',
-      debugShowCheckedModeBanner: false,
-      home: const HomePage(),
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo, brightness: Brightness.light),
-        brightness: Brightness.light,
-        fontFamily: 'NotoSansSC-Bold',
-        fontFamilyFallback: [
-          'PingFang SC',
-          'Microsoft YaHei',
-          'SimSun',
-        ]
-      ),
-      darkTheme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.indigo,
-          brightness: Brightness.dark,
-        ),
-        fontFamily: 'NotoSansSC-Bold',
-        fontFamilyFallback: [
-          'PingFang SC',
-          'Microsoft YaHei',
-          'SimSun',
-        ],
-      ),
-      themeMode: ThemeMode.system,
-      scrollBehavior: MyScrollBehavior(),
-    );
-  }
 }
 
 class ZhiBanKouDaiApp extends StatelessWidget {
@@ -94,83 +35,24 @@ class ZhiBanKouDaiApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
       ],
       child: Consumer<ThemeProvider>(
-        builder: (_, themeProvider, _) => MaterialApp.router(
-          title: '智伴口袋',
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.lightTheme.copyWith(
-            textTheme: AppTheme.lightTheme.textTheme.apply(
-              fontFamily: 'NotoSansSC',
-            ),
-          ),
-          darkTheme: AppTheme.darkTheme.copyWith(
-            textTheme: AppTheme.darkTheme.textTheme.apply(
-              fontFamily: 'NotoSansSC',
-            ),
-          ),
-          themeMode: themeProvider.mode,
-          routerConfig: appRouter,
-        ),
+        builder: (_, themeProvider, __) {
+          final brightness = switch (themeProvider.mode) {
+            ThemeMode.light => Brightness.light,
+            ThemeMode.dark => Brightness.dark,
+            ThemeMode.system => WidgetsBinding.instance.platformDispatcher.platformBrightness,
+          };
+          SystemChrome.setSystemUIOverlayStyle(AppThemeData.overlayStyle(brightness));
+
+          return MaterialApp.router(
+            title: '智伴口袋',
+            debugShowCheckedModeBanner: false,
+            theme: AppThemeData.light,
+            darkTheme: AppThemeData.dark,
+            themeMode: themeProvider.mode,
+            routerConfig: appRouter,
+          );
+        },
       ),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
-}
-
-class MyXiaoMiApp extends StatelessWidget {
-  const MyXiaoMiApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'ZhiBan',
-      debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: 'My Home Page'),
     );
   }
 }

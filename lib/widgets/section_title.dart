@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../xui/x_design.dart';
 
 class SectionTitle extends StatelessWidget {
   final String title;
@@ -9,9 +8,18 @@ class SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Padding(
       padding: padding ?? const EdgeInsets.fromLTRB(16, 20, 16, 12),
-      child: Text(title.toUpperCase(), style: XuiTheme.uppercaseLabel()),
+      child: Text(
+        title,
+        style: textTheme.labelMedium?.copyWith(
+          color: colorScheme.onSurfaceVariant,
+          letterSpacing: 1.0,
+        ),
+      ),
     );
   }
 }

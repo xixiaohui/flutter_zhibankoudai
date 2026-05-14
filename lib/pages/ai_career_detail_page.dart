@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../config/constants.dart';
-import '../config/theme.dart';
 import '../models/career.dart';
+import '../models/chat_message.dart';
 import '../services/cloudbase_ai.dart';
-import '../xui/x_design.dart';
+import '../widgets/chat_bubble.dart';
 
 class AICareerDetailPage extends StatefulWidget {
   final Career career;
@@ -209,21 +209,23 @@ class _AICareerDetailPageState extends State<AICareerDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
-      backgroundColor: AppTheme.warmCream,
+      backgroundColor: colorScheme.surfaceContainerLowest,
       appBar: AppBar(
-        backgroundColor: AppTheme.pureWhite,
+        backgroundColor: colorScheme.surface,
         elevation: 0,
         surfaceTintColor: Colors.transparent,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, size: 18, color: AppTheme.clayBlack),
+          icon: Icon(Icons.arrow_back_ios_new, size: 18, color: colorScheme.onSurface),
           onPressed: () => Navigator.pop(context),
         ),
         title: Row(
           children: [
             Container(
-              width: 36,
-              height: 36,
+              width: 36, height: 36,
               decoration: BoxDecoration(
                 color: _accentColor.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(12),
@@ -237,16 +239,9 @@ class _AICareerDetailPageState extends State<AICareerDetailPage> {
                 children: [
                   Text(
                     _career.nameZh.isNotEmpty ? _career.nameZh : _career.name,
-                    style: const TextStyle(
-                      color: AppTheme.clayBlack,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 15,
-                    ),
+                    style: textTheme.titleSmall?.copyWith(color: colorScheme.onSurface),
                   ),
-                  Text(
-                    _career.name,
-                    style: const TextStyle(color: AppTheme.warmSilver, fontSize: 11),
-                  ),
+                  Text(_career.name, style: textTheme.labelSmall?.copyWith(color: colorScheme.secondary)),
                 ],
               ),
             ),
@@ -268,180 +263,33 @@ class _AICareerDetailPageState extends State<AICareerDetailPage> {
               controller: _scrollCtrl,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               itemCount: _messages.length,
-              itemBuilder: (_, i) => _buildBubble(_messages[i]),
+              itemBuilder: (_, i) {
+                final msg = _messages[i];
+                final isLoading = msg.text.isEmpty && !msg.isUser;
+                return ChatBubbleWidget(
+                  text: msg.text,
+                  isUser: msg.isUser,
+                  isLoading: isLoading,
+                  avatar: ChatAvatar(
+                    label: msg.isUser ? '我' : _career.emoji,
+                    backgroundColor: msg.isUser
+                        ? const Color(0xFFfbbd41)
+                        : _accentColor.withValues(alpha: 0.2),
+                    textColor: Colors.white,
+                  ),
+                );
+              },
             ),
           ),
-          _inputBar(),
+          ChatInputBar(
+            controller: _textCtrl,
+            hintText: '向${_career.nameZh}提问...',
+            isThinking: _isThinking,
+            sendButtonColor: _accentColor.withValues(alpha: 0.3),
+            onSend: _sendMessage,
+          ),
         ],
       ),
-    );
-  }
-
-  Widget _buildBubble(ChatMessage msg) {
-    if (msg.text.isEmpty && !msg.isUser) {
-      return Padding(
-        padding: const EdgeInsets.only(bottom: 12),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _avatar(false),
-            const SizedBox(width: 8),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              decoration: BoxDecoration(
-                color: AppTheme.pureWhite,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(18),
-                  topRight: Radius.circular(18),
-                  bottomRight: Radius.circular(18),
-                ),
-              ),
-              child: const SizedBox(
-                width: 24, height: 24,
-                child: CircularProgressIndicator(strokeWidth: 2),
-              ),
-            ),
-          ],
-        ),
-      );
-    }
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: msg.isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
-        children: msg.isUser ? _userBubble(msg) : _aiBubble(msg),
-      ),
-    );
-  }
-
-  List<Widget> _userBubble(ChatMessage msg) {
-    return [
-      Flexible(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            color: AppTheme.lemon400.withValues(alpha: 0.35),
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(18),
-              topRight: Radius.circular(4),
-              bottomLeft: Radius.circular(18),
-              bottomRight: Radius.circular(18),
-            ),
-          ),
-          child: Text(msg.text, style: XuiTheme.bodyStd()),
-        ),
-      ),
-      const SizedBox(width: 8),
-      _avatar(true),
-    ];
-  }
-
-  List<Widget> _aiBubble(ChatMessage msg) {
-    return [
-      _avatar(false),
-      const SizedBox(width: 8),
-      Flexible(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            color: AppTheme.pureWhite,
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(4),
-              topRight: Radius.circular(18),
-              bottomLeft: Radius.circular(18),
-              bottomRight: Radius.circular(18),
-            ),
-            border: Border.all(color: AppTheme.oatBorder),
-          ),
-          child: Text(msg.text, style: XuiTheme.bodyStd()),
-        ),
-      ),
-    ];
-  }
-
-  Widget _avatar(bool isUser) {
-    return Container(
-      width: 32,
-      height: 32,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: isUser ? AppTheme.lemon500 : _accentColor.withValues(alpha: 0.2),
-      ),
-      child: Center(
-        child: Text(
-          isUser ? '我' : _career.emoji,
-          style: const TextStyle(fontSize: 16),
-        ),
-      ),
-    );
-  }
-
-  Widget _inputBar() {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
-      decoration: BoxDecoration(
-        color: AppTheme.pureWhite,
-        border: const Border(top: BorderSide(color: AppTheme.oatBorder)),
-      ),
-      child: SafeArea(
-        top: false,
-        child: Row(
-          children: [
-            Expanded(
-              child: TextField(
-                controller: _textCtrl,
-                style: XuiTheme.bodyStd(),
-                decoration: XuiTheme.inputDecoration(hintText: '向${_career.nameZh}提问...'),
-                textInputAction: TextInputAction.send,
-                onSubmitted: _sendMessage,
-                maxLines: 3,
-                minLines: 1,
-              ),
-            ),
-            const SizedBox(width: 8),
-            GestureDetector(
-              onTap: () => _sendMessage(_textCtrl.text),
-              child: Container(
-                width: 40, height: 40,
-                decoration: BoxDecoration(
-                  color: _isThinking ? AppTheme.oatLight : _accentColor.withValues(alpha: 0.3),
-                  borderRadius: BorderRadius.circular(AppTheme.radiusCard),
-                ),
-                child: Icon(
-                  Icons.send_rounded,
-                  size: 20,
-                  color: _isThinking ? AppTheme.warmSilver : AppTheme.clayBlack,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ChatMessage {
-  final String text;
-  final bool isUser;
-  final DateTime time;
-
-  ChatMessage({required this.text, required this.isUser, DateTime? time})
-      : time = time ?? DateTime.now();
-
-  Map<String, dynamic> toJson() => {
-    'text': text,
-    'isUser': isUser,
-    'time': time.millisecondsSinceEpoch,
-  };
-
-  factory ChatMessage.fromJson(Map<String, dynamic> json) {
-    return ChatMessage(
-      text: json['text'] ?? '',
-      isUser: json['isUser'] ?? false,
-      time: DateTime.fromMillisecondsSinceEpoch(json['time'] ?? 0),
     );
   }
 }
