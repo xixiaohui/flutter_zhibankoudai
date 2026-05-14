@@ -6,11 +6,12 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import '../config/routes.dart';
 import '../design/radius.dart';
 import '../design/colors.dart';
-import '../design/elevation.dart';
 import '../models/daily_content.dart';
-import '../models/field_metadata.dart';
 import '../providers/module_provider.dart';
 import '../providers/daily_content_provider.dart';
+import '../widgets/action_button.dart';
+import '../widgets/outlined_action_button.dart';
+import 'module_detail/widgets/metadata_section.dart';
 
 class ModuleDetailPage extends StatefulWidget {
   final String moduleId;
@@ -133,7 +134,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                         ),
                       ],
 
-                      if (content.extra.isNotEmpty) _buildMetadataSection(content.extra, mc, textTheme, colorScheme),
+                      if (content.extra.isNotEmpty) MetadataSection(extra: content.extra, accentColor: mc),
 
                       if (content.isAiGenerated) ...[
                         const SizedBox(height: 16),
@@ -162,23 +163,19 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
 
                     Row(children: [
                       Expanded(
-                        child: _actionButton(
+                        child: ActionButton(
                           label: isGenerating ? '生成中...' : 'AI 换一条',
                           icon: isGenerating ? Icons.hourglass_empty : Icons.refresh,
                           loading: isGenerating,
                           onTap: isGenerating ? null : () => cp.refreshWithAi(module),
-                          colorScheme: colorScheme,
-                          textTheme: textTheme,
                         ),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
-                        child: _outlinedButton(
+                        child: OutlinedActionButton(
                           label: '生成海报',
                           icon: Icons.share,
                           onTap: content != null ? () => _navigateToPoster(context, content) : null,
-                          colorScheme: colorScheme,
-                          textTheme: textTheme,
                         ),
                       ),
                     ]),
@@ -201,98 +198,6 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
     );
   }
 
-  Widget _buildMetadataSection(Map<String, dynamic> extra, Color mc, TextTheme textTheme, ColorScheme colorScheme) {
-    final rows = <Widget>[];
-    extra.forEach((key, value) {
-      if (FieldMetadata.skip(key)) return;
-      final str = value?.toString() ?? '';
-      if (str.isEmpty) return;
-
-      final icon = FieldMetadata.icon(key);
-      final label = FieldMetadata.label(key);
-
-      rows.add(Padding(
-        padding: const EdgeInsets.only(bottom: 10),
-        child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Icon(icon, size: 16, color: mc),
-          const SizedBox(width: 8),
-          Text('$label：', style: textTheme.bodySmall?.copyWith(color: colorScheme.secondary)),
-          Expanded(child: Text(str, style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurface, height: 1.5))),
-        ]),
-      ));
-    });
-
-    if (rows.isEmpty) return const SizedBox.shrink();
-
-    return Padding(
-      padding: const EdgeInsets.only(top: 20),
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: mc.withValues(alpha: 0.05),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: mc.withValues(alpha: 0.12)),
-        ),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: rows),
-      ),
-    );
-  }
-
-  Widget _actionButton({
-    required String label,
-    required IconData icon,
-    bool loading = false,
-    VoidCallback? onTap,
-    required ColorScheme colorScheme,
-    required TextTheme textTheme,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        decoration: BoxDecoration(
-          color: colorScheme.surface,
-          borderRadius: BorderRadius.circular(AppRadius.card),
-          border: Border.all(color: colorScheme.outline, width: 0.5),
-          boxShadow: AppElevation.card,
-        ),
-        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          if (loading)
-            const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
-          else
-            Icon(icon, size: 18, color: colorScheme.onSurface),
-          const SizedBox(width: 6),
-          Text(label, style: textTheme.labelLarge?.copyWith(color: colorScheme.onSurface)),
-        ]),
-      ),
-    );
-  }
-
-  Widget _outlinedButton({
-    required String label,
-    required IconData icon,
-    VoidCallback? onTap,
-    required ColorScheme colorScheme,
-    required TextTheme textTheme,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(AppRadius.standard),
-          border: Border.all(color: colorScheme.outline),
-        ),
-        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Icon(icon, size: 18, color: colorScheme.onSurface),
-          const SizedBox(width: 6),
-          Text(label, style: textTheme.labelLarge?.copyWith(color: colorScheme.onSurface)),
-        ]),
-      ),
-    );
-  }
 
   void _navigateToPoster(BuildContext context, DailyContent content) {
     context.push(RoutePaths.poster, extra: content);
