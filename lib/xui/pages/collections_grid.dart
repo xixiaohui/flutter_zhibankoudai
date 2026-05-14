@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_zhiban/xui/pages/experts.dart';
 import 'package:flutter_application_zhiban/design/colors.dart';
 import 'package:flutter_application_zhiban/xui/utils/module.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' show ClayContainer;
+import 'package:flutter_application_zhiban/widgets/clay_container.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
 

@@ -5,7 +5,7 @@ import 'package:flutter_application_zhiban/design/colors.dart';
 import 'package:flutter_application_zhiban/xui/pages/expert_detail.dart';
 import 'package:flutter_application_zhiban/xui/pages/poster_preview.dart';
 import 'package:flutter_application_zhiban/xui/utils/module.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' show ClayContainer;
+import 'package:flutter_application_zhiban/widgets/clay_container.dart';
 import 'package:http/http.dart' as http;
 
 class ExpertsPage extends StatefulWidget {

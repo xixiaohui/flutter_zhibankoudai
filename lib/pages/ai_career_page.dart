@@ -4,8 +4,6 @@ import '../design/colors.dart';
 import '../design/elevation.dart';
 import '../design/radius.dart';
 import '../models/career.dart';
-import '../xui/x_design.dart';
-
 class AICareerPage extends StatefulWidget {
   const AICareerPage({super.key});
 
@@ -68,7 +66,7 @@ class _AICareerPageState extends State<AICareerPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('加载失败', style: XuiTheme.bodyStd()),
+            Text('加载失败', style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 8),
             TextButton(onPressed: _loadCareers, child: const Text('重试')),
           ],
@@ -126,7 +124,7 @@ class _AICareerPageState extends State<AICareerPage> {
                 ),
                 child: Text(
                   '${entry.value.length}',
-                  style: XuiTheme.badge(),
+                  style: const TextStyle(fontSize: 9.6, fontWeight: FontWeight.w600, color: AppColors.clayBlack),
                 ),
               ),
             ],

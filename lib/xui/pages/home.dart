@@ -6,7 +6,7 @@ import 'package:flutter_application_zhiban/xui/pages/ai_chat_page.dart';
 import 'package:flutter_application_zhiban/xui/pages/collections_grid.dart';
 import 'package:flutter_application_zhiban/xui/pages/collections_list.dart';
 import 'package:flutter_application_zhiban/xui/pages/search_result.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' show ClayContainer;
+import 'package:flutter_application_zhiban/widgets/clay_container.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
