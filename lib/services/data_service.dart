@@ -126,6 +126,50 @@ class DataService {
       const Duration(hours: AppConstants.cacheExpireHours),
     );
 
+    // Save to content history for deduplication
+    await _addToContentHistory(moduleId, content);
+
     _logger.d('Daily content saved for $moduleId');
+  }
+
+  // ================================
+  // 内容历史（用于AI去重）
+  // ================================
+  static const int _maxHistoryCount = 10;
+  static const String _keyContentHistoryPrefix = 'content_history_';
+
+  Future<void> _addToContentHistory(
+    String moduleId,
+    Map<String, dynamic> content,
+  ) async {
+    final cache = await _cache;
+    final historyKey = '$_keyContentHistoryPrefix$moduleId';
+    final history = cache.getJsonList(historyKey) ?? [];
+
+    final entry = {
+      'title': content['title']?.toString() ?? '',
+      'subtitle': content['subtitle']?.toString() ?? '',
+      'category': content['category']?.toString() ?? '',
+      'date': DateTime.now().toIso8601String(),
+    };
+
+    // Remove existing entry with same title to avoid duplicates in history
+    history.removeWhere((e) => e['title'] == entry['title']);
+
+    history.insert(0, entry);
+
+    // Keep only recent history
+    if (history.length > _maxHistoryCount) {
+      history.removeRange(_maxHistoryCount, history.length);
+    }
+
+    await cache.setJsonList(historyKey, history);
+    _logger.d('Content history updated for $moduleId (${history.length} entries)');
+  }
+
+  Future<List<Map<String, dynamic>>> getRecentContentHistory(String moduleId) async {
+    final cache = await _cache;
+    final historyKey = '$_keyContentHistoryPrefix$moduleId';
+    return cache.getJsonList(historyKey) ?? [];
   }
 }

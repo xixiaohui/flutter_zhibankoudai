@@ -170,6 +170,34 @@ class AiService {
     return buf.toString();
   }
 
+  String _buildDedupPrompt(List<Map<String, dynamic>> recentHistory) {
+    if (recentHistory.isEmpty) return '';
+
+    final buf = StringBuffer();
+    buf.writeln();
+    buf.writeln('【内容去重指令 ★重要★】');
+    buf.writeln('以下是近期已生成过的内容，必须严格避免重复：');
+
+    for (int i = 0; i < recentHistory.length; i++) {
+      final entry = recentHistory[i];
+      final title = entry['title']?.toString() ?? '';
+      final subtitle = entry['subtitle']?.toString() ?? '';
+      final category = entry['category']?.toString() ?? '';
+      if (title.isNotEmpty) {
+        buf.writeln('${i + 1}. 标题:「$title」${subtitle.isNotEmpty ? ' 副标题:「$subtitle」' : ''}${category.isNotEmpty ? ' 分类:「$category」' : ''}');
+      }
+    }
+
+    buf.writeln();
+    buf.writeln('请严格遵守以下去重规则：');
+    buf.writeln('1. 新生成内容的标题必须与上述所有历史标题完全不同，不能只是换了一种说法');
+    buf.writeln('2. 选择与上述历史内容不同的角度、概念或切入点');
+    buf.writeln('3. 如果该领域有多个分支/流派，优先选择近期未涉及的方向');
+    buf.writeln('4. 即使是相同主题，也要从全新视角或更深层次进行解读');
+
+    return buf.toString();
+  }
+
   Future<Map<String, dynamic>?> _callHunyuanModel(
     String moduleId,
     String prompt,
@@ -190,6 +218,27 @@ class AiService {
         _logger.d('Domain enrichment injected for module: $moduleId');
       }
 
+      // 注入内容去重指令（基于近期已生成的内容）
+      final recentHistory = await DataService().getRecentContentHistory(moduleId);
+      final dedupPrompt = _buildDedupPrompt(recentHistory);
+      if (dedupPrompt.isNotEmpty) {
+        systemPrompt = '$systemPrompt\n$dedupPrompt';
+        _logger.d('Dedup prompt injected for module: $moduleId (${recentHistory.length} recent entries)');
+      }
+
+      // 构建用户提示词，包含去重要求
+      var userMessage = '生成今日内容';
+      if (recentHistory.isNotEmpty) {
+        final recentTitles = recentHistory
+            .map((e) => e['title']?.toString() ?? '')
+            .where((t) => t.isNotEmpty)
+            .take(5)
+            .join('」、「');
+        if (recentTitles.isNotEmpty) {
+          userMessage = '请生成今日内容，注意避免与以下近期内容重复：「$recentTitles」';
+        }
+      }
+
       // Use xclaw API (non-streaming) as primary
       final contentStr =
           await generateTextXclaw(
@@ -197,12 +246,12 @@ class AiService {
             subModel: 'hunyuan-turbos-latest',
             messages: [
               {'role': 'system', 'content': systemPrompt},
-              {'role': 'user', 'content': '生成今日内容'},
+              {'role': 'user', 'content': userMessage},
             ],
           ) ??
-          await generateTextWithLocalPrompt(moduleId, userPrompt: '生成今日内容') ??
-          await streamTextWithCloudPrompt(moduleId, userPrompt: '生成今日内容') ??
-          await streamTextWithSystemPrompt(prompt, userPrompt: '生成今日内容');
+          await generateTextWithLocalPrompt(moduleId, userPrompt: userMessage) ??
+          await streamTextWithCloudPrompt(moduleId, userPrompt: userMessage) ??
+          await streamTextWithSystemPrompt(prompt, userPrompt: userMessage);
 
       if (contentStr == null || contentStr.trim().isEmpty) {
         return null;
