@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../config/theme.dart';
+import '../design/colors.dart';
+import '../design/elevation.dart';
+import '../design/radius.dart';
 import '../models/career.dart';
 import '../xui/x_design.dart';
 
@@ -42,14 +44,14 @@ class _AICareerPageState extends State<AICareerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.warmCream,
+      backgroundColor: AppColors.warmCream,
       appBar: AppBar(
-        backgroundColor: AppTheme.pureWhite,
+        backgroundColor: AppColors.pureWhite,
         elevation: 0,
         surfaceTintColor: Colors.transparent,
         title: const Text(
           'AI Career',
-          style: TextStyle(color: AppTheme.clayBlack, fontWeight: FontWeight.w600),
+          style: TextStyle(color: AppColors.clayBlack, fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
       ),
@@ -112,15 +114,15 @@ class _AICareerPageState extends State<AICareerPage> {
                 style: const TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w700,
-                  color: AppTheme.clayBlack,
+                  color: AppColors.clayBlack,
                 ),
               ),
               const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
-                  color: AppTheme.oatLight,
-                  borderRadius: BorderRadius.circular(AppTheme.radiusPill),
+                  color: AppColors.oatLight,
+                  borderRadius: BorderRadius.circular(AppRadius.pill),
                 ),
                 child: Text(
                   '${entry.value.length}',
@@ -146,10 +148,10 @@ class _AICareerPageState extends State<AICareerPage> {
         child: Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: AppTheme.pureWhite,
-            borderRadius: BorderRadius.circular(AppTheme.radiusCard),
-            border: Border.all(color: AppTheme.oatBorder),
-            boxShadow: AppTheme.clayShadow,
+            color: AppColors.pureWhite,
+            borderRadius: BorderRadius.circular(AppRadius.card),
+            border: Border.all(color: AppColors.oatBorder),
+            boxShadow: AppElevation.card,
           ),
           child: Row(
             children: [
@@ -174,7 +176,7 @@ class _AICareerPageState extends State<AICareerPage> {
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
-                        color: AppTheme.clayBlack,
+                        color: AppColors.clayBlack,
                       ),
                     ),
                     const SizedBox(height: 3),
@@ -184,13 +186,13 @@ class _AICareerPageState extends State<AICareerPage> {
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontSize: 12,
-                        color: AppTheme.warmCharcoal,
+                        color: AppColors.warmCharcoal,
                       ),
                     ),
                   ],
                 ),
               ),
-              const Icon(Icons.chevron_right, color: AppTheme.warmSilver, size: 20),
+              const Icon(Icons.chevron_right, color: AppColors.warmSilver, size: 20),
             ],
           ),
         ),
