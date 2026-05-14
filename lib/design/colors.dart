@@ -32,7 +32,7 @@ class AppColors {
   static const Color darkMuted = Color(0xFF1E293B);
   static const Color darkMutedForeground = Color(0xFF94A3B8);
   static const Color darkBorder = Color(0x14FFFFFF); // rgba(255,255,255,0.08)
-  static const Color darkBorderVisible = Color(0xFF334155);
+  static const Color darkBorderVisible = Color(0xFF525a69);
 
   // ── Semantic ──
   static const Color success = Color(0xFF059669);
@@ -74,4 +74,46 @@ class AppColors {
     outline: darkBorderVisible,
     outlineVariant: darkMuted,
   );
+
+  /// Parse hex color string (with or without #, supports 6 or 7 char hex)
+  static Color fromHex(String hexString) {
+    final buffer = StringBuffer();
+    if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
+    buffer.write(hexString.replaceFirst('#', ''));
+    return Color(int.parse(buffer.toString(), radix: 16));
+  }
+
+  // ── Extended Palette (migrated from legacy AppTheme) ──
+  static const Color matcha300 = Color(0xFF84e7a5);
+  static const Color matcha600 = Color(0xFF078a52);
+  static const Color matcha800 = Color(0xFF02492a);
+  static const Color slushie500 = Color(0xFF3bd3fd);
+  static const Color slushie800 = Color(0xFF0089ad);
+  static const Color lemon400 = Color(0xFFf8cc65);
+  static const Color lemon500 = Color(0xFFfbbd41);
+  static const Color lemon700 = Color(0xFFd08a11);
+  static const Color lemon800 = Color(0xFF9d6a09);
+  static const Color ube100 = Color(0xFFE9E2FF);
+  static const Color ube200 = Color(0xFFD8CBFF);
+  static const Color ube300 = Color(0xFFc1b0ff);
+  static const Color ube800 = Color(0xFF43089f);
+  static const Color ube900 = Color(0xFF32037d);
+  static const Color pomegranate400 = Color(0xFFfc7981);
+  static const Color blueberry800 = Color(0xFF01418d);
+  static const Color oatBorder = Color(0xFFdad4c8);
+  static const Color oatLight = Color(0xFFeee9df);
+  static const Color warmSilver = Color(0xFF9f9b93);
+  static const Color warmCharcoal = Color(0xFF55534e);
+  static const Color darkCharcoal = Color(0xFF333333);
+  static const Color lightFrost = Color(0xFFeff1f3);
+  static const Color focusRing = Color(0xFF146EF5);
+  static const Color ghostBorder = Color(0xFF717989);
+  static const Color dragonfruit = Color(0xFFfc7981);
+  static const Color badgeBlueBg = Color(0xFFf0f8ff);
+  static const Color badgeBlueText = Color(0xFF3859f9);
+
+  // ── Semantic aliases (backward compatibility with legacy code) ──
+  static const Color pureWhite = surface;
+  static const Color warmCream = background;
+  static const Color clayBlack = foreground;
 }
