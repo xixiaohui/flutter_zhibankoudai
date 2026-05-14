@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/design/colors.dart';
+import 'package:flutter_application_zhiban/design/typography.dart';
+import 'package:flutter_application_zhiban/design/elevation.dart';
 import 'package:flutter_application_zhiban/xui/pages/experts.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 
 class ExpertDetailPage extends StatelessWidget {
   final Map item;
@@ -15,11 +17,11 @@ class ExpertDetailPage extends StatelessWidget {
     final compact = MediaQuery.sizeOf(context).width < 600;
 
     return Scaffold(
-      backgroundColor: xui.XuiTheme.warmCream,
+      backgroundColor: AppColors.warmCream,
       appBar: AppBar(
-        backgroundColor: xui.XuiTheme.pureWhite,
+        backgroundColor: AppColors.pureWhite,
         elevation: 0,
-        foregroundColor: xui.XuiTheme.clayBlack,
+        foregroundColor: AppColors.clayBlack,
         title: const Text("详情"),
         actions: [
           IconButton(
@@ -30,7 +32,7 @@ class ExpertDetailPage extends StatelessWidget {
         ],
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(1),
-          child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
+          child: Divider(height: 1, thickness: 1, color: AppColors.oatBorder),
         ),
       ),
       body: Center(
@@ -46,16 +48,18 @@ class ExpertDetailPage extends StatelessWidget {
             ),
             child: Container(
               padding: EdgeInsets.all(compact ? 18 : 26),
-              decoration: xui.XuiTheme.cardDecoration(
-                radius: compact ? 24 : 32,
-                color: xui.XuiTheme.pureWhite,
+              decoration: BoxDecoration(
+                color: AppColors.pureWhite,
+                borderRadius: BorderRadius.circular(compact ? 24 : 32),
+                border: Border.all(color: AppColors.oatBorder, width: 1),
+                boxShadow: AppElevation.card,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,
-                    style: xui.XuiTheme.sectionHeading().copyWith(
+                    style: AppTypography.textTheme.headlineMedium?.copyWith(
                           fontSize: compact ? 28 : 36,
                           height: 1.2,
                           letterSpacing: 0,
@@ -64,21 +68,21 @@ class ExpertDetailPage extends StatelessWidget {
                   const SizedBox(height: 12),
                   Text(
                     date,
-                    style: xui.XuiTheme.bodyStd().copyWith(
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           fontSize: 13,
-                          color: xui.XuiTheme.warmSilver,
+                          color: AppColors.warmSilver,
                         ),
                   ),
                   const Divider(height: 30),
                   Text(
                     content,
                     textAlign: TextAlign.left,
-                    style: xui.XuiTheme.body().copyWith(
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           fontSize: compact ? 17 : 18,
                           height: 1.75,
                           letterSpacing: 0,
                           fontFamily: 'NotoSerifSC',
-                          color: xui.XuiTheme.darkCharcoal,
+                          color: AppColors.darkCharcoal,
                         ),
                   ),
                 ],

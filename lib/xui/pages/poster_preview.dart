@@ -3,8 +3,8 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_application_zhiban/design/colors.dart';
 import 'package:flutter_application_zhiban/xui/pages/poster_widget.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 
 import 'package:flutter_application_zhiban/xui/utils/save_image_stub.dart'
     if (dart.library.html) 'package:flutter_application_zhiban/xui/utils/save_image_web.dart'
@@ -107,7 +107,7 @@ class _PosterPreviewState extends State<PosterPreview> {
             Row(
               children: [
                 Expanded(
-                  child: Text("海报预览", style: xui.XuiTheme.featureTitle()),
+                  child: Text("海报预览", style: Theme.of(context).textTheme.titleMedium),
                 ),
                 IconButton(
                   onPressed: () => Navigator.pop(context),
@@ -127,7 +127,7 @@ class _PosterPreviewState extends State<PosterPreview> {
                     child: RepaintBoundary(
                       key: posterKey,
                       child: Container(
-                        color: xui.XuiTheme.pureWhite,
+                        color: AppColors.pureWhite,
                         child: PosterWidget(item: widget.item),
                       ),
                     ),
@@ -152,8 +152,8 @@ class _PosterPreviewState extends State<PosterPreview> {
                     : const Icon(Icons.download),
                 label: Text(imageBytes == null ? "生成中..." : "保存到相册"),
                 style: FilledButton.styleFrom(
-                  backgroundColor: xui.XuiTheme.blueberry800,
-                  foregroundColor: xui.XuiTheme.pureWhite,
+                  backgroundColor: AppColors.blueberry800,
+                  foregroundColor: AppColors.pureWhite,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),

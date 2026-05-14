@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_zhiban/xui/pages/experts.dart';
 import 'package:flutter_application_zhiban/design/colors.dart';
 import 'package:flutter_application_zhiban/xui/utils/module.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
+import 'package:flutter_application_zhiban/xui/x_design.dart' show ClayContainer;
 import 'package:http/http.dart' as http;
 
 class CollectionsListPage extends StatefulWidget {
@@ -73,15 +73,15 @@ class _CollectionsListPageState extends State<CollectionsListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: xui.XuiTheme.warmCream,
+      backgroundColor: AppColors.warmCream,
       appBar: AppBar(
-        backgroundColor: xui.XuiTheme.pureWhite,
+        backgroundColor: AppColors.pureWhite,
         elevation: 0,
-        foregroundColor: xui.XuiTheme.clayBlack,
+        foregroundColor: AppColors.clayBlack,
         title: const Text("助手列表"),
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(1),
-          child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
+          child: Divider(height: 1, thickness: 1, color: AppColors.oatBorder),
         ),
       ),
       body: RefreshIndicator(
@@ -125,13 +125,13 @@ class _CollectionRow extends StatelessWidget {
     final icon = module?.icon ?? "📁";
     final slogan = module?.slogan ?? "点击查看该数据集";
     final colors = module?.colors;
-    final accent = colors != null ? AppColors.fromHex(colors.accent) : xui.XuiTheme.slushie800;
-    final textColor = colors != null ? AppColors.fromHex(colors.text) : xui.XuiTheme.clayBlack;
-    final subTextColor = colors != null ? AppColors.fromHex(colors.textSecondary) : xui.XuiTheme.warmCharcoal;
+    final accent = colors != null ? AppColors.fromHex(colors.accent) : AppColors.slushie800;
+    final textColor = colors != null ? AppColors.fromHex(colors.text) : AppColors.clayBlack;
+    final subTextColor = colors != null ? AppColors.fromHex(colors.textSecondary) : AppColors.warmCharcoal;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
-      child: xui.ClayContainer(
+      child: ClayContainer(
         onTap: () => Navigator.push(
           context,
           MaterialPageRoute(builder: (_) => ExpertsPage(collectionName: collection)),
@@ -158,19 +158,19 @@ class _CollectionRow extends StatelessWidget {
                     name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: xui.XuiTheme.featureTitle().copyWith(fontSize: 17, color: textColor),
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 17, color: textColor),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     slogan,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: xui.XuiTheme.bodyStd().copyWith(fontSize: 13, color: subTextColor),
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 13, color: subTextColor),
                   ),
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right, color: xui.XuiTheme.warmSilver),
+            const Icon(Icons.chevron_right, color: AppColors.warmSilver),
           ],
         ),
       ),
@@ -200,7 +200,7 @@ class _LoadMoreRow extends StatelessWidget {
     if (!hasMore) {
       return Padding(
         padding: const EdgeInsets.all(18),
-        child: Center(child: Text("没有更多数据", style: xui.XuiTheme.bodyStd())),
+        child: Center(child: Text("没有更多数据", style: Theme.of(context).textTheme.bodyMedium)),
       );
     }
     return Padding(
@@ -208,8 +208,8 @@ class _LoadMoreRow extends StatelessWidget {
       child: FilledButton(
         onPressed: onPressed,
         style: FilledButton.styleFrom(
-          backgroundColor: xui.XuiTheme.lemon500,
-          foregroundColor: xui.XuiTheme.clayBlack,
+          backgroundColor: AppColors.lemon500,
+          foregroundColor: AppColors.clayBlack,
           padding: const EdgeInsets.symmetric(vertical: 13),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),

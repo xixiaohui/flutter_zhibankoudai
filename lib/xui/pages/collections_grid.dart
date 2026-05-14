@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_zhiban/xui/pages/experts.dart';
 import 'package:flutter_application_zhiban/design/colors.dart';
 import 'package:flutter_application_zhiban/xui/utils/module.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
+import 'package:flutter_application_zhiban/xui/x_design.dart' show ClayContainer;
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
 
@@ -79,15 +79,15 @@ class _CollectionsGridPageState extends State<CollectionsGridPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: xui.XuiTheme.warmCream,
+      backgroundColor: AppColors.warmCream,
       appBar: AppBar(
-        backgroundColor: xui.XuiTheme.pureWhite,
+        backgroundColor: AppColors.pureWhite,
         elevation: 0,
-        foregroundColor: xui.XuiTheme.clayBlack,
+        foregroundColor: AppColors.clayBlack,
         title: const Text("助手广场"),
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(1),
-          child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
+          child: Divider(height: 1, thickness: 1, color: AppColors.oatBorder),
         ),
       ),
       body: RefreshIndicator(
@@ -138,13 +138,13 @@ class _CollectionTile extends StatelessWidget {
     final icon = module?.icon ?? "📁";
     final slogan = module?.slogan ?? "点击查看该数据集";
     final colors = module?.colors;
-    final accent = colors != null ? AppColors.fromHex(colors.accent) : xui.XuiTheme.slushie800;
-    final start = colors != null ? AppColors.fromHex(colors.gradientStart) : xui.XuiTheme.pureWhite;
-    final end = colors != null ? AppColors.fromHex(colors.gradientEnd) : xui.XuiTheme.lightFrost;
-    final textColor = colors != null ? AppColors.fromHex(colors.text) : xui.XuiTheme.clayBlack;
-    final subTextColor = colors != null ? AppColors.fromHex(colors.textSecondary) : xui.XuiTheme.warmCharcoal;
+    final accent = colors != null ? AppColors.fromHex(colors.accent) : AppColors.slushie800;
+    final start = colors != null ? AppColors.fromHex(colors.gradientStart) : AppColors.pureWhite;
+    final end = colors != null ? AppColors.fromHex(colors.gradientEnd) : AppColors.lightFrost;
+    final textColor = colors != null ? AppColors.fromHex(colors.text) : AppColors.clayBlack;
+    final subTextColor = colors != null ? AppColors.fromHex(colors.textSecondary) : AppColors.warmCharcoal;
 
-    return xui.ClayContainer(
+    return ClayContainer(
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(builder: (_) => ExpertsPage(collectionName: collection)),
@@ -174,19 +174,19 @@ class _CollectionTile extends StatelessWidget {
               name,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: xui.XuiTheme.featureTitle().copyWith(fontSize: 17, color: textColor),
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 17, color: textColor),
             ),
             const SizedBox(height: 8),
             Text(
               slogan,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
-              style: xui.XuiTheme.bodyStd().copyWith(fontSize: 13, color: subTextColor, height: 1.45),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 13, color: subTextColor, height: 1.45),
             ),
             const SizedBox(height: 12),
             const Align(
               alignment: Alignment.centerRight,
-              child: Icon(Icons.chevron_right, size: 20, color: xui.XuiTheme.warmSilver),
+              child: Icon(Icons.chevron_right, size: 20, color: AppColors.warmSilver),
             ),
           ],
         ),
@@ -212,7 +212,7 @@ class _LoadMoreTile extends StatelessWidget {
     if (!hasMore) {
       return Padding(
         padding: const EdgeInsets.all(16),
-        child: Center(child: Text("没有更多数据", style: xui.XuiTheme.bodyStd())),
+        child: Center(child: Text("没有更多数据", style: Theme.of(context).textTheme.bodyMedium)),
       );
     }
     return Padding(
@@ -220,8 +220,8 @@ class _LoadMoreTile extends StatelessWidget {
       child: FilledButton(
         onPressed: onPressed,
         style: FilledButton.styleFrom(
-          backgroundColor: xui.XuiTheme.lemon500,
-          foregroundColor: xui.XuiTheme.clayBlack,
+          backgroundColor: AppColors.lemon500,
+          foregroundColor: AppColors.clayBlack,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
         child: const Text("加载更多"),

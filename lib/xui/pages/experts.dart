@@ -1,10 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/design/colors.dart';
 import 'package:flutter_application_zhiban/xui/pages/expert_detail.dart';
 import 'package:flutter_application_zhiban/xui/pages/poster_preview.dart';
 import 'package:flutter_application_zhiban/xui/utils/module.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
+import 'package:flutter_application_zhiban/xui/x_design.dart' show ClayContainer;
 import 'package:http/http.dart' as http;
 
 class ExpertsPage extends StatefulWidget {
@@ -86,15 +87,15 @@ class _ExpertsPageState extends State<ExpertsPage> {
     final title = module?.name ?? widget.collectionName;
 
     return Scaffold(
-      backgroundColor: xui.XuiTheme.warmCream,
+      backgroundColor: AppColors.warmCream,
       appBar: AppBar(
-        backgroundColor: xui.XuiTheme.pureWhite,
+        backgroundColor: AppColors.pureWhite,
         elevation: 0,
-        foregroundColor: xui.XuiTheme.clayBlack,
+        foregroundColor: AppColors.clayBlack,
         title: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(1),
-          child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
+          child: Divider(height: 1, thickness: 1, color: AppColors.oatBorder),
         ),
       ),
       body: RefreshIndicator(
@@ -149,7 +150,7 @@ class _ExpertCard extends StatelessWidget {
     final date = item['date'] ?? '';
     final isAI = item['isAIGenerated'] ?? false;
 
-    return xui.ClayContainer(
+    return ClayContainer(
       onTap: () {
         Navigator.push(
           context,
@@ -167,14 +168,14 @@ class _ExpertCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
                   decoration: BoxDecoration(
-                    color: xui.XuiTheme.pomegranate400.withValues(alpha: 0.08),
-                    border: Border.all(color: xui.XuiTheme.pomegranate400),
+                    color: AppColors.pomegranate400.withValues(alpha: 0.08),
+                    border: Border.all(color: AppColors.pomegranate400),
                     borderRadius: BorderRadius.circular(999),
                   ),
                   child: Text(
                     "AI解读",
-                    style: xui.XuiTheme.bodyStd().copyWith(
-                          color: xui.XuiTheme.pomegranate400,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: AppColors.pomegranate400,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                         ),
@@ -194,7 +195,7 @@ class _ExpertCard extends StatelessWidget {
             title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: xui.XuiTheme.featureTitle().copyWith(fontSize: 18),
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18),
           ),
           const SizedBox(height: 8),
           Expanded(
@@ -202,9 +203,9 @@ class _ExpertCard extends StatelessWidget {
               content,
               maxLines: 4,
               overflow: TextOverflow.ellipsis,
-              style: xui.XuiTheme.bodyStd().copyWith(
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     height: 1.55,
-                    color: xui.XuiTheme.darkCharcoal,
+                    color: AppColors.darkCharcoal,
                     fontFamily: "NotoSerifSC",
                   ),
             ),
@@ -217,13 +218,13 @@ class _ExpertCard extends StatelessWidget {
                   date,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: xui.XuiTheme.bodyStd().copyWith(
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontSize: 12,
-                        color: xui.XuiTheme.warmSilver,
+                        color: AppColors.warmSilver,
                       ),
                 ),
               ),
-              const Icon(Icons.chevron_right, color: xui.XuiTheme.warmSilver),
+              const Icon(Icons.chevron_right, color: AppColors.warmSilver),
             ],
           ),
         ],
@@ -253,7 +254,7 @@ class _LoadMoreTile extends StatelessWidget {
       return Center(
         child: Text(
           "没有更多数据",
-          style: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.warmSilver),
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.warmSilver),
         ),
       );
     }
@@ -262,8 +263,8 @@ class _LoadMoreTile extends StatelessWidget {
       child: FilledButton(
         onPressed: onPressed,
         style: FilledButton.styleFrom(
-          backgroundColor: xui.XuiTheme.lemon500,
-          foregroundColor: xui.XuiTheme.clayBlack,
+          backgroundColor: AppColors.lemon500,
+          foregroundColor: AppColors.clayBlack,
           padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 13),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
@@ -277,7 +278,7 @@ void showPosterPreview(BuildContext context, Map item) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
-    backgroundColor: xui.XuiTheme.pureWhite,
+    backgroundColor: AppColors.pureWhite,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
     ),

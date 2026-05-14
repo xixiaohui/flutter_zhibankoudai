@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
+import 'package:flutter_application_zhiban/design/colors.dart';
+import 'package:flutter_application_zhiban/design/elevation.dart';
 import 'package:http/http.dart' as http;
 
 class SearchResultPage extends StatefulWidget {
@@ -74,15 +75,15 @@ class _SearchResultPageState extends State<SearchResultPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: xui.XuiTheme.warmCream,
+      backgroundColor: AppColors.warmCream,
       appBar: AppBar(
-        backgroundColor: xui.XuiTheme.pureWhite,
+        backgroundColor: AppColors.pureWhite,
         elevation: 0,
-        foregroundColor: xui.XuiTheme.clayBlack,
+        foregroundColor: AppColors.clayBlack,
         title: const Text('AI 分析结果'),
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(1),
-          child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
+          child: Divider(height: 1, thickness: 1, color: AppColors.oatBorder),
         ),
       ),
       body: SafeArea(
@@ -111,22 +112,23 @@ class _SearchResultPageState extends State<SearchResultPage> {
           child: TextField(
             controller: controller,
             textInputAction: TextInputAction.search,
-            decoration: xui.XuiTheme.inputDecoration(
+            decoration: InputDecoration(
               hintText: "继续提问...",
-            ).copyWith(
+              filled: true,
+              fillColor: AppColors.pureWhite,
               prefixIcon: const Icon(Icons.search),
               contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(22),
-                borderSide: const BorderSide(color: xui.XuiTheme.oatBorder, width: 1),
+                borderSide: const BorderSide(color: AppColors.oatBorder, width: 1),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(22),
-                borderSide: const BorderSide(color: xui.XuiTheme.oatBorder, width: 1),
+                borderSide: const BorderSide(color: AppColors.oatBorder, width: 1),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(22),
-                borderSide: const BorderSide(color: xui.XuiTheme.focusRing, width: 2),
+                borderSide: const BorderSide(color: AppColors.focusRing, width: 2),
               ),
             ),
             onSubmitted: (_) => onSearch(),
@@ -135,8 +137,8 @@ class _SearchResultPageState extends State<SearchResultPage> {
         const SizedBox(width: 8),
         FilledButton(
           style: FilledButton.styleFrom(
-            backgroundColor: xui.XuiTheme.blueberry800,
-            foregroundColor: xui.XuiTheme.pureWhite,
+            backgroundColor: AppColors.blueberry800,
+            foregroundColor: AppColors.pureWhite,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),
@@ -160,7 +162,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
       return Center(
         child: Text(
           "请输入问题并点击分析",
-          style: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.warmCharcoal),
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.warmCharcoal),
         ),
       );
     }
@@ -172,14 +174,19 @@ class _SearchResultPageState extends State<SearchResultPage> {
         children: [
           Text(
             "问题：${controller.text}",
-            style: xui.XuiTheme.bodyMed(),
+            style: Theme.of(context).textTheme.titleSmall,
           ),
           const SizedBox(height: 12),
           Container(
             width: double.infinity,
-            decoration: xui.XuiTheme.cardDecoration(radius: 22, color: xui.XuiTheme.pureWhite),
+            decoration: BoxDecoration(
+              color: AppColors.pureWhite,
+              borderRadius: BorderRadius.circular(22),
+              border: Border.all(color: AppColors.oatBorder, width: 1),
+              boxShadow: AppElevation.card,
+            ),
             padding: const EdgeInsets.all(18),
-            child: Text(result ?? "", style: xui.XuiTheme.body().copyWith(letterSpacing: 0)),
+            child: Text(result ?? "", style: Theme.of(context).textTheme.bodyLarge?.copyWith(letterSpacing: 0)),
           ),
           const SizedBox(height: 16),
           Wrap(
@@ -198,10 +205,10 @@ class _SearchResultPageState extends State<SearchResultPage> {
 
   Widget _suggestion(String text) {
     return ActionChip(
-      backgroundColor: xui.XuiTheme.pureWhite,
+      backgroundColor: AppColors.pureWhite,
       label: Text(text),
-      labelStyle: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.blueberry800),
-      side: const BorderSide(color: xui.XuiTheme.oatBorder),
+      labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.blueberry800),
+      side: const BorderSide(color: AppColors.oatBorder),
       onPressed: () {
         controller.text = text;
         onSearch();

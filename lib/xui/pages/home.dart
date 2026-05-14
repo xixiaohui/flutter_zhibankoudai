@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/design/colors.dart';
+import 'package:flutter_application_zhiban/design/typography.dart';
+import 'package:flutter_application_zhiban/design/elevation.dart';
 import 'package:flutter_application_zhiban/xui/pages/ai_chat_page.dart';
 import 'package:flutter_application_zhiban/xui/pages/collections_grid.dart';
 import 'package:flutter_application_zhiban/xui/pages/collections_list.dart';
 import 'package:flutter_application_zhiban/xui/pages/search_result.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
+import 'package:flutter_application_zhiban/xui/x_design.dart' show ClayContainer;
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -14,16 +17,16 @@ class HomePage extends StatelessWidget {
     final maxWidth = width >= 900 ? 960.0 : double.infinity;
 
     return Scaffold(
-      backgroundColor: xui.XuiTheme.warmCream,
+      backgroundColor: AppColors.warmCream,
       appBar: AppBar(
-        backgroundColor: xui.XuiTheme.pureWhite,
+        backgroundColor: AppColors.pureWhite,
         centerTitle: true,
         elevation: 0,
-        foregroundColor: xui.XuiTheme.clayBlack,
+        foregroundColor: AppColors.clayBlack,
         title: const Text("智伴口袋"),
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(1),
-          child: Divider(height: 1, thickness: 1, color: xui.XuiTheme.oatBorder),
+          child: Divider(height: 1, thickness: 1, color: AppColors.oatBorder),
         ),
       ),
       body: Center(
@@ -76,16 +79,18 @@ class HeroSection extends StatelessWidget {
       padding: _pagePadding(context),
       child: Container(
         padding: EdgeInsets.all(compact ? 18 : 24),
-        decoration: xui.XuiTheme.cardDecoration(
-          radius: compact ? 28 : 36,
-          color: xui.XuiTheme.pureWhite,
+        decoration: BoxDecoration(
+          color: AppColors.pureWhite,
+          borderRadius: BorderRadius.circular(compact ? 28 : 36),
+          border: Border.all(color: AppColors.oatBorder, width: 1),
+          boxShadow: AppElevation.card,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               "复合材料AI助手",
-              style: xui.XuiTheme.displayHero().copyWith(
+              style: AppTypography.textTheme.headlineLarge?.copyWith(
                     fontSize: compact ? 34 : 48,
                     height: 1.12,
                     letterSpacing: 0,
@@ -94,7 +99,7 @@ class HeroSection extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               "AI分析 · 材料查询 · 行情洞察",
-              style: xui.XuiTheme.subHeading().copyWith(
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     fontSize: compact ? 15 : 18,
                     letterSpacing: 0,
                   ),
@@ -138,9 +143,10 @@ class _SearchSectionState extends State<SearchSection> {
       // 👉 用户点击键盘搜索
       onSubmitted: (_) => _goSearch(),
 
-      decoration: xui.XuiTheme.inputDecoration(
+      decoration: InputDecoration(
         hintText: "请输入问题，例如：玻璃纤维的价格？",
-      ).copyWith(
+        filled: true,
+        fillColor: AppColors.pureWhite,
         prefixIcon: const Icon(Icons.search),
 
         // 👉 加一个搜索按钮（推荐）
@@ -156,11 +162,11 @@ class _SearchSectionState extends State<SearchSection> {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
           borderSide:
-              const BorderSide(color: xui.XuiTheme.oatBorder, width: 1),
+              const BorderSide(color: AppColors.oatBorder, width: 1),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
-          borderSide: const BorderSide(color: xui.XuiTheme.focusRing, width: 2),
+          borderSide: const BorderSide(color: AppColors.focusRing, width: 2),
         ),
       ),
     );
@@ -215,7 +221,7 @@ class HotGridSliver extends StatelessWidget {
       childAspectRatio: _isCompact(context) ? 3.2 : 2.5,
       children: [
         for (final text in items)
-          xui.ClayContainer(
+          ClayContainer(
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (_) => SearchResultPage(query: text)),
@@ -228,7 +234,7 @@ class HotGridSliver extends StatelessWidget {
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: xui.XuiTheme.bodyMed().copyWith(fontSize: 15),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 15),
               ),
             ),
           ),
@@ -253,7 +259,7 @@ class MarketGridSliver extends StatelessWidget {
       childAspectRatio: _isCompact(context) ? 2.35 : 1.9,
       children: [
         for (final item in items)
-          xui.ClayContainer(
+          ClayContainer(
             borderRadius: 24,
             padding: const EdgeInsets.all(16),
             onTap: () => Navigator.push(
@@ -265,8 +271,8 @@ class MarketGridSliver extends StatelessWidget {
                 Icon(
                   item.$4,
                   color: item.$3 == "上涨"
-                      ? xui.XuiTheme.lemon700
-                      : xui.XuiTheme.warmSilver,
+                      ? AppColors.lemon700
+                      : AppColors.warmSilver,
                 ),
                 const SizedBox(width: 14),
                 Expanded(
@@ -274,13 +280,13 @@ class MarketGridSliver extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(item.$1, style: xui.XuiTheme.featureTitle().copyWith(fontSize: 17)),
+                      Text(item.$1, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 17)),
                       const SizedBox(height: 4),
-                      Text(item.$2, style: xui.XuiTheme.bodyMed()),
+                      Text(item.$2, style: Theme.of(context).textTheme.titleSmall),
                     ],
                   ),
                 ),
-                Text(item.$3, style: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.warmCharcoal)),
+                Text(item.$3, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.warmCharcoal)),
               ],
             ),
           ),
@@ -328,7 +334,7 @@ class SectionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(_horizontalInset(context), 0, _horizontalInset(context), 10),
-      child: Text(title, style: xui.XuiTheme.uppercaseLabel()),
+      child: Text(title, style: Theme.of(context).textTheme.labelMedium),
     );
   }
 }
@@ -406,24 +412,24 @@ class _AssistantGrid extends StatelessWidget {
       childAspectRatio: _isCompact(context) ? 2.9 : 2.6,
       children: [
         for (final item in items)
-          xui.ClayContainer(
+          ClayContainer(
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (_) => item.page),
             ),
             borderRadius: 24,
             padding: const EdgeInsets.all(16),
-            color: xui.XuiTheme.pureWhite,
+            color: AppColors.pureWhite,
             child: Row(
               children: [
                 Container(
                   width: 48,
                   height: 48,
                   decoration: BoxDecoration(
-                    color: xui.XuiTheme.slushie500.withValues(alpha: 0.14),
+                    color: AppColors.slushie500.withValues(alpha: 0.14),
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  child: Icon(item.icon, color: xui.XuiTheme.blueberry800),
+                  child: Icon(item.icon, color: AppColors.blueberry800),
                 ),
                 const SizedBox(width: 14),
                 Expanded(
@@ -431,18 +437,18 @@ class _AssistantGrid extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(item.title, style: xui.XuiTheme.featureTitle().copyWith(fontSize: 17)),
+                      Text(item.title, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 17)),
                       const SizedBox(height: 4),
                       Text(
                         item.desc,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.warmCharcoal),
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.warmCharcoal),
                       ),
                     ],
                   ),
                 ),
-                const Icon(Icons.chevron_right, color: xui.XuiTheme.warmSilver),
+                const Icon(Icons.chevron_right, color: AppColors.warmSilver),
               ],
             ),
           ),
@@ -459,17 +465,17 @@ class AiEntrySliver extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Padding(
         padding: _pagePadding(context),
-        child: xui.ClayContainer(
+        child: ClayContainer(
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(builder: (_) => const AiChatPage()),
           ),
           borderRadius: 24,
           padding: const EdgeInsets.all(18),
-          color: xui.XuiTheme.slushie500,
+          color: AppColors.slushie500,
           child: Row(
             children: [
-              const Icon(Icons.smart_toy, size: 36, color: xui.XuiTheme.pureWhite),
+              const Icon(Icons.smart_toy, size: 36, color: AppColors.pureWhite),
               const SizedBox(width: 14),
               Expanded(
                 child: Column(
@@ -477,19 +483,19 @@ class AiEntrySliver extends StatelessWidget {
                   children: const [
                     Text(
                       "AI材料助手",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: xui.XuiTheme.pureWhite),
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.pureWhite),
                     ),
                     SizedBox(height: 4),
                     Text(
                       "材料问题 · 行情趋势 · 采购建议",
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: xui.XuiTheme.pureWhite, height: 1.35),
+                      style: TextStyle(color: AppColors.pureWhite, height: 1.35),
                     ),
                   ],
                 ),
               ),
-              const Icon(Icons.chevron_right, color: xui.XuiTheme.pureWhite),
+              const Icon(Icons.chevron_right, color: AppColors.pureWhite),
             ],
           ),
         ),
@@ -540,21 +546,21 @@ class _IconTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return xui.ClayContainer(
+    return ClayContainer(
       onTap: onTap,
       borderRadius: 22,
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: xui.XuiTheme.slushie800, size: 28),
+          Icon(icon, color: AppColors.slushie800, size: 28),
           const SizedBox(height: 8),
           Text(
             title,
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: xui.XuiTheme.featureTitle().copyWith(fontSize: 16),
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 16),
           ),
         ],
       ),
