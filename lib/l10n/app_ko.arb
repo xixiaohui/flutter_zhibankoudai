@@ -1,0 +1,249 @@
+{
+  "@@locale": "ko",
+  "appName": "PocketMind",
+  "appNameEn": "PocketMind",
+  "bottomNavHome": "홈",
+  "bottomNavDiscover": "탐색",
+  "bottomNavAssistant": "에이전트",
+  "bottomNavMine": "마이",
+  "dailyUpdate": "[KO] Daily Update",
+  "personalKnowledgeBase": "[KO] Your Personal Expert Knowledge Base",
+  "noContent": "콘텐츠 없음",
+  "noModule": "모듈 없음",
+  "moreModules": "[KO] More Modules",
+  "aiGenerate": "[KO] AI Generate",
+  "aiRefresh": "[KO] AI Refresh",
+  "generatePoster": "[KO] Poster",
+  "share": "공유",
+  "sharePoster": "[KO] Share Poster",
+  "shareToFriend": "[KO] Share with Friends",
+  "shareRecommend": "[KO] Recommend to more people",
+  "shareText": "[KO] PocketMind — Daily Knowledge, Growing with You!\n60+ expert modules delivering quality content every day.\nDownload now!",
+  "cancel": "취소",
+  "confirm": "확인",
+  "delete": "삭제",
+  "retry": "재시도",
+  "save": "저장",
+  "loading": "로딩 중...",
+  "generating": "생성 중...",
+  "processing": "처리 중...",
+  "saveToAlbum": "[KO] Save to Album",
+  "savedToAlbum": "[KO] Poster saved to album",
+  "savedMultipleToAlbum": "[KO] {count} posters saved to album",
+  "@savedMultipleToAlbum": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "savingImages": "[KO] Saving {current}/{total}...",
+  "@savingImages": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "saveError": "[KO] Save error: {error}",
+  "@saveError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "savePermissionRequired": "[KO] Album permission required",
+  "shareFailed": "[KO] Share failed: {error}",
+  "@shareFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "moduleNotFound": "[KO] Module not found",
+  "moduleNotFoundDesc": "[KO] This module could not be found",
+  "loadFailed": "[KO] Load failed",
+  "loadingMore": "[KO] Load more",
+  "noMoreData": "[KO] No more data",
+  "themeSettings": "테마 설정",
+  "notification": "알림",
+  "notificationDesc": "[KO] Set daily push time",
+  "clearCache": "캐시 지우기",
+  "clearCacheDesc": "[KO] Clear local cache data",
+  "aboutUs": "정보",
+  "aboutVersion": "[KO] Version {version}",
+  "@aboutVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "rateUs": "[KO] Rate Us",
+  "rateUsDesc": "[KO] Your support drives us forward",
+  "rateLater": "[KO] Later",
+  "clearCacheConfirm": "[KO] Are you sure you want to clear all local cache data?\nThis will remove saved content and settings.",
+  "cacheCleared": "[KO] Cache cleared",
+  "aboutSlogan": "[KO] Daily knowledge, growing with you",
+  "aboutVersionLabel": "[KO] Version",
+  "aboutBuildLabel": "[KO] Build",
+  "aboutDesignLabel": "[KO] Design",
+  "aboutBuildValue": "[KO] Flutter · Tencent CloudBase",
+  "aboutDesignValue": "[KO] Editorial Precision Design System",
+  "aboutGotIt": "[KO] Got it",
+  "rateTitle": "[KO] Rate Us",
+  "rateContent": "[KO] Thank you for your support! Every rating helps us improve.\n\nPlease rate us in the app store, or share with your friends.",
+  "lightMode": "라이트 모드",
+  "darkMode": "다크 모드",
+  "followSystem": "시스템 따르기",
+  "enableDailyPush": "[KO] Enable daily push",
+  "selectPushTime": "[KO] Select daily push time (currently demo settings, backend push coming soon)",
+  "morningTime": "[KO] ☀️ Morning",
+  "forenoonTime": "[KO] 🌤 Before Noon",
+  "eveningTime": "[KO] 🌙 Evening",
+  "morningDesc": "[KO] Start your day with energy",
+  "forenoonDesc": "[KO] Prime learning time",
+  "eveningDesc": "[KO] Relaxed evening reading",
+  "pushSet": "[KO] Daily push set to {time}",
+  "@pushSet": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "pushDisabled": "[KO] Daily push disabled",
+  "emotionalCompanion": "[KO] Emotional Companion",
+  "emotionalCompanionDesc": "[KO] Chat with \"Xiao Zhi\" and share your feelings",
+  "domainExpert": "[KO] Domain Experts",
+  "domainExpertDesc": "[KO] Deep conversations with 180+ industry experts for professional insights",
+  "hotPicks": "[KO] Hot Picks",
+  "deleteChatHistory": "[KO] Delete Chat History",
+  "deleteChatConfirm": "[KO] Are you sure you want to delete all chat history? This cannot be undone.",
+  "typeHint": "[KO] Say something...",
+  "typeHintExpert": "[KO] Ask {name}...",
+  "@typeHintExpert": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sorryCannotReply": "[KO] Sorry, I'm unable to reply right now. Please try again later.",
+  "errorOccurred": "[KO] Error: {error}",
+  "@errorOccurred": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "aiFriendGreeting": "[KO] Hi! I'm Xiao Zhi, your emotional companion...",
+  "chatMe": "[KO] Me",
+  "chatBot": "[KO] Zhi",
+  "emotionCrisis": "[KO] Crisis",
+  "emotionHappy": "[KO] Happy",
+  "emotionSad": "[KO] Sad",
+  "emotionAnxious": "[KO] Anxious",
+  "emotionAngry": "[KO] Angry",
+  "emotionCalm": "[KO] Calm",
+  "emotionNeutral": "[KO] Neutral",
+  "emotionExcited": "[KO] Excited",
+  "emotionTired": "[KO] Tired",
+  "sceneFirstGreeting": "[KO] First Greeting",
+  "sceneCrisisIntervention": "[KO] Crisis Intervention",
+  "sceneEmotionalComfort": "[KO] Emotional Comfort",
+  "sceneShareJoy": "[KO] Sharing Joy",
+  "sceneDailyChat": "[KO] Daily Chat",
+  "sceneDeepTalk": "[KO] Deep Conversation",
+  "sceneSilentCompany": "[KO] Silent Companion",
+  "recentMemory": "[KO] Recent Conversation Memory",
+  "memoryUser": "[KO] User",
+  "memoryBot": "[KO] Xiao Zhi",
+  "memoryContinue": "[KO] Please continue the conversation based on the above memory, maintaining context coherence.",
+  "userCardName": "[KO] PocketMind User",
+  "quickEntry": "[KO] Quick Entry",
+  "hotQuestions": "[KO] Hot Questions",
+  "marketTrends": "[KO] Market Trends",
+  "recommendedFeatures": "[KO] Recommended",
+  "smartAssistant": "[KO] Smart Assistant",
+  "otherAssistants": "[KO] Other Assistants",
+  "assistantSquare": "[KO] Assistant Square",
+  "assistantList": "[KO] Assistant List",
+  "viewDataset": "[KO] Tap to view this dataset",
+  "aiAnalysis": "[KO] AI Analysis",
+  "materialQuery": "[KO] Material Query",
+  "priceTrend": "[KO] Price Trend",
+  "supplier": "[KO] Suppliers",
+  "aiMaterialAssistant": "[KO] AI Material Assistant",
+  "aiAnalysisMaterial": "[KO] AI Analysis · Material Query · Market Insights",
+  "aiMaterialAssistantDesc": "[KO] Material Questions · Market Trends · Procurement Advice",
+  "trendAnalysis": "[KO] Trend Analysis",
+  "materialDatabase": "[KO] Material Database",
+  "quoteTool": "[KO] Quote Tool",
+  "materialQuestion": "[KO] Enter a question, e.g.: What is the price of fiberglass?",
+  "searchHint": "[KO] Continue asking...",
+  "analyze": "[KO] Analyze",
+  "searchPlaceholder": "[KO] Enter a question and tap analyze",
+  "questionPrefix": "[KO] Question: {question}",
+  "@questionPrefix": {
+    "placeholders": {
+      "question": {
+        "type": "String"
+      }
+    }
+  },
+  "inputMaterialQuestion": "[KO] Enter a material question to start analysis",
+  "inputMaterialHint": "[KO] Enter material question...",
+  "requestFailed": "[KO] Request failed. Please try again later.",
+  "aiMaterialHero": "[KO] Material AI Smart Assistant",
+  "aiMaterialHeroDesc": "[KO] Enter a question to get material data and analysis results",
+  "aiMaterialHeroHint": "[KO] Enter material, price, application scenario...",
+  "posterPreview": "[KO] Poster Preview",
+  "close": "[KO] Close",
+  "saveToPhotoAlbum": "[KO] Save to Album",
+  "savedToPhotoAlbum": "[KO] Saved to album",
+  "saveToAlbumFailed": "[KO] Save failed. Please check album permissions.",
+  "posterBranding": "[KO] PocketMind",
+  "posterFooter": "[KO] Daily Knowledge Companion",
+  "posterFromApp": "[KO] Daily knowledge shared from \"PocketMind\"",
+  "aiInterpretation": "[KO] AI Insights",
+  "compositeMaterialAiAssistant": "[KO] Composite Material AI Assistant",
+  "smartAnalysisMaterial": "[KO] Smart material analysis",
+  "marketAnalysisAssistant": "[KO] Market Analysis Assistant",
+  "marketAnalysisDesc": "[KO] Price trends and market analysis",
+  "quoteAssistant": "[KO] Quote Assistant",
+  "quoteAssistantDesc": "[KO] Cost estimation and quote generation",
+  "tradeAssistant": "[KO] Trade Assistant",
+  "tradeAssistantDesc": "[KO] English replies and customer communication",
+  "myAssistant": "[KO] My Assistant",
+  "cloudAssistantWaterfall": "[KO] Cloud Assistant Waterfall",
+  "cloudAssistantList": "[KO] Cloud Assistant List",
+  "otherCategory": "[KO] Other",
+  "weekdayMon": "[KO] Mon",
+  "weekdayTue": "[KO] Tue",
+  "weekdayWed": "[KO] Wed",
+  "weekdayThu": "[KO] Thu",
+  "weekdayFri": "[KO] Fri",
+  "weekdaySat": "[KO] Sat",
+  "weekdaySun": "[KO] Sun",
+  "fieldAuthor": "[KO] Author",
+  "fieldSinger": "[KO] Singer",
+  "fieldDirector": "[KO] Director",
+  "fieldSource": "[KO] Source",
+  "fieldEra": "[KO] Era",
+  "fieldRegion": "[KO] Region",
+  "fieldLocation": "[KO] Location",
+  "fieldAlbum": "[KO] Album",
+  "fieldFortuneDirection": "[KO] Lucky Direction",
+  "fieldFortuneNumber": "[KO] Lucky Number",
+  "fieldFortuneColor": "[KO] Lucky Color",
+  "fieldCoreQuote": "[KO] Core Quote",
+  "identifyEmotion": "[KO] Detected Emotion",
+  "confidence": "[KO] Confidence"
+}

@@ -1,0 +1,249 @@
+{
+  "@@locale": "es",
+  "appName": "PocketMind",
+  "appNameEn": "PocketMind",
+  "bottomNavHome": "Inicio",
+  "bottomNavDiscover": "Explorar",
+  "bottomNavAssistant": "Agente",
+  "bottomNavMine": "Mi",
+  "dailyUpdate": "[ES] Daily Update",
+  "personalKnowledgeBase": "[ES] Your Personal Expert Knowledge Base",
+  "noContent": "Sin contenido",
+  "noModule": "Sin módulos",
+  "moreModules": "[ES] More Modules",
+  "aiGenerate": "[ES] AI Generate",
+  "aiRefresh": "[ES] AI Refresh",
+  "generatePoster": "[ES] Poster",
+  "share": "Compartir",
+  "sharePoster": "[ES] Share Poster",
+  "shareToFriend": "[ES] Share with Friends",
+  "shareRecommend": "[ES] Recommend to more people",
+  "shareText": "[ES] PocketMind — Daily Knowledge, Growing with You!\n60+ expert modules delivering quality content every day.\nDownload now!",
+  "cancel": "Cancelar",
+  "confirm": "Aceptar",
+  "delete": "Eliminar",
+  "retry": "Reintentar",
+  "save": "Guardar",
+  "loading": "Cargando...",
+  "generating": "Generando...",
+  "processing": "Procesando...",
+  "saveToAlbum": "[ES] Save to Album",
+  "savedToAlbum": "[ES] Poster saved to album",
+  "savedMultipleToAlbum": "[ES] {count} posters saved to album",
+  "@savedMultipleToAlbum": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "savingImages": "[ES] Saving {current}/{total}...",
+  "@savingImages": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "saveError": "[ES] Save error: {error}",
+  "@saveError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "savePermissionRequired": "[ES] Album permission required",
+  "shareFailed": "[ES] Share failed: {error}",
+  "@shareFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "moduleNotFound": "[ES] Module not found",
+  "moduleNotFoundDesc": "[ES] This module could not be found",
+  "loadFailed": "[ES] Load failed",
+  "loadingMore": "[ES] Load more",
+  "noMoreData": "[ES] No more data",
+  "themeSettings": "Tema",
+  "notification": "Notificaciones",
+  "notificationDesc": "[ES] Set daily push time",
+  "clearCache": "Limpiar caché",
+  "clearCacheDesc": "[ES] Clear local cache data",
+  "aboutUs": "Acerca de",
+  "aboutVersion": "[ES] Version {version}",
+  "@aboutVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "rateUs": "[ES] Rate Us",
+  "rateUsDesc": "[ES] Your support drives us forward",
+  "rateLater": "[ES] Later",
+  "clearCacheConfirm": "[ES] Are you sure you want to clear all local cache data?\nThis will remove saved content and settings.",
+  "cacheCleared": "[ES] Cache cleared",
+  "aboutSlogan": "[ES] Daily knowledge, growing with you",
+  "aboutVersionLabel": "[ES] Version",
+  "aboutBuildLabel": "[ES] Build",
+  "aboutDesignLabel": "[ES] Design",
+  "aboutBuildValue": "[ES] Flutter · Tencent CloudBase",
+  "aboutDesignValue": "[ES] Editorial Precision Design System",
+  "aboutGotIt": "[ES] Got it",
+  "rateTitle": "[ES] Rate Us",
+  "rateContent": "[ES] Thank you for your support! Every rating helps us improve.\n\nPlease rate us in the app store, or share with your friends.",
+  "lightMode": "Modo claro",
+  "darkMode": "Modo oscuro",
+  "followSystem": "Sistema",
+  "enableDailyPush": "[ES] Enable daily push",
+  "selectPushTime": "[ES] Select daily push time (currently demo settings, backend push coming soon)",
+  "morningTime": "[ES] ☀️ Morning",
+  "forenoonTime": "[ES] 🌤 Before Noon",
+  "eveningTime": "[ES] 🌙 Evening",
+  "morningDesc": "[ES] Start your day with energy",
+  "forenoonDesc": "[ES] Prime learning time",
+  "eveningDesc": "[ES] Relaxed evening reading",
+  "pushSet": "[ES] Daily push set to {time}",
+  "@pushSet": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "pushDisabled": "[ES] Daily push disabled",
+  "emotionalCompanion": "[ES] Emotional Companion",
+  "emotionalCompanionDesc": "[ES] Chat with \"Xiao Zhi\" and share your feelings",
+  "domainExpert": "[ES] Domain Experts",
+  "domainExpertDesc": "[ES] Deep conversations with 180+ industry experts for professional insights",
+  "hotPicks": "[ES] Hot Picks",
+  "deleteChatHistory": "[ES] Delete Chat History",
+  "deleteChatConfirm": "[ES] Are you sure you want to delete all chat history? This cannot be undone.",
+  "typeHint": "[ES] Say something...",
+  "typeHintExpert": "[ES] Ask {name}...",
+  "@typeHintExpert": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sorryCannotReply": "[ES] Sorry, I'm unable to reply right now. Please try again later.",
+  "errorOccurred": "[ES] Error: {error}",
+  "@errorOccurred": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "aiFriendGreeting": "[ES] Hi! I'm Xiao Zhi, your emotional companion...",
+  "chatMe": "[ES] Me",
+  "chatBot": "[ES] Zhi",
+  "emotionCrisis": "[ES] Crisis",
+  "emotionHappy": "[ES] Happy",
+  "emotionSad": "[ES] Sad",
+  "emotionAnxious": "[ES] Anxious",
+  "emotionAngry": "[ES] Angry",
+  "emotionCalm": "[ES] Calm",
+  "emotionNeutral": "[ES] Neutral",
+  "emotionExcited": "[ES] Excited",
+  "emotionTired": "[ES] Tired",
+  "sceneFirstGreeting": "[ES] First Greeting",
+  "sceneCrisisIntervention": "[ES] Crisis Intervention",
+  "sceneEmotionalComfort": "[ES] Emotional Comfort",
+  "sceneShareJoy": "[ES] Sharing Joy",
+  "sceneDailyChat": "[ES] Daily Chat",
+  "sceneDeepTalk": "[ES] Deep Conversation",
+  "sceneSilentCompany": "[ES] Silent Companion",
+  "recentMemory": "[ES] Recent Conversation Memory",
+  "memoryUser": "[ES] User",
+  "memoryBot": "[ES] Xiao Zhi",
+  "memoryContinue": "[ES] Please continue the conversation based on the above memory, maintaining context coherence.",
+  "userCardName": "[ES] PocketMind User",
+  "quickEntry": "[ES] Quick Entry",
+  "hotQuestions": "[ES] Hot Questions",
+  "marketTrends": "[ES] Market Trends",
+  "recommendedFeatures": "[ES] Recommended",
+  "smartAssistant": "[ES] Smart Assistant",
+  "otherAssistants": "[ES] Other Assistants",
+  "assistantSquare": "[ES] Assistant Square",
+  "assistantList": "[ES] Assistant List",
+  "viewDataset": "[ES] Tap to view this dataset",
+  "aiAnalysis": "[ES] AI Analysis",
+  "materialQuery": "[ES] Material Query",
+  "priceTrend": "[ES] Price Trend",
+  "supplier": "[ES] Suppliers",
+  "aiMaterialAssistant": "[ES] AI Material Assistant",
+  "aiAnalysisMaterial": "[ES] AI Analysis · Material Query · Market Insights",
+  "aiMaterialAssistantDesc": "[ES] Material Questions · Market Trends · Procurement Advice",
+  "trendAnalysis": "[ES] Trend Analysis",
+  "materialDatabase": "[ES] Material Database",
+  "quoteTool": "[ES] Quote Tool",
+  "materialQuestion": "[ES] Enter a question, e.g.: What is the price of fiberglass?",
+  "searchHint": "[ES] Continue asking...",
+  "analyze": "[ES] Analyze",
+  "searchPlaceholder": "[ES] Enter a question and tap analyze",
+  "questionPrefix": "[ES] Question: {question}",
+  "@questionPrefix": {
+    "placeholders": {
+      "question": {
+        "type": "String"
+      }
+    }
+  },
+  "inputMaterialQuestion": "[ES] Enter a material question to start analysis",
+  "inputMaterialHint": "[ES] Enter material question...",
+  "requestFailed": "[ES] Request failed. Please try again later.",
+  "aiMaterialHero": "[ES] Material AI Smart Assistant",
+  "aiMaterialHeroDesc": "[ES] Enter a question to get material data and analysis results",
+  "aiMaterialHeroHint": "[ES] Enter material, price, application scenario...",
+  "posterPreview": "[ES] Poster Preview",
+  "close": "[ES] Close",
+  "saveToPhotoAlbum": "[ES] Save to Album",
+  "savedToPhotoAlbum": "[ES] Saved to album",
+  "saveToAlbumFailed": "[ES] Save failed. Please check album permissions.",
+  "posterBranding": "[ES] PocketMind",
+  "posterFooter": "[ES] Daily Knowledge Companion",
+  "posterFromApp": "[ES] Daily knowledge shared from \"PocketMind\"",
+  "aiInterpretation": "[ES] AI Insights",
+  "compositeMaterialAiAssistant": "[ES] Composite Material AI Assistant",
+  "smartAnalysisMaterial": "[ES] Smart material analysis",
+  "marketAnalysisAssistant": "[ES] Market Analysis Assistant",
+  "marketAnalysisDesc": "[ES] Price trends and market analysis",
+  "quoteAssistant": "[ES] Quote Assistant",
+  "quoteAssistantDesc": "[ES] Cost estimation and quote generation",
+  "tradeAssistant": "[ES] Trade Assistant",
+  "tradeAssistantDesc": "[ES] English replies and customer communication",
+  "myAssistant": "[ES] My Assistant",
+  "cloudAssistantWaterfall": "[ES] Cloud Assistant Waterfall",
+  "cloudAssistantList": "[ES] Cloud Assistant List",
+  "otherCategory": "[ES] Other",
+  "weekdayMon": "[ES] Mon",
+  "weekdayTue": "[ES] Tue",
+  "weekdayWed": "[ES] Wed",
+  "weekdayThu": "[ES] Thu",
+  "weekdayFri": "[ES] Fri",
+  "weekdaySat": "[ES] Sat",
+  "weekdaySun": "[ES] Sun",
+  "fieldAuthor": "[ES] Author",
+  "fieldSinger": "[ES] Singer",
+  "fieldDirector": "[ES] Director",
+  "fieldSource": "[ES] Source",
+  "fieldEra": "[ES] Era",
+  "fieldRegion": "[ES] Region",
+  "fieldLocation": "[ES] Location",
+  "fieldAlbum": "[ES] Album",
+  "fieldFortuneDirection": "[ES] Lucky Direction",
+  "fieldFortuneNumber": "[ES] Lucky Number",
+  "fieldFortuneColor": "[ES] Lucky Color",
+  "fieldCoreQuote": "[ES] Core Quote",
+  "identifyEmotion": "[ES] Detected Emotion",
+  "confidence": "[ES] Confidence"
+}

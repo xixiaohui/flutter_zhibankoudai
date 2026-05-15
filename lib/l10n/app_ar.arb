@@ -1,0 +1,249 @@
+{
+  "@@locale": "ar",
+  "appName": "PocketMind",
+  "appNameEn": "PocketMind",
+  "bottomNavHome": "الرئيسية",
+  "bottomNavDiscover": "استكشاف",
+  "bottomNavAssistant": "الوكيل",
+  "bottomNavMine": "حسابي",
+  "dailyUpdate": "[AR] Daily Update",
+  "personalKnowledgeBase": "[AR] Your Personal Expert Knowledge Base",
+  "noContent": "لا يوجد محتوى",
+  "noModule": "لا توجد وحدات",
+  "moreModules": "[AR] More Modules",
+  "aiGenerate": "[AR] AI Generate",
+  "aiRefresh": "[AR] AI Refresh",
+  "generatePoster": "[AR] Poster",
+  "share": "مشاركة",
+  "sharePoster": "[AR] Share Poster",
+  "shareToFriend": "[AR] Share with Friends",
+  "shareRecommend": "[AR] Recommend to more people",
+  "shareText": "[AR] PocketMind — Daily Knowledge, Growing with You!\n60+ expert modules delivering quality content every day.\nDownload now!",
+  "cancel": "إلغاء",
+  "confirm": "تأكيد",
+  "delete": "حذف",
+  "retry": "إعادة",
+  "save": "حفظ",
+  "loading": "جار التحميل...",
+  "generating": "جار الإنشاء...",
+  "processing": "جار المعالجة...",
+  "saveToAlbum": "[AR] Save to Album",
+  "savedToAlbum": "[AR] Poster saved to album",
+  "savedMultipleToAlbum": "[AR] {count} posters saved to album",
+  "@savedMultipleToAlbum": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "savingImages": "[AR] Saving {current}/{total}...",
+  "@savingImages": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "saveError": "[AR] Save error: {error}",
+  "@saveError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "savePermissionRequired": "[AR] Album permission required",
+  "shareFailed": "[AR] Share failed: {error}",
+  "@shareFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "moduleNotFound": "[AR] Module not found",
+  "moduleNotFoundDesc": "[AR] This module could not be found",
+  "loadFailed": "[AR] Load failed",
+  "loadingMore": "[AR] Load more",
+  "noMoreData": "[AR] No more data",
+  "themeSettings": "المظهر",
+  "notification": "الإشعارات",
+  "notificationDesc": "[AR] Set daily push time",
+  "clearCache": "مسح التخزين",
+  "clearCacheDesc": "[AR] Clear local cache data",
+  "aboutUs": "حول",
+  "aboutVersion": "[AR] Version {version}",
+  "@aboutVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "rateUs": "[AR] Rate Us",
+  "rateUsDesc": "[AR] Your support drives us forward",
+  "rateLater": "[AR] Later",
+  "clearCacheConfirm": "[AR] Are you sure you want to clear all local cache data?\nThis will remove saved content and settings.",
+  "cacheCleared": "[AR] Cache cleared",
+  "aboutSlogan": "[AR] Daily knowledge, growing with you",
+  "aboutVersionLabel": "[AR] Version",
+  "aboutBuildLabel": "[AR] Build",
+  "aboutDesignLabel": "[AR] Design",
+  "aboutBuildValue": "[AR] Flutter · Tencent CloudBase",
+  "aboutDesignValue": "[AR] Editorial Precision Design System",
+  "aboutGotIt": "[AR] Got it",
+  "rateTitle": "[AR] Rate Us",
+  "rateContent": "[AR] Thank you for your support! Every rating helps us improve.\n\nPlease rate us in the app store, or share with your friends.",
+  "lightMode": "فاتح",
+  "darkMode": "داكن",
+  "followSystem": "النظام",
+  "enableDailyPush": "[AR] Enable daily push",
+  "selectPushTime": "[AR] Select daily push time (currently demo settings, backend push coming soon)",
+  "morningTime": "[AR] ☀️ Morning",
+  "forenoonTime": "[AR] 🌤 Before Noon",
+  "eveningTime": "[AR] 🌙 Evening",
+  "morningDesc": "[AR] Start your day with energy",
+  "forenoonDesc": "[AR] Prime learning time",
+  "eveningDesc": "[AR] Relaxed evening reading",
+  "pushSet": "[AR] Daily push set to {time}",
+  "@pushSet": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "pushDisabled": "[AR] Daily push disabled",
+  "emotionalCompanion": "[AR] Emotional Companion",
+  "emotionalCompanionDesc": "[AR] Chat with \"Xiao Zhi\" and share your feelings",
+  "domainExpert": "[AR] Domain Experts",
+  "domainExpertDesc": "[AR] Deep conversations with 180+ industry experts for professional insights",
+  "hotPicks": "[AR] Hot Picks",
+  "deleteChatHistory": "[AR] Delete Chat History",
+  "deleteChatConfirm": "[AR] Are you sure you want to delete all chat history? This cannot be undone.",
+  "typeHint": "[AR] Say something...",
+  "typeHintExpert": "[AR] Ask {name}...",
+  "@typeHintExpert": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sorryCannotReply": "[AR] Sorry, I'm unable to reply right now. Please try again later.",
+  "errorOccurred": "[AR] Error: {error}",
+  "@errorOccurred": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "aiFriendGreeting": "[AR] Hi! I'm Xiao Zhi, your emotional companion...",
+  "chatMe": "[AR] Me",
+  "chatBot": "[AR] Zhi",
+  "emotionCrisis": "[AR] Crisis",
+  "emotionHappy": "[AR] Happy",
+  "emotionSad": "[AR] Sad",
+  "emotionAnxious": "[AR] Anxious",
+  "emotionAngry": "[AR] Angry",
+  "emotionCalm": "[AR] Calm",
+  "emotionNeutral": "[AR] Neutral",
+  "emotionExcited": "[AR] Excited",
+  "emotionTired": "[AR] Tired",
+  "sceneFirstGreeting": "[AR] First Greeting",
+  "sceneCrisisIntervention": "[AR] Crisis Intervention",
+  "sceneEmotionalComfort": "[AR] Emotional Comfort",
+  "sceneShareJoy": "[AR] Sharing Joy",
+  "sceneDailyChat": "[AR] Daily Chat",
+  "sceneDeepTalk": "[AR] Deep Conversation",
+  "sceneSilentCompany": "[AR] Silent Companion",
+  "recentMemory": "[AR] Recent Conversation Memory",
+  "memoryUser": "[AR] User",
+  "memoryBot": "[AR] Xiao Zhi",
+  "memoryContinue": "[AR] Please continue the conversation based on the above memory, maintaining context coherence.",
+  "userCardName": "[AR] PocketMind User",
+  "quickEntry": "[AR] Quick Entry",
+  "hotQuestions": "[AR] Hot Questions",
+  "marketTrends": "[AR] Market Trends",
+  "recommendedFeatures": "[AR] Recommended",
+  "smartAssistant": "[AR] Smart Assistant",
+  "otherAssistants": "[AR] Other Assistants",
+  "assistantSquare": "[AR] Assistant Square",
+  "assistantList": "[AR] Assistant List",
+  "viewDataset": "[AR] Tap to view this dataset",
+  "aiAnalysis": "[AR] AI Analysis",
+  "materialQuery": "[AR] Material Query",
+  "priceTrend": "[AR] Price Trend",
+  "supplier": "[AR] Suppliers",
+  "aiMaterialAssistant": "[AR] AI Material Assistant",
+  "aiAnalysisMaterial": "[AR] AI Analysis · Material Query · Market Insights",
+  "aiMaterialAssistantDesc": "[AR] Material Questions · Market Trends · Procurement Advice",
+  "trendAnalysis": "[AR] Trend Analysis",
+  "materialDatabase": "[AR] Material Database",
+  "quoteTool": "[AR] Quote Tool",
+  "materialQuestion": "[AR] Enter a question, e.g.: What is the price of fiberglass?",
+  "searchHint": "[AR] Continue asking...",
+  "analyze": "[AR] Analyze",
+  "searchPlaceholder": "[AR] Enter a question and tap analyze",
+  "questionPrefix": "[AR] Question: {question}",
+  "@questionPrefix": {
+    "placeholders": {
+      "question": {
+        "type": "String"
+      }
+    }
+  },
+  "inputMaterialQuestion": "[AR] Enter a material question to start analysis",
+  "inputMaterialHint": "[AR] Enter material question...",
+  "requestFailed": "[AR] Request failed. Please try again later.",
+  "aiMaterialHero": "[AR] Material AI Smart Assistant",
+  "aiMaterialHeroDesc": "[AR] Enter a question to get material data and analysis results",
+  "aiMaterialHeroHint": "[AR] Enter material, price, application scenario...",
+  "posterPreview": "[AR] Poster Preview",
+  "close": "[AR] Close",
+  "saveToPhotoAlbum": "[AR] Save to Album",
+  "savedToPhotoAlbum": "[AR] Saved to album",
+  "saveToAlbumFailed": "[AR] Save failed. Please check album permissions.",
+  "posterBranding": "[AR] PocketMind",
+  "posterFooter": "[AR] Daily Knowledge Companion",
+  "posterFromApp": "[AR] Daily knowledge shared from \"PocketMind\"",
+  "aiInterpretation": "[AR] AI Insights",
+  "compositeMaterialAiAssistant": "[AR] Composite Material AI Assistant",
+  "smartAnalysisMaterial": "[AR] Smart material analysis",
+  "marketAnalysisAssistant": "[AR] Market Analysis Assistant",
+  "marketAnalysisDesc": "[AR] Price trends and market analysis",
+  "quoteAssistant": "[AR] Quote Assistant",
+  "quoteAssistantDesc": "[AR] Cost estimation and quote generation",
+  "tradeAssistant": "[AR] Trade Assistant",
+  "tradeAssistantDesc": "[AR] English replies and customer communication",
+  "myAssistant": "[AR] My Assistant",
+  "cloudAssistantWaterfall": "[AR] Cloud Assistant Waterfall",
+  "cloudAssistantList": "[AR] Cloud Assistant List",
+  "otherCategory": "[AR] Other",
+  "weekdayMon": "[AR] Mon",
+  "weekdayTue": "[AR] Tue",
+  "weekdayWed": "[AR] Wed",
+  "weekdayThu": "[AR] Thu",
+  "weekdayFri": "[AR] Fri",
+  "weekdaySat": "[AR] Sat",
+  "weekdaySun": "[AR] Sun",
+  "fieldAuthor": "[AR] Author",
+  "fieldSinger": "[AR] Singer",
+  "fieldDirector": "[AR] Director",
+  "fieldSource": "[AR] Source",
+  "fieldEra": "[AR] Era",
+  "fieldRegion": "[AR] Region",
+  "fieldLocation": "[AR] Location",
+  "fieldAlbum": "[AR] Album",
+  "fieldFortuneDirection": "[AR] Lucky Direction",
+  "fieldFortuneNumber": "[AR] Lucky Number",
+  "fieldFortuneColor": "[AR] Lucky Color",
+  "fieldCoreQuote": "[AR] Core Quote",
+  "identifyEmotion": "[AR] Detected Emotion",
+  "confidence": "[AR] Confidence"
+}
