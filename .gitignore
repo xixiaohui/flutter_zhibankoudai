@@ -74,3 +74,6 @@ build_output/
 
 
 ai-server/
+
+# Generated localization files
+lib/l10n/gen/

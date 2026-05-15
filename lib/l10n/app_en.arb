@@ -1,0 +1,10 @@
+{
+  "@@locale": "en",
+  "appName": "PocketMind",
+  "bottomNavHome": "Home",
+  "bottomNavDiscover": "Discover",
+  "bottomNavAssistant": "Assistant",
+  "bottomNavMine": "Mine",
+  "dailyUpdate": "Daily Update",
+  "personalKnowledgeBase": "Your Personal Expert Knowledge Base"
+}
