@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:logger/logger.dart';
 import '../config/constants.dart';
 import '../models/module_config.dart';
@@ -24,14 +25,15 @@ class DataService {
   // ================================
   // 模块配置
   // ================================
-  Future<List<ModuleConfig>> getModuleConfigs() async {
+  Future<List<ModuleConfig>> getModuleConfigs({String locale = 'zh'}) async {
     final cache = await _cache;
+    final cacheKey = '${AppConstants.keyModuleConfig}_$locale';
 
-    final cached = cache.getWithExpiry(AppConstants.keyModuleConfig);
+    final cached = cache.getWithExpiry(cacheKey);
     if (cached != null) {
       try {
         final list = jsonDecode(cached) as List<dynamic>;
-        _logger.d('Module configs loaded from cache');
+        _logger.d('Module configs loaded from cache for locale $locale');
         return list
             .map((e) => ModuleConfig.fromJson(e as Map<String, dynamic>))
             .toList();
@@ -44,7 +46,7 @@ class DataService {
       final cloudConfigs = await _fetchModuleConfigsFromCloud();
       if (cloudConfigs.isNotEmpty) {
         await cache.setWithExpiry(
-          AppConstants.keyModuleConfig,
+          cacheKey,
           jsonEncode(cloudConfigs.map((e) => e.toJson()).toList()),
           const Duration(hours: AppConstants.cacheExpireHours),
         );
@@ -55,10 +57,42 @@ class DataService {
       _logger.e('Cloud fetch error: $e');
     }
 
-    _logger.d('Module configs loaded from fallback');
+    // Try loading from assets
+    final assetModules = await _loadModulesFromAssets(locale);
+    if (assetModules.isNotEmpty) {
+      await cache.setWithExpiry(
+        cacheKey,
+        jsonEncode(assetModules.map((e) => e.toJson()).toList()),
+        const Duration(hours: AppConstants.cacheExpireHours),
+      );
+      return assetModules;
+    }
+
+    // Fallback to zh if locale is not zh
+    if (locale != 'zh') {
+      _logger.d('Falling back to zh modules for locale $locale');
+      return getModuleConfigs(locale: 'zh');
+    }
+
+    // Final safety net
+    _logger.d('Using empty module fallback');
     return AppConstants.defaultModules
         .map((e) => ModuleConfig.fromJson(e))
         .toList();
+  }
+
+  Future<List<ModuleConfig>> _loadModulesFromAssets(String locale) async {
+    final path = 'assets/cloudData/modules/modules_$locale.json';
+    try {
+      final jsonStr = await rootBundle.loadString(path);
+      final list = jsonDecode(jsonStr) as List<dynamic>;
+      return list
+          .map((e) => ModuleConfig.fromJson(e as Map<String, dynamic>))
+          .toList();
+    } catch (e) {
+      _logger.w('Failed to load modules from $path: $e');
+      return [];
+    }
   }
 
   Future<List<ModuleConfig>> _fetchModuleConfigsFromCloud() async {

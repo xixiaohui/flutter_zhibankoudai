@@ -17,13 +17,13 @@ class ModuleProvider extends ChangeNotifier {
   String? get error => _error;
 
   /// Load module configs
-  Future<void> loadModules() async {
+  Future<void> loadModules({String locale = 'zh'}) async {
     _isLoading = true;
     _error = null;
     notifyListeners();
 
     try {
-      _modules = await _dataService.getModuleConfigs();
+      _modules = await _dataService.getModuleConfigs(locale: locale);
       _isLoading = false;
       notifyListeners();
     } catch (e) {

@@ -10,6 +10,7 @@ import '../models/daily_content.dart';
 import '../models/module_config.dart';
 import '../providers/module_provider.dart';
 import '../providers/daily_content_provider.dart';
+import '../providers/locale_provider.dart';
 import '../widgets/daily_card.dart';
 import '../widgets/module_grid_item.dart';
 
@@ -44,7 +45,8 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   Future<void> _loadData() async {
     final mp = context.read<ModuleProvider>();
     final cp = context.read<DailyContentProvider>();
-    if (mp.modules.isEmpty) await mp.loadModules();
+    final localeProvider = context.read<LocaleProvider>();
+    if (mp.modules.isEmpty) await mp.loadModules(locale: localeProvider.languageCode);
     for (final m in mp.modules) {
       if (cp.getContent(m.id) == null) cp.loadContent(m);
     }
