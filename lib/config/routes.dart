@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_zhiban/xui/pages/collections_list.dart';
 import 'package:go_router/go_router.dart';
+import '../l10n/gen/app_localizations.dart';
 import '../pages/home_page.dart';
 import '../pages/module_detail_page.dart';
 import '../pages/poster_page.dart';
@@ -124,11 +125,11 @@ class MainShell extends StatelessWidget {
                 case 3: context.go(RoutePaths.mine);
               }
             },
-            destinations: const [
-              NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home), label: '首页'),
-              NavigationDestination(icon: Icon(Icons.explore_outlined), selectedIcon: Icon(Icons.explore), label: '发现'),
-              NavigationDestination(icon: Icon(Icons.bolt_outlined), selectedIcon: Icon(Icons.bolt), label: '助理'),
-              NavigationDestination(icon: Icon(Icons.person_outline), selectedIcon: Icon(Icons.person), label: '我的'),
+            destinations: [
+              NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home), label: AppLocalizations.of(context).bottomNavHome),
+              NavigationDestination(icon: Icon(Icons.explore_outlined), selectedIcon: Icon(Icons.explore), label: AppLocalizations.of(context).bottomNavDiscover),
+              NavigationDestination(icon: Icon(Icons.bolt_outlined), selectedIcon: Icon(Icons.bolt), label: AppLocalizations.of(context).bottomNavAssistant),
+              NavigationDestination(icon: Icon(Icons.person_outline), selectedIcon: Icon(Icons.person), label: AppLocalizations.of(context).bottomNavMine),
             ],
           );
         },

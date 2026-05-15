@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import '../l10n/gen/app_localizations.dart';
 import '../config/routes.dart';
 import '../design/radius.dart';
 import '../design/spacing.dart';
@@ -336,7 +337,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
         Text(_dateStr(), style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant)),
         const SizedBox(height: 8),
         Row(children: [
-          Text('智伴口袋', style: textTheme.headlineMedium?.copyWith(color: colorScheme.onSurface)),
+          Text(AppLocalizations.of(context).appName, style: textTheme.headlineMedium?.copyWith(color: colorScheme.onSurface)),
           const SizedBox(width: 8),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
@@ -344,11 +345,11 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
               color: const Color(0xFFf8cc65).withValues(alpha: 0.4),
               borderRadius: BorderRadius.circular(AppRadius.pill),
             ),
-            child: Text('每日更新', style: textTheme.labelSmall?.copyWith(color: colorScheme.onSurface)),
+            child: Text(AppLocalizations.of(context).dailyUpdate, style: textTheme.labelSmall?.copyWith(color: colorScheme.onSurface)),
           ),
         ]),
         const SizedBox(height: 6),
-        Text('您的个人专家知识库', style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary)),
+        Text(AppLocalizations.of(context).personalKnowledgeBase, style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary)),
       ]),
     );
   }
