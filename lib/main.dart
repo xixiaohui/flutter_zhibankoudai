@@ -47,32 +47,65 @@ class ZhiBanKouDaiApp extends StatelessWidget {
           };
           SystemChrome.setSystemUIOverlayStyle(AppThemeData.overlayStyle(brightness));
 
-          return MaterialApp.router(
-            title: '智伴口袋',
-            debugShowCheckedModeBanner: false,
-            theme: AppThemeData.light,
-            darkTheme: AppThemeData.dark,
-            themeMode: themeProvider.mode,
-            routerConfig: appRouter,
-            locale: localeProvider.locale,
-            supportedLocales: AppLocalizations.supportedLocales,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            localeResolutionCallback: (locale, supportedLocales) {
-              for (final supportedLocale in supportedLocales) {
-                if (supportedLocale.languageCode == locale?.languageCode) {
-                  return supportedLocale;
+          return _LocaleObserver(
+            child: MaterialApp.router(
+              title: '智伴口袋',
+              debugShowCheckedModeBanner: false,
+              theme: AppThemeData.light,
+              darkTheme: AppThemeData.dark,
+              themeMode: themeProvider.mode,
+              routerConfig: appRouter,
+              locale: localeProvider.locale,
+              supportedLocales: AppLocalizations.supportedLocales,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              localeResolutionCallback: (locale, supportedLocales) {
+                for (final supportedLocale in supportedLocales) {
+                  if (supportedLocale.languageCode == locale?.languageCode) {
+                    return supportedLocale;
+                  }
                 }
-              }
-              return supportedLocales.first;
-            },
+                return supportedLocales.first;
+              },
+            ),
           );
         },
       ),
     );
   }
+}
+
+class _LocaleObserver extends StatefulWidget {
+  final Widget child;
+  const _LocaleObserver({required this.child});
+
+  @override
+  State<_LocaleObserver> createState() => _LocaleObserverState();
+}
+
+class _LocaleObserverState extends State<_LocaleObserver>
+    with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeLocales(List<Locale>? locales) {
+    context.read<LocaleProvider>().updateFromSystem();
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
 }
