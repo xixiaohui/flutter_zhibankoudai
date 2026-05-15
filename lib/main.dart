@@ -7,6 +7,9 @@ import 'design/theme_data.dart';
 import 'providers/module_provider.dart';
 import 'providers/daily_content_provider.dart';
 import 'providers/theme_provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'l10n/gen/app_localizations.dart';
+import 'providers/locale_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,9 +36,10 @@ class ZhiBanKouDaiApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ModuleProvider()),
         ChangeNotifierProvider(create: (_) => DailyContentProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => LocaleProvider()),
       ],
-      child: Consumer<ThemeProvider>(
-        builder: (_, themeProvider, _) {
+      child: Consumer2<ThemeProvider, LocaleProvider>(
+        builder: (_, themeProvider, localeProvider, _) {
           final brightness = switch (themeProvider.mode) {
             ThemeMode.light => Brightness.light,
             ThemeMode.dark => Brightness.dark,
@@ -50,6 +54,22 @@ class ZhiBanKouDaiApp extends StatelessWidget {
             darkTheme: AppThemeData.dark,
             themeMode: themeProvider.mode,
             routerConfig: appRouter,
+            locale: localeProvider.locale,
+            supportedLocales: AppLocalizations.supportedLocales,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            localeResolutionCallback: (locale, supportedLocales) {
+              for (final supportedLocale in supportedLocales) {
+                if (supportedLocale.languageCode == locale?.languageCode) {
+                  return supportedLocale;
+                }
+              }
+              return supportedLocales.first;
+            },
           );
         },
       ),
