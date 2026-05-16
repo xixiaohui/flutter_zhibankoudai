@@ -267,5 +267,23 @@
   "catTech": "科技設計",
   "catHealth": "健康養生",
   "catHumanities": "人文社科",
-  "catPractical": "實用資訊"
+  "catPractical": "實用資訊",
+  "dateFormat": "{year}年{month}月{day}日 {weekday}",
+  "@dateFormat": {
+    "placeholders": {
+      "year": {
+        "type": "int"
+      },
+      "month": {
+        "type": "int"
+      },
+      "day": {
+        "type": "int"
+      },
+      "weekday": {
+        "type": "String"
+      }
+    }
+  },
+  "refreshLabel": "換一條"
 }

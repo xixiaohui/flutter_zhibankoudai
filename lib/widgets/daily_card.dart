@@ -248,7 +248,7 @@ class _Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-      _ActionBtn(icon: Icons.refresh, label: '换一条', fg: fg, textTheme: textTheme, onTap: onRefresh),
+      _ActionBtn(icon: Icons.refresh, label: AppLocalizations.of(context)!.refreshLabel, fg: fg, textTheme: textTheme, onTap: onRefresh),
       const SizedBox(width: 12),
       _ActionBtn(icon: Icons.share, label: AppLocalizations.of(context)!.share, fg: fg, textTheme: textTheme, onTap: onShare),
     ]);

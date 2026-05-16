@@ -245,5 +245,23 @@
   "fieldFortuneColor": "[AR] Lucky Color",
   "fieldCoreQuote": "[AR] Core Quote",
   "identifyEmotion": "[AR] Detected Emotion",
-  "confidence": "[AR] Confidence"
+  "confidence": "[AR] Confidence",
+  "dateFormat": "{weekday}, {month}/{day}/{year}",
+  "@dateFormat": {
+    "placeholders": {
+      "year": {
+        "type": "int"
+      },
+      "month": {
+        "type": "int"
+      },
+      "day": {
+        "type": "int"
+      },
+      "weekday": {
+        "type": "String"
+      }
+    }
+  },
+  "refreshLabel": "تحديث"
 }

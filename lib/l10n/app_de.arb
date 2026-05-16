@@ -245,5 +245,23 @@
   "fieldFortuneColor": "[DE] Lucky Color",
   "fieldCoreQuote": "[DE] Core Quote",
   "identifyEmotion": "[DE] Detected Emotion",
-  "confidence": "[DE] Confidence"
+  "confidence": "[DE] Confidence",
+  "dateFormat": "{weekday}, {month}/{day}/{year}",
+  "@dateFormat": {
+    "placeholders": {
+      "year": {
+        "type": "int"
+      },
+      "month": {
+        "type": "int"
+      },
+      "day": {
+        "type": "int"
+      },
+      "weekday": {
+        "type": "String"
+      }
+    }
+  },
+  "refreshLabel": "Aktualisieren"
 }

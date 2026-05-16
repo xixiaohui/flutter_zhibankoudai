@@ -9,6 +9,7 @@ class ModuleConfig {
   final String? generatePrompt;
   final List<FallbackContent> fallback;
   final ShareConfig? share;
+  final String refreshText;
 
   const ModuleConfig({
     required this.id,
@@ -19,6 +20,7 @@ class ModuleConfig {
     this.generatePrompt,
     this.fallback = const [],
     this.share,
+    this.refreshText = 'Refresh',
   });
 
   factory ModuleConfig.fromJson(Map<String, dynamic> json) {
@@ -36,6 +38,7 @@ class ModuleConfig {
       share: json['share'] != null
           ? ShareConfig.fromJson(json['share'] as Map<String, dynamic>)
           : null,
+      refreshText: json['refreshText'] as String? ?? 'Refresh',
     );
   }
 

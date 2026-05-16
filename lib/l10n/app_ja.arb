@@ -245,5 +245,23 @@
   "fieldFortuneColor": "[JA] Lucky Color",
   "fieldCoreQuote": "[JA] Core Quote",
   "identifyEmotion": "[JA] Detected Emotion",
-  "confidence": "[JA] Confidence"
+  "confidence": "[JA] Confidence",
+  "dateFormat": "{year}年{month}月{day}日 {weekday}",
+  "@dateFormat": {
+    "placeholders": {
+      "year": {
+        "type": "int"
+      },
+      "month": {
+        "type": "int"
+      },
+      "day": {
+        "type": "int"
+      },
+      "weekday": {
+        "type": "String"
+      }
+    }
+  },
+  "refreshLabel": "リフレッシュ"
 }

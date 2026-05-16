@@ -215,6 +215,16 @@
   "weekdayFri": "Fri",
   "weekdaySat": "Sat",
   "weekdaySun": "Sun",
+  "dateFormat": "{weekday}, {month}/{day}/{year}",
+  "@dateFormat": {
+    "placeholders": {
+      "year": {"type": "int"},
+      "month": {"type": "int"},
+      "day": {"type": "int"},
+      "weekday": {"type": "String"}
+    }
+  },
+  "refreshLabel": "Refresh",
   "fieldAuthor": "Author",
   "fieldSinger": "Singer",
   "fieldDirector": "Director",

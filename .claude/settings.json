@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git branch *)",
+      "Bash(git commit *)",
+      "Bash(python _temp_s2t_convert.py)"
+    ]
+  }
+}

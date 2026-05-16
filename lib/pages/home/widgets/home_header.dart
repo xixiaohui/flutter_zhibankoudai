@@ -12,7 +12,7 @@ class HomeHeader extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final now = DateTime.now();
     final wd = [l10n.weekdayMon, l10n.weekdayTue, l10n.weekdayWed, l10n.weekdayThu, l10n.weekdayFri, l10n.weekdaySat, l10n.weekdaySun];
-    return '${now.year}年${now.month}月${now.day}日 ${wd[now.weekday - 1]}';
+    return l10n.dateFormat(now.year, now.month, now.day, wd[now.weekday - 1]);
   }
 
   @override

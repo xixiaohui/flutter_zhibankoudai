@@ -245,5 +245,23 @@
   "fieldFortuneColor": "[HI] Lucky Color",
   "fieldCoreQuote": "[HI] Core Quote",
   "identifyEmotion": "[HI] Detected Emotion",
-  "confidence": "[HI] Confidence"
+  "confidence": "[HI] Confidence",
+  "dateFormat": "{weekday}, {month}/{day}/{year}",
+  "@dateFormat": {
+    "placeholders": {
+      "year": {
+        "type": "int"
+      },
+      "month": {
+        "type": "int"
+      },
+      "day": {
+        "type": "int"
+      },
+      "weekday": {
+        "type": "String"
+      }
+    }
+  },
+  "refreshLabel": "रीफ्रेश"
 }

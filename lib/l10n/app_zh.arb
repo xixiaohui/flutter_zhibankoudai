@@ -215,6 +215,16 @@
   "weekdayFri": "周五",
   "weekdaySat": "周六",
   "weekdaySun": "周日",
+  "dateFormat": "{year}年{month}月{day}日 {weekday}",
+  "@dateFormat": {
+    "placeholders": {
+      "year": {"type": "int"},
+      "month": {"type": "int"},
+      "day": {"type": "int"},
+      "weekday": {"type": "String"}
+    }
+  },
+  "refreshLabel": "换一条",
   "fieldAuthor": "作者",
   "fieldSinger": "歌手",
   "fieldDirector": "导演",
