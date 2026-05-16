@@ -1,0 +1,1022 @@
+[
+  {
+    "id": "quote",
+    "name": "時光絮語",
+    "description": "名言警句，每日一句，點亮你的一天",
+    "generate": "請生成一句經典名言，包含作者和出處",
+    "icon": "📜",
+    "color": "#5C6BC0",
+    "refreshText": "換一句",
+    "loadingText": "名言正在送達...",
+    "placeholderText": "點擊「換一句」獲取今日名言",
+    "posterType": "quote",
+    "slogan": "名人名言，智慧啓迪",
+    "aiTags": [
+      "名言",
+      "金句"
+    ]
+  },
+  {
+    "id": "joke",
+    "name": "輕鬆一刻",
+    "description": "輕鬆一刻，快樂每一天",
+    "generate": "請生成一個簡短有趣的笑話",
+    "icon": "😄",
+    "color": "#FF7043",
+    "refreshText": "換一個",
+    "loadingText": "段子正在趕來的路上...",
+    "placeholderText": "點擊「換一個」獲取輕鬆一刻",
+    "posterType": "joke",
+    "slogan": "笑一笑，十年少",
+    "aiTags": [
+      "段子",
+      "幽默"
+    ]
+  },
+  {
+    "id": "psychology",
+    "name": "心理解析",
+    "description": "心理小知識，了解自己了解他人",
+    "generate": "請生成一個實用的心理學小知識",
+    "icon": "🧠",
+    "color": "#7E57C2",
+    "refreshText": "換一個",
+    "loadingText": "正在分析...",
+    "placeholderText": "點擊「換一個」獲取心理知識",
+    "posterType": "psychology",
+    "slogan": "讀懂內心，遇見更好的自己",
+    "aiTags": [
+      "心理",
+      "情感"
+    ]
+  },
+  {
+    "id": "finance",
+    "name": "財富視窗",
+    "description": "投資理財，財富增長",
+    "generate": "請生成一條實用的理財小知識",
+    "icon": "💹",
+    "color": "#26A69A",
+    "refreshText": "換一條",
+    "loadingText": "財經要聞加載中...",
+    "placeholderText": "點擊「換一條」獲取財經資訊",
+    "posterType": "finance",
+    "slogan": "洞察財富趨勢",
+    "aiTags": [
+      "金融",
+      "經濟"
+    ]
+  },
+  {
+    "id": "love",
+    "name": "甜蜜時刻",
+    "description": "浪漫語錄，溫暖你的心",
+    "generate": "請生成一條浪漫的愛情語錄",
+    "icon": "💕",
+    "color": "#EC407A",
+    "refreshText": "換一句",
+    "loadingText": "甜蜜情話生成中...",
+    "placeholderText": "點擊「換一句」獲取甜蜜情話",
+    "posterType": "love",
+    "slogan": "愛要大聲說出來",
+    "aiTags": [
+      "情話",
+      "甜蜜"
+    ]
+  },
+  {
+    "id": "movie",
+    "name": "光影世界",
+    "description": "精彩電影，不容錯過",
+    "generate": "請生成一部值得觀看的電影推薦",
+    "icon": "🎬",
+    "color": "#EF5350",
+    "refreshText": "換一部",
+    "loadingText": "好片推薦生成中...",
+    "placeholderText": "點擊「換一部」獲取電影推薦",
+    "posterType": "movie",
+    "slogan": "光影人生，品味百態",
+    "aiTags": [
+      "電影",
+      "影評"
+    ]
+  },
+  {
+    "id": "music",
+    "name": "音樂時光",
+    "description": "經典音樂，打動人心",
+    "generate": "請推薦一首經典歌曲",
+    "icon": "🎵",
+    "color": "#AB47BC",
+    "refreshText": "換一首",
+    "loadingText": "好歌正在播放...",
+    "placeholderText": "點擊「換一首」獲取音樂推薦",
+    "posterType": "music",
+    "slogan": "音樂是靈魂的糧食",
+    "aiTags": [
+      "音樂",
+      "歌單"
+    ]
+  },
+  {
+    "id": "tech",
+    "name": "科技前沿",
+    "description": "科技動態，洞見未來",
+    "generate": "請分享一個科技前沿動態",
+    "icon": "🚀",
+    "color": "#42A5F5",
+    "refreshText": "換一條",
+    "loadingText": "科技前沿加載中...",
+    "placeholderText": "點擊「換一條」獲取科技資訊",
+    "posterType": "tech",
+    "slogan": "科技改變世界",
+    "aiTags": [
+      "科技",
+      "前沿"
+    ]
+  },
+  {
+    "id": "tcm",
+    "name": "中醫養生",
+    "description": "中醫養生，健康生活",
+    "generate": "請分享一個中醫養生小知識",
+    "icon": "🌿",
+    "color": "#66BB6A",
+    "refreshText": "換一條",
+    "loadingText": "養生知識加載中...",
+    "placeholderText": "點擊「換一條」獲取中醫養生知識",
+    "posterType": "tcm",
+    "slogan": "傳承千年中醫智慧",
+    "aiTags": [
+      "中醫",
+      "養生"
+    ]
+  },
+  {
+    "id": "travel",
+    "name": "旅行日記",
+    "description": "旅行推薦，玩轉世界",
+    "generate": "請推薦一個旅行目的地",
+    "icon": "✈️",
+    "color": "#26C6DA",
+    "refreshText": "換一處",
+    "loadingText": "旅行攻略生成中...",
+    "placeholderText": "點擊「換一處」獲取旅行推薦",
+    "posterType": "travel",
+    "slogan": "世界那麼大，我想去看看",
+    "aiTags": [
+      "旅行",
+      "目的地"
+    ]
+  },
+  {
+    "id": "fortune",
+    "name": "每日一卦",
+    "description": "每日運勢，好運相伴",
+    "generate": "請生成今日運勢分析",
+    "icon": "☯️",
+    "color": "#8D6E63",
+    "refreshText": "再算一卦",
+    "loadingText": "卦象解讀中...",
+    "placeholderText": "點擊「再算一卦」獲取今日運勢",
+    "posterType": "fortune",
+    "slogan": "知命而行，順勢而爲",
+    "aiTags": [
+      "易經",
+      "卦象"
+    ]
+  },
+  {
+    "id": "literature",
+    "name": "文學殿堂",
+    "description": "文學佳作，細細品讀",
+    "generate": "請分享一段文學佳作賞析",
+    "icon": "📚",
+    "color": "#78909C",
+    "refreshText": "換一篇",
+    "loadingText": "文學佳作加載中...",
+    "placeholderText": "點擊「換一篇」獲取文學推薦",
+    "posterType": "literature",
+    "slogan": "腹有詩書氣自華",
+    "aiTags": [
+      "文學",
+      "名著"
+    ]
+  },
+  {
+    "id": "foreignTrade",
+    "name": "外貿助手",
+    "description": "外貿資訊，商機無限",
+    "generate": "請分享一條外貿資訊",
+    "icon": "🌐",
+    "color": "#5C6BC0",
+    "refreshText": "換一條",
+    "loadingText": "外貿知識加載中...",
+    "placeholderText": "點擊「換一條」獲取外貿知識",
+    "posterType": "foreignTrade",
+    "slogan": "貨通天下，買賣全球",
+    "aiTags": [
+      "外貿",
+      "跨境"
+    ]
+  },
+  {
+    "id": "ecommerce",
+    "name": "電商運營",
+    "description": "電商動態，把握趨勢",
+    "generate": "請分享一個電商運營知識",
+    "icon": "🛒",
+    "color": "#FF7043",
+    "refreshText": "換一條",
+    "loadingText": "運營技巧加載中...",
+    "placeholderText": "點擊「換一條」獲取電商運營技巧",
+    "posterType": "ecommerce",
+    "slogan": "運營有道，銷量無憂",
+    "aiTags": [
+      "電商",
+      "運營"
+    ]
+  },
+  {
+    "id": "math",
+    "name": "數學達人",
+    "description": "數學趣題，啓迪思維",
+    "generate": "請分享一個有趣的數學知識",
+    "icon": "📐",
+    "color": "#7E57C2",
+    "refreshText": "換一道",
+    "loadingText": "數學題加載中...",
+    "placeholderText": "點擊「換一道」獲取數學知識",
+    "posterType": "math",
+    "slogan": "數學是科學的語言",
+    "aiTags": [
+      "數學",
+      "解題"
+    ]
+  },
+  {
+    "id": "english",
+    "name": "英語達人",
+    "description": "英語學習，提升自我",
+    "generate": "請分享一個實用的英語知識點",
+    "icon": "🔤",
+    "color": "#42A5F5",
+    "refreshText": "換一條",
+    "loadingText": "英語知識加載中...",
+    "placeholderText": "點擊「換一條」獲取英語知識",
+    "posterType": "english",
+    "slogan": "English is a global language",
+    "aiTags": [
+      "英語",
+      "學習"
+    ]
+  },
+  {
+    "id": "programming",
+    "name": "編程導師",
+    "description": "編程技巧，技術進階",
+    "generate": "請介紹一個有趣的編程概念",
+    "icon": "💻",
+    "color": "#26A69A",
+    "refreshText": "換一條",
+    "loadingText": "代碼技巧加載中...",
+    "placeholderText": "點擊「換一條」獲取編程技巧",
+    "posterType": "programming",
+    "slogan": "代碼改變世界",
+    "aiTags": [
+      "編程",
+      "代碼"
+    ]
+  },
+  {
+    "id": "photography",
+    "name": "攝影大師",
+    "description": "攝影技巧，記錄美好",
+    "generate": "請分享一個實用的攝影技巧",
+    "icon": "📷",
+    "color": "#EC407A",
+    "refreshText": "換一條",
+    "loadingText": "攝影技巧加載中...",
+    "placeholderText": "點擊「換一條」獲取攝影技巧",
+    "posterType": "photography",
+    "slogan": "用鏡頭捕捉美好",
+    "aiTags": [
+      "攝影",
+      "技巧"
+    ]
+  },
+  {
+    "id": "beauty",
+    "name": "美妝達人",
+    "description": "美容護膚，煥發光彩",
+    "generate": "請分享一個實用的美容護膚知識",
+    "icon": "💄",
+    "color": "#EF5350",
+    "refreshText": "換一條",
+    "loadingText": "美妝知識加載中...",
+    "placeholderText": "點擊「換一條」獲取美妝知識",
+    "posterType": "beauty",
+    "slogan": "beauty is in the details",
+    "aiTags": [
+      "美妝",
+      "護膚"
+    ]
+  },
+  {
+    "id": "investment",
+    "name": "投資顧問",
+    "description": "投資理財，財富增值",
+    "generate": "請分享一個投資理財知識",
+    "icon": "📈",
+    "color": "#66BB6A",
+    "refreshText": "換一條",
+    "loadingText": "投資知識加載中...",
+    "placeholderText": "點擊「換一條」獲取投資知識",
+    "posterType": "investment",
+    "slogan": "穩健投資，財富增值",
+    "aiTags": [
+      "投資",
+      "理財"
+    ]
+  },
+  {
+    "id": "fishing",
+    "name": "釣魚達人",
+    "description": "釣魚技巧，漁樂無窮",
+    "generate": "請分享一個釣魚技巧或知識",
+    "icon": "🎣",
+    "color": "#26C6DA",
+    "refreshText": "換一條",
+    "loadingText": "釣魚技巧加載中...",
+    "placeholderText": "點擊「換一條」獲取釣魚技巧",
+    "posterType": "fishing",
+    "slogan": "釣魚是一種生活態度",
+    "aiTags": [
+      "釣魚",
+      "技巧"
+    ]
+  },
+  {
+    "id": "fitness",
+    "name": "健身教練",
+    "description": "健身指導，強健體魄",
+    "generate": "請分享一個實用的健身知識",
+    "icon": "💪",
+    "color": "#AB47BC",
+    "refreshText": "換一條",
+    "loadingText": "健身知識加載中...",
+    "placeholderText": "點擊「換一條」獲取健身知識",
+    "posterType": "fitness",
+    "slogan": "生命在於運動",
+    "aiTags": [
+      "健身",
+      "運動"
+    ]
+  },
+  {
+    "id": "pet",
+    "name": "寵物專家",
+    "description": "寵物養護，愛心陪伴",
+    "generate": "請分享一個寵物養護知識",
+    "icon": "🐾",
+    "color": "#8D6E63",
+    "refreshText": "換一條",
+    "loadingText": "寵物知識加載中...",
+    "placeholderText": "點擊「換一條」獲取寵物知識",
+    "posterType": "pet",
+    "slogan": "寵物是人類的好朋友",
+    "aiTags": [
+      "寵物",
+      "養護"
+    ]
+  },
+  {
+    "id": "fashion",
+    "name": "時尚教主",
+    "description": "時尚穿搭，展現品味",
+    "generate": "請分享一個時尚穿搭知識",
+    "icon": "👗",
+    "color": "#78909C",
+    "refreshText": "換一條",
+    "loadingText": "時尚資訊加載中...",
+    "placeholderText": "點擊「換一條」獲取時尚資訊",
+    "posterType": "fashion",
+    "slogan": "fashion is what you buy, style is what you do with it",
+    "aiTags": [
+      "時尚",
+      "潮流"
+    ]
+  },
+  {
+    "id": "outfit",
+    "name": "穿搭指南",
+    "description": "穿搭推薦，每日搭配",
+    "generate": "請分享一個穿搭推薦",
+    "icon": "👔",
+    "color": "#5C6BC0",
+    "refreshText": "換一條",
+    "loadingText": "穿搭指南加載中...",
+    "placeholderText": "點擊「換一條」獲取穿搭指南",
+    "posterType": "outfit",
+    "slogan": "穿出風格，活出精彩",
+    "aiTags": [
+      "穿搭",
+      "搭配"
+    ]
+  },
+  {
+    "id": "decoration",
+    "name": "裝修顧問",
+    "description": "家居裝飾，美化生活",
+    "generate": "請分享一個家居裝飾技巧",
+    "icon": "🏠",
+    "color": "#FF7043",
+    "refreshText": "換一條",
+    "loadingText": "裝修知識加載中...",
+    "placeholderText": "點擊「換一條」獲取裝修知識",
+    "posterType": "decoration",
+    "slogan": "讓家更溫馨",
+    "aiTags": [
+      "裝修",
+      "家居"
+    ]
+  },
+  {
+    "id": "glassFiber",
+    "name": "玻纖專家",
+    "description": "玻璃纖維，材料前沿",
+    "generate": "請分享一個玻璃纖維相關知識",
+    "icon": "🧵",
+    "color": "#7E57C2",
+    "refreshText": "換一條",
+    "loadingText": "玻纖知識加載中...",
+    "placeholderText": "點擊「換一條」獲取玻纖知識",
+    "posterType": "glassFiber",
+    "slogan": "專業材料，專業品質",
+    "aiTags": [
+      "玻纖",
+      "材料"
+    ]
+  },
+  {
+    "id": "resin",
+    "name": "樹脂達人",
+    "description": "樹脂工藝，創意無限",
+    "generate": "請分享一個樹脂工藝知識",
+    "icon": "🧪",
+    "color": "#42A5F5",
+    "refreshText": "換一條",
+    "loadingText": "樹脂知識加載中...",
+    "placeholderText": "點擊「換一條」獲取樹脂知識",
+    "posterType": "resin",
+    "slogan": "材料科學，應用無限",
+    "aiTags": [
+      "樹脂",
+      "化工"
+    ]
+  },
+  {
+    "id": "tax",
+    "name": "財稅顧問",
+    "description": "稅務籌劃，合規省心",
+    "generate": "請分享一個稅務籌劃知識",
+    "icon": "📋",
+    "color": "#26A69A",
+    "refreshText": "換一條",
+    "loadingText": "財稅知識加載中...",
+    "placeholderText": "點擊「換一條」獲取財稅知識",
+    "posterType": "tax",
+    "slogan": "合理節稅，依法納稅",
+    "aiTags": [
+      "財稅",
+      "稅務"
+    ]
+  },
+  {
+    "id": "law",
+    "name": "法律顧問",
+    "description": "法律常識，知法守法",
+    "generate": "請分享一個實用法律常識",
+    "icon": "⚖️",
+    "color": "#EC407A",
+    "refreshText": "換一條",
+    "loadingText": "法律知識加載中...",
+    "placeholderText": "點擊「換一條」獲取法律知識",
+    "posterType": "law",
+    "slogan": "知法用法，保護自己",
+    "aiTags": [
+      "法律",
+      "維權"
+    ]
+  },
+  {
+    "id": "official",
+    "name": "職場達人",
+    "description": "政務服務，辦事指南",
+    "generate": "請分享一個政務服務信息",
+    "icon": "🎩",
+    "color": "#EF5350",
+    "refreshText": "換一條",
+    "loadingText": "職場知識加載中...",
+    "placeholderText": "點擊「換一條」獲取職場知識",
+    "posterType": "official",
+    "slogan": "職場如戰場，智慧取勝",
+    "aiTags": [
+      "職場",
+      "人際"
+    ]
+  },
+  {
+    "id": "handling",
+    "name": "處事高手",
+    "description": "辦事指南，高效辦事",
+    "generate": "請分享一個辦事指南",
+    "icon": "💎",
+    "color": "#66BB6A",
+    "refreshText": "換一條",
+    "loadingText": "處事智慧加載中...",
+    "placeholderText": "點擊「換一條」獲取處事智慧",
+    "posterType": "handling",
+    "slogan": "世事洞明皆學問",
+    "aiTags": [
+      "處事",
+      "情商"
+    ]
+  },
+  {
+    "id": "floral",
+    "name": "花藝師",
+    "description": "花卉養護，芬芳生活",
+    "generate": "請分享一個花卉養護知識",
+    "icon": "💐",
+    "color": "#26C6DA",
+    "refreshText": "換一條",
+    "loadingText": "花藝知識加載中...",
+    "placeholderText": "點擊「換一條」獲取花藝知識",
+    "posterType": "floral",
+    "slogan": "花語人生，芬芳四季",
+    "aiTags": [
+      "花藝",
+      "插花"
+    ]
+  },
+  {
+    "id": "history",
+    "name": "歷史明鏡",
+    "description": "歷史故事，以史為鑑",
+    "generate": "請分享一個有趣的歷史故事",
+    "icon": "📚",
+    "color": "#AB47BC",
+    "refreshText": "換一條",
+    "loadingText": "歷史典故加載中...",
+    "placeholderText": "點擊「換一條」獲取歷史典故",
+    "posterType": "history",
+    "slogan": "以史為鑑，可以知興替",
+    "aiTags": [
+      "歷史",
+      "典故"
+    ]
+  },
+  {
+    "id": "military",
+    "name": "軍事觀察",
+    "description": "軍事動態，國防視野",
+    "generate": "請分享一條軍事動態",
+    "icon": "🎖️",
+    "color": "#8D6E63",
+    "refreshText": "換一條",
+    "loadingText": "軍事知識加載中...",
+    "placeholderText": "點擊「換一條」獲取軍事知識",
+    "posterType": "military",
+    "slogan": "知己知彼，百戰不殆",
+    "aiTags": [
+      "軍事",
+      "戰略"
+    ]
+  },
+  {
+    "id": "stock",
+    "name": "股海明燈",
+    "description": "股市行情，投資參考",
+    "generate": "請分享一條股市行情分析",
+    "icon": "📈",
+    "color": "#1E88E5",
+    "refreshText": "換一條",
+    "loadingText": "投資專家正在爲你分析...",
+    "placeholderText": "點擊「換一條」獲取投資知識",
+    "posterType": "stock",
+    "slogan": "理性投資，穩健增值",
+    "aiTags": [
+      "股票",
+      "期貨"
+    ]
+  },
+  {
+    "id": "economics",
+    "name": "經濟視窗",
+    "description": "經濟觀察，洞悉趨勢",
+    "generate": "請分享一條經濟觀察",
+    "icon": "💰",
+    "color": "#00897B",
+    "refreshText": "換一條",
+    "loadingText": "經濟學家正在爲你解讀...",
+    "placeholderText": "點擊「換一條」學習經濟學知識",
+    "posterType": "economics",
+    "slogan": "洞悉經濟，把握趨勢",
+    "aiTags": [
+      "經濟",
+      "分析"
+    ]
+  },
+  {
+    "id": "business",
+    "name": "商道智慧",
+    "description": "商業洞察，把握商機",
+    "generate": "請分享一個商業洞察",
+    "icon": "💼",
+    "color": "#6D4C41",
+    "refreshText": "換一條",
+    "loadingText": "商業導師正在爲你指點...",
+    "placeholderText": "點擊「換一條」學習商業智慧",
+    "posterType": "business",
+    "slogan": "商道即人道，贏在格局",
+    "aiTags": [
+      "商業",
+      "經營"
+    ]
+  },
+  {
+    "id": "news",
+    "name": "資訊前沿",
+    "description": "每日資訊，知曉天下",
+    "generate": "請生成一條每日資訊",
+    "icon": "📰",
+    "color": "#D32F2F",
+    "refreshText": "換一條",
+    "loadingText": "媒體專家正在爲你解讀...",
+    "placeholderText": "點擊「換一條」獲取新聞解讀",
+    "posterType": "news",
+    "slogan": "資訊爲王，洞察爲先",
+    "aiTags": [
+      "新聞",
+      "熱點"
+    ]
+  },
+  {
+    "id": "wisdomBag",
+    "name": "智慧錦囊",
+    "description": "智慧錦囊，人生哲理",
+    "generate": "請分享一個智慧錦囊",
+    "icon": "🎁",
+    "color": "#FFA000",
+    "refreshText": "換一個",
+    "loadingText": "智慧錦囊生成中...",
+    "placeholderText": "點擊「換一個」獲取智慧錦囊",
+    "posterType": "wisdomBag",
+    "slogan": "小智慧，大人生",
+    "aiTags": [
+      "智慧",
+      "錦囊"
+    ]
+  },
+  {
+    "id": "robotAi",
+    "name": "AI機器人",
+    "description": "人工智能，未來科技",
+    "generate": "請分享一個機器人或AI知識",
+    "icon": "🤖",
+    "color": "#7C4DFF",
+    "refreshText": "換一條",
+    "loadingText": "AI正在思考...",
+    "placeholderText": "點擊「換一條」獲取AI知識",
+    "posterType": "robotAi",
+    "slogan": "智能未來，由你掌控",
+    "aiTags": [
+      "AI",
+      "機器人"
+    ]
+  },
+  {
+    "id": "americanExpert",
+    "name": "美國通",
+    "description": "美國文化，深入了解",
+    "generate": "請分享一個關於美國的知識",
+    "icon": "🗽",
+    "color": "#1565C0",
+    "refreshText": "換一條",
+    "loadingText": "正在爲你介紹...",
+    "placeholderText": "點擊「換一條」了解美國文化",
+    "posterType": "americanExpert",
+    "slogan": "了解美國，洞察世界",
+    "aiTags": [
+      "美國",
+      "文化"
+    ]
+  },
+  {
+    "id": "apple",
+    "name": "果核學堂",
+    "description": "果核學堂，智慧果實",
+    "generate": "請分享一個有趣的知識點",
+    "icon": "🍎",
+    "color": "#E53935",
+    "refreshText": "換一條",
+    "loadingText": "學堂開課中...",
+    "placeholderText": "點擊「換一條」獲取新知識",
+    "posterType": "apple",
+    "slogan": "每天進步一點點",
+    "aiTags": [
+      "知識",
+      "學習"
+    ]
+  },
+  {
+    "id": "growth",
+    "name": "增長專家",
+    "description": "市場品牌增長策略",
+    "generate": "請分享一個品牌增長策略",
+    "icon": "📈",
+    "color": "#00C853",
+    "refreshText": "換一條",
+    "loadingText": "增長策略生成中...",
+    "placeholderText": "點擊「換一條」獲取增長知識",
+    "posterType": "growth",
+    "slogan": "增長是企業的生命線",
+    "aiTags": [
+      "增長",
+      "營銷"
+    ]
+  },
+  {
+    "id": "uiDesigner",
+    "name": "UI設計師",
+    "description": "UI設計，視覺美學",
+    "generate": "請分享一個UI設計技巧",
+    "icon": "🎨",
+    "color": "#FF4081",
+    "refreshText": "換一條",
+    "loadingText": "設計靈感生成中...",
+    "placeholderText": "點擊「換一條」獲取設計靈感",
+    "posterType": "uiDesigner",
+    "slogan": "設計讓世界更美好",
+    "aiTags": [
+      "設計",
+      "UI"
+    ]
+  },
+  {
+    "id": "futures",
+    "name": "期貨專家",
+    "description": "期貨貿易，專業分析",
+    "generate": "請分享一個期貨貿易知識",
+    "icon": "📊",
+    "color": "#455A64",
+    "refreshText": "換一條",
+    "loadingText": "期貨分析中...",
+    "placeholderText": "點擊「換一條」獲取期貨知識",
+    "posterType": "futures",
+    "slogan": "洞察大宗，駕馭風險",
+    "aiTags": [
+      "期貨",
+      "大宗商品"
+    ]
+  },
+  {
+    "id": "freud",
+    "name": "弗洛伊德",
+    "description": "弗洛伊德心理學",
+    "generate": "請分享一個弗洛伊德心理學概念",
+    "icon": "🧠",
+    "color": "#5E35B1",
+    "refreshText": "換一條",
+    "loadingText": "精神分析中...",
+    "placeholderText": "點擊「換一條」了解心理學知識",
+    "posterType": "freud",
+    "slogan": "探索潛意識，解讀心靈",
+    "aiTags": [
+      "心理學",
+      "精神分析"
+    ]
+  },
+  {
+    "id": "fashionBrand",
+    "name": "奢侈品牌",
+    "description": "服裝品牌，時尚前沿",
+    "generate": "請分享一個世界服裝品牌故事",
+    "icon": "👛",
+    "color": "#880E4F",
+    "refreshText": "換一條",
+    "loadingText": "品牌故事加載中...",
+    "placeholderText": "點擊「換一條」了解奢侈品牌",
+    "posterType": "fashionBrand",
+    "slogan": "品味經典，洞悉潮流",
+    "aiTags": [
+      "品牌",
+      "時尚"
+    ]
+  },
+  {
+    "id": "xinStudy",
+    "name": "心學大師",
+    "description": "心學智慧，修身養性",
+    "generate": "請分享一個心學知識點",
+    "icon": "💭",
+    "color": "#00695C",
+    "refreshText": "換一條",
+    "loadingText": "心學智慧解讀中...",
+    "placeholderText": "點擊「換一條」學習心學智慧",
+    "posterType": "xinStudy",
+    "slogan": "知行合一，致良知",
+    "aiTags": [
+      "心學",
+      "王陽明"
+    ]
+  },
+  {
+    "id": "liStudy",
+    "name": "理學大師",
+    "description": "理學思想，格物致知",
+    "generate": "請分享一個理學知識點",
+    "icon": "📖",
+    "color": "#4A148C",
+    "refreshText": "換一條",
+    "loadingText": "理學智慧解讀中...",
+    "placeholderText": "點擊「換一條」學習理學智慧",
+    "posterType": "liStudy",
+    "slogan": "格物致知，正心誠意",
+    "aiTags": [
+      "理學",
+      "朱熹"
+    ]
+  },
+  {
+    "id": "anthropologist",
+    "name": "人類學家",
+    "description": "人類學視角看世界",
+    "generate": "請分享一個人類學知識",
+    "icon": "🏛️",
+    "color": "#8D6E63",
+    "refreshText": "換一條",
+    "loadingText": "人類學探索中...",
+    "placeholderText": "點擊「換一條」探索人類文明",
+    "posterType": "anthropologist",
+    "slogan": "理解人類，認識自己",
+    "aiTags": [
+      "人類學",
+      "文化"
+    ]
+  },
+  {
+    "id": "geographer",
+    "name": "地理學家",
+    "description": "地理知識，探索世界",
+    "generate": "請分享一個地理知識",
+    "icon": "🌍",
+    "color": "#26A69A",
+    "refreshText": "換一條",
+    "loadingText": "地理知識解讀中...",
+    "placeholderText": "點擊「換一條」探索地球奧祕",
+    "posterType": "geographer",
+    "slogan": "讀懂地球，看清世界",
+    "aiTags": [
+      "地理",
+      "地貌"
+    ]
+  },
+  {
+    "id": "historian",
+    "name": "歷史學家",
+    "description": "歷史研究，深度解讀",
+    "generate": "請分享一個歷史研究視角",
+    "icon": "📜",
+    "color": "#7E57C2",
+    "refreshText": "換一條",
+    "loadingText": "歷史長河探索中...",
+    "placeholderText": "點擊「換一條」觸摸歷史脈搏",
+    "posterType": "historian",
+    "slogan": "以史為鑑，照見未來",
+    "aiTags": [
+      "歷史",
+      "史實"
+    ]
+  },
+  {
+    "id": "narratologist",
+    "name": "敘事學家",
+    "description": "敘事藝術，故事力量",
+    "generate": "請分享一個敘事學概念",
+    "icon": "📖",
+    "color": "#EC407A",
+    "refreshText": "換一條",
+    "loadingText": "敘事藝術解讀中...",
+    "placeholderText": "點擊「換一條」領悟故事魅力",
+    "posterType": "narratologist",
+    "slogan": "故事之道，敘事之藝",
+    "aiTags": [
+      "敘事",
+      "故事"
+    ]
+  },
+  {
+    "id": "psychologist",
+    "name": "心理學家",
+    "description": "心理學深度解讀",
+    "generate": "請分享一個心理學研究成果",
+    "icon": "🧠",
+    "color": "#5C6BC0",
+    "refreshText": "換一條",
+    "loadingText": "心理奧祕探索中...",
+    "placeholderText": "點擊「換一條」解讀人心",
+    "posterType": "psychologist",
+    "slogan": "洞察心靈，認知自我",
+    "aiTags": [
+      "心理學",
+      "認知"
+    ]
+  },
+  {
+    "id": "softwareArchitect",
+    "name": "軟件架構師助手",
+    "description": "軟件架構，系統設計",
+    "generate": "請分享一個軟件架構知識",
+    "icon": "🏗️",
+    "color": "#1565C0",
+    "refreshText": "換一條",
+    "loadingText": "架構知識解讀中...",
+    "placeholderText": "點擊「換一條」獲取架構知識",
+    "posterType": "softwareArchitect",
+    "slogan": "系統設計，架構之道",
+    "aiTags": [
+      "架構",
+      "設計"
+    ]
+  },
+  {
+    "id": "solidityEngineer",
+    "name": "Solidity智能合約工程師",
+    "description": "智能合約，區塊鏈開發",
+    "generate": "請分享一個智能合約知識",
+    "icon": "⛓️",
+    "color": "#2E7D32",
+    "refreshText": "換一條",
+    "loadingText": "合約知識解讀中...",
+    "placeholderText": "點擊「換一條」獲取合約知識",
+    "posterType": "solidityEngineer",
+    "slogan": "智能合約，鏈上之道",
+    "aiTags": [
+      "區塊鏈",
+      "合約"
+    ]
+  },
+  {
+    "id": "xiaohongshuExpert",
+    "name": "小紅書專家",
+    "description": "小紅書運營，種草技巧",
+    "generate": "請分享一個小紅書運營技巧",
+    "icon": "📕",
+    "color": "#E91E63",
+    "refreshText": "換一條",
+    "loadingText": "運營技巧解讀中...",
+    "placeholderText": "點擊「換一條」獲取運營技巧",
+    "posterType": "xiaohongshuExpert",
+    "slogan": "流量密碼，內容爲王",
+    "aiTags": [
+      "運營",
+      "種草"
+    ]
+  },
+  {
+    "id": "seoExpert",
+    "name": "SEO專家",
+    "description": "搜索引擎優化，讓內容被更多人看到",
+    "generate": "請生成一條SEO優化技巧",
+    "icon": "🔍",
+    "color": "#FF5722",
+    "refreshText": "換一條",
+    "loadingText": "SEO技巧解讀中...",
+    "placeholderText": "點擊「換一條」獲取SEO技巧",
+    "posterType": "seoExpert",
+    "slogan": "搜索優化，排名提升",
+    "aiTags": [
+      "搜索",
+      "排名"
+    ]
+  },
+  {
+    "id": "idiom",
+    "name": "歇後語俗語",
+    "description": "歇後語俗語，民間智慧",
+    "generate": "請生成一條歇後語或俗語",
+    "icon": "📝",
+    "color": "#795548",
+    "refreshText": "換一條",
+    "loadingText": "俗語智慧解讀中...",
+    "placeholderText": "點擊「換一條」獲取歇後語俗語",
+    "posterType": "idiom",
+    "slogan": "民間智慧，口口相傳",
+    "aiTags": [
+      "歇後語",
+      "俗語"
+    ]
+  }
+]

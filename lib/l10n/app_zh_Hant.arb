@@ -1,0 +1,271 @@
+{
+  "@@locale": "zh_Hant",
+  "appName": "智伴口袋",
+  "appNameEn": "PocketMind",
+  "bottomNavHome": "首頁",
+  "bottomNavDiscover": "發現",
+  "bottomNavAssistant": "助理",
+  "bottomNavMine": "我的",
+  "dailyUpdate": "每日更新",
+  "personalKnowledgeBase": "您的個人專家知識庫",
+  "noContent": "暫無內容",
+  "noModule": "暫無模塊",
+  "moreModules": "更多模塊",
+  "aiGenerate": "AI 生成",
+  "aiRefresh": "AI 換一條",
+  "generatePoster": "生成海報",
+  "share": "分享",
+  "sharePoster": "分享海報",
+  "shareToFriend": "分享給朋友",
+  "shareRecommend": "推薦給更多人",
+  "shareText": "智伴口袋 — 每日知識，伴你成長！\n60+專家模塊，每天爲你推送優質內容。\n快來下載體驗吧！",
+  "cancel": "取消",
+  "confirm": "確定",
+  "delete": "刪除",
+  "retry": "重試",
+  "save": "保存",
+  "loading": "加載中...",
+  "generating": "生成中...",
+  "processing": "處理中...",
+  "saveToAlbum": "保存相冊",
+  "savedToAlbum": "海報已保存至相冊",
+  "savedMultipleToAlbum": "{count} 張海報已保存至相冊",
+  "@savedMultipleToAlbum": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "savingImages": "保存中 {current}/{total}...",
+  "@savingImages": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "saveError": "保存出錯: {error}",
+  "@saveError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "savePermissionRequired": "需要相冊權限",
+  "shareFailed": "分享失敗: {error}",
+  "@shareFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "moduleNotFound": "模塊不存在",
+  "moduleNotFoundDesc": "未找到該模塊",
+  "loadFailed": "加載失敗",
+  "loadingMore": "加載更多",
+  "noMoreData": "沒有更多數據",
+  "themeSettings": "主題設置",
+  "notification": "通知提醒",
+  "notificationDesc": "設置每日推送時間",
+  "clearCache": "清除緩存",
+  "clearCacheDesc": "清理本地緩存數據",
+  "aboutUs": "關於我們",
+  "aboutVersion": "版本 {version}",
+  "@aboutVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "rateUs": "給個好評",
+  "rateUsDesc": "您的支持是我們前進的動力",
+  "rateLater": "稍後再說",
+  "clearCacheConfirm": "確定要清除所有本地緩存數據嗎？\n這將清除已保存的內容和設置。",
+  "cacheCleared": "緩存已清除",
+  "aboutSlogan": "每日知識，伴你成長",
+  "aboutVersionLabel": "版本",
+  "aboutBuildLabel": "構建",
+  "aboutDesignLabel": "設計",
+  "aboutBuildValue": "Flutter · Tencent CloudBase",
+  "aboutDesignValue": "Editorial Precision Design System",
+  "aboutGotIt": "知道了",
+  "rateTitle": "給個好評",
+  "rateContent": "感謝您的支持！您的每一次好評都是我們前進的動力。\n\n請前往應用商店爲我們評分，或分享給更多朋友。",
+  "lightMode": "淺色模式",
+  "darkMode": "深色模式",
+  "followSystem": "跟隨系統",
+  "enableDailyPush": "開啓每日推送",
+  "selectPushTime": "選擇每日推送時間（當前爲示例設置，具體推送由後端支持）",
+  "morningTime": "☀️ 早晨",
+  "forenoonTime": "🌤 上午",
+  "eveningTime": "🌙 晚間",
+  "morningDesc": "開啓活力一天",
+  "forenoonDesc": "黃金學習時間",
+  "eveningDesc": "睡前輕鬆閱讀",
+  "pushSet": "已設置每日 {time} 推送",
+  "@pushSet": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "pushDisabled": "已關閉每日推送",
+  "emotionalCompanion": "情感陪伴",
+  "emotionalCompanionDesc": "和\"小智\"聊聊天，分享你的心情",
+  "domainExpert": "領域專家",
+  "domainExpertDesc": "與180+行業專家深度對話，獲取專業見解",
+  "hotPicks": "熱門精選",
+  "deleteChatHistory": "刪除聊天記錄",
+  "deleteChatConfirm": "確定要刪除所有聊天記錄嗎？刪除後將無法恢復。",
+  "typeHint": "說點什麼...",
+  "typeHintExpert": "向{name}提問...",
+  "@typeHintExpert": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sorryCannotReply": "抱歉，我暫時無法回復。請稍後再試。",
+  "errorOccurred": "出錯了：{error}",
+  "@errorOccurred": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "aiFriendGreeting": "你好呀！我是小智，你的情感陪伴夥伴...",
+  "chatMe": "我",
+  "chatBot": "智",
+  "emotionCrisis": "危機信號",
+  "emotionHappy": "開心",
+  "emotionSad": "難過",
+  "emotionAnxious": "焦慮",
+  "emotionAngry": "生氣",
+  "emotionCalm": "平靜",
+  "emotionNeutral": "中性",
+  "emotionExcited": "興奮",
+  "emotionTired": "疲憊",
+  "sceneFirstGreeting": "初次問候",
+  "sceneCrisisIntervention": "危機幹預",
+  "sceneEmotionalComfort": "情緒安撫",
+  "sceneShareJoy": "分享喜悅",
+  "sceneDailyChat": "日常閒聊",
+  "sceneDeepTalk": "深度交流",
+  "sceneSilentCompany": "安靜陪伴",
+  "recentMemory": "最近的對話記憶",
+  "memoryUser": "用戶",
+  "memoryBot": "小智",
+  "memoryContinue": "請基於以上對話記憶繼續交流，保持上下文連貫。",
+  "userCardName": "智伴口袋用戶",
+  "quickEntry": "快捷入口",
+  "hotQuestions": "熱門問題",
+  "marketTrends": "行情趨勢",
+  "recommendedFeatures": "推薦功能",
+  "smartAssistant": "智能助手",
+  "otherAssistants": "其他助手",
+  "assistantSquare": "助手廣場",
+  "assistantList": "助手列表",
+  "viewDataset": "點擊查看該數據集",
+  "aiAnalysis": "AI分析",
+  "materialQuery": "材料查詢",
+  "priceTrend": "價格趨勢",
+  "supplier": "供應商",
+  "aiMaterialAssistant": "AI材料助手",
+  "aiAnalysisMaterial": "AI分析 · 材料查詢 · 行情洞察",
+  "aiMaterialAssistantDesc": "材料問題 · 行情趨勢 · 採購建議",
+  "trendAnalysis": "趨勢分析",
+  "materialDatabase": "材料數據庫",
+  "quoteTool": "報價工具",
+  "materialQuestion": "請輸入問題，例如：玻璃纖維的價格？",
+  "searchHint": "繼續提問...",
+  "analyze": "分析",
+  "searchPlaceholder": "請輸入問題並點擊分析",
+  "questionPrefix": "問題：{question}",
+  "@questionPrefix": {
+    "placeholders": {
+      "question": {
+        "type": "String"
+      }
+    }
+  },
+  "inputMaterialQuestion": "輸入材料問題，開始分析",
+  "inputMaterialHint": "輸入材料問題...",
+  "requestFailed": "請求失敗，請稍後再試。",
+  "aiMaterialHero": "材料 AI 智能助手",
+  "aiMaterialHeroDesc": "輸入問題，獲取材料數據與分析結果",
+  "aiMaterialHeroHint": "請輸入材料、價格、應用場景...",
+  "posterPreview": "海報預覽",
+  "close": "關閉",
+  "saveToPhotoAlbum": "保存到相冊",
+  "savedToPhotoAlbum": "已保存到相冊",
+  "saveToAlbumFailed": "保存失敗，請檢查相冊權限",
+  "posterBranding": "智伴口袋",
+  "posterFooter": "每日知識陪伴",
+  "posterFromApp": "來自「智伴口袋」的每日知識分享",
+  "aiInterpretation": "AI解讀",
+  "compositeMaterialAiAssistant": "複合材料AI助手",
+  "smartAnalysisMaterial": "智能分析材料問題",
+  "marketAnalysisAssistant": "行情分析助手",
+  "marketAnalysisDesc": "價格趨勢與市場分析",
+  "quoteAssistant": "報價助手",
+  "quoteAssistantDesc": "成本估算與報價生成",
+  "tradeAssistant": "外貿助手",
+  "tradeAssistantDesc": "英文回復與客戶溝通",
+  "myAssistant": "我的助手",
+  "cloudAssistantWaterfall": "雲端助手瀑布流",
+  "cloudAssistantList": "雲端助手列表",
+  "otherCategory": "其他",
+  "details": "詳情",
+  "aiAnalysisResult": "AI 分析結果",
+  "aiAssistant": "AI助手",
+  "weekdayMon": "周一",
+  "weekdayTue": "周二",
+  "weekdayWed": "周三",
+  "weekdayThu": "周四",
+  "weekdayFri": "周五",
+  "weekdaySat": "周六",
+  "weekdaySun": "周日",
+  "fieldAuthor": "作者",
+  "fieldSinger": "歌手",
+  "fieldDirector": "導演",
+  "fieldSource": "出處",
+  "fieldEra": "年代",
+  "fieldRegion": "地區",
+  "fieldLocation": "位置",
+  "fieldAlbum": "專輯",
+  "fieldFortuneDirection": "吉利方位",
+  "fieldFortuneNumber": "吉利數字",
+  "fieldFortuneColor": "吉利顏色",
+  "fieldCoreQuote": "核心金句",
+  "identifyEmotion": "識別情緒",
+  "confidence": "置信度",
+  "careerGreeting": "你好！我是{name}專家。{vibe}",
+  "@careerGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "vibe": {
+        "type": "String"
+      }
+    }
+  },
+  "catHotPicks": "熱門精選",
+  "catFinance": "財經商業",
+  "catLearning": "學習成長",
+  "catLifestyle": "生活休閒",
+  "catTech": "科技設計",
+  "catHealth": "健康養生",
+  "catHumanities": "人文社科",
+  "catPractical": "實用資訊"
+}

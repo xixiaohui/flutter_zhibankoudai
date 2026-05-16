@@ -8,7 +8,7 @@
 - AI 内容生成（腾讯混元大模型），含内容去重和领域知识增强
 - 海报生成与分享
 - AI 情感陪伴（小智） & 180+ 行业专家深度对话
-- **12 种语言国际化支持**
+- **13 种语言国际化支持**
 
 ---
 
@@ -19,17 +19,18 @@
 | 序号 | 语言 | Locale | RTL |
 | --- | --- | --- | --- |
 | 1 | 中文（默认） | zh | |
-| 2 | English | en | |
-| 3 | 日本語 | ja | |
-| 4 | 한국어 | ko | |
-| 5 | Español | es | |
-| 6 | Français | fr | |
-| 7 | Deutsch | de | |
-| 8 | Português | pt | |
-| 9 | Русский | ru | |
-| 10 | العربية | ar | ✓ |
-| 11 | हिन्दी | hi | |
-| 12 | ไทย | th | |
+| 2 | 繁體中文 | zh_Hant | |
+| 3 | English | en | |
+| 4 | 日本語 | ja | |
+| 5 | 한국어 | ko | |
+| 6 | Español | es | |
+| 7 | Français | fr | |
+| 8 | Deutsch | de | |
+| 9 | Português | pt | |
+| 10 | Русский | ru | |
+| 11 | العربية | ar | ✓ |
+| 12 | हिन्दी | hi | |
+| 13 | ไทย | th | |
 
 翻译文件位于 `lib/l10n/`（ARB 格式），模块配置位于 `assets/cloudData/modules/`（JSON 格式）。新增语言只需添加对应的 ARB 和 JSON 文件。
 
@@ -110,7 +111,7 @@ lib/
 │   ├── ai_friend_page.dart    # AI 情感陪伴
 │   └── ai_career_page.dart    # 行业专家对话
 ├── widgets/                   # 可复用组件
-├── l10n/                      # ARB 翻译文件（12 种语言）
+├── l10n/                      # ARB 翻译文件（13 种语言）
 │   └── gen/                   # flutter gen-l10n 自动生成（gitignore）
 └── xui/
     ├── pages/                 # XUI 页面（助手广场、搜索等）
