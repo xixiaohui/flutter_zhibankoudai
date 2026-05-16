@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                 isLoading: cp.isLoading(fm.id),
                 isGenerating: cp.isGenerating(fm.id),
                 onTap: () => _navigateToDetail(fm.id),
-                onRefresh: () => cp.refreshWithAi(fm),
+                onRefresh: () => cp.refreshWithAi(fm, locale: context.read<LocaleProvider>().languageCode),
                 onShare: () => _navigateToPoster(content),
               ),
             ));

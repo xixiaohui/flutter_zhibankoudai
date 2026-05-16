@@ -10,6 +10,7 @@ import '../l10n/gen/app_localizations.dart';
 import '../models/daily_content.dart';
 import '../models/field_metadata.dart';
 import '../providers/module_provider.dart';
+import '../providers/locale_provider.dart';
 import '../providers/daily_content_provider.dart';
 
 class ModuleDetailPage extends StatefulWidget {
@@ -173,7 +174,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                           label: isGenerating ? AppLocalizations.of(context)!.generating : AppLocalizations.of(context)!.aiRefresh,
                           icon: isGenerating ? Icons.hourglass_empty : Icons.refresh,
                           loading: isGenerating,
-                          onTap: isGenerating ? null : () => cp.refreshWithAi(module),
+                          onTap: isGenerating ? null : () => cp.refreshWithAi(module, locale: context.read<LocaleProvider>().languageCode),
                           colorScheme: colorScheme,
                           textTheme: textTheme,
                         ),

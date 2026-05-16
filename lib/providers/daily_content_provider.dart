@@ -68,7 +68,7 @@ class DailyContentProvider extends ChangeNotifier {
   }
 
   /// AI刷新内容（用户手动触发）
-  Future<void> refreshWithAi(ModuleConfig module) async {
+  Future<void> refreshWithAi(ModuleConfig module, {String locale = 'zh'}) async {
     _generatingMap[module.id] = true;
     notifyListeners();
 
@@ -78,6 +78,7 @@ class DailyContentProvider extends ChangeNotifier {
           moduleId: module.id,
           prompt: module.generatePrompt!,
           fallback: module.fallback,
+          locale: locale,
         );
         _contents[module.id] = aiContent;
       }

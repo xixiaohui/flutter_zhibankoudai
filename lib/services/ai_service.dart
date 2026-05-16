@@ -83,12 +83,13 @@ class AiService {
     required String moduleId,
     required String prompt,
     required List<FallbackContent> fallback,
+    String locale = 'zh',
   }) async {
     try {
       _logger.d('AI generating content for module: $moduleId');
       _logger.d('Prompt for module $moduleId: $prompt');
 
-      final response = await _callHunyuanModel(moduleId, prompt);
+      final response = await _callHunyuanModel(moduleId, prompt, locale: locale);
 
 
       _logger.d('AI response for module $moduleId: ${response != null ? "Received" : "No response"}');
@@ -200,8 +201,9 @@ class AiService {
 
   Future<Map<String, dynamic>?> _callHunyuanModel(
     String moduleId,
-    String prompt,
-  ) async {
+    String prompt, {
+    String locale = 'zh',
+  }) async {
     try {
 
       var systemPrompt = await getLocalGeneratePrompt(moduleId, forceRefresh:false);
@@ -226,8 +228,11 @@ class AiService {
         _logger.d('Dedup prompt injected for module: $moduleId (${recentHistory.length} recent entries)');
       }
 
-      // 构建用户提示词，包含去重要求
-      var userMessage = '生成今日内容';
+      // Build user message with locale instruction
+      var userMessage = locale == 'zh'
+          ? '生成今日内容'
+          : 'Generate today\'s content in ${_localeDisplayName(locale)}';
+
       if (recentHistory.isNotEmpty) {
         final recentTitles = recentHistory
             .map((e) => e['title']?.toString() ?? '')
@@ -235,8 +240,15 @@ class AiService {
             .take(5)
             .join('」、「');
         if (recentTitles.isNotEmpty) {
-          userMessage = '请生成今日内容，注意避免与以下近期内容重复：「$recentTitles」';
+          userMessage = locale == 'zh'
+              ? '请生成今日内容，注意避免与以下近期内容重复：「$recentTitles」'
+              : 'Generate today\'s content in ${_localeDisplayName(locale)}, avoiding duplication with: 「$recentTitles」';
         }
+      }
+
+      // Add language instruction to system prompt
+      if (locale != 'zh') {
+        systemPrompt = '$systemPrompt\n\nIMPORTANT: Generate all output in ${_localeDisplayName(locale)}. All titles, descriptions, and content must be in ${_localeDisplayName(locale)}.';
       }
 
       // Use xclaw API (non-streaming) as primary
@@ -387,4 +399,19 @@ class AiService {
       isAiGenerated: false,
     );
   }
+
+  String _localeDisplayName(String locale) => switch (locale) {
+    'en' => 'English',
+    'ja' => 'Japanese',
+    'ko' => 'Korean',
+    'es' => 'Spanish',
+    'fr' => 'French',
+    'de' => 'German',
+    'pt' => 'Portuguese',
+    'ru' => 'Russian',
+    'ar' => 'Arabic',
+    'hi' => 'Hindi',
+    'th' => 'Thai',
+    _ => 'Chinese',
+  };
 }
