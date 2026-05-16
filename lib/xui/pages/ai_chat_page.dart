@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/l10n/gen/app_localizations.dart';
 import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:http/http.dart' as http;
@@ -117,7 +118,7 @@ class _AiChatPageState extends State<AiChatPage> {
     } catch (e) {
       if (!mounted) return;
       setState(() {
-        messages[assistantIndex] = Message(role: "assistant", content: "请求失败，请稍后再试。");
+        messages[assistantIndex] = Message(role: "assistant", content: AppLocalizations.of(context)!.requestFailed);
       });
     }
 
@@ -147,7 +148,7 @@ class _AiChatPageState extends State<AiChatPage> {
         backgroundColor: colorScheme.surface,
         elevation: 0,
         foregroundColor: colorScheme.onSurface,
-        title: const Text("AI材料助手"),
+        title: Text(AppLocalizations.of(context)!.aiMaterialAssistant),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
           child: Divider(height: 1, thickness: 1, color: colorScheme.outlineVariant),
@@ -159,7 +160,7 @@ class _AiChatPageState extends State<AiChatPage> {
             child: messages.isEmpty
                 ? Center(
                     child: Text(
-                      "输入材料问题，开始分析",
+                      AppLocalizations.of(context)!.inputMaterialQuestion,
                       style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary),
                     ),
                   )
@@ -189,7 +190,7 @@ class _AiChatPageState extends State<AiChatPage> {
                       textInputAction: TextInputAction.send,
                       style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface),
                       decoration: InputDecoration(
-                        hintText: "输入材料问题...",
+                        hintText: AppLocalizations.of(context)!.inputMaterialHint,
                         hintStyle: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary),
                         filled: true,
                         fillColor: colorScheme.surfaceContainerHighest,

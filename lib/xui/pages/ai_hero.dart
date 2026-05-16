@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/l10n/gen/app_localizations.dart';
 import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 
 import 'search_result.dart' show SearchResultPage;
@@ -52,12 +53,12 @@ class _AiHeroSectionState extends State<AiHeroSection> {
       child: Column(
         children: [
           Text(
-            '材料 AI 智能助手',
+            AppLocalizations.of(context)!.aiMaterialHero,
             style: xui.XuiTheme.sectionHeading().copyWith(color: xui.XuiTheme.pureWhite),
           ),
           const SizedBox(height: 16),
           Text(
-            '输入问题，获取材料数据与分析结果',
+            AppLocalizations.of(context)!.aiMaterialHeroDesc,
             style: xui.XuiTheme.bodyLarge().copyWith(color: xui.XuiTheme.pureWhite),
           ),
           const SizedBox(height: 40),
@@ -71,7 +72,7 @@ class _AiHeroSectionState extends State<AiHeroSection> {
                   child: TextField(
                     controller: controller,
                     decoration: xui.XuiTheme.inputDecoration(
-                      hintText: "请输入材料、价格、应用场景...",
+                      hintText: AppLocalizations.of(context)!.aiMaterialHeroHint,
                     ).copyWith(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(24),
@@ -100,7 +101,7 @@ class _AiHeroSectionState extends State<AiHeroSection> {
                     ),
                   ),
                   onPressed: onSearch,
-                  child: const Text("分析"),
+                  child: Text(AppLocalizations.of(context)!.analyze),
                 ),
               ],
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/l10n/gen/app_localizations.dart';
 import 'package:flutter_application_zhiban/xui/pages/experts.dart';
 
 class ExpertDetailPage extends StatelessWidget {
@@ -25,7 +26,7 @@ class ExpertDetailPage extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.image_outlined),
-            tooltip: "生成海报",
+            tooltip: AppLocalizations.of(context)!.generatePoster,
             onPressed: () => showPosterPreview(context, item),
           ),
         ],

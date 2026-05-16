@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_application_zhiban/l10n/gen/app_localizations.dart';
 import 'package:flutter_application_zhiban/xui/pages/poster_widget.dart';
 import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
 
@@ -89,7 +90,7 @@ class _PosterPreviewState extends State<PosterPreview> {
     setState(() => saving = false);
 
     messenger.showSnackBar(
-      SnackBar(content: Text(ok ? "已保存到相册" : "保存失败，请检查相册权限")),
+      SnackBar(content: Text(ok ? AppLocalizations.of(context)!.savedToPhotoAlbum : AppLocalizations.of(context)!.saveToAlbumFailed)),
     );
   }
 
@@ -107,12 +108,12 @@ class _PosterPreviewState extends State<PosterPreview> {
             Row(
               children: [
                 Expanded(
-                  child: Text("海报预览", style: xui.XuiTheme.featureTitle()),
+                  child: Text(AppLocalizations.of(context)!.posterPreview, style: xui.XuiTheme.featureTitle()),
                 ),
                 IconButton(
                   onPressed: () => Navigator.pop(context),
                   icon: const Icon(Icons.close),
-                  tooltip: "关闭",
+                  tooltip: AppLocalizations.of(context)!.close,
                 ),
               ],
             ),
@@ -150,7 +151,7 @@ class _PosterPreviewState extends State<PosterPreview> {
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
                     : const Icon(Icons.download),
-                label: Text(imageBytes == null ? "生成中..." : "保存到相册"),
+                label: Text(imageBytes == null ? AppLocalizations.of(context)!.generating : AppLocalizations.of(context)!.saveToPhotoAlbum),
                 style: FilledButton.styleFrom(
                   backgroundColor: xui.XuiTheme.blueberry800,
                   foregroundColor: xui.XuiTheme.pureWhite,

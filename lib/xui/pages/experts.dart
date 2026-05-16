@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/l10n/gen/app_localizations.dart';
 import 'package:flutter_application_zhiban/xui/pages/expert_detail.dart';
 import 'package:flutter_application_zhiban/xui/pages/poster_preview.dart';
 import 'package:flutter_application_zhiban/xui/utils/module.dart';
@@ -178,7 +179,7 @@ class _ExpertCard extends StatelessWidget {
                       border: Border.all(color: xui.XuiTheme.pomegranate400),
                       borderRadius: BorderRadius.circular(999),
                     ),
-                    child: Text("AI解读",
+                    child: Text(AppLocalizations.of(context)!.aiInterpretation,
                       style: textTheme.labelSmall?.copyWith(
                         color: xui.XuiTheme.pomegranate400,
                         fontWeight: FontWeight.w600,
@@ -188,7 +189,7 @@ class _ExpertCard extends StatelessWidget {
                 IconButton(
                   visualDensity: VisualDensity.compact,
                   icon: Icon(Icons.image_outlined, size: 20, color: colorScheme.onSurface),
-                  tooltip: "生成海报",
+                  tooltip: AppLocalizations.of(context)!.generatePoster,
                   onPressed: () => showPosterPreview(context, item),
                 ),
               ],
@@ -239,7 +240,7 @@ class _LoadMoreTile extends StatelessWidget {
 
     if (!hasMore) {
       return Center(
-        child: Text("没有更多数据", style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary)),
+        child: Text(AppLocalizations.of(context)!.noMoreData, style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary)),
       );
     }
 
@@ -252,7 +253,7 @@ class _LoadMoreTile extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 13),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
-        child: const Text("加载更多"),
+        child: Text(AppLocalizations.of(context)!.loadingMore),
       ),
     );
   }

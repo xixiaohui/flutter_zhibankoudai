@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/l10n/gen/app_localizations.dart';
 import 'package:flutter_application_zhiban/xui/pages/ai_chat_page.dart';
 import 'package:flutter_application_zhiban/xui/pages/collections_grid.dart';
 import 'package:flutter_application_zhiban/xui/pages/collections_list.dart';
@@ -20,7 +21,7 @@ class HomePage extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
         foregroundColor: colorScheme.onSurface,
-        title: const Text("智伴口袋"),
+        title: Text(AppLocalizations.of(context)!.appName),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
           child: Divider(height: 1, thickness: 1, color: colorScheme.outlineVariant),
@@ -33,30 +34,30 @@ class HomePage extends StatelessWidget {
             physics: const BouncingScrollPhysics(
               parent: AlwaysScrollableScrollPhysics(),
             ),
-            slivers: const [
-              SliverToBoxAdapter(child: SizedBox(height: 12)),
-              SliverToBoxAdapter(child: HeroSection()),
-              SliverToBoxAdapter(child: SizedBox(height: 14)),
-              AiEntrySliver(),
-              SliverToBoxAdapter(child: SizedBox(height: 22)),
-              SliverToBoxAdapter(child: _SectionTitle("快捷入口")),
-              QuickGridSliver(),
-              SliverToBoxAdapter(child: SizedBox(height: 22)),
-              SliverToBoxAdapter(child: _SectionTitle("热门问题")),
-              HotGridSliver(),
-              SliverToBoxAdapter(child: SizedBox(height: 22)),
-              SliverToBoxAdapter(child: _SectionTitle("行情趋势")),
-              MarketGridSliver(),
-              SliverToBoxAdapter(child: SizedBox(height: 22)),
-              SliverToBoxAdapter(child: _SectionTitle("推荐功能")),
-              FeatureGridSliver(),
-              SliverToBoxAdapter(child: SizedBox(height: 22)),
-              SliverToBoxAdapter(child: _SectionTitle("智能助手")),
-              AssistantGridSliver(),
-              SliverToBoxAdapter(child: SizedBox(height: 22)),
-              SliverToBoxAdapter(child: _SectionTitle("其他助手")),
-              OtherAssistantGridSliver(),
-              SliverToBoxAdapter(child: SizedBox(height: 84)),
+            slivers: [
+              const SliverToBoxAdapter(child: SizedBox(height: 12)),
+              const SliverToBoxAdapter(child: HeroSection()),
+              const SliverToBoxAdapter(child: SizedBox(height: 14)),
+              const AiEntrySliver(),
+              const SliverToBoxAdapter(child: SizedBox(height: 22)),
+              SliverToBoxAdapter(child: _SectionTitle(AppLocalizations.of(context)!.quickEntry)),
+              const QuickGridSliver(),
+              const SliverToBoxAdapter(child: SizedBox(height: 22)),
+              SliverToBoxAdapter(child: _SectionTitle(AppLocalizations.of(context)!.hotQuestions)),
+              const HotGridSliver(),
+              const SliverToBoxAdapter(child: SizedBox(height: 22)),
+              SliverToBoxAdapter(child: _SectionTitle(AppLocalizations.of(context)!.marketTrends)),
+              const MarketGridSliver(),
+              const SliverToBoxAdapter(child: SizedBox(height: 22)),
+              SliverToBoxAdapter(child: _SectionTitle(AppLocalizations.of(context)!.recommendedFeatures)),
+              const FeatureGridSliver(),
+              const SliverToBoxAdapter(child: SizedBox(height: 22)),
+              SliverToBoxAdapter(child: _SectionTitle(AppLocalizations.of(context)!.smartAssistant)),
+              const AssistantGridSliver(),
+              const SliverToBoxAdapter(child: SizedBox(height: 22)),
+              SliverToBoxAdapter(child: _SectionTitle(AppLocalizations.of(context)!.otherAssistants)),
+              const OtherAssistantGridSliver(),
+              const SliverToBoxAdapter(child: SizedBox(height: 84)),
             ],
           ),
         ),
@@ -110,7 +111,7 @@ class HeroSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "复合材料AI助手",
+              AppLocalizations.of(context)!.compositeMaterialAiAssistant,
               style: textTheme.displaySmall?.copyWith(
                 fontSize: compact ? 34 : 48,
                 height: 1.12,
@@ -121,7 +122,7 @@ class HeroSection extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              "AI分析 · 材料查询 · 行情洞察",
+              AppLocalizations.of(context)!.aiAnalysisMaterial,
               style: textTheme.titleMedium?.copyWith(
                 fontSize: compact ? 15 : 18,
                 letterSpacing: 0,
@@ -168,7 +169,7 @@ class _SearchSectionState extends State<SearchSection> {
       style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface),
       onSubmitted: (_) => _goSearch(),
       decoration: InputDecoration(
-        hintText: "请输入问题，例如：玻璃纤维的价格？",
+        hintText: AppLocalizations.of(context)!.materialQuestion,
         hintStyle: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary),
         filled: true,
         fillColor: colorScheme.surfaceContainerHighest,
@@ -201,11 +202,12 @@ class QuickGridSliver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final items = [
-      _HomeAction("AI分析", Icons.smart_toy, const AiChatPage()),
-      _HomeAction("材料查询", Icons.search, const CollectionsGridPage()),
-      _HomeAction("价格趋势", Icons.show_chart, const AiChatPage()),
-      _HomeAction("供应商", Icons.business, const CollectionsListPage()),
+      _HomeAction(l10n.aiAnalysis, Icons.smart_toy, const AiChatPage()),
+      _HomeAction(l10n.materialQuery, Icons.search, const CollectionsGridPage()),
+      _HomeAction(l10n.priceTrend, Icons.show_chart, const AiChatPage()),
+      _HomeAction(l10n.supplier, Icons.business, const CollectionsListPage()),
     ];
 
     return _AdaptiveGridSliver(
@@ -331,11 +333,12 @@ class FeatureGridSliver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final items = [
-      _HomeAction("AI助手", Icons.smart_toy, const AiChatPage()),
-      _HomeAction("趋势分析", Icons.auto_graph, const AiChatPage()),
-      _HomeAction("材料数据库", Icons.storage, const CollectionsGridPage()),
-      _HomeAction("报价工具", Icons.calculate, const AiChatPage()),
+      _HomeAction(l10n.smartAssistant, Icons.smart_toy, const AiChatPage()),
+      _HomeAction(l10n.trendAnalysis, Icons.auto_graph, const AiChatPage()),
+      _HomeAction(l10n.materialDatabase, Icons.storage, const CollectionsGridPage()),
+      _HomeAction(l10n.quoteTool, Icons.calculate, const AiChatPage()),
     ];
 
     return _AdaptiveGridSliver(
@@ -363,9 +366,10 @@ class AssistantGridSliver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final items = [
-      _AssistantItem(title: "AI材料助手", desc: "智能分析材料问题", icon: Icons.smart_toy, page: const AiChatPage()),
-      _AssistantItem(title: "行情分析助手", desc: "价格趋势与市场分析", icon: Icons.auto_graph, page: const AiChatPage()),
+      _AssistantItem(title: l10n.aiMaterialAssistant, desc: l10n.smartAnalysisMaterial, icon: Icons.smart_toy, page: const AiChatPage()),
+      _AssistantItem(title: l10n.marketAnalysisAssistant, desc: l10n.marketAnalysisDesc, icon: Icons.auto_graph, page: const AiChatPage()),
     ];
     return _AssistantGrid(items: items);
   }
@@ -376,11 +380,12 @@ class OtherAssistantGridSliver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final items = [
-      _AssistantItem(title: "报价助手", desc: "成本估算与报价生成", icon: Icons.calculate, page: const AiChatPage()),
-      _AssistantItem(title: "外贸助手", desc: "英文回复与客户沟通", icon: Icons.language, page: const AiChatPage()),
-      _AssistantItem(title: "我的助手", desc: "云端助手瀑布流", icon: Icons.grid_3x3, page: const CollectionsGridPage()),
-      _AssistantItem(title: "助手列表", desc: "云端助手列表", icon: Icons.list, page: const CollectionsListPage()),
+      _AssistantItem(title: l10n.quoteAssistant, desc: l10n.quoteAssistantDesc, icon: Icons.calculate, page: const AiChatPage()),
+      _AssistantItem(title: l10n.tradeAssistant, desc: l10n.tradeAssistantDesc, icon: Icons.language, page: const AiChatPage()),
+      _AssistantItem(title: l10n.myAssistant, desc: l10n.cloudAssistantWaterfall, icon: Icons.grid_3x3, page: const CollectionsGridPage()),
+      _AssistantItem(title: l10n.assistantList, desc: l10n.cloudAssistantList, icon: Icons.list, page: const CollectionsListPage()),
     ];
     return _AssistantGrid(items: items);
   }
@@ -466,11 +471,14 @@ class AiEntrySliver extends StatelessWidget {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text("AI材料助手", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
-                    SizedBox(height: 4),
-                    Text("材料问题 · 行情趋势 · 采购建议", maxLines: 2, overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: Colors.white, height: 1.35)),
+                  children: [
+                    Text(AppLocalizations.of(context)!.aiMaterialAssistant,
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
+                    const SizedBox(height: 4),
+                    Text(AppLocalizations.of(context)!.aiMaterialAssistantDesc,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.white, height: 1.35)),
                   ],
                 ),
               ),

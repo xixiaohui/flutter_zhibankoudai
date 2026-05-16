@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/l10n/gen/app_localizations.dart';
 import 'package:flutter_application_zhiban/xui/pages/experts.dart';
 import 'package:flutter_application_zhiban/config/theme.dart';
 import 'package:flutter_application_zhiban/xui/utils/module.dart';
@@ -84,7 +85,7 @@ class _CollectionsGridPageState extends State<CollectionsGridPage> {
         backgroundColor: colorScheme.surface,
         elevation: 0,
         foregroundColor: colorScheme.onSurface,
-        title: const Text("助手广场"),
+        title: Text(AppLocalizations.of(context)!.assistantSquare),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
           child: Divider(height: 1, thickness: 1, color: colorScheme.outlineVariant),
@@ -134,7 +135,7 @@ class _CollectionTile extends StatelessWidget {
     final module = findModuleByCollection(collection);
     final name = module?.name ?? collection;
     final icon = module?.icon ?? "📁";
-    final slogan = module?.slogan ?? "点击查看该数据集";
+    final slogan = module?.slogan ?? AppLocalizations.of(context)!.viewDataset;
     final colors = module?.colors;
     final accent = colors != null ? AppTheme.fromHex(colors.accent) : colorScheme.primary;
     final start = colors != null
@@ -202,7 +203,7 @@ class _LoadMoreTile extends StatelessWidget {
     if (!hasMore) {
       return Padding(
         padding: const EdgeInsets.all(16),
-        child: Center(child: Text("没有更多数据", style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary))),
+        child: Center(child: Text(AppLocalizations.of(context)!.noMoreData, style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary))),
       );
     }
     return Padding(
@@ -214,7 +215,7 @@ class _LoadMoreTile extends StatelessWidget {
           foregroundColor: colorScheme.onPrimary,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
-        child: const Text("加载更多"),
+        child: Text(AppLocalizations.of(context)!.loadingMore),
       ),
     );
   }

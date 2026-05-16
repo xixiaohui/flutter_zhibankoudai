@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/l10n/gen/app_localizations.dart';
 import 'package:http/http.dart' as http;
 
 class SearchResultPage extends StatefulWidget {
@@ -79,7 +80,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
         backgroundColor: colorScheme.surface,
         elevation: 0,
         foregroundColor: colorScheme.onSurface,
-        title: const Text('AI 分析结果'),
+        title: Text(AppLocalizations.of(context)!.aiAnalysis),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
           child: Divider(height: 1, thickness: 1, color: colorScheme.outlineVariant),
@@ -116,7 +117,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
             textInputAction: TextInputAction.search,
             style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface),
             decoration: InputDecoration(
-              hintText: "继续提问...",
+              hintText: AppLocalizations.of(context)!.searchHint,
               hintStyle: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary),
               filled: true,
               fillColor: colorScheme.surfaceContainerHighest,
@@ -147,7 +148,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),
           onPressed: loading ? null : onSearch,
-          child: const Text("分析"),
+          child: Text(AppLocalizations.of(context)!.analyze),
         ),
       ],
     );
@@ -162,12 +163,12 @@ class _SearchResultPageState extends State<SearchResultPage> {
     }
 
     if (error != null) {
-      return Center(child: Text("出错了：$error", style: textTheme.bodyMedium?.copyWith(color: colorScheme.error)));
+      return Center(child: Text(AppLocalizations.of(context)!.errorOccurred(error!), style: textTheme.bodyMedium?.copyWith(color: colorScheme.error)));
     }
 
     if (result == null) {
       return Center(
-        child: Text("请输入问题并点击分析",
+        child: Text(AppLocalizations.of(context)!.searchPlaceholder,
           style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary)),
       );
     }
@@ -177,7 +178,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("问题：${controller.text}",
+          Text(AppLocalizations.of(context)!.questionPrefix(controller.text),
             style: textTheme.titleSmall?.copyWith(color: colorScheme.onSurface)),
           const SizedBox(height: 12),
           Container(
