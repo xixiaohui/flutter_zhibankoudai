@@ -1,12 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_zhiban/l10n/gen/app_localizations.dart';
+import 'package:flutter_application_zhiban/design/colors.dart';
 import 'package:flutter_application_zhiban/xui/pages/expert_detail.dart';
 import 'package:flutter_application_zhiban/xui/pages/poster_preview.dart';
 import 'package:flutter_application_zhiban/xui/utils/module.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
+import 'package:flutter_application_zhiban/widgets/clay_container.dart';
 import 'package:http/http.dart' as http;
+import '../../l10n/gen/app_localizations.dart';
 
 class ExpertsPage extends StatefulWidget {
   final String collectionName;
@@ -87,15 +88,15 @@ class _ExpertsPageState extends State<ExpertsPage> {
     final title = module?.name ?? widget.collectionName;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
+      backgroundColor: AppColors.warmCream,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.surface,
+        backgroundColor: AppColors.pureWhite,
         elevation: 0,
-        foregroundColor: Theme.of(context).colorScheme.onSurface,
+        foregroundColor: AppColors.clayBlack,
         title: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Divider(height: 1, thickness: 1, color: Theme.of(context).colorScheme.outlineVariant),
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(height: 1, thickness: 1, color: AppColors.oatBorder),
         ),
       ),
       body: RefreshIndicator(
@@ -145,75 +146,90 @@ class _ExpertCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
     final title = item['title'] ?? '';
     final content = item['content'] ?? item['summary'] ?? '';
     final date = item['date'] ?? '';
     final isAI = item['isAIGenerated'] ?? false;
 
-    return GestureDetector(
+    return ClayContainer(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (_) => ExpertDetailPage(item: item)),
         );
       },
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: colorScheme.surface,
-          borderRadius: BorderRadius.circular(22),
-          border: Border.all(color: colorScheme.outline, width: 0.5),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                if (isAI)
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: xui.XuiTheme.pomegranate400.withValues(alpha: 0.08),
-                      border: Border.all(color: xui.XuiTheme.pomegranate400),
-                      borderRadius: BorderRadius.circular(999),
-                    ),
-                    child: Text(AppLocalizations.of(context)!.aiInterpretation,
-                      style: textTheme.labelSmall?.copyWith(
-                        color: xui.XuiTheme.pomegranate400,
-                        fontWeight: FontWeight.w600,
-                      )),
+      borderRadius: 22,
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              if (isAI)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: AppColors.pomegranate400.withValues(alpha: 0.08),
+                    border: Border.all(color: AppColors.pomegranate400),
+                    borderRadius: BorderRadius.circular(999),
                   ),
-                const Spacer(),
-                IconButton(
-                  visualDensity: VisualDensity.compact,
-                  icon: Icon(Icons.image_outlined, size: 20, color: colorScheme.onSurface),
-                  tooltip: AppLocalizations.of(context)!.generatePoster,
-                  onPressed: () => showPosterPreview(context, item),
+                  child: Text(
+                    l10n.aiInterpretation,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: AppColors.pomegranate400,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
                 ),
-              ],
+              const Spacer(),
+              IconButton(
+                visualDensity: VisualDensity.compact,
+                icon: const Icon(Icons.image_outlined, size: 20),
+                tooltip: l10n.generatePoster,
+                onPressed: () => showPosterPreview(context, item),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Text(
+            title,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18),
+          ),
+          const SizedBox(height: 8),
+          Expanded(
+            child: Text(
+              content,
+              maxLines: 4,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    height: 1.55,
+                    color: AppColors.darkCharcoal,
+                    fontFamily: "NotoSerifSC",
+                  ),
             ),
-            const SizedBox(height: 6),
-            Text(title, maxLines: 2, overflow: TextOverflow.ellipsis,
-              style: textTheme.titleSmall?.copyWith(fontSize: 18, color: colorScheme.onSurface)),
-            const SizedBox(height: 8),
-            Expanded(
-              child: Text(content, maxLines: 4, overflow: TextOverflow.ellipsis,
-                style: textTheme.bodySmall?.copyWith(height: 1.55, color: colorScheme.secondary)),
-            ),
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                Expanded(
-                  child: Text(date, maxLines: 1, overflow: TextOverflow.ellipsis,
-                    style: textTheme.bodySmall?.copyWith(fontSize: 12, color: colorScheme.secondary)),
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  date,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontSize: 12,
+                        color: AppColors.warmSilver,
+                      ),
                 ),
-                Icon(Icons.chevron_right, color: colorScheme.secondary),
-              ],
-            ),
-          ],
-        ),
+              ),
+              const Icon(Icons.chevron_right, color: AppColors.warmSilver),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -232,15 +248,17 @@ class _LoadMoreTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
     if (isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
 
     if (!hasMore) {
       return Center(
-        child: Text(AppLocalizations.of(context)!.noMoreData, style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary)),
+        child: Text(
+          l10n.noMoreData,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.warmSilver),
+        ),
       );
     }
 
@@ -248,23 +266,22 @@ class _LoadMoreTile extends StatelessWidget {
       child: FilledButton(
         onPressed: onPressed,
         style: FilledButton.styleFrom(
-          backgroundColor: colorScheme.primary,
-          foregroundColor: colorScheme.onPrimary,
+          backgroundColor: AppColors.lemon500,
+          foregroundColor: AppColors.clayBlack,
           padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 13),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
-        child: Text(AppLocalizations.of(context)!.loadingMore),
+        child: Text(l10n.loadingMore),
       ),
     );
   }
 }
 
 void showPosterPreview(BuildContext context, Map item) {
-  final colorScheme = Theme.of(context).colorScheme;
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
-    backgroundColor: colorScheme.surface,
+    backgroundColor: AppColors.pureWhite,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
     ),

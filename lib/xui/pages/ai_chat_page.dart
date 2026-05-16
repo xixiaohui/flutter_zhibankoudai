@@ -2,11 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_zhiban/l10n/gen/app_localizations.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
+import 'package:flutter_application_zhiban/design/colors.dart';
+import 'package:flutter_application_zhiban/design/elevation.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../l10n/gen/app_localizations.dart';
 
 class Message {
   final String role;
@@ -117,8 +118,9 @@ class _AiChatPageState extends State<AiChatPage> {
       }
     } catch (e) {
       if (!mounted) return;
+      final l10n = AppLocalizations.of(context)!;
       setState(() {
-        messages[assistantIndex] = Message(role: "assistant", content: AppLocalizations.of(context)!.requestFailed);
+        messages[assistantIndex] = Message(role: "assistant", content: l10n.requestFailed);
       });
     }
 
@@ -140,18 +142,17 @@ class _AiChatPageState extends State<AiChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: colorScheme.surfaceContainerLowest,
+      backgroundColor: AppColors.warmCream,
       appBar: AppBar(
-        backgroundColor: colorScheme.surface,
+        backgroundColor: AppColors.pureWhite,
         elevation: 0,
-        foregroundColor: colorScheme.onSurface,
-        title: Text(AppLocalizations.of(context)!.aiMaterialAssistant),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Divider(height: 1, thickness: 1, color: colorScheme.outlineVariant),
+        foregroundColor: AppColors.clayBlack,
+        title: Text(l10n.aiMaterialAssistant),
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(height: 1, thickness: 1, color: AppColors.oatBorder),
         ),
       ),
       body: Column(
@@ -160,8 +161,8 @@ class _AiChatPageState extends State<AiChatPage> {
             child: messages.isEmpty
                 ? Center(
                     child: Text(
-                      AppLocalizations.of(context)!.inputMaterialQuestion,
-                      style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary),
+                      l10n.inputMaterialQuestion,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.warmCharcoal),
                     ),
                   )
                 : ListView.builder(
@@ -176,9 +177,9 @@ class _AiChatPageState extends State<AiChatPage> {
             top: false,
             child: Container(
               padding: const EdgeInsets.fromLTRB(12, 8, 12, 10),
-              decoration: BoxDecoration(
-                color: colorScheme.surface,
-                border: Border(top: BorderSide(color: colorScheme.outline)),
+              decoration: const BoxDecoration(
+                color: AppColors.pureWhite,
+                border: Border(top: BorderSide(color: AppColors.oatBorder)),
               ),
               child: Row(
                 children: [
@@ -188,24 +189,22 @@ class _AiChatPageState extends State<AiChatPage> {
                       minLines: 1,
                       maxLines: 4,
                       textInputAction: TextInputAction.send,
-                      style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface),
                       decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context)!.inputMaterialHint,
-                        hintStyle: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary),
+                        hintText: l10n.inputMaterialHint,
                         filled: true,
-                        fillColor: colorScheme.surfaceContainerHighest,
+                        fillColor: AppColors.pureWhite,
                         contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: colorScheme.outline, width: 1),
+                          borderSide: const BorderSide(color: AppColors.oatBorder, width: 1),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: colorScheme.outline, width: 1),
+                          borderSide: const BorderSide(color: AppColors.oatBorder, width: 1),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                          borderSide: const BorderSide(color: AppColors.focusRing, width: 2),
                         ),
                       ),
                       onSubmitted: sendMessage,
@@ -217,11 +216,11 @@ class _AiChatPageState extends State<AiChatPage> {
                         ? const SizedBox(
                             width: 18,
                             height: 18,
-                            child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                            child: CircularProgressIndicator(strokeWidth: 2),
                           )
                         : const Icon(Icons.send),
-                    color: colorScheme.onPrimary,
-                    style: IconButton.styleFrom(backgroundColor: colorScheme.primary),
+                    color: AppColors.pureWhite,
+                    style: IconButton.styleFrom(backgroundColor: AppColors.blueberry800),
                     onPressed: loading ? null : () => sendMessage(_controller.text),
                   ),
                 ],
@@ -243,8 +242,6 @@ class ChatBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     final isUser = message.role == "user";
     final maxWidth = MediaQuery.sizeOf(context).width * 0.84;
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
 
     return Align(
       alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
@@ -253,28 +250,22 @@ class ChatBubble extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         constraints: BoxConstraints(maxWidth: maxWidth.clamp(260, 640).toDouble()),
         decoration: BoxDecoration(
-          color: isUser ? xui.XuiTheme.slushie500 : colorScheme.surface,
+          color: isUser ? AppColors.slushie500 : AppColors.pureWhite,
           borderRadius: BorderRadius.only(
             topLeft: const Radius.circular(20),
             topRight: const Radius.circular(20),
             bottomLeft: Radius.circular(isUser ? 20 : 6),
             bottomRight: Radius.circular(isUser ? 6 : 20),
           ),
-          border: Border.all(color: colorScheme.outline, width: 1),
+          border: Border.all(color: AppColors.oatBorder, width: 1),
+          boxShadow: AppElevation.card,
         ),
         child: isUser
             ? Text(
                 message.content,
-                style: xui.XuiTheme.bodyStd().copyWith(color: xui.XuiTheme.pureWhite, height: 1.55),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.pureWhite, height: 1.55),
               )
-            : MarkdownBody(
-                data: message.content,
-                styleSheet: MarkdownStyleSheet(
-                  p: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface, height: 1.55),
-                  strong: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface),
-                  code: textTheme.bodySmall?.copyWith(color: colorScheme.onSurface),
-                ),
-              ),
+            : MarkdownBody(data: message.content),
       ),
     );
   }

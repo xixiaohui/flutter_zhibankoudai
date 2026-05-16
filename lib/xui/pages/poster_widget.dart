@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
+import 'package:flutter_application_zhiban/design/colors.dart';
+import 'package:flutter_application_zhiban/design/elevation.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:intl/intl.dart';
 
@@ -54,10 +55,10 @@ class PosterWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: xui.XuiTheme.oatLight, width: 1),
-        boxShadow: xui.XuiTheme.clayShadow,
+        border: Border.all(color: AppColors.oatLight, width: 1),
+        boxShadow: AppElevation.card,
         gradient: const LinearGradient(
-          colors: [xui.XuiTheme.warmCream, xui.XuiTheme.lightFrost],
+          colors: [AppColors.warmCream, AppColors.lightFrost],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -72,7 +73,7 @@ class PosterWidget extends StatelessWidget {
               width: 220,
               height: 220,
               decoration: BoxDecoration(
-                color: xui.XuiTheme.slushie500.withValues(alpha: 0.08),
+                color: AppColors.slushie500.withValues(alpha: 0.08),
                 shape: BoxShape.circle,
               ),
             ),
@@ -84,7 +85,7 @@ class PosterWidget extends StatelessWidget {
               width: 180,
               height: 180,
               decoration: BoxDecoration(
-                color: xui.XuiTheme.ube800.withValues(alpha: 0.08),
+                color: AppColors.ube800.withValues(alpha: 0.08),
                 shape: BoxShape.circle,
               ),
             ),
@@ -99,7 +100,7 @@ class PosterWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: 67,
                 fontWeight: FontWeight.bold,
-                color: xui.XuiTheme.slushie500.withValues(alpha: 0.04),
+                color: AppColors.slushie500.withValues(alpha: 0.04),
               ),
             ),
           ),
@@ -120,20 +121,20 @@ class PosterWidget extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
-                            colors: [xui.XuiTheme.blueberry800, xui.XuiTheme.ube800],
+                            colors: [AppColors.blueberry800, AppColors.ube800],
                           ),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: const Text(
                           "AI 解读",
                           style: TextStyle(
-                            color: xui.XuiTheme.pureWhite,
+                            color: AppColors.pureWhite,
                             fontSize: 16,
                             letterSpacing: 1.2,
                           ),
                         ),
                       ),
-                    const Icon(Icons.auto_awesome, size: 18, color: xui.XuiTheme.warmCharcoal),
+                    const Icon(Icons.auto_awesome, size: 18, color: AppColors.warmCharcoal),
                   ],
                 ),
 
@@ -149,7 +150,7 @@ class PosterWidget extends StatelessWidget {
                     fontWeight: FontWeight.w800,
                     height: 1.3,
                     letterSpacing: 0.5,
-                    color: xui.XuiTheme.clayBlack,
+                    color: AppColors.clayBlack,
                   ),
                 ),
 
@@ -160,11 +161,11 @@ class PosterWidget extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.all(32),
                   decoration: BoxDecoration(
-                    color: xui.XuiTheme.pureWhite.withValues(alpha: 0.95),
+                    color: AppColors.pureWhite.withValues(alpha: 0.95),
                     borderRadius: BorderRadius.circular(24),
                     boxShadow: [
                       BoxShadow(
-                        color: xui.XuiTheme.slushie500.withValues(alpha: 0.06),
+                        color: AppColors.slushie500.withValues(alpha: 0.06),
                         blurRadius: 20,
                         offset: const Offset(0, 10),
                       ),
@@ -179,7 +180,7 @@ class PosterWidget extends StatelessWidget {
                     overflow: TextOverflow.visible,
                     style: const TextStyle(
                       height: 1.8,
-                      color: xui.XuiTheme.darkCharcoal,
+                      color: AppColors.darkCharcoal,
                       fontFamily: 'NotoSerifSC',
                     ),
                   ),
@@ -195,7 +196,7 @@ class PosterWidget extends StatelessWidget {
                       date,
                       style: const TextStyle(
                         fontSize: 16,
-                        color: xui.XuiTheme.warmCharcoal,
+                        color: AppColors.warmCharcoal,
                         letterSpacing: 1,
                       ),
                     ),
@@ -205,7 +206,7 @@ class PosterWidget extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         letterSpacing: 2,
                         fontSize: 16,
-                        color: xui.XuiTheme.blueberry800,
+                        color: AppColors.blueberry800,
                       ),
                     ),
                   ],
@@ -220,7 +221,7 @@ class PosterWidget extends StatelessWidget {
             left: 20,
             child: Container(
               width: 40, height: 2,
-              color: xui.XuiTheme.warmCharcoal.withValues(alpha: 0.3),
+              color: AppColors.warmCharcoal.withValues(alpha: 0.3),
             ),
           ),
           Positioned(
@@ -228,7 +229,7 @@ class PosterWidget extends StatelessWidget {
             left: 20,
             child: Container(
               width: 2, height: 40,
-              color: xui.XuiTheme.warmCharcoal.withValues(alpha: 0.3),
+              color: AppColors.warmCharcoal.withValues(alpha: 0.3),
             ),
           ),
           Positioned(
@@ -236,7 +237,7 @@ class PosterWidget extends StatelessWidget {
             right: 20,
             child: Container(
               width: 40, height: 2,
-              color: xui.XuiTheme.warmCharcoal.withValues(alpha: 0.3),
+              color: AppColors.warmCharcoal.withValues(alpha: 0.3),
             ),
           ),
           Positioned(
@@ -244,7 +245,7 @@ class PosterWidget extends StatelessWidget {
             right: 20,
             child: Container(
               width: 2, height: 40,
-              color: xui.XuiTheme.warmCharcoal.withValues(alpha: 0.3),
+              color: AppColors.warmCharcoal.withValues(alpha: 0.3),
             ),
           ),
         ],

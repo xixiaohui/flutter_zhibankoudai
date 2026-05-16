@@ -3,9 +3,9 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_application_zhiban/l10n/gen/app_localizations.dart';
+import 'package:flutter_application_zhiban/design/colors.dart';
 import 'package:flutter_application_zhiban/xui/pages/poster_widget.dart';
-import 'package:flutter_application_zhiban/xui/x_design.dart' as xui;
+import '../../l10n/gen/app_localizations.dart';
 
 import 'package:flutter_application_zhiban/xui/utils/save_image_stub.dart'
     if (dart.library.html) 'package:flutter_application_zhiban/xui/utils/save_image_web.dart'
@@ -82,6 +82,7 @@ class _PosterPreviewState extends State<PosterPreview> {
 
     // 提前获取 messenger，避免跨 async 使用 context
     final messenger = ScaffoldMessenger.of(context);
+    final l10n = AppLocalizations.of(context)!;
     setState(() => saving = true);
 
     final ok = await saveImage(imageBytes!);
@@ -90,12 +91,13 @@ class _PosterPreviewState extends State<PosterPreview> {
     setState(() => saving = false);
 
     messenger.showSnackBar(
-      SnackBar(content: Text(ok ? AppLocalizations.of(context)!.savedToPhotoAlbum : AppLocalizations.of(context)!.saveToAlbumFailed)),
+      SnackBar(content: Text(ok ? l10n.savedToPhotoAlbum : l10n.saveToAlbumFailed)),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final screen = MediaQuery.sizeOf(context);
     final maxPreviewWidth = (screen.width - 48).clamp(280.0, 420.0).toDouble();
 
@@ -108,12 +110,12 @@ class _PosterPreviewState extends State<PosterPreview> {
             Row(
               children: [
                 Expanded(
-                  child: Text(AppLocalizations.of(context)!.posterPreview, style: xui.XuiTheme.featureTitle()),
+                  child: Text(l10n.posterPreview, style: Theme.of(context).textTheme.titleMedium),
                 ),
                 IconButton(
                   onPressed: () => Navigator.pop(context),
                   icon: const Icon(Icons.close),
-                  tooltip: AppLocalizations.of(context)!.close,
+                  tooltip: l10n.close,
                 ),
               ],
             ),
@@ -128,7 +130,7 @@ class _PosterPreviewState extends State<PosterPreview> {
                     child: RepaintBoundary(
                       key: posterKey,
                       child: Container(
-                        color: xui.XuiTheme.pureWhite,
+                        color: AppColors.pureWhite,
                         child: PosterWidget(item: widget.item),
                       ),
                     ),
@@ -151,10 +153,10 @@ class _PosterPreviewState extends State<PosterPreview> {
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
                     : const Icon(Icons.download),
-                label: Text(imageBytes == null ? AppLocalizations.of(context)!.generating : AppLocalizations.of(context)!.saveToPhotoAlbum),
+                label: Text(imageBytes == null ? l10n.generating : l10n.saveToPhotoAlbum),
                 style: FilledButton.styleFrom(
-                  backgroundColor: xui.XuiTheme.blueberry800,
-                  foregroundColor: xui.XuiTheme.pureWhite,
+                  backgroundColor: AppColors.blueberry800,
+                  foregroundColor: AppColors.pureWhite,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),

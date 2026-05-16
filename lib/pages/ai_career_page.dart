@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../design/colors.dart';
+import '../design/elevation.dart';
+import '../design/radius.dart';
 import '../l10n/gen/app_localizations.dart';
 import '../models/career.dart';
-
 class AICareerPage extends StatefulWidget {
   const AICareerPage({super.key});
 
@@ -40,37 +42,35 @@ class _AICareerPageState extends State<AICareerPage> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
     return Scaffold(
-      backgroundColor: colorScheme.surfaceContainerLowest,
+      backgroundColor: AppColors.warmCream,
       appBar: AppBar(
-        backgroundColor: colorScheme.surface,
+        backgroundColor: AppColors.pureWhite,
         elevation: 0,
         surfaceTintColor: Colors.transparent,
-        title: Text(
+        title: const Text(
           'AI Career',
-          style: textTheme.titleSmall?.copyWith(color: colorScheme.onSurface, fontWeight: FontWeight.w600),
+          style: TextStyle(color: AppColors.clayBlack, fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
       ),
-      body: _buildBody(colorScheme, textTheme),
+      body: _buildBody(),
     );
   }
 
-  Widget _buildBody(ColorScheme colorScheme, TextTheme textTheme) {
+  Widget _buildBody() {
     if (_loading) {
       return const Center(child: CircularProgressIndicator());
     }
     if (_error != null) {
+      final l10n = AppLocalizations.of(context)!;
       return Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(AppLocalizations.of(context)!.loadFailed, style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface)),
+            Text(l10n.loadFailed, style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 8),
-            TextButton(onPressed: _loadCareers, child: Text(AppLocalizations.of(context)!.retry)),
+            TextButton(onPressed: _loadCareers, child: Text(l10n.retry)),
           ],
         ),
       );
@@ -79,7 +79,7 @@ class _AICareerPageState extends State<AICareerPage> {
     final careers = _careers!.where((c) => c.name.isNotEmpty).toList();
     final grouped = <String, List<Career>>{};
     for (final c in careers) {
-      final catKey = c.category.isNotEmpty ? c.category : AppLocalizations.of(context)!.otherCategory;
+      final catKey = c.category.isNotEmpty ? c.category : '其他';
       grouped.putIfAbsent(catKey, () => []).add(c);
     }
 
@@ -89,16 +89,17 @@ class _AICareerPageState extends State<AICareerPage> {
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       itemCount: categories.length,
-      itemBuilder: (_, i) => _buildCategorySection(categories[i], colorScheme, textTheme),
+      itemBuilder: (_, i) => _buildCategorySection(categories[i]),
     );
   }
 
-  Widget _buildCategorySection(MapEntry<String, List<Career>> entry, ColorScheme colorScheme, TextTheme textTheme) {
+  Widget _buildCategorySection(MapEntry<String, List<Career>> entry) {
     final cat = entry.value.first;
+    final l10n = AppLocalizations.of(context)!;
     final icon = cat.categoryIcon.isNotEmpty ? cat.categoryIcon : '📋';
     final name = cat.categoryName.isNotEmpty
         ? cat.categoryName
-        : (cat.category.isNotEmpty ? cat.category : AppLocalizations.of(context)!.otherCategory);
+        : (cat.category.isNotEmpty ? cat.category : l10n.otherCategory);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -111,33 +112,34 @@ class _AICareerPageState extends State<AICareerPage> {
               const SizedBox(width: 8),
               Text(
                 name,
-                style: textTheme.titleSmall?.copyWith(
+                style: const TextStyle(
+                  fontSize: 17,
                   fontWeight: FontWeight.w700,
-                  color: colorScheme.onSurface,
+                  color: AppColors.clayBlack,
                 ),
               ),
               const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
-                  color: colorScheme.outlineVariant,
-                  borderRadius: BorderRadius.circular(24),
+                  color: AppColors.oatLight,
+                  borderRadius: BorderRadius.circular(AppRadius.pill),
                 ),
                 child: Text(
                   '${entry.value.length}',
-                  style: textTheme.labelSmall?.copyWith(color: colorScheme.secondary),
+                  style: const TextStyle(fontSize: 9.6, fontWeight: FontWeight.w600, color: AppColors.clayBlack),
                 ),
               ),
             ],
           ),
         ),
-        ...entry.value.map((career) => _buildCareerCard(career, colorScheme, textTheme)),
+        ...entry.value.map((career) => _buildCareerCard(career)),
         const SizedBox(height: 4),
       ],
     );
   }
 
-  Widget _buildCareerCard(Career career, ColorScheme colorScheme, TextTheme textTheme) {
+  Widget _buildCareerCard(Career career) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: GestureDetector(
@@ -147,9 +149,10 @@ class _AICareerPageState extends State<AICareerPage> {
         child: Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: colorScheme.surface,
-            borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: colorScheme.outline, width: 0.5),
+            color: AppColors.pureWhite,
+            borderRadius: BorderRadius.circular(AppRadius.card),
+            border: Border.all(color: AppColors.oatBorder),
+            boxShadow: AppElevation.card,
           ),
           child: Row(
             children: [
@@ -171,9 +174,10 @@ class _AICareerPageState extends State<AICareerPage> {
                   children: [
                     Text(
                       career.nameZh.isNotEmpty ? career.nameZh : career.name,
-                      style: textTheme.titleSmall?.copyWith(
+                      style: const TextStyle(
+                        fontSize: 15,
                         fontWeight: FontWeight.w600,
-                        color: colorScheme.onSurface,
+                        color: AppColors.clayBlack,
                       ),
                     ),
                     const SizedBox(height: 3),
@@ -181,14 +185,15 @@ class _AICareerPageState extends State<AICareerPage> {
                       career.vibeZh.isNotEmpty ? career.vibeZh : career.vibe,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: textTheme.bodySmall?.copyWith(
-                        color: colorScheme.secondary,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: AppColors.warmCharcoal,
                       ),
                     ),
                   ],
                 ),
               ),
-              Icon(Icons.chevron_right, color: colorScheme.secondary, size: 20),
+              const Icon(Icons.chevron_right, color: AppColors.warmSilver, size: 20),
             ],
           ),
         ),

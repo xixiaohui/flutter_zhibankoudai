@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_zhiban/l10n/gen/app_localizations.dart';
+import 'package:flutter_application_zhiban/design/colors.dart';
+import 'package:flutter_application_zhiban/design/elevation.dart';
 import 'package:http/http.dart' as http;
+import '../../l10n/gen/app_localizations.dart';
 
 class SearchResultPage extends StatefulWidget {
   final String query;
@@ -73,17 +75,17 @@ class _SearchResultPageState extends State<SearchResultPage> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: colorScheme.surfaceContainerLowest,
+      backgroundColor: AppColors.warmCream,
       appBar: AppBar(
-        backgroundColor: colorScheme.surface,
+        backgroundColor: AppColors.pureWhite,
         elevation: 0,
-        foregroundColor: colorScheme.onSurface,
-        title: Text(AppLocalizations.of(context)!.aiAnalysis),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Divider(height: 1, thickness: 1, color: colorScheme.outlineVariant),
+        foregroundColor: AppColors.clayBlack,
+        title: Text(l10n.aiAnalysisResult),
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(height: 1, thickness: 1, color: AppColors.oatBorder),
         ),
       ),
       body: SafeArea(
@@ -106,34 +108,30 @@ class _SearchResultPageState extends State<SearchResultPage> {
   }
 
   Widget _buildSearchBar() {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
+    final l10n = AppLocalizations.of(context)!;
     return Row(
       children: [
         Expanded(
           child: TextField(
             controller: controller,
             textInputAction: TextInputAction.search,
-            style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface),
             decoration: InputDecoration(
-              hintText: AppLocalizations.of(context)!.searchHint,
-              hintStyle: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary),
+              hintText: l10n.searchHint,
               filled: true,
-              fillColor: colorScheme.surfaceContainerHighest,
-              prefixIcon: Icon(Icons.search, color: colorScheme.secondary),
+              fillColor: AppColors.pureWhite,
+              prefixIcon: const Icon(Icons.search),
               contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(22),
-                borderSide: BorderSide(color: colorScheme.outline, width: 1),
+                borderSide: const BorderSide(color: AppColors.oatBorder, width: 1),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(22),
-                borderSide: BorderSide(color: colorScheme.outline, width: 1),
+                borderSide: const BorderSide(color: AppColors.oatBorder, width: 1),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(22),
-                borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                borderSide: const BorderSide(color: AppColors.focusRing, width: 2),
               ),
             ),
             onSubmitted: (_) => onSearch(),
@@ -142,34 +140,34 @@ class _SearchResultPageState extends State<SearchResultPage> {
         const SizedBox(width: 8),
         FilledButton(
           style: FilledButton.styleFrom(
-            backgroundColor: colorScheme.primary,
-            foregroundColor: colorScheme.onPrimary,
+            backgroundColor: AppColors.blueberry800,
+            foregroundColor: AppColors.pureWhite,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),
           onPressed: loading ? null : onSearch,
-          child: Text(AppLocalizations.of(context)!.analyze),
+          child: Text(l10n.analyze),
         ),
       ],
     );
   }
 
   Widget _buildContent() {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
+    final l10n = AppLocalizations.of(context)!;
     if (loading) {
       return const Center(child: CircularProgressIndicator());
     }
 
     if (error != null) {
-      return Center(child: Text(AppLocalizations.of(context)!.errorOccurred(error!), style: textTheme.bodyMedium?.copyWith(color: colorScheme.error)));
+      return Center(child: Text(l10n.errorOccurred(error.toString())));
     }
 
     if (result == null) {
       return Center(
-        child: Text(AppLocalizations.of(context)!.searchPlaceholder,
-          style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary)),
+        child: Text(
+          l10n.searchPlaceholder,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.warmCharcoal),
+        ),
       );
     }
 
@@ -178,19 +176,21 @@ class _SearchResultPageState extends State<SearchResultPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppLocalizations.of(context)!.questionPrefix(controller.text),
-            style: textTheme.titleSmall?.copyWith(color: colorScheme.onSurface)),
+          Text(
+            l10n.questionPrefix(controller.text),
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
           const SizedBox(height: 12),
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: colorScheme.surface,
+              color: AppColors.pureWhite,
               borderRadius: BorderRadius.circular(22),
-              border: Border.all(color: colorScheme.outline, width: 0.5),
+              border: Border.all(color: AppColors.oatBorder, width: 1),
+              boxShadow: AppElevation.card,
             ),
             padding: const EdgeInsets.all(18),
-            child: Text(result ?? "",
-              style: textTheme.bodyLarge?.copyWith(color: colorScheme.onSurface, letterSpacing: 0)),
+            child: Text(result ?? "", style: Theme.of(context).textTheme.bodyLarge?.copyWith(letterSpacing: 0)),
           ),
           const SizedBox(height: 16),
           Wrap(
@@ -208,14 +208,11 @@ class _SearchResultPageState extends State<SearchResultPage> {
   }
 
   Widget _suggestion(String text) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
     return ActionChip(
-      backgroundColor: colorScheme.surfaceContainerHighest,
+      backgroundColor: AppColors.pureWhite,
       label: Text(text),
-      labelStyle: textTheme.labelMedium?.copyWith(color: colorScheme.primary),
-      side: BorderSide(color: colorScheme.outline),
+      labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.blueberry800),
+      side: const BorderSide(color: AppColors.oatBorder),
       onPressed: () {
         controller.text = text;
         onSearch();

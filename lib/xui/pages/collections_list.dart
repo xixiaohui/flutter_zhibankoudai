@@ -1,11 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_zhiban/l10n/gen/app_localizations.dart';
 import 'package:flutter_application_zhiban/xui/pages/experts.dart';
-import 'package:flutter_application_zhiban/config/theme.dart';
+import 'package:flutter_application_zhiban/design/colors.dart';
 import 'package:flutter_application_zhiban/xui/utils/module.dart';
+import 'package:flutter_application_zhiban/widgets/clay_container.dart';
 import 'package:http/http.dart' as http;
+import '../../l10n/gen/app_localizations.dart';
 
 class CollectionsListPage extends StatefulWidget {
   const CollectionsListPage({super.key});
@@ -72,17 +73,17 @@ class _CollectionsListPageState extends State<CollectionsListPage> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: colorScheme.surfaceContainerLowest,
+      backgroundColor: AppColors.warmCream,
       appBar: AppBar(
-        backgroundColor: colorScheme.surface,
+        backgroundColor: AppColors.pureWhite,
         elevation: 0,
-        foregroundColor: colorScheme.onSurface,
-        title: Text(AppLocalizations.of(context)!.assistantList),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Divider(height: 1, thickness: 1, color: colorScheme.outlineVariant),
+        foregroundColor: AppColors.clayBlack,
+        title: Text(l10n.assistantList),
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(height: 1, thickness: 1, color: AppColors.oatBorder),
         ),
       ),
       body: RefreshIndicator(
@@ -90,7 +91,12 @@ class _CollectionsListPageState extends State<CollectionsListPage> {
         child: ListView.builder(
           controller: _controller,
           physics: const AlwaysScrollableScrollPhysics(),
-          padding: EdgeInsets.fromLTRB(14, 14, 14, 24 + MediaQuery.paddingOf(context).bottom),
+          padding: EdgeInsets.fromLTRB(
+            14,
+            14,
+            14,
+            24 + MediaQuery.paddingOf(context).bottom,
+          ),
           itemCount: _list.length + 1,
           itemBuilder: (context, index) {
             if (index < _list.length) {
@@ -116,57 +122,59 @@ class _CollectionRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
     final module = findModuleByCollection(collection);
     final name = module?.name ?? collection;
     final icon = module?.icon ?? "📁";
-    final slogan = module?.slogan ?? AppLocalizations.of(context)!.viewDataset;
+    final l10n = AppLocalizations.of(context)!;
+    final slogan = module?.slogan ?? l10n.viewDataset;
     final colors = module?.colors;
-    final accent = colors != null ? AppTheme.fromHex(colors.accent) : colorScheme.primary;
-    final textColor = colors != null ? AppTheme.fromHex(colors.text) : colorScheme.onSurface;
-    final subTextColor = colors != null ? AppTheme.fromHex(colors.textSecondary) : colorScheme.secondary;
+    final accent = colors != null ? AppColors.fromHex(colors.accent) : AppColors.slushie800;
+    final textColor = colors != null ? AppColors.fromHex(colors.text) : AppColors.clayBlack;
+    final subTextColor = colors != null ? AppColors.fromHex(colors.textSecondary) : AppColors.warmCharcoal;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
-      child: GestureDetector(
+      child: ClayContainer(
         onTap: () => Navigator.push(
           context,
           MaterialPageRoute(builder: (_) => ExpertsPage(collectionName: collection)),
         ),
-        child: Container(
-          padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            color: colorScheme.surface,
-            borderRadius: BorderRadius.circular(22),
-            border: Border.all(color: colorScheme.outline, width: 0.5),
-          ),
-          child: Row(
-            children: [
-              Container(
-                width: 52, height: 52,
-                decoration: BoxDecoration(
-                  color: accent.withValues(alpha: 0.13),
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                child: Center(child: Text(icon, style: const TextStyle(fontSize: 24))),
+        borderRadius: 22,
+        padding: const EdgeInsets.all(14),
+        child: Row(
+          children: [
+            Container(
+              width: 52,
+              height: 52,
+              decoration: BoxDecoration(
+                color: accent.withValues(alpha: 0.13),
+                borderRadius: BorderRadius.circular(18),
               ),
-              const SizedBox(width: 14),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(name, maxLines: 1, overflow: TextOverflow.ellipsis,
-                      style: textTheme.titleSmall?.copyWith(fontSize: 17, color: textColor)),
-                    const SizedBox(height: 4),
-                    Text(slogan, maxLines: 2, overflow: TextOverflow.ellipsis,
-                      style: textTheme.bodySmall?.copyWith(fontSize: 13, color: subTextColor)),
-                  ],
-                ),
+              child: Center(child: Text(icon, style: const TextStyle(fontSize: 24))),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 17, color: textColor),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    slogan,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 13, color: subTextColor),
+                  ),
+                ],
               ),
-              Icon(Icons.chevron_right, color: colorScheme.secondary),
-            ],
-          ),
+            ),
+            const Icon(Icons.chevron_right, color: AppColors.warmSilver),
+          ],
         ),
       ),
     );
@@ -178,19 +186,25 @@ class _LoadMoreRow extends StatelessWidget {
   final bool hasMore;
   final VoidCallback onPressed;
 
-  const _LoadMoreRow({required this.isLoading, required this.hasMore, required this.onPressed});
+  const _LoadMoreRow({
+    required this.isLoading,
+    required this.hasMore,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
     if (isLoading) {
-      return const Padding(padding: EdgeInsets.all(18), child: Center(child: CircularProgressIndicator()));
+      return const Padding(
+        padding: EdgeInsets.all(18),
+        child: Center(child: CircularProgressIndicator()),
+      );
     }
     if (!hasMore) {
       return Padding(
         padding: const EdgeInsets.all(18),
-        child: Center(child: Text(AppLocalizations.of(context)!.noMoreData, style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary))),
+        child: Center(child: Text(l10n.noMoreData, style: Theme.of(context).textTheme.bodyMedium)),
       );
     }
     return Padding(
@@ -198,12 +212,12 @@ class _LoadMoreRow extends StatelessWidget {
       child: FilledButton(
         onPressed: onPressed,
         style: FilledButton.styleFrom(
-          backgroundColor: colorScheme.primary,
-          foregroundColor: colorScheme.onPrimary,
+          backgroundColor: AppColors.lemon500,
+          foregroundColor: AppColors.clayBlack,
           padding: const EdgeInsets.symmetric(vertical: 13),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
-        child: Text(AppLocalizations.of(context)!.loadingMore),
+        child: Text(l10n.loadingMore),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../design/radius.dart';
+import '../design/colors.dart';
 import '../design/spacing.dart';
 import '../l10n/gen/app_localizations.dart';
 import '../models/daily_content.dart';
@@ -26,17 +27,10 @@ class DailyCard extends StatelessWidget {
     this.onShare,
   });
 
-  static Color _fromHex(String hex) {
-    final buffer = StringBuffer();
-    if (hex.length == 6 || hex.length == 7) buffer.write('ff');
-    buffer.write(hex.replaceFirst('#', ''));
-    return Color(int.parse(buffer.toString(), radix: 16));
-  }
-
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final moduleColor = _fromHex(module.color);
+    final moduleColor = AppColors.fromHex(module.color);
     final useDarkText = moduleColor.computeLuminance() > 0.5;
     final fg = useDarkText ? Colors.black : Colors.white;
 

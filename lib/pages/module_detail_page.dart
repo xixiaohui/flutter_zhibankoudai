@@ -5,13 +5,14 @@ import 'package:provider/provider.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import '../config/routes.dart';
 import '../design/radius.dart';
-import '../design/elevation.dart';
+import '../design/colors.dart';
 import '../l10n/gen/app_localizations.dart';
 import '../models/daily_content.dart';
-import '../models/field_metadata.dart';
 import '../providers/module_provider.dart';
-import '../providers/locale_provider.dart';
 import '../providers/daily_content_provider.dart';
+import '../widgets/action_button.dart';
+import '../widgets/outlined_action_button.dart';
+import 'module_detail/widgets/metadata_section.dart';
 
 class ModuleDetailPage extends StatefulWidget {
   final String moduleId;
@@ -35,15 +36,9 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
     if (m != null && cp.getContent(widget.moduleId) == null) cp.loadContent(m);
   }
 
-  static Color _fromHex(String hex) {
-    final buffer = StringBuffer();
-    if (hex.length == 6 || hex.length == 7) buffer.write('ff');
-    buffer.write(hex.replaceFirst('#', ''));
-    return Color(int.parse(buffer.toString(), radix: 16));
-  }
-
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final mp = context.read<ModuleProvider>();
     final module = mp.getModuleById(widget.moduleId);
     final textTheme = Theme.of(context).textTheme;
@@ -51,12 +46,12 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
 
     if (module == null) {
       return Scaffold(
-        appBar: AppBar(title: Text(AppLocalizations.of(context)!.moduleNotFound)),
-        body: Center(child: Text(AppLocalizations.of(context)!.moduleNotFoundDesc)),
+        appBar: AppBar(title: Text(l10n.moduleNotFound)),
+        body: Center(child: Text(l10n.moduleNotFoundDesc)),
       );
     }
 
-    final mc = _fromHex(module.color);
+    final mc = AppColors.fromHex(module.color);
 
     return Scaffold(
       body: CustomScrollView(
@@ -82,7 +77,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
             ),
           ),
           Consumer<DailyContentProvider>(
-            builder: (_, cp, _) {
+            builder: (_, cp, __) {
               final content = cp.getContent(widget.moduleId);
               final isLoading = cp.isLoading(widget.moduleId);
               final isGenerating = cp.isGenerating(widget.moduleId);
@@ -141,7 +136,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                         ),
                       ],
 
-                      if (content.extra.isNotEmpty) _buildMetadataSection(content.extra, mc, textTheme, colorScheme),
+                      if (content.extra.isNotEmpty) MetadataSection(extra: content.extra, accentColor: mc),
 
                       if (content.isAiGenerated) ...[
                         const SizedBox(height: 16),
@@ -154,7 +149,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                           child: Row(mainAxisSize: MainAxisSize.min, children: [
                             Icon(Icons.auto_awesome, size: 14, color: const Color(0xFF078a52)),
                             const SizedBox(width: 4),
-                            Text(AppLocalizations.of(context)!.aiGenerate, style: textTheme.labelSmall?.copyWith(color: const Color(0xFF078a52))),
+                            Text(l10n.aiGenerate, style: textTheme.labelSmall?.copyWith(color: const Color(0xFF078a52))),
                           ]),
                         ),
                       ],
@@ -163,30 +158,26 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                     if (content == null)
                       Padding(
                         padding: const EdgeInsets.only(top: 40),
-                        child: Center(child: Text(AppLocalizations.of(context)!.noContent, style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary))),
+                        child: Center(child: Text(l10n.noContent, style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary))),
                       ),
 
                     const SizedBox(height: 32),
 
                     Row(children: [
                       Expanded(
-                        child: _actionButton(
-                          label: isGenerating ? AppLocalizations.of(context)!.generating : AppLocalizations.of(context)!.aiRefresh,
+                        child: ActionButton(
+                          label: isGenerating ? l10n.generating : l10n.aiRefresh,
                           icon: isGenerating ? Icons.hourglass_empty : Icons.refresh,
                           loading: isGenerating,
-                          onTap: isGenerating ? null : () => cp.refreshWithAi(module, locale: context.read<LocaleProvider>().languageCode),
-                          colorScheme: colorScheme,
-                          textTheme: textTheme,
+                          onTap: isGenerating ? null : () => cp.refreshWithAi(module),
                         ),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
-                        child: _outlinedButton(
-                          label: AppLocalizations.of(context)!.generatePoster,
+                        child: OutlinedActionButton(
+                          label: l10n.generatePoster,
                           icon: Icons.share,
                           onTap: content != null ? () => _navigateToPoster(context, content) : null,
-                          colorScheme: colorScheme,
-                          textTheme: textTheme,
                         ),
                       ),
                     ]),
@@ -209,98 +200,6 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
     );
   }
 
-  Widget _buildMetadataSection(Map<String, dynamic> extra, Color mc, TextTheme textTheme, ColorScheme colorScheme) {
-    final rows = <Widget>[];
-    extra.forEach((key, value) {
-      if (FieldMetadata.skip(key)) return;
-      final str = value?.toString() ?? '';
-      if (str.isEmpty) return;
-
-      final icon = FieldMetadata.icon(key);
-      final label = FieldMetadata.label(key);
-
-      rows.add(Padding(
-        padding: const EdgeInsets.only(bottom: 10),
-        child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Icon(icon, size: 16, color: mc),
-          const SizedBox(width: 8),
-          Text('$label：', style: textTheme.bodySmall?.copyWith(color: colorScheme.secondary)),
-          Expanded(child: Text(str, style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurface, height: 1.5))),
-        ]),
-      ));
-    });
-
-    if (rows.isEmpty) return const SizedBox.shrink();
-
-    return Padding(
-      padding: const EdgeInsets.only(top: 20),
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: mc.withValues(alpha: 0.05),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: mc.withValues(alpha: 0.12)),
-        ),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: rows),
-      ),
-    );
-  }
-
-  Widget _actionButton({
-    required String label,
-    required IconData icon,
-    bool loading = false,
-    VoidCallback? onTap,
-    required ColorScheme colorScheme,
-    required TextTheme textTheme,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        decoration: BoxDecoration(
-          color: colorScheme.surface,
-          borderRadius: BorderRadius.circular(AppRadius.card),
-          border: Border.all(color: colorScheme.outline, width: 0.5),
-          boxShadow: AppElevation.card,
-        ),
-        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          if (loading)
-            const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
-          else
-            Icon(icon, size: 18, color: colorScheme.onSurface),
-          const SizedBox(width: 6),
-          Text(label, style: textTheme.labelLarge?.copyWith(color: colorScheme.onSurface)),
-        ]),
-      ),
-    );
-  }
-
-  Widget _outlinedButton({
-    required String label,
-    required IconData icon,
-    VoidCallback? onTap,
-    required ColorScheme colorScheme,
-    required TextTheme textTheme,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(AppRadius.standard),
-          border: Border.all(color: colorScheme.outline),
-        ),
-        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Icon(icon, size: 18, color: colorScheme.onSurface),
-          const SizedBox(width: 6),
-          Text(label, style: textTheme.labelLarge?.copyWith(color: colorScheme.onSurface)),
-        ]),
-      ),
-    );
-  }
 
   void _navigateToPoster(BuildContext context, DailyContent content) {
     context.push(RoutePaths.poster, extra: content);

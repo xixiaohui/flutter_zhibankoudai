@@ -6,7 +6,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:gal/gal.dart';
 import 'dart:io';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import '../config/theme.dart';
+import '../design/colors.dart';
+import '../design/elevation.dart';
 import '../l10n/gen/app_localizations.dart';
 import '../models/daily_content.dart';
 import '../models/field_metadata.dart';
@@ -34,7 +35,7 @@ class _PosterPageState extends State<PosterPage> {
   static final _posterMarkdownStyle = MarkdownStyleSheet(
   /// 正文
   p: TextStyle(
-    color: AppTheme.pureWhite.withValues(alpha: 0.96),
+    color: AppColors.pureWhite.withValues(alpha: 0.96),
     fontSize: 52,
     fontWeight: FontWeight.w400,
     height: 2.15,
@@ -44,7 +45,7 @@ class _PosterPageState extends State<PosterPage> {
 
   /// 一级标题
   h1: TextStyle(
-    color: AppTheme.pureWhite,
+    color: AppColors.pureWhite,
     fontSize: 76,
     fontWeight: FontWeight.w700,
     height: 1.45,
@@ -54,7 +55,7 @@ class _PosterPageState extends State<PosterPage> {
 
   /// 二级标题
   h2: TextStyle(
-    color: AppTheme.pureWhite.withValues(alpha: 0.98),
+    color: AppColors.pureWhite.withValues(alpha: 0.98),
     fontSize: 66,
     fontWeight: FontWeight.w600,
     height: 1.55,
@@ -64,7 +65,7 @@ class _PosterPageState extends State<PosterPage> {
 
   /// 三级标题
   h3: TextStyle(
-    color: AppTheme.pureWhite.withValues(alpha: 0.95),
+    color: AppColors.pureWhite.withValues(alpha: 0.95),
     fontSize: 58,
     fontWeight: FontWeight.w600,
     height: 1.65,
@@ -74,7 +75,7 @@ class _PosterPageState extends State<PosterPage> {
 
   /// 加粗
   strong: TextStyle(
-    color: AppTheme.pureWhite,
+    color: AppColors.pureWhite,
     fontWeight: FontWeight.w700,
     letterSpacing: 0.5,
     fontFamily: 'NotoSerifSC',
@@ -82,7 +83,7 @@ class _PosterPageState extends State<PosterPage> {
 
   /// 引用（手杖感核心）
   blockquote: TextStyle(
-    color: AppTheme.ube200,
+    color: AppColors.ube200,
     fontSize: 50,
     fontWeight: FontWeight.w400,
     height: 2.2,
@@ -92,10 +93,10 @@ class _PosterPageState extends State<PosterPage> {
   ),
 
   blockquoteDecoration: BoxDecoration(
-    color: AppTheme.pureWhite.withValues(alpha: 0.04),
+    color: AppColors.pureWhite.withValues(alpha: 0.04),
     border: Border(
       left: BorderSide(
-        color: AppTheme.ube300,
+        color: AppColors.ube300,
         width: 6,
       ),
     ),
@@ -109,7 +110,7 @@ class _PosterPageState extends State<PosterPage> {
 
   /// 列表
   listBullet: TextStyle(
-    color: AppTheme.ube100,
+    color: AppColors.ube100,
     fontSize: 52,
     height: 2.1,
     fontWeight: FontWeight.w500,
@@ -118,7 +119,7 @@ class _PosterPageState extends State<PosterPage> {
 
   /// 行内代码
   code: TextStyle(
-    color: AppTheme.ube100,
+    color: AppColors.ube100,
     fontSize: 46,
     height: 1.8,
     fontWeight: FontWeight.w500,
@@ -128,10 +129,10 @@ class _PosterPageState extends State<PosterPage> {
 
   /// 代码块
   codeblockDecoration: BoxDecoration(
-    color: AppTheme.pureWhite.withValues(alpha: 0.06),
+    color: AppColors.pureWhite.withValues(alpha: 0.06),
     borderRadius: BorderRadius.circular(20),
     border: Border.all(
-      color: AppTheme.pureWhite.withValues(alpha: 0.08),
+      color: AppColors.pureWhite.withValues(alpha: 0.08),
     ),
   ),
 
@@ -141,7 +142,7 @@ class _PosterPageState extends State<PosterPage> {
   horizontalRuleDecoration: BoxDecoration(
     border: Border(
       top: BorderSide(
-        color: AppTheme.pureWhite.withValues(alpha: 0.12),
+        color: AppColors.pureWhite.withValues(alpha: 0.12),
         width: 1.5,
       ),
     ),
@@ -236,17 +237,17 @@ class _PosterPageState extends State<PosterPage> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
-      backgroundColor: colorScheme.surfaceContainerLowest,
+      backgroundColor: AppColors.warmCream,
       appBar: AppBar(
-        backgroundColor: colorScheme.surface,
-        title: Text(AppLocalizations.of(context)!.generatePoster),
+        title: Text(l10n.generatePoster),
         actions: [
           IconButton(
             icon: const Icon(Icons.share),
             onPressed: _isProcessing ? null : _sharePoster,
-            tooltip: AppLocalizations.of(context)!.sharePoster,
+            tooltip: l10n.sharePoster,
           ),
         ],
       ),
@@ -287,7 +288,7 @@ class _PosterPageState extends State<PosterPage> {
                 Expanded(
                   child: _clayBtn(
                     Icons.download,
-                    _isProcessing ? AppLocalizations.of(context)!.processing : AppLocalizations.of(context)!.saveToAlbum,
+                    _isProcessing ? l10n.processing : l10n.saveToAlbum,
                     _isProcessing ? null : _savePoster,
                   ),
                 ),
@@ -295,7 +296,7 @@ class _PosterPageState extends State<PosterPage> {
                 Expanded(
                   child: _clayBtn(
                     Icons.share,
-                    AppLocalizations.of(context)!.share,
+                    l10n.share,
                     _isProcessing ? null : _sharePoster,
                   ),
                 ),
@@ -308,6 +309,7 @@ class _PosterPageState extends State<PosterPage> {
   }
 
   Widget _buildPageCard(int pageIndex) {
+    final l10n = AppLocalizations.of(context)!;
     final isFirstPage = pageIndex == 0;
     final dc = widget.dailyContent;
     return Container(
@@ -315,13 +317,13 @@ class _PosterPageState extends State<PosterPage> {
       padding: const EdgeInsets.all(_posterPadding),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [AppTheme.ube800, AppTheme.ube900],
+          colors: [AppColors.ube800, AppColors.ube900],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(60),
-        border: Border.all(color: AppTheme.oatBorder, width: 2),
-        boxShadow: AppTheme.clayShadow,
+        border: Border.all(color: AppColors.oatBorder, width: 2),
+        boxShadow: AppElevation.card,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -332,9 +334,9 @@ class _PosterPageState extends State<PosterPage> {
               Text(dc.categoryIcon, style: const TextStyle(fontSize: 76)),
               const SizedBox(width: 12),
               Text(
-                AppLocalizations.of(context)!.posterBranding,
+                l10n.posterBranding,
                 style: const TextStyle(
-                  color: AppTheme.ube300,
+                  color: AppColors.ube300,
                   fontSize: 76,
                   fontWeight: FontWeight.w600,
                   letterSpacing: -0.4,
@@ -352,7 +354,7 @@ class _PosterPageState extends State<PosterPage> {
             Text(
               '— ${dc.title}',
               style: TextStyle(
-                color: AppTheme.pureWhite.withValues(alpha: 0.8),
+                color: AppColors.pureWhite.withValues(alpha: 0.8),
                 fontSize: 24,
                 fontStyle: FontStyle.italic,
               ),
@@ -363,7 +365,7 @@ class _PosterPageState extends State<PosterPage> {
             Text(
               dc.subtitle,
               style: TextStyle(
-                color: AppTheme.pureWhite.withValues(alpha: 0.6),
+                color: AppColors.pureWhite.withValues(alpha: 0.6),
                 fontSize: 20,
               ),
             ),
@@ -373,9 +375,9 @@ class _PosterPageState extends State<PosterPage> {
           Align(
             alignment: Alignment.centerRight,
             child: Text(
-              AppLocalizations.of(context)!.posterFooter,
+              l10n.posterFooter,
               style: TextStyle(
-                color: AppTheme.pureWhite.withValues(alpha: 0.5),
+                color: AppColors.pureWhite.withValues(alpha: 0.5),
                 fontSize: 18,
               ),
             ),
@@ -404,13 +406,13 @@ class _PosterPageState extends State<PosterPage> {
               Icon(
                 icon,
                 size: 24,
-                color: AppTheme.pureWhite.withValues(alpha: 0.6),
+                color: AppColors.pureWhite.withValues(alpha: 0.6),
               ),
               const SizedBox(width: 10),
               Text(
                 '$label：',
                 style: TextStyle(
-                  color: AppTheme.pureWhite.withValues(alpha: 0.5),
+                  color: AppColors.pureWhite.withValues(alpha: 0.5),
                   fontSize: 22,
                 ),
               ),
@@ -418,7 +420,7 @@ class _PosterPageState extends State<PosterPage> {
                 child: Text(
                   str,
                   style: TextStyle(
-                    color: AppTheme.pureWhite.withValues(alpha: 0.8),
+                    color: AppColors.pureWhite.withValues(alpha: 0.8),
                     fontSize: 22,
                     height: 1.5,
                   ),
@@ -438,9 +440,9 @@ class _PosterPageState extends State<PosterPage> {
         width: double.infinity,
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          color: AppTheme.pureWhite.withValues(alpha: 0.06),
+          color: AppColors.pureWhite.withValues(alpha: 0.06),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: AppTheme.pureWhite.withValues(alpha: 0.1)),
+          border: Border.all(color: AppColors.pureWhite.withValues(alpha: 0.1)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -456,20 +458,20 @@ class _PosterPageState extends State<PosterPage> {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
         decoration: BoxDecoration(
-          color: AppTheme.pureWhite,
+          color: AppColors.pureWhite,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: AppTheme.oatBorder),
-          boxShadow: AppTheme.clayShadow,
+          border: Border.all(color: AppColors.oatBorder),
+          boxShadow: AppElevation.card,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 18, color: AppTheme.clayBlack),
+            Icon(icon, size: 18, color: AppColors.clayBlack),
             const SizedBox(width: 6),
             Text(
               label,
               style: const TextStyle(
-                color: AppTheme.clayBlack,
+                color: AppColors.clayBlack,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
@@ -496,6 +498,7 @@ class _PosterPageState extends State<PosterPage> {
   }
 
   Future<void> _savePoster() async {
+    final l10n = AppLocalizations.of(context)!;
     final messenger = ScaffoldMessenger.of(context);
     final controllers = _controllers;
 
@@ -504,7 +507,7 @@ class _PosterPageState extends State<PosterPage> {
       final ok = await _requestPermission();
       if (!ok) {
         if (mounted) {
-          messenger.showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.savePermissionRequired)));
+          messenger.showSnackBar(SnackBar(content: Text(l10n.savePermissionRequired)));
         }
         setState(() => _isProcessing = false);
         return;
@@ -517,7 +520,7 @@ class _PosterPageState extends State<PosterPage> {
         if (mounted && total > 1) {
           messenger.showSnackBar(
             SnackBar(
-              content: Text(AppLocalizations.of(context)!.savingImages(i + 1, total)),
+              content: Text(l10n.savingImages(i + 1, total)),
               duration: const Duration(seconds: 1),
             ),
           );
@@ -546,12 +549,12 @@ class _PosterPageState extends State<PosterPage> {
 
       if (mounted) {
         messenger.showSnackBar(
-          SnackBar(content: Text(total > 1 ? AppLocalizations.of(context)!.savedMultipleToAlbum(total) : AppLocalizations.of(context)!.savedToAlbum)),
+          SnackBar(content: Text(total > 1 ? l10n.savedMultipleToAlbum(total) : l10n.savedToAlbum)),
         );
       }
     } catch (e) {
       if (mounted) {
-        messenger.showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.saveError(e.toString()))));
+        messenger.showSnackBar(SnackBar(content: Text(l10n.saveError(e.toString()))));
       }
     } finally {
       if (mounted) setState(() => _isProcessing = false);
@@ -559,6 +562,7 @@ class _PosterPageState extends State<PosterPage> {
   }
 
   Future<void> _sharePoster() async {
+    final l10n = AppLocalizations.of(context)!;
     final messenger = ScaffoldMessenger.of(context);
     final controllers = _controllers;
 
@@ -593,12 +597,12 @@ class _PosterPageState extends State<PosterPage> {
 
       if (files.isNotEmpty) {
         await SharePlus.instance.share(
-          ShareParams(files: files, text: AppLocalizations.of(context)!.posterFromApp),
+          ShareParams(files: files, text: l10n.posterFromApp),
         );
       }
     } catch (e) {
       if (mounted) {
-        messenger.showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.shareFailed(e.toString()))));
+        messenger.showSnackBar(SnackBar(content: Text(l10n.shareFailed(e.toString()))));
       }
     } finally {
       if (mounted) setState(() => _isProcessing = false);

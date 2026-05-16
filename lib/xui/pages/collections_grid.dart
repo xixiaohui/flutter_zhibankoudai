@@ -1,12 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_zhiban/l10n/gen/app_localizations.dart';
 import 'package:flutter_application_zhiban/xui/pages/experts.dart';
-import 'package:flutter_application_zhiban/config/theme.dart';
+import 'package:flutter_application_zhiban/design/colors.dart';
 import 'package:flutter_application_zhiban/xui/utils/module.dart';
+import 'package:flutter_application_zhiban/widgets/clay_container.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
+import '../../l10n/gen/app_localizations.dart';
 
 class CollectionsGridPage extends StatefulWidget {
   const CollectionsGridPage({super.key});
@@ -78,17 +79,17 @@ class _CollectionsGridPageState extends State<CollectionsGridPage> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: colorScheme.surfaceContainerLowest,
+      backgroundColor: AppColors.warmCream,
       appBar: AppBar(
-        backgroundColor: colorScheme.surface,
+        backgroundColor: AppColors.pureWhite,
         elevation: 0,
-        foregroundColor: colorScheme.onSurface,
-        title: Text(AppLocalizations.of(context)!.assistantSquare),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Divider(height: 1, thickness: 1, color: colorScheme.outlineVariant),
+        foregroundColor: AppColors.clayBlack,
+        title: Text(l10n.assistantSquare),
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(height: 1, thickness: 1, color: AppColors.oatBorder),
         ),
       ),
       body: RefreshIndicator(
@@ -101,7 +102,12 @@ class _CollectionsGridPageState extends State<CollectionsGridPage> {
               crossAxisCount: _columnsForWidth(constraints.maxWidth),
               mainAxisSpacing: 12,
               crossAxisSpacing: 12,
-              padding: EdgeInsets.fromLTRB(14, 14, 14, 24 + MediaQuery.paddingOf(context).bottom),
+              padding: EdgeInsets.fromLTRB(
+                14,
+                14,
+                14,
+                24 + MediaQuery.paddingOf(context).bottom,
+              ),
               itemCount: _list.length + 1,
               itemBuilder: (context, index) {
                 if (index < _list.length) {
@@ -129,41 +135,37 @@ class _CollectionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final module = findModuleByCollection(collection);
     final name = module?.name ?? collection;
     final icon = module?.icon ?? "📁";
-    final slogan = module?.slogan ?? AppLocalizations.of(context)!.viewDataset;
+    final l10n = AppLocalizations.of(context)!;
+    final slogan = module?.slogan ?? l10n.viewDataset;
     final colors = module?.colors;
-    final accent = colors != null ? AppTheme.fromHex(colors.accent) : colorScheme.primary;
-    final start = colors != null
-        ? AppTheme.fromHex(colors.gradientStart)
-        : (isDark ? colorScheme.surface : colorScheme.surface);
-    final end = colors != null
-        ? AppTheme.fromHex(colors.gradientEnd)
-        : (isDark ? colorScheme.surfaceContainerHighest : const Color(0xFFeff1f3));
-    final textColor = colors != null ? AppTheme.fromHex(colors.text) : colorScheme.onSurface;
-    final subTextColor = colors != null ? AppTheme.fromHex(colors.textSecondary) : colorScheme.secondary;
+    final accent = colors != null ? AppColors.fromHex(colors.accent) : AppColors.slushie800;
+    final start = colors != null ? AppColors.fromHex(colors.gradientStart) : AppColors.pureWhite;
+    final end = colors != null ? AppColors.fromHex(colors.gradientEnd) : AppColors.lightFrost;
+    final textColor = colors != null ? AppColors.fromHex(colors.text) : AppColors.clayBlack;
+    final subTextColor = colors != null ? AppColors.fromHex(colors.textSecondary) : AppColors.warmCharcoal;
 
-    return GestureDetector(
+    return ClayContainer(
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(builder: (_) => ExpertsPage(collectionName: collection)),
       ),
+      borderRadius: 22,
+      padding: EdgeInsets.zero,
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(colors: [start, end], begin: Alignment.topLeft, end: Alignment.bottomRight),
           borderRadius: BorderRadius.circular(22),
-          border: Border.all(color: colorScheme.outline, width: 0.5),
         ),
         padding: const EdgeInsets.all(14),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              width: 46, height: 46,
+              width: 46,
+              height: 46,
               decoration: BoxDecoration(
                 color: accent.withValues(alpha: 0.14),
                 borderRadius: BorderRadius.circular(16),
@@ -171,15 +173,23 @@ class _CollectionTile extends StatelessWidget {
               child: Center(child: Text(icon, style: const TextStyle(fontSize: 23))),
             ),
             const SizedBox(height: 12),
-            Text(name, maxLines: 2, overflow: TextOverflow.ellipsis,
-              style: textTheme.titleSmall?.copyWith(fontSize: 17, color: textColor)),
+            Text(
+              name,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 17, color: textColor),
+            ),
             const SizedBox(height: 8),
-            Text(slogan, maxLines: 3, overflow: TextOverflow.ellipsis,
-              style: textTheme.bodySmall?.copyWith(fontSize: 13, color: subTextColor, height: 1.45)),
+            Text(
+              slogan,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 13, color: subTextColor, height: 1.45),
+            ),
             const SizedBox(height: 12),
-            Align(
+            const Align(
               alignment: Alignment.centerRight,
-              child: Icon(Icons.chevron_right, size: 20, color: colorScheme.secondary),
+              child: Icon(Icons.chevron_right, size: 20, color: AppColors.warmSilver),
             ),
           ],
         ),
@@ -193,17 +203,20 @@ class _LoadMoreTile extends StatelessWidget {
   final bool hasMore;
   final VoidCallback onPressed;
 
-  const _LoadMoreTile({required this.isLoading, required this.hasMore, required this.onPressed});
+  const _LoadMoreTile({
+    required this.isLoading,
+    required this.hasMore,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
     if (isLoading) return const Center(child: Padding(padding: EdgeInsets.all(18), child: CircularProgressIndicator()));
     if (!hasMore) {
       return Padding(
         padding: const EdgeInsets.all(16),
-        child: Center(child: Text(AppLocalizations.of(context)!.noMoreData, style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary))),
+        child: Center(child: Text(l10n.noMoreData, style: Theme.of(context).textTheme.bodyMedium)),
       );
     }
     return Padding(
@@ -211,11 +224,11 @@ class _LoadMoreTile extends StatelessWidget {
       child: FilledButton(
         onPressed: onPressed,
         style: FilledButton.styleFrom(
-          backgroundColor: colorScheme.primary,
-          foregroundColor: colorScheme.onPrimary,
+          backgroundColor: AppColors.lemon500,
+          foregroundColor: AppColors.clayBlack,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
-        child: Text(AppLocalizations.of(context)!.loadingMore),
+        child: Text(l10n.loadingMore),
       ),
     );
   }

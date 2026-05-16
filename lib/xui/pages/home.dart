@@ -1,30 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_zhiban/l10n/gen/app_localizations.dart';
+import 'package:flutter_application_zhiban/design/colors.dart';
+import 'package:flutter_application_zhiban/design/typography.dart';
+import 'package:flutter_application_zhiban/design/elevation.dart';
 import 'package:flutter_application_zhiban/xui/pages/ai_chat_page.dart';
 import 'package:flutter_application_zhiban/xui/pages/collections_grid.dart';
 import 'package:flutter_application_zhiban/xui/pages/collections_list.dart';
 import 'package:flutter_application_zhiban/xui/pages/search_result.dart';
+import 'package:flutter_application_zhiban/widgets/clay_container.dart';
+import '../../l10n/gen/app_localizations.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final width = MediaQuery.sizeOf(context).width;
     final maxWidth = width >= 900 ? 960.0 : double.infinity;
-    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      backgroundColor: colorScheme.surfaceContainerLowest,
+      backgroundColor: AppColors.warmCream,
       appBar: AppBar(
-        backgroundColor: colorScheme.surface,
+        backgroundColor: AppColors.pureWhite,
         centerTitle: true,
         elevation: 0,
-        foregroundColor: colorScheme.onSurface,
-        title: Text(AppLocalizations.of(context)!.appName),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Divider(height: 1, thickness: 1, color: colorScheme.outlineVariant),
+        foregroundColor: AppColors.clayBlack,
+        title: Text(l10n.appName),
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(height: 1, thickness: 1, color: AppColors.oatBorder),
         ),
       ),
       body: Center(
@@ -40,22 +44,22 @@ class HomePage extends StatelessWidget {
               const SliverToBoxAdapter(child: SizedBox(height: 14)),
               const AiEntrySliver(),
               const SliverToBoxAdapter(child: SizedBox(height: 22)),
-              SliverToBoxAdapter(child: _SectionTitle(AppLocalizations.of(context)!.quickEntry)),
+              SliverToBoxAdapter(child: SectionTitle(l10n.quickEntry)),
               const QuickGridSliver(),
               const SliverToBoxAdapter(child: SizedBox(height: 22)),
-              SliverToBoxAdapter(child: _SectionTitle(AppLocalizations.of(context)!.hotQuestions)),
+              SliverToBoxAdapter(child: SectionTitle(l10n.hotQuestions)),
               const HotGridSliver(),
               const SliverToBoxAdapter(child: SizedBox(height: 22)),
-              SliverToBoxAdapter(child: _SectionTitle(AppLocalizations.of(context)!.marketTrends)),
+              SliverToBoxAdapter(child: SectionTitle(l10n.marketTrends)),
               const MarketGridSliver(),
               const SliverToBoxAdapter(child: SizedBox(height: 22)),
-              SliverToBoxAdapter(child: _SectionTitle(AppLocalizations.of(context)!.recommendedFeatures)),
+              SliverToBoxAdapter(child: SectionTitle(l10n.recommendedFeatures)),
               const FeatureGridSliver(),
               const SliverToBoxAdapter(child: SizedBox(height: 22)),
-              SliverToBoxAdapter(child: _SectionTitle(AppLocalizations.of(context)!.smartAssistant)),
+              SliverToBoxAdapter(child: SectionTitle(l10n.smartAssistant)),
               const AssistantGridSliver(),
               const SliverToBoxAdapter(child: SizedBox(height: 22)),
-              SliverToBoxAdapter(child: _SectionTitle(AppLocalizations.of(context)!.otherAssistants)),
+              SliverToBoxAdapter(child: SectionTitle(l10n.otherAssistants)),
               const OtherAssistantGridSliver(),
               const SliverToBoxAdapter(child: SizedBox(height: 84)),
             ],
@@ -66,68 +70,42 @@ class HomePage extends StatelessWidget {
   }
 }
 
-// ═══════ Section Title ═══════
-
-class _SectionTitle extends StatelessWidget {
-  final String title;
-  const _SectionTitle(this.title);
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-    return Padding(
-      padding: EdgeInsets.fromLTRB(_horizontalInset(context), 0, _horizontalInset(context), 10),
-      child: Text(title, style: textTheme.labelMedium?.copyWith(
-        color: colorScheme.secondary,
-        letterSpacing: 1.0,
-        fontWeight: FontWeight.w600,
-      )),
-    );
-  }
-}
-
-// ═══════ Hero Section ═══════
-
 class HeroSection extends StatelessWidget {
   const HeroSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final compact = _isCompact(context);
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
 
     return Padding(
       padding: _pagePadding(context),
       child: Container(
         padding: EdgeInsets.all(compact ? 18 : 24),
         decoration: BoxDecoration(
-          color: colorScheme.surface,
+          color: AppColors.pureWhite,
           borderRadius: BorderRadius.circular(compact ? 28 : 36),
-          border: Border.all(color: colorScheme.outline, width: 0.5),
+          border: Border.all(color: AppColors.oatBorder, width: 1),
+          boxShadow: AppElevation.card,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              AppLocalizations.of(context)!.compositeMaterialAiAssistant,
-              style: textTheme.displaySmall?.copyWith(
-                fontSize: compact ? 34 : 48,
-                height: 1.12,
-                letterSpacing: 0,
-                color: colorScheme.onSurface,
-                fontWeight: FontWeight.w600,
-              ),
+              l10n.compositeMaterialAiAssistant,
+              style: AppTypography.textTheme.headlineLarge?.copyWith(
+                    fontSize: compact ? 34 : 48,
+                    height: 1.12,
+                    letterSpacing: 0,
+                  ),
             ),
             const SizedBox(height: 8),
             Text(
-              AppLocalizations.of(context)!.aiAnalysisMaterial,
-              style: textTheme.titleMedium?.copyWith(
-                fontSize: compact ? 15 : 18,
-                letterSpacing: 0,
-                color: colorScheme.secondary,
-              ),
+              l10n.aiAnalysisMaterial,
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontSize: compact ? 15 : 18,
+                    letterSpacing: 0,
+                  ),
             ),
             const SizedBox(height: 16),
             const SearchSection(),
@@ -137,8 +115,6 @@ class HeroSection extends StatelessWidget {
     );
   }
 }
-
-// ═══════ Search Section ═══════
 
 class SearchSection extends StatefulWidget {
   const SearchSection({super.key});
@@ -152,50 +128,54 @@ class _SearchSectionState extends State<SearchSection> {
 
   void _goSearch() {
     final query = _controller.text.trim();
+
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (_) => SearchResultPage(query: query)),
+      MaterialPageRoute(
+        builder: (_) => SearchResultPage(query: query),
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
+    final l10n = AppLocalizations.of(context)!;
     return TextField(
       controller: _controller,
       textInputAction: TextInputAction.search,
-      style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface),
+
+      // 👉 用户点击键盘搜索
       onSubmitted: (_) => _goSearch(),
+
       decoration: InputDecoration(
-        hintText: AppLocalizations.of(context)!.materialQuestion,
-        hintStyle: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary),
+        hintText: l10n.materialQuestion,
         filled: true,
-        fillColor: colorScheme.surfaceContainerHighest,
-        prefixIcon: Icon(Icons.search, color: colorScheme.secondary),
+        fillColor: AppColors.pureWhite,
+        prefixIcon: const Icon(Icons.search),
+
+        // 👉 加一个搜索按钮（推荐）
         suffixIcon: IconButton(
-          icon: Icon(Icons.arrow_forward, color: colorScheme.secondary),
+          icon: const Icon(Icons.arrow_forward),
           onPressed: _goSearch,
         ),
+
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide(color: colorScheme.outline, width: 1),
+          borderSide:
+              const BorderSide(color: AppColors.oatBorder, width: 1),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide(color: colorScheme.primary, width: 2),
+          borderSide: const BorderSide(color: AppColors.focusRing, width: 2),
         ),
       ),
     );
   }
 }
-
-// ═══════ Quick Grid ═══════
 
 class QuickGridSliver extends StatelessWidget {
   const QuickGridSliver({super.key});
@@ -228,15 +208,11 @@ class QuickGridSliver extends StatelessWidget {
   }
 }
 
-// ═══════ Hot Grid ═══════
-
 class HotGridSliver extends StatelessWidget {
   const HotGridSliver({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
     final items = [
       "玻璃钢为什么发白？",
       "FRP耐腐蚀吗？",
@@ -250,20 +226,20 @@ class HotGridSliver extends StatelessWidget {
       childAspectRatio: _isCompact(context) ? 3.2 : 2.5,
       children: [
         for (final text in items)
-          _ThemedCard(
-            borderRadius: 24,
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          ClayContainer(
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (_) => SearchResultPage(query: text)),
             ),
+            borderRadius: 24,
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
             child: Center(
               child: Text(
                 text,
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: textTheme.bodyMedium?.copyWith(fontSize: 15, color: colorScheme.onSurface),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 15),
               ),
             ),
           ),
@@ -272,15 +248,11 @@ class HotGridSliver extends StatelessWidget {
   }
 }
 
-// ═══════ Market Grid ═══════
-
 class MarketGridSliver extends StatelessWidget {
   const MarketGridSliver({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
     final items = [
       ("玻璃纤维纱", "¥4000-5200", "上涨", Icons.trending_up),
       ("不饱和树脂", "¥9000-11000", "平稳", Icons.trending_flat),
@@ -292,7 +264,7 @@ class MarketGridSliver extends StatelessWidget {
       childAspectRatio: _isCompact(context) ? 2.35 : 1.9,
       children: [
         for (final item in items)
-          _ThemedCard(
+          ClayContainer(
             borderRadius: 24,
             padding: const EdgeInsets.all(16),
             onTap: () => Navigator.push(
@@ -303,7 +275,9 @@ class MarketGridSliver extends StatelessWidget {
               children: [
                 Icon(
                   item.$4,
-                  color: item.$3 == "上涨" ? Colors.amber : colorScheme.secondary,
+                  color: item.$3 == "上涨"
+                      ? AppColors.lemon700
+                      : AppColors.warmSilver,
                 ),
                 const SizedBox(width: 14),
                 Expanded(
@@ -311,13 +285,13 @@ class MarketGridSliver extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(item.$1, style: textTheme.titleSmall?.copyWith(fontSize: 17, color: colorScheme.onSurface)),
+                      Text(item.$1, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 17)),
                       const SizedBox(height: 4),
-                      Text(item.$2, style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface)),
+                      Text(item.$2, style: Theme.of(context).textTheme.titleSmall),
                     ],
                   ),
                 ),
-                Text(item.$3, style: textTheme.bodySmall?.copyWith(color: colorScheme.secondary)),
+                Text(item.$3, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.warmCharcoal)),
               ],
             ),
           ),
@@ -326,8 +300,6 @@ class MarketGridSliver extends StatelessWidget {
   }
 }
 
-// ═══════ Feature Grid ═══════
-
 class FeatureGridSliver extends StatelessWidget {
   const FeatureGridSliver({super.key});
 
@@ -335,7 +307,7 @@ class FeatureGridSliver extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final items = [
-      _HomeAction(l10n.smartAssistant, Icons.smart_toy, const AiChatPage()),
+      _HomeAction(l10n.aiAssistant, Icons.smart_toy, const AiChatPage()),
       _HomeAction(l10n.trendAnalysis, Icons.auto_graph, const AiChatPage()),
       _HomeAction(l10n.materialDatabase, Icons.storage, const CollectionsGridPage()),
       _HomeAction(l10n.quoteTool, Icons.calculate, const AiChatPage()),
@@ -359,7 +331,19 @@ class FeatureGridSliver extends StatelessWidget {
   }
 }
 
-// ═══════ Assistant Grid ═══════
+class SectionTitle extends StatelessWidget {
+  final String title;
+
+  const SectionTitle(this.title, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(_horizontalInset(context), 0, _horizontalInset(context), 10),
+      child: Text(title, style: Theme.of(context).textTheme.labelMedium),
+    );
+  }
+}
 
 class AssistantGridSliver extends StatelessWidget {
   const AssistantGridSliver({super.key});
@@ -368,9 +352,20 @@ class AssistantGridSliver extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final items = [
-      _AssistantItem(title: l10n.aiMaterialAssistant, desc: l10n.smartAnalysisMaterial, icon: Icons.smart_toy, page: const AiChatPage()),
-      _AssistantItem(title: l10n.marketAnalysisAssistant, desc: l10n.marketAnalysisDesc, icon: Icons.auto_graph, page: const AiChatPage()),
+      _AssistantItem(
+        title: l10n.aiMaterialAssistant,
+        desc: l10n.smartAnalysisMaterial,
+        icon: Icons.smart_toy,
+        page: const AiChatPage(),
+      ),
+      _AssistantItem(
+        title: l10n.marketAnalysisAssistant,
+        desc: l10n.marketAnalysisDesc,
+        icon: Icons.auto_graph,
+        page: const AiChatPage(),
+      ),
     ];
+
     return _AssistantGrid(items: items);
   }
 }
@@ -382,47 +377,67 @@ class OtherAssistantGridSliver extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final items = [
-      _AssistantItem(title: l10n.quoteAssistant, desc: l10n.quoteAssistantDesc, icon: Icons.calculate, page: const AiChatPage()),
-      _AssistantItem(title: l10n.tradeAssistant, desc: l10n.tradeAssistantDesc, icon: Icons.language, page: const AiChatPage()),
-      _AssistantItem(title: l10n.myAssistant, desc: l10n.cloudAssistantWaterfall, icon: Icons.grid_3x3, page: const CollectionsGridPage()),
-      _AssistantItem(title: l10n.assistantList, desc: l10n.cloudAssistantList, icon: Icons.list, page: const CollectionsListPage()),
+      _AssistantItem(
+        title: l10n.quoteAssistant,
+        desc: l10n.quoteAssistantDesc,
+        icon: Icons.calculate,
+        page: const AiChatPage(),
+      ),
+      _AssistantItem(
+        title: l10n.tradeAssistant,
+        desc: l10n.tradeAssistantDesc,
+        icon: Icons.language,
+        page: const AiChatPage(),
+      ),
+      _AssistantItem(
+        title: l10n.myAssistant,
+        desc: l10n.cloudAssistantWaterfall,
+        icon: Icons.grid_3x3,
+        page: const CollectionsGridPage(),
+      ),
+      _AssistantItem(
+        title: l10n.assistantList,
+        desc: l10n.cloudAssistantList,
+        icon: Icons.list,
+        page: const CollectionsListPage(),
+      ),
     ];
+
     return _AssistantGrid(items: items);
   }
 }
 
 class _AssistantGrid extends StatelessWidget {
   final List<_AssistantItem> items;
+
   const _AssistantGrid({required this.items});
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
     return _AdaptiveGridSliver(
       maxTileWidth: 390,
       minColumns: 1,
       childAspectRatio: _isCompact(context) ? 2.9 : 2.6,
       children: [
         for (final item in items)
-          _ThemedCard(
-            borderRadius: 24,
-            padding: const EdgeInsets.all(16),
+          ClayContainer(
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (_) => item.page),
             ),
+            borderRadius: 24,
+            padding: const EdgeInsets.all(16),
+            color: AppColors.pureWhite,
             child: Row(
               children: [
                 Container(
                   width: 48,
                   height: 48,
                   decoration: BoxDecoration(
-                    color: colorScheme.primary.withValues(alpha: 0.12),
+                    color: AppColors.slushie500.withValues(alpha: 0.14),
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  child: Icon(item.icon, color: colorScheme.primary),
+                  child: Icon(item.icon, color: AppColors.blueberry800),
                 ),
                 const SizedBox(width: 14),
                 Expanded(
@@ -430,14 +445,18 @@ class _AssistantGrid extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(item.title, style: textTheme.titleSmall?.copyWith(fontSize: 17, color: colorScheme.onSurface)),
+                      Text(item.title, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 17)),
                       const SizedBox(height: 4),
-                      Text(item.desc, maxLines: 1, overflow: TextOverflow.ellipsis,
-                        style: textTheme.bodySmall?.copyWith(color: colorScheme.secondary)),
+                      Text(
+                        item.desc,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.warmCharcoal),
+                      ),
                     ],
                   ),
                 ),
-                Icon(Icons.chevron_right, color: colorScheme.secondary),
+                const Icon(Icons.chevron_right, color: AppColors.warmSilver),
               ],
             ),
           ),
@@ -446,43 +465,46 @@ class _AssistantGrid extends StatelessWidget {
   }
 }
 
-// ═══════ AI Entry Card (colored — keeps brand color) ═══════
-
 class AiEntrySliver extends StatelessWidget {
   const AiEntrySliver({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return SliverToBoxAdapter(
       child: Padding(
         padding: _pagePadding(context),
-        child: _ThemedCard(
-          borderRadius: 24,
-          padding: const EdgeInsets.all(18),
-          color: const Color(0xFF3bd3fd),
+        child: ClayContainer(
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(builder: (_) => const AiChatPage()),
           ),
+          borderRadius: 24,
+          padding: const EdgeInsets.all(18),
+          color: AppColors.slushie500,
           child: Row(
             children: [
-              const Icon(Icons.smart_toy, size: 36, color: Colors.white),
+              const Icon(Icons.smart_toy, size: 36, color: AppColors.pureWhite),
               const SizedBox(width: 14),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(AppLocalizations.of(context)!.aiMaterialAssistant,
-                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
+                    Text(
+                      l10n.aiMaterialAssistant,
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.pureWhite),
+                    ),
                     const SizedBox(height: 4),
-                    Text(AppLocalizations.of(context)!.aiMaterialAssistantDesc,
+                    Text(
+                      l10n.aiMaterialAssistantDesc,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(color: Colors.white, height: 1.35)),
+                      style: const TextStyle(color: AppColors.pureWhite, height: 1.35),
+                    ),
                   ],
                 ),
               ),
-              const Icon(Icons.chevron_right, color: Colors.white),
+              const Icon(Icons.chevron_right, color: AppColors.pureWhite),
             ],
           ),
         ),
@@ -490,44 +512,6 @@ class AiEntrySliver extends StatelessWidget {
     );
   }
 }
-
-// ═══════ Reusable themed card (replaces ClayContainer for non-interactive surfaces) ═══════
-
-class _ThemedCard extends StatelessWidget {
-  final Widget child;
-  final VoidCallback? onTap;
-  final double borderRadius;
-  final Color? color;
-  final EdgeInsetsGeometry? padding;
-
-  const _ThemedCard({
-    required this.child,
-    this.onTap,
-    this.borderRadius = 24,
-    this.color,
-    this.padding,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final deco = BoxDecoration(
-      color: color ?? colorScheme.surface,
-      borderRadius: BorderRadius.circular(borderRadius),
-      border: Border.all(color: colorScheme.outline, width: 0.5),
-    );
-
-    if (onTap != null) {
-      return GestureDetector(
-        onTap: onTap,
-        child: Container(padding: padding, decoration: deco, child: child),
-      );
-    }
-    return Container(padding: padding, decoration: deco, child: child);
-  }
-}
-
-// ═══════ Adaptive Grid ═══════
 
 class _AdaptiveGridSliver extends StatelessWidget {
   final List<Widget> children;
@@ -562,8 +546,6 @@ class _AdaptiveGridSliver extends StatelessWidget {
   }
 }
 
-// ═══════ Icon Tile ═══════
-
 class _IconTile extends StatelessWidget {
   final String title;
   final IconData icon;
@@ -573,32 +555,33 @@ class _IconTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
-    return _ThemedCard(
+    return ClayContainer(
+      onTap: onTap,
       borderRadius: 22,
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-      onTap: onTap,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: colorScheme.primary, size: 28),
+          Icon(icon, color: AppColors.slushie800, size: 28),
           const SizedBox(height: 8),
-          Text(title, textAlign: TextAlign.center, maxLines: 2, overflow: TextOverflow.ellipsis,
-            style: textTheme.labelLarge?.copyWith(fontSize: 16, color: colorScheme.onSurface)),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 16),
+          ),
         ],
       ),
     );
   }
 }
 
-// ═══════ Data Classes ═══════
-
 class _HomeAction {
   final String title;
   final IconData icon;
   final Widget page;
+
   const _HomeAction(this.title, this.icon, this.page);
 }
 
@@ -607,10 +590,15 @@ class _AssistantItem {
   final String desc;
   final IconData icon;
   final Widget page;
-  const _AssistantItem({required this.title, required this.desc, required this.icon, required this.page});
+
+  const _AssistantItem({
+    required this.title,
+    required this.desc,
+    required this.icon,
+    required this.page,
+  });
 }
 
-// ═══════ Helpers ═══════
 
 bool _isCompact(BuildContext context) => MediaQuery.sizeOf(context).width < 600;
 
