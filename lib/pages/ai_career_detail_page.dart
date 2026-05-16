@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../config/constants.dart';
+import '../l10n/gen/app_localizations.dart';
 import '../models/career.dart';
 import '../models/chat_message.dart';
 import '../services/cloudbase_ai.dart';
@@ -84,13 +85,13 @@ class _AICareerDetailPageState extends State<AICareerDetailPage> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('删除聊天记录'),
-        content: const Text('确定要删除所有聊天记录吗？'),
+        title: Text(AppLocalizations.of(context)!.deleteChatHistory),
+        content: Text(AppLocalizations.of(context)!.deleteChatConfirm),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('取消')),
+          TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(AppLocalizations.of(context)!.cancel)),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
-            child: const Text('删除', style: TextStyle(color: Color(0xFFC62828))),
+            child: Text(AppLocalizations.of(context)!.delete, style: const TextStyle(color: Color(0xFFC62828))),
           ),
         ],
       ),
@@ -135,14 +136,14 @@ class _AICareerDetailPageState extends State<AICareerDetailPage> {
           _messages.last = ChatMessage(text: response, isUser: false);
           _history.add({'user': text, 'assistant': response});
         } else {
-          _messages.last = ChatMessage(text: '抱歉，我暂时无法回复。请稍后再试。', isUser: false);
+          _messages.last = ChatMessage(text: AppLocalizations.of(context)!.sorryCannotReply, isUser: false);
         }
       });
     } catch (e) {
       if (!mounted) return;
       setState(() {
         _isThinking = false;
-        _messages.last = ChatMessage(text: '出错了：$e', isUser: false);
+        _messages.last = ChatMessage(text: AppLocalizations.of(context)!.errorOccurred(e.toString()), isUser: false);
       });
     }
 
@@ -155,13 +156,14 @@ class _AICareerDetailPageState extends State<AICareerDetailPage> {
     buf.writeln(_career.buildSystemPrompt());
 
     if (_history.isNotEmpty) {
-      buf.writeln('\n【最近的对话记忆】');
+      final l10n = AppLocalizations.of(context)!;
+      buf.writeln('\n${l10n.recentMemory}');
       final recent = _history.length > 5 ? _history.sublist(_history.length - 5) : _history;
       for (final round in recent) {
-        buf.writeln('用户: ${round['user']}');
+        buf.writeln('${l10n.memoryUser}: ${round['user']}');
         buf.writeln('${_career.name}: ${round['assistant']}');
       }
-      buf.writeln('请基于以上对话记忆继续交流，保持上下文连贯。');
+      buf.writeln(l10n.memoryContinue);
     }
 
     return buf.toString();
@@ -252,7 +254,7 @@ class _AICareerDetailPageState extends State<AICareerDetailPage> {
             IconButton(
               onPressed: _clearHistory,
               icon: const Icon(Icons.delete_outline, size: 20),
-              tooltip: '删除聊天记录',
+              tooltip: AppLocalizations.of(context)!.deleteChatHistory,
             ),
         ],
       ),
@@ -271,7 +273,7 @@ class _AICareerDetailPageState extends State<AICareerDetailPage> {
                   isUser: msg.isUser,
                   isLoading: isLoading,
                   avatar: ChatAvatar(
-                    label: msg.isUser ? '我' : _career.emoji,
+                    label: msg.isUser ? AppLocalizations.of(context)!.chatMe : _career.emoji,
                     backgroundColor: msg.isUser
                         ? const Color(0xFFfbbd41)
                         : _accentColor.withValues(alpha: 0.2),
@@ -283,7 +285,7 @@ class _AICareerDetailPageState extends State<AICareerDetailPage> {
           ),
           ChatInputBar(
             controller: _textCtrl,
-            hintText: '向${_career.nameZh}提问...',
+            hintText: AppLocalizations.of(context)!.typeHintExpert(_career.nameZh),
             isThinking: _isThinking,
             sendButtonColor: _accentColor.withValues(alpha: 0.3),
             onSend: _sendMessage,

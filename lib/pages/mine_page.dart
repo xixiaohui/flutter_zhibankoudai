@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../config/constants.dart';
 import '../design/radius.dart';
+import '../l10n/gen/app_localizations.dart';
 import '../providers/theme_provider.dart';
 import '../services/cache_service.dart';
 
@@ -18,7 +19,7 @@ class MinePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerLowest,
       appBar: AppBar(
-        title: const Text('我的'),
+        title: Text(AppLocalizations.of(context)!.bottomNavMine),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -28,15 +29,19 @@ class MinePage extends StatelessWidget {
           _UserCard(textTheme: textTheme, colorScheme: colorScheme),
           const SizedBox(height: 24),
           _menuGroup(context, textTheme, colorScheme, [
-            _MenuItem(Icons.color_lens, '主题设置', themeProvider.modeLabel, _onTheme),
-            _MenuItem(Icons.notifications, '通知提醒', '设置每日推送时间', _onNotification),
-            _MenuItem(Icons.cleaning_services, '清除缓存', '清理本地缓存数据', _onClearCache),
+            _MenuItem(Icons.color_lens, AppLocalizations.of(context)!.themeSettings, switch (themeProvider.mode) {
+              ThemeMode.light => AppLocalizations.of(context)!.lightMode,
+              ThemeMode.dark => AppLocalizations.of(context)!.darkMode,
+              ThemeMode.system => AppLocalizations.of(context)!.followSystem,
+            }, _onTheme),
+            _MenuItem(Icons.notifications, AppLocalizations.of(context)!.notification, AppLocalizations.of(context)!.notificationDesc, _onNotification),
+            _MenuItem(Icons.cleaning_services, AppLocalizations.of(context)!.clearCache, AppLocalizations.of(context)!.clearCacheDesc, _onClearCache),
           ]),
           const SizedBox(height: 16),
           _menuGroup(context, textTheme, colorScheme, [
-            _MenuItem(Icons.info, '关于我们', '版本 ${AppConstants.appVersion}', _onAbout),
-            _MenuItem(Icons.star, '给个好评', '您的支持是我们前进的动力', _onRate),
-            _MenuItem(Icons.share, '分享给朋友', '推荐给更多人', _onShare),
+            _MenuItem(Icons.info, AppLocalizations.of(context)!.aboutUs, AppLocalizations.of(context)!.aboutVersion(AppConstants.appVersion), _onAbout),
+            _MenuItem(Icons.star, AppLocalizations.of(context)!.rateUs, AppLocalizations.of(context)!.rateUsDesc, _onRate),
+            _MenuItem(Icons.share, AppLocalizations.of(context)!.shareToFriend, AppLocalizations.of(context)!.shareRecommend, _onShare),
           ]),
           const SizedBox(height: 32),
           Text(
@@ -94,12 +99,12 @@ class MinePage extends StatelessWidget {
       builder: (ctx) => AlertDialog(
         backgroundColor: colorScheme.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.card)),
-        title: const Text('清除缓存'),
-        content: const Text('确定要清除所有本地缓存数据吗？\n这将清除已保存的内容和设置。'),
+        title: Text(AppLocalizations.of(ctx)!.clearCache),
+        content: Text(AppLocalizations.of(ctx)!.clearCacheConfirm),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: Text('取消', style: TextStyle(color: colorScheme.secondary)),
+            child: Text(AppLocalizations.of(ctx)!.cancel, style: TextStyle(color: colorScheme.secondary)),
           ),
           TextButton(
             onPressed: () async {
@@ -108,11 +113,11 @@ class MinePage extends StatelessWidget {
               await cache.clear();
               if (ctx.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: const Text('缓存已清除'), backgroundColor: const Color(0xFF059669)),
+                  SnackBar(content: Text(AppLocalizations.of(context)!.cacheCleared), backgroundColor: const Color(0xFF059669)),
                 );
               }
             },
-            child: const Text('确定', style: TextStyle(color: Color(0xFFDC2626))),
+            child: Text(AppLocalizations.of(ctx)!.confirm, style: const TextStyle(color: Color(0xFFDC2626))),
           ),
         ],
       ),
@@ -140,14 +145,14 @@ class MinePage extends StatelessWidget {
           const Text(AppConstants.appName),
         ]),
         content: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text('每日知识，伴你成长', style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant)),
+          Text(AppLocalizations.of(dialogContext)!.aboutSlogan, style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant)),
           const SizedBox(height: 16),
-          _AboutRow('版本', AppConstants.appVersion, textTheme, colorScheme),
-          _AboutRow('构建', 'Flutter · Tencent CloudBase', textTheme, colorScheme),
-          _AboutRow('设计', 'Editorial Precision Design System', textTheme, colorScheme),
+          _AboutRow(AppLocalizations.of(dialogContext)!.aboutVersionLabel, AppConstants.appVersion, textTheme, colorScheme),
+          _AboutRow(AppLocalizations.of(dialogContext)!.aboutBuildLabel, AppLocalizations.of(dialogContext)!.aboutBuildValue, textTheme, colorScheme),
+          _AboutRow(AppLocalizations.of(dialogContext)!.aboutDesignLabel, AppLocalizations.of(dialogContext)!.aboutDesignValue, textTheme, colorScheme),
         ]),
         actions: [
-          TextButton(onPressed: () => Navigator.of(dialogContext).pop(), child: const Text('知道了')),
+          TextButton(onPressed: () => Navigator.of(dialogContext).pop(), child: Text(AppLocalizations.of(dialogContext)!.aboutGotIt)),
         ],
       ),
     );
@@ -160,16 +165,16 @@ class MinePage extends StatelessWidget {
       builder: (ctx) => AlertDialog(
         backgroundColor: colorScheme.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.card)),
-        title: const Text('给个好评'),
-        content: const Text('感谢您的支持！您的每一次好评都是我们前进的动力。\n\n请前往应用商店为我们评分，或分享给更多朋友。'),
+        title: Text(AppLocalizations.of(ctx)!.rateTitle),
+        content: Text(AppLocalizations.of(ctx)!.rateContent),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: Text('稍后再说', style: TextStyle(color: colorScheme.secondary)),
+            child: Text(AppLocalizations.of(ctx)!.rateLater, style: TextStyle(color: colorScheme.secondary)),
           ),
           TextButton(
             onPressed: () { Navigator.pop(ctx); _onShare(context); },
-            child: const Text('分享给朋友'),
+            child: Text(AppLocalizations.of(ctx)!.shareToFriend),
           ),
         ],
       ),
@@ -178,7 +183,7 @@ class MinePage extends StatelessWidget {
 
   void _onShare(BuildContext context) {
     SharePlus.instance.share(ShareParams(
-      text: '智伴口袋 — 每日知识，伴你成长！\n60+专家模块，每天为你推送优质内容。\n快来下载体验吧！',
+      text: AppLocalizations.of(context)!.shareText,
       subject: AppConstants.appName,
     ));
   }
@@ -208,12 +213,12 @@ class _ThemeSheet extends StatelessWidget {
             decoration: BoxDecoration(color: colorScheme.outlineVariant, borderRadius: BorderRadius.circular(2)),
           ),
           const SizedBox(height: 20),
-          Text('主题设置', style: textTheme.titleLarge?.copyWith(color: colorScheme.onSurface)),
+          Text(AppLocalizations.of(context)!.themeSettings, style: textTheme.titleLarge?.copyWith(color: colorScheme.onSurface)),
           const SizedBox(height: 16),
           for (final mode in ThemeMode.values)
             _ThemeOption(
               icon: _themeIcon(mode),
-              label: _themeLabel(mode),
+              label: _themeLabel(mode, context),
               selected: provider.mode == mode,
               onTap: () { provider.setMode(mode); Navigator.pop(context); },
               textTheme: textTheme,
@@ -230,10 +235,10 @@ class _ThemeSheet extends StatelessWidget {
     ThemeMode.system => Icons.settings_suggest,
   };
 
-  String _themeLabel(ThemeMode mode) => switch (mode) {
-    ThemeMode.light => '浅色模式',
-    ThemeMode.dark => '深色模式',
-    ThemeMode.system => '跟随系统',
+  String _themeLabel(ThemeMode mode, BuildContext context) => switch (mode) {
+    ThemeMode.light => AppLocalizations.of(context)!.lightMode,
+    ThemeMode.dark => AppLocalizations.of(context)!.darkMode,
+    ThemeMode.system => AppLocalizations.of(context)!.followSystem,
   };
 }
 
@@ -288,12 +293,6 @@ class _NotificationDialogState extends State<_NotificationDialog> {
   int _minute = 0;
   bool _enabled = true;
 
-  static const _times = [
-    ('☀️ 早晨', 7, 0, '开启活力一天'),
-    ('🌤 上午', 9, 0, '黄金学习时间'),
-    ('🌙 晚间', 20, 0, '睡前轻松阅读'),
-  ];
-
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -302,43 +301,52 @@ class _NotificationDialogState extends State<_NotificationDialog> {
     return AlertDialog(
       backgroundColor: colorScheme.surface,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.card)),
-      title: const Text('通知提醒'),
+      title: Text(AppLocalizations.of(context)!.notification),
       content: Column(mainAxisSize: MainAxisSize.min, children: [
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
-          title: const Text('开启每日推送'),
+          title: Text(AppLocalizations.of(context)!.enableDailyPush),
           value: _enabled,
           onChanged: (v) => setState(() => _enabled = v),
           activeTrackColor: const Color(0xFFc1b0ff).withValues(alpha: 0.3),
           activeThumbColor: const Color(0xFF43089f),
         ),
         const SizedBox(height: 8),
-        Text('选择每日推送时间（当前为示例设置，具体推送由后端支持）',
+        Text(AppLocalizations.of(context)!.selectPushTime,
           style: textTheme.bodySmall?.copyWith(color: colorScheme.secondary)),
         const SizedBox(height: 16),
-        for (final t in _times)
-          _TimeTile(
-            label: t.$1, desc: t.$4, selected: _hour == t.$2,
-            onTap: _enabled ? () => setState(() { _hour = t.$2; _minute = t.$3; }) : null,
-            textTheme: textTheme, colorScheme: colorScheme,
-          ),
+        _TimeTile(
+          label: AppLocalizations.of(context)!.morningTime, desc: AppLocalizations.of(context)!.morningDesc, selected: _hour == 7,
+          onTap: _enabled ? () => setState(() { _hour = 7; _minute = 0; }) : null,
+          textTheme: textTheme, colorScheme: colorScheme,
+        ),
+        _TimeTile(
+          label: AppLocalizations.of(context)!.forenoonTime, desc: AppLocalizations.of(context)!.forenoonDesc, selected: _hour == 9,
+          onTap: _enabled ? () => setState(() { _hour = 9; _minute = 0; }) : null,
+          textTheme: textTheme, colorScheme: colorScheme,
+        ),
+        _TimeTile(
+          label: AppLocalizations.of(context)!.eveningTime, desc: AppLocalizations.of(context)!.eveningDesc, selected: _hour == 20,
+          onTap: _enabled ? () => setState(() { _hour = 20; _minute = 0; }) : null,
+          textTheme: textTheme, colorScheme: colorScheme,
+        ),
       ]),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('取消', style: TextStyle(color: colorScheme.secondary)),
+          child: Text(AppLocalizations.of(context)!.cancel, style: TextStyle(color: colorScheme.secondary)),
         ),
         TextButton(
           onPressed: () {
             Navigator.pop(context);
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(_enabled
-                ? '已设置每日 ${_hour.toString().padLeft(2, '0')}:${_minute.toString().padLeft(2, '0')} 推送'
-                : '已关闭每日推送'),
+                ? AppLocalizations.of(context)!.pushSet('${_hour.toString().padLeft(2, '0')}:${_minute.toString().padLeft(2, '0')}')
+                : AppLocalizations.of(context)!.pushDisabled),
               backgroundColor: const Color(0xFF059669),
             ));
           },
-          child: const Text('保存'),
+          child: Text(AppLocalizations.of(context)!.save),
         ),
       ],
     );
@@ -412,9 +420,9 @@ class _UserCard extends StatelessWidget {
         const SizedBox(width: 16),
         Expanded(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text('智伴口袋用户', style: textTheme.titleLarge?.copyWith(color: Colors.white)),
+            Text(AppLocalizations.of(context)!.userCardName, style: textTheme.titleLarge?.copyWith(color: Colors.white)),
             const SizedBox(height: 4),
-            Text('每日知识，伴你成长', style: textTheme.bodySmall?.copyWith(color: Colors.white.withValues(alpha: 0.7))),
+            Text(AppLocalizations.of(context)!.aboutSlogan, style: textTheme.bodySmall?.copyWith(color: Colors.white.withValues(alpha: 0.7))),
           ]),
         ),
         Icon(Icons.edit, color: Colors.white.withValues(alpha: 0.5), size: 20),

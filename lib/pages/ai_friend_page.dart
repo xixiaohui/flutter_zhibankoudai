@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../l10n/gen/app_localizations.dart';
 import '../models/chat_message.dart';
 import '../services/cloudbase_ai.dart';
 import '../widgets/chat_bubble.dart';
@@ -290,16 +291,16 @@ class ConversationMemory {
   }
 
   /// 将记忆格式化为可注入 prompt 的文本
-  String formatForPrompt() {
+  String formatForPrompt(AppLocalizations l10n) {
     if (_history.isEmpty) return '';
     final buf = StringBuffer();
-    buf.writeln('\n【最近的对话记忆】');
+    buf.writeln('\n${l10n.recentMemory}');
     for (int i = 0; i < _history.length; i++) {
       final round = _history[i];
-      buf.writeln('用户: ${round['user']}');
-      buf.writeln('小智: ${round['assistant']}');
+      buf.writeln('${l10n.memoryUser}: ${round['user']}');
+      buf.writeln('${l10n.memoryBot}: ${round['assistant']}');
     }
-    buf.writeln('请基于以上对话记忆继续交流，保持上下文连贯。\n');
+    buf.writeln(l10n.memoryContinue + '\n');
     return buf.toString();
   }
 
@@ -324,7 +325,7 @@ class PromptBuilder {
   });
 
   /// 组装完整系统 Prompt: system + scene + safety + memory
-  String buildSystemPrompt(String userInput) {
+  String buildSystemPrompt(String userInput, AppLocalizations l10n) {
     currentScene = SceneMatcher.matchScene(userInput, config.scenePrompts);
     final scenePrompt = config.scenePrompts[currentScene]?.prompt ?? '';
 
@@ -336,16 +337,16 @@ class PromptBuilder {
     }
     buf.writeln('\n${config.safetyPrompt}');
 
-    final memText = memory.formatForPrompt();
+    final memText = memory.formatForPrompt(l10n);
     if (memText.isNotEmpty) buf.write(memText);
 
     return buf.toString();
   }
 
   /// 构建发送给 AI 的完整 messages 数组
-  List<Map<String, String>> buildMessages(String userInput) {
+  List<Map<String, String>> buildMessages(String userInput, AppLocalizations l10n) {
     return [
-      {'role': 'system', 'content': buildSystemPrompt(userInput)},
+      {'role': 'system', 'content': buildSystemPrompt(userInput, l10n)},
       {'role': 'user', 'content': userInput},
     ];
   }
@@ -425,7 +426,7 @@ class _AIFriendPageState extends State<AIFriendPage> {
 
   void _addGreeting() {
     _messages.add(ChatMessage(
-      text: '你好呀！我是小智，你的情感陪伴伙伴。今天过得怎么样？有什么想跟我聊聊的吗？',
+      text: AppLocalizations.of(context)!.aiFriendGreeting,
       isUser: false,
     ));
     _persistMessages();
@@ -441,16 +442,16 @@ class _AIFriendPageState extends State<AIFriendPage> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('删除聊天记录'),
-        content: const Text('确定要删除所有聊天记录吗？删除后将无法恢复。'),
+        title: Text(AppLocalizations.of(context)!.deleteChatHistory),
+        content: Text(AppLocalizations.of(context)!.deleteChatConfirm),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: const Text('取消'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
-            child: const Text('删除', style: TextStyle(color: Color(0xFFC62828))),
+            child: Text(AppLocalizations.of(context)!.delete, style: const TextStyle(color: Color(0xFFC62828))),
           ),
         ],
       ),
@@ -483,7 +484,7 @@ class _AIFriendPageState extends State<AIFriendPage> {
     _scrollToBottom();
     _persistMessages();
 
-    final messages = _promptBuilder.buildMessages(text);
+    final messages = _promptBuilder.buildMessages(text, AppLocalizations.of(context)!);
 
     final response = await streamTextXclaw(
       model: _config.model,
@@ -500,7 +501,7 @@ class _AIFriendPageState extends State<AIFriendPage> {
         _memory.add(text, response);
       } else {
         _messages.last = ChatMessage(
-          text: '抱歉，我暂时无法回复。请稍后再试。',
+          text: AppLocalizations.of(context)!.sorryCannotReply,
           isUser: false,
         );
       }
@@ -559,7 +560,7 @@ class _AIFriendPageState extends State<AIFriendPage> {
             IconButton(
               onPressed: _clearHistory,
               icon: const Icon(Icons.delete_outline, size: 20),
-              tooltip: '删除聊天记录',
+              tooltip: AppLocalizations.of(context)!.deleteChatHistory,
             ),
           Padding(
             padding: const EdgeInsets.only(right: 16),
@@ -583,7 +584,7 @@ class _AIFriendPageState extends State<AIFriendPage> {
                   isUser: msg.isUser,
                   isLoading: isLoading,
                   avatar: ChatAvatar(
-                    label: msg.isUser ? '我' : '智',
+                    label: msg.isUser ? AppLocalizations.of(context)!.chatMe : AppLocalizations.of(context)!.chatBot,
                     backgroundColor: msg.isUser ? null : null,
                     textColor: Colors.white,
                   ),
@@ -593,7 +594,7 @@ class _AIFriendPageState extends State<AIFriendPage> {
           ),
           ChatInputBar(
             controller: _textCtrl,
-            hintText: '说点什么...',
+            hintText: AppLocalizations.of(context)!.typeHint,
             isThinking: _isThinking,
             sendButtonColor: const Color(0xFFfbbd41),
             onSend: _sendMessage,
@@ -605,8 +606,17 @@ class _AIFriendPageState extends State<AIFriendPage> {
   }
 
   Widget _sceneChip(TextTheme textTheme) {
-    final cfg = _config.scenePrompts[_currentScene];
-    final label = cfg?.name ?? _currentScene;
+    final l10n = AppLocalizations.of(context)!;
+    final label = switch (_currentScene) {
+      'greeting' => l10n.sceneFirstGreeting,
+      'crisis' => l10n.sceneCrisisIntervention,
+      'comfort' => l10n.sceneEmotionalComfort,
+      'celebration' => l10n.sceneShareJoy,
+      'daily_chat' => l10n.sceneDailyChat,
+      'deep_talk' => l10n.sceneDeepTalk,
+      'companion' => l10n.sceneSilentCompany,
+      _ => _currentScene,
+    };
     final isCrisis = _currentScene == 'crisis';
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -625,6 +635,18 @@ class _AIFriendPageState extends State<AIFriendPage> {
     final e = _currentEmotion!;
     final isCrisis = e.type == EmotionType.crisis;
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
+    final emotionLabel = switch (e.type) {
+      EmotionType.crisis => l10n.emotionCrisis,
+      EmotionType.happy => l10n.emotionHappy,
+      EmotionType.sad => l10n.emotionSad,
+      EmotionType.anxious => l10n.emotionAnxious,
+      EmotionType.angry => l10n.emotionAngry,
+      EmotionType.calm => l10n.emotionCalm,
+      EmotionType.neutral => l10n.emotionNeutral,
+      EmotionType.excited => l10n.emotionExcited,
+      EmotionType.tired => l10n.emotionTired,
+    };
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -633,13 +655,13 @@ class _AIFriendPageState extends State<AIFriendPage> {
         children: [
           Text(e.type.emoji, style: const TextStyle(fontSize: 16)),
           const SizedBox(width: 6),
-          Text('识别情绪: ${e.type.label}',
+          Text('${l10n.identifyEmotion}: $emotionLabel',
             style: isCrisis
               ? textTheme.bodySmall?.copyWith(color: const Color(0xFFC62828), fontWeight: FontWeight.w600)
               : textTheme.bodySmall?.copyWith(color: colorScheme.onSurface)),
           if (!isCrisis) ...[
             const Spacer(),
-            Text('置信度: ${e.confidence}', style: textTheme.bodySmall?.copyWith(color: colorScheme.secondary)),
+            Text('${l10n.confidence}: ${e.confidence}', style: textTheme.bodySmall?.copyWith(color: colorScheme.secondary)),
           ],
         ],
       ),
@@ -664,9 +686,20 @@ class _AIFriendPageState extends State<AIFriendPage> {
         });
       },
       itemBuilder: (_) => _config.scenePrompts.entries.map((e) {
+        final l10n = AppLocalizations.of(context)!;
+        final label = switch (e.key) {
+          'greeting' => l10n.sceneFirstGreeting,
+          'crisis' => l10n.sceneCrisisIntervention,
+          'comfort' => l10n.sceneEmotionalComfort,
+          'celebration' => l10n.sceneShareJoy,
+          'daily_chat' => l10n.sceneDailyChat,
+          'deep_talk' => l10n.sceneDeepTalk,
+          'companion' => l10n.sceneSilentCompany,
+          _ => e.value.name,
+        };
         return PopupMenuItem<String>(
           value: e.key,
-          child: Text(e.value.name, style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface)),
+          child: Text(label, style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface)),
         );
       }).toList(),
     );

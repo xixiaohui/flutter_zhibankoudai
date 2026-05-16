@@ -7,6 +7,7 @@ import 'package:gal/gal.dart';
 import 'dart:io';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import '../config/theme.dart';
+import '../l10n/gen/app_localizations.dart';
 import '../models/daily_content.dart';
 import '../models/field_metadata.dart';
 
@@ -240,12 +241,12 @@ class _PosterPageState extends State<PosterPage> {
       backgroundColor: colorScheme.surfaceContainerLowest,
       appBar: AppBar(
         backgroundColor: colorScheme.surface,
-        title: const Text('生成海报'),
+        title: Text(AppLocalizations.of(context)!.generatePoster),
         actions: [
           IconButton(
             icon: const Icon(Icons.share),
             onPressed: _isProcessing ? null : _sharePoster,
-            tooltip: '分享海报',
+            tooltip: AppLocalizations.of(context)!.sharePoster,
           ),
         ],
       ),
@@ -286,7 +287,7 @@ class _PosterPageState extends State<PosterPage> {
                 Expanded(
                   child: _clayBtn(
                     Icons.download,
-                    _isProcessing ? '处理中...' : '保存相册',
+                    _isProcessing ? AppLocalizations.of(context)!.processing : AppLocalizations.of(context)!.saveToAlbum,
                     _isProcessing ? null : _savePoster,
                   ),
                 ),
@@ -294,7 +295,7 @@ class _PosterPageState extends State<PosterPage> {
                 Expanded(
                   child: _clayBtn(
                     Icons.share,
-                    '分享',
+                    AppLocalizations.of(context)!.share,
                     _isProcessing ? null : _sharePoster,
                   ),
                 ),
@@ -330,9 +331,9 @@ class _PosterPageState extends State<PosterPage> {
             children: [
               Text(dc.categoryIcon, style: const TextStyle(fontSize: 76)),
               const SizedBox(width: 12),
-              const Text(
-                '智伴口袋',
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context)!.posterBranding,
+                style: const TextStyle(
                   color: AppTheme.ube300,
                   fontSize: 76,
                   fontWeight: FontWeight.w600,
@@ -372,7 +373,7 @@ class _PosterPageState extends State<PosterPage> {
           Align(
             alignment: Alignment.centerRight,
             child: Text(
-              '每日知识陪伴',
+              AppLocalizations.of(context)!.posterFooter,
               style: TextStyle(
                 color: AppTheme.pureWhite.withValues(alpha: 0.5),
                 fontSize: 18,
@@ -503,7 +504,7 @@ class _PosterPageState extends State<PosterPage> {
       final ok = await _requestPermission();
       if (!ok) {
         if (mounted) {
-          messenger.showSnackBar(const SnackBar(content: Text('需要相册权限')));
+          messenger.showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.savePermissionRequired)));
         }
         setState(() => _isProcessing = false);
         return;
@@ -516,7 +517,7 @@ class _PosterPageState extends State<PosterPage> {
         if (mounted && total > 1) {
           messenger.showSnackBar(
             SnackBar(
-              content: Text('保存中 ${i + 1}/$total...'),
+              content: Text(AppLocalizations.of(context)!.savingImages(i + 1, total)),
               duration: const Duration(seconds: 1),
             ),
           );
@@ -545,12 +546,12 @@ class _PosterPageState extends State<PosterPage> {
 
       if (mounted) {
         messenger.showSnackBar(
-          SnackBar(content: Text(total > 1 ? '$total 张海报已保存至相册' : '海报已保存至相册')),
+          SnackBar(content: Text(total > 1 ? AppLocalizations.of(context)!.savedMultipleToAlbum(total) : AppLocalizations.of(context)!.savedToAlbum)),
         );
       }
     } catch (e) {
       if (mounted) {
-        messenger.showSnackBar(SnackBar(content: Text('保存出错: $e')));
+        messenger.showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.saveError(e.toString()))));
       }
     } finally {
       if (mounted) setState(() => _isProcessing = false);
@@ -592,12 +593,12 @@ class _PosterPageState extends State<PosterPage> {
 
       if (files.isNotEmpty) {
         await SharePlus.instance.share(
-          ShareParams(files: files, text: '来自「智伴口袋」的每日知识分享'),
+          ShareParams(files: files, text: AppLocalizations.of(context)!.posterFromApp),
         );
       }
     } catch (e) {
       if (mounted) {
-        messenger.showSnackBar(SnackBar(content: Text('分享失败: $e')));
+        messenger.showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.shareFailed(e.toString()))));
       }
     } finally {
       if (mounted) setState(() => _isProcessing = false);

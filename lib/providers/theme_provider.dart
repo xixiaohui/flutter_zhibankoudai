@@ -7,17 +7,6 @@ class ThemeProvider extends ChangeNotifier {
 
   ThemeMode get mode => _mode;
 
-  String get modeLabel {
-    switch (_mode) {
-      case ThemeMode.light:
-        return '浅色模式';
-      case ThemeMode.dark:
-        return '深色模式';
-      case ThemeMode.system:
-        return '跟随系统';
-    }
-  }
-
   ThemeProvider() {
     _load();
   }

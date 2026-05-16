@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../design/radius.dart';
 import '../design/spacing.dart';
+import '../l10n/gen/app_localizations.dart';
 import '../models/daily_content.dart';
 import '../models/module_config.dart';
 import 'skeleton_loader.dart';
@@ -176,7 +177,7 @@ class _Body extends StatelessWidget {
     final c = content;
     if (c == null || c.content.isEmpty) {
       return Text(
-        '暂无内容',
+        AppLocalizations.of(context)!.noContent,
         style: textTheme.bodyLarge?.copyWith(color: fg.withValues(alpha: 0.6)),
       );
     }
@@ -229,7 +230,7 @@ class _Body extends StatelessWidget {
           child: Row(mainAxisSize: MainAxisSize.min, children: [
             Icon(Icons.auto_awesome, size: 11, color: fg),
             const SizedBox(width: 3),
-            Text('AI 生成', style: textTheme.labelSmall?.copyWith(color: fg)),
+            Text(AppLocalizations.of(context)!.aiGenerate, style: textTheme.labelSmall?.copyWith(color: fg)),
           ]),
         ),
       ],
@@ -255,7 +256,7 @@ class _Footer extends StatelessWidget {
     return Row(mainAxisAlignment: MainAxisAlignment.end, children: [
       _ActionBtn(icon: Icons.refresh, label: '换一条', fg: fg, textTheme: textTheme, onTap: onRefresh),
       const SizedBox(width: 12),
-      _ActionBtn(icon: Icons.share, label: '分享', fg: fg, textTheme: textTheme, onTap: onShare),
+      _ActionBtn(icon: Icons.share, label: AppLocalizations.of(context)!.share, fg: fg, textTheme: textTheme, onTap: onShare),
     ]);
   }
 }

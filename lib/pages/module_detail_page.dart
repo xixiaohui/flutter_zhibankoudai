@@ -6,6 +6,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import '../config/routes.dart';
 import '../design/radius.dart';
 import '../design/elevation.dart';
+import '../l10n/gen/app_localizations.dart';
 import '../models/daily_content.dart';
 import '../models/field_metadata.dart';
 import '../providers/module_provider.dart';
@@ -49,8 +50,8 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
 
     if (module == null) {
       return Scaffold(
-        appBar: AppBar(title: const Text('模块不存在')),
-        body: const Center(child: Text('未找到该模块')),
+        appBar: AppBar(title: Text(AppLocalizations.of(context)!.moduleNotFound)),
+        body: Center(child: Text(AppLocalizations.of(context)!.moduleNotFoundDesc)),
       );
     }
 
@@ -152,7 +153,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                           child: Row(mainAxisSize: MainAxisSize.min, children: [
                             Icon(Icons.auto_awesome, size: 14, color: const Color(0xFF078a52)),
                             const SizedBox(width: 4),
-                            Text('AI 生成', style: textTheme.labelSmall?.copyWith(color: const Color(0xFF078a52))),
+                            Text(AppLocalizations.of(context)!.aiGenerate, style: textTheme.labelSmall?.copyWith(color: const Color(0xFF078a52))),
                           ]),
                         ),
                       ],
@@ -161,7 +162,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                     if (content == null)
                       Padding(
                         padding: const EdgeInsets.only(top: 40),
-                        child: Center(child: Text('暂无内容', style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary))),
+                        child: Center(child: Text(AppLocalizations.of(context)!.noContent, style: textTheme.bodyMedium?.copyWith(color: colorScheme.secondary))),
                       ),
 
                     const SizedBox(height: 32),
@@ -169,7 +170,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                     Row(children: [
                       Expanded(
                         child: _actionButton(
-                          label: isGenerating ? '生成中...' : 'AI 换一条',
+                          label: isGenerating ? AppLocalizations.of(context)!.generating : AppLocalizations.of(context)!.aiRefresh,
                           icon: isGenerating ? Icons.hourglass_empty : Icons.refresh,
                           loading: isGenerating,
                           onTap: isGenerating ? null : () => cp.refreshWithAi(module),
@@ -180,7 +181,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                       const SizedBox(width: 12),
                       Expanded(
                         child: _outlinedButton(
-                          label: '生成海报',
+                          label: AppLocalizations.of(context)!.generatePoster,
                           icon: Icons.share,
                           onTap: content != null ? () => _navigateToPoster(context, content) : null,
                           colorScheme: colorScheme,

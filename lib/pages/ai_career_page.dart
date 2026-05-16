@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../l10n/gen/app_localizations.dart';
 import '../models/career.dart';
 
 class AICareerPage extends StatefulWidget {
@@ -67,9 +68,9 @@ class _AICareerPageState extends State<AICareerPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('加载失败', style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface)),
+            Text(AppLocalizations.of(context)!.loadFailed, style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface)),
             const SizedBox(height: 8),
-            TextButton(onPressed: _loadCareers, child: const Text('重试')),
+            TextButton(onPressed: _loadCareers, child: Text(AppLocalizations.of(context)!.retry)),
           ],
         ),
       );
@@ -78,7 +79,7 @@ class _AICareerPageState extends State<AICareerPage> {
     final careers = _careers!.where((c) => c.name.isNotEmpty).toList();
     final grouped = <String, List<Career>>{};
     for (final c in careers) {
-      final catKey = c.category.isNotEmpty ? c.category : '其他';
+      final catKey = c.category.isNotEmpty ? c.category : AppLocalizations.of(context)!.otherCategory;
       grouped.putIfAbsent(catKey, () => []).add(c);
     }
 
@@ -97,7 +98,7 @@ class _AICareerPageState extends State<AICareerPage> {
     final icon = cat.categoryIcon.isNotEmpty ? cat.categoryIcon : '📋';
     final name = cat.categoryName.isNotEmpty
         ? cat.categoryName
-        : (cat.category.isNotEmpty ? cat.category : '其他');
+        : (cat.category.isNotEmpty ? cat.category : AppLocalizations.of(context)!.otherCategory);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

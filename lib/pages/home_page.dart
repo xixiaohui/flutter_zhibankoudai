@@ -84,12 +84,12 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
 
           slivers.add(SliverToBoxAdapter(child: _aiFriendCard(context, textTheme, colorScheme)));
           slivers.add(SliverToBoxAdapter(child: _aiCareerCard(context, textTheme, colorScheme)));
-          slivers.add(SliverToBoxAdapter(child: _sectionTitle(textTheme, colorScheme, '更多模块')));
+          slivers.add(SliverToBoxAdapter(child: _sectionTitle(textTheme, colorScheme, AppLocalizations.of(context)!.moreModules)));
 
           if (mp.isLoading) {
             slivers.add(SliverFillRemaining(child: _loadingGrid(colorScheme)));
           } else if (mp.modules.isEmpty) {
-            slivers.add(const SliverFillRemaining(child: Center(child: Text('暂无模块'))));
+            slivers.add(SliverFillRemaining(child: Center(child: Text(AppLocalizations.of(context)!.noModule))));
           } else {
             slivers.addAll(_buildModuleSections(mp.modules.skip(1).toList(), textTheme, colorScheme));
           }
@@ -150,7 +150,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
           padding: const EdgeInsets.fromLTRB(20, 4, 20, 10),
           child: Row(children: [
             const Text('🔥 ', style: TextStyle(fontSize: 14)),
-            Text('热门精选', style: textTheme.labelMedium?.copyWith(
+            Text(AppLocalizations.of(context)!.hotPicks, style: textTheme.labelMedium?.copyWith(
               color: colorScheme.onSurfaceVariant,
               letterSpacing: 1.0,
             )),
@@ -259,9 +259,9 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
             const SizedBox(width: 16),
             Expanded(
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text('情感陪伴', style: textTheme.titleSmall?.copyWith(color: colorScheme.onSurface)),
+                Text(AppLocalizations.of(context)!.emotionalCompanion, style: textTheme.titleSmall?.copyWith(color: colorScheme.onSurface)),
                 const SizedBox(height: 4),
-                Text('和"小智"聊聊天，分享你的心情',
+                Text(AppLocalizations.of(context)!.emotionalCompanionDesc,
                   style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant)),
               ]),
             ),
@@ -312,9 +312,9 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
             const SizedBox(width: 16),
             Expanded(
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text('领域专家', style: textTheme.titleSmall?.copyWith(color: colorScheme.onSurface)),
+                Text(AppLocalizations.of(context)!.domainExpert, style: textTheme.titleSmall?.copyWith(color: colorScheme.onSurface)),
                 const SizedBox(height: 4),
-                Text('与180+行业专家深度对话，获取专业见解',
+                Text(AppLocalizations.of(context)!.domainExpertDesc,
                   style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant)),
               ]),
             ),
@@ -336,7 +336,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 60, 20, 20),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(_dateStr(), style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant)),
+        Text(_dateStr(context), style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant)),
         const SizedBox(height: 8),
         Row(children: [
           Text(AppLocalizations.of(context).appName, style: textTheme.headlineMedium?.copyWith(color: colorScheme.onSurface)),
@@ -390,10 +390,11 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     return Color(int.parse(buffer.toString(), radix: 16));
   }
 
-  String _dateStr() {
+  String _dateStr(BuildContext context) {
     final now = DateTime.now();
-    const wd = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
-    return '${now.year}年${now.month}月${now.day}日 ${wd[now.weekday - 1]}';
+    final l10n = AppLocalizations.of(context)!;
+    final wd = ['', l10n.weekdayMon, l10n.weekdayTue, l10n.weekdayWed, l10n.weekdayThu, l10n.weekdayFri, l10n.weekdaySat, l10n.weekdaySun];
+    return '${now.year}年${now.month}月${now.day}日 ${wd[now.weekday]}';
   }
 
   void _navigateToDetail(String id) => context.push('/module/$id');
