@@ -1,0 +1,1022 @@
+[
+  {
+    "id": "quote",
+    "name": "Citações Atemporais",
+    "description": "Words of sabedoria to light up your day",
+    "generate": "Gerar a classic citação with author and source",
+    "icon": "📜",
+    "color": "#5C6BC0",
+    "refreshText": "Nova Citação",
+    "loadingText": "Sabedoria está a caminho...",
+    "placeholderText": "Toque \"Nova Citação\" for today's inspiration",
+    "posterType": "quote",
+    "slogan": "Sabedoria from great minds",
+    "aiTags": [
+      "quotes",
+      "Sabedoria"
+    ]
+  },
+  {
+    "id": "joke",
+    "name": "Piadas Diárias",
+    "description": "Lighten up your day with laughter",
+    "generate": "Gerar a short and funny piada",
+    "icon": "😄",
+    "color": "#FF7043",
+    "refreshText": "Nova Piada",
+    "loadingText": "A laugh está a caminho...",
+    "placeholderText": "Toque \"Nova Piada\" for a good laugh",
+    "posterType": "joke",
+    "slogan": "A laugh a day keeps the blues away",
+    "aiTags": [
+      "jokes",
+      "humor"
+    ]
+  },
+  {
+    "id": "psychology",
+    "name": "Sabedoria Mental",
+    "description": "Psychology insights to know yourself and others",
+    "generate": "Gerar a practical psychology dica",
+    "icon": "🧠",
+    "color": "#7E57C2",
+    "refreshText": "Novo Insight",
+    "loadingText": "Analisando...",
+    "placeholderText": "Toque \"Novo Insight\" for psychology conhecimento",
+    "posterType": "psychology",
+    "slogan": "Understand the mind, meet a better self",
+    "aiTags": [
+      "psychology",
+      "emotions"
+    ]
+  },
+  {
+    "id": "finance",
+    "name": "Janela Finançasira",
+    "description": "Investimento and wealth management insights",
+    "generate": "Gerar a practical financial literacy dica",
+    "icon": "💹",
+    "color": "#26A69A",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando financial insights...",
+    "placeholderText": "Toque \"Nova Dica\" for financial news",
+    "posterType": "finance",
+    "slogan": "See the trends in wealth",
+    "aiTags": [
+      "Finanças",
+      "economy"
+    ]
+  },
+  {
+    "id": "love",
+    "name": "Doces Momentos",
+    "description": "Romantic citaçãos to warm your heart",
+    "generate": "Gerar a romantic love citação",
+    "icon": "💕",
+    "color": "#EC407A",
+    "refreshText": "Nova Frase",
+    "loadingText": "Elaborando sweet words...",
+    "placeholderText": "Toque \"Nova Frase\" for a romantic citação",
+    "posterType": "love",
+    "slogan": "Amor speaks louder than words",
+    "aiTags": [
+      "Amor",
+      "romance"
+    ]
+  },
+  {
+    "id": "movie",
+    "name": "Mundo do Cinema",
+    "description": "Great movies you shouldn't miss",
+    "generate": "Gerar a worthwhile movie recommendation",
+    "icon": "🎬",
+    "color": "#EF5350",
+    "refreshText": "Novo Filmee",
+    "loadingText": "Encontrando great films...",
+    "placeholderText": "Toque \"Novo Filmee\" for a movie recommendation",
+    "posterType": "movie",
+    "slogan": "Vida on screen, emotions in every frame",
+    "aiTags": [
+      "movies",
+      "reviews"
+    ]
+  },
+  {
+    "id": "music",
+    "name": "Hora da Música",
+    "description": "Classic songs that touch the soul",
+    "generate": "Recommend a classic song",
+    "icon": "🎵",
+    "color": "#AB47BC",
+    "refreshText": "Nova Música",
+    "loadingText": "Tocando a great track...",
+    "placeholderText": "Toque \"Nova Música\" for music recommendations",
+    "posterType": "music",
+    "slogan": "Música is food for the soul",
+    "aiTags": [
+      "Música",
+      "playlist"
+    ]
+  },
+  {
+    "id": "tech",
+    "name": "Fronteira Tecnologia",
+    "description": "Tecnologianology trends shaping the future",
+    "generate": "Compartilhar a cutting-edge tech update",
+    "icon": "🚀",
+    "color": "#42A5F5",
+    "refreshText": "Nova Atualização",
+    "loadingText": "Carregando tech news...",
+    "placeholderText": "Toque \"Nova Atualização\" for tech insights",
+    "posterType": "tech",
+    "slogan": "Tecnologianology changes the world",
+    "aiTags": [
+      "Tecnologia",
+      "innovation"
+    ]
+  },
+  {
+    "id": "tcm",
+    "name": "Bem-Estar MTC",
+    "description": "Traditional Chinese Medicine for healthy living",
+    "generate": "Compartilhar a TCM wellness dica",
+    "icon": "🌿",
+    "color": "#66BB6A",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando wellness conhecimento...",
+    "placeholderText": "Toque \"Nova Dica\" for TCM sabedoria",
+    "posterType": "tcm",
+    "slogan": "Ancient sabedoria for modern health",
+    "aiTags": [
+      "TCM",
+      "wellness"
+    ]
+  },
+  {
+    "id": "travel",
+    "name": "Diário de Viagem",
+    "description": "Viagem recommendations to explore the world",
+    "generate": "Recommend a travel destination",
+    "icon": "✈️",
+    "color": "#26C6DA",
+    "refreshText": "Novo Lugar",
+    "loadingText": "Planejando your next trip...",
+    "placeholderText": "Toque \"Novo Lugar\" for travel inspiration",
+    "posterType": "travel",
+    "slogan": "The world is vast, go explore",
+    "aiTags": [
+      "Viagem",
+      "destinations"
+    ]
+  },
+  {
+    "id": "fortune",
+    "name": "Sorte Diária",
+    "description": "Diário fortune for good luck",
+    "generate": "Gerar today's fortune análise",
+    "icon": "☯️",
+    "color": "#8D6E63",
+    "refreshText": "Tirar Novamente",
+    "loadingText": "Lendo the signs...",
+    "placeholderText": "Toque \"Tirar Novamente\" for today's fortune",
+    "posterType": "fortune",
+    "slogan": "Know your path, follow the flow",
+    "aiTags": [
+      "I Ching",
+      "fortune"
+    ]
+  },
+  {
+    "id": "literature",
+    "name": "Salão Literário",
+    "description": "Literary masterpieces to savor",
+    "generate": "Compartilhar a literary excerpt with análise",
+    "icon": "📚",
+    "color": "#78909C",
+    "refreshText": "Nova Peça",
+    "loadingText": "Carregando literary works...",
+    "placeholderText": "Toque \"Nova Peça\" for literature recommendations",
+    "posterType": "literature",
+    "slogan": "Lendo refines the soul",
+    "aiTags": [
+      "literature",
+      "classics"
+    ]
+  },
+  {
+    "id": "foreignTrade",
+    "name": "Assistente Comercial",
+    "description": "Foreign trade insights and opportunities",
+    "generate": "Compartilhar a foreign trade insight",
+    "icon": "🌐",
+    "color": "#5C6BC0",
+    "refreshText": "Novo Insight",
+    "loadingText": "Carregando trade conhecimento...",
+    "placeholderText": "Toque \"Novo Insight\" for trade conhecimento",
+    "posterType": "foreignTrade",
+    "slogan": "Trade connects the world",
+    "aiTags": [
+      "trade",
+      "cross-border"
+    ]
+  },
+  {
+    "id": "ecommerce",
+    "name": "Operações E-Commerce",
+    "description": "E-commerce trends and strategies",
+    "generate": "Compartilhar an e-commerce operations dica",
+    "icon": "🛒",
+    "color": "#FF7043",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando operations dicas...",
+    "placeholderText": "Toque \"Nova Dica\" for e-commerce insights",
+    "posterType": "ecommerce",
+    "slogan": "Smart operations, worry-free sales",
+    "aiTags": [
+      "e-commerce",
+      "operations"
+    ]
+  },
+  {
+    "id": "math",
+    "name": "Gênio da Matemática",
+    "description": "Fun math problems to sharpen your mind",
+    "generate": "Compartilhar an interesting math fact",
+    "icon": "📐",
+    "color": "#7E57C2",
+    "refreshText": "Novo Problema",
+    "loadingText": "Carregando math puzzles...",
+    "placeholderText": "Toque \"Novo Problema\" for math conhecimento",
+    "posterType": "math",
+    "slogan": "Mathematics is the language of science",
+    "aiTags": [
+      "math",
+      "problem-solving"
+    ]
+  },
+  {
+    "id": "english",
+    "name": "Inglês Pro",
+    "description": "English learning dicas for self-improvement",
+    "generate": "Compartilhar a practical English learning dica",
+    "icon": "🔤",
+    "color": "#42A5F5",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando English dicas...",
+    "placeholderText": "Toque \"Nova Dica\" for English conhecimento",
+    "posterType": "english",
+    "slogan": "English is a global language",
+    "aiTags": [
+      "English",
+      "learning"
+    ]
+  },
+  {
+    "id": "programming",
+    "name": "Mentor de Código",
+    "description": "Programming dicas for technical growth",
+    "generate": "Introduce an interesting programming concept",
+    "icon": "💻",
+    "color": "#26A69A",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando code dicas...",
+    "placeholderText": "Toque \"Nova Dica\" for programming skills",
+    "posterType": "programming",
+    "slogan": "Código changes the world",
+    "aiTags": [
+      "programming",
+      "coding"
+    ]
+  },
+  {
+    "id": "photography",
+    "name": "Mestre da Foto",
+    "description": "Photography dicas to capture beautiful moments",
+    "generate": "Compartilhar a practical photography dica",
+    "icon": "📷",
+    "color": "#EC407A",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando photography dicas...",
+    "placeholderText": "Toque \"Nova Dica\" for photography skills",
+    "posterType": "photography",
+    "slogan": "Capture beauty through the lens",
+    "aiTags": [
+      "photography",
+      "Dicas"
+    ]
+  },
+  {
+    "id": "beauty",
+    "name": "Guru da Beleza",
+    "description": "Skincare and beauty dicas for a radiant glow",
+    "generate": "Compartilhar a practical beauty and skincare dica",
+    "icon": "💄",
+    "color": "#EF5350",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando beauty conhecimento...",
+    "placeholderText": "Toque \"Nova Dica\" for beauty dicas",
+    "posterType": "beauty",
+    "slogan": "Beleza is in the details",
+    "aiTags": [
+      "Beleza",
+      "skincare"
+    ]
+  },
+  {
+    "id": "investment",
+    "name": "Consultor de Investimentos",
+    "description": "Investimento conhecimento for wealth growth",
+    "generate": "Compartilhar an investment conhecimento dica",
+    "icon": "📈",
+    "color": "#66BB6A",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando investment conhecimento...",
+    "placeholderText": "Toque \"Nova Dica\" for investment insights",
+    "posterType": "investment",
+    "slogan": "Steady investing, lasting wealth",
+    "aiTags": [
+      "Investimento",
+      "Riqueza"
+    ]
+  },
+  {
+    "id": "fishing",
+    "name": "Pesca Pro",
+    "description": "Fishing dicas for endless enjoyment",
+    "generate": "Compartilhar a fishing dica or conhecimento",
+    "icon": "🎣",
+    "color": "#26C6DA",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando fishing dicas...",
+    "placeholderText": "Toque \"Nova Dica\" for fishing conhecimento",
+    "posterType": "fishing",
+    "slogan": "Fishing is a way of life",
+    "aiTags": [
+      "fishing",
+      "Dicas"
+    ]
+  },
+  {
+    "id": "fitness",
+    "name": "Coach Fitness",
+    "description": "Fitness guidance for a stronger body",
+    "generate": "Compartilhar a practical fitness dica",
+    "icon": "💪",
+    "color": "#AB47BC",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando fitness conhecimento...",
+    "placeholderText": "Toque \"Nova Dica\" for fitness conhecimento",
+    "posterType": "fitness",
+    "slogan": "Vida is movement",
+    "aiTags": [
+      "fitness",
+      "exercise"
+    ]
+  },
+  {
+    "id": "pet",
+    "name": "Especialista em Pets",
+    "description": "Pet care dicas with loving companionship",
+    "generate": "Compartilhar a pet care dica",
+    "icon": "🐾",
+    "color": "#8D6E63",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando pet conhecimento...",
+    "placeholderText": "Toque \"Nova Dica\" for pet care dicas",
+    "posterType": "pet",
+    "slogan": "Pets are our best friends",
+    "aiTags": [
+      "pets",
+      "care"
+    ]
+  },
+  {
+    "id": "fashion",
+    "name": "Ícone da Moda",
+    "description": "Moda dicas to express your style",
+    "generate": "Compartilhar a fashion and styling dica",
+    "icon": "👗",
+    "color": "#78909C",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando fashion news...",
+    "placeholderText": "Toque \"Nova Dica\" for fashion insights",
+    "posterType": "fashion",
+    "slogan": "Moda is what you buy, style is what you do with it",
+    "aiTags": [
+      "Moda",
+      "trends"
+    ]
+  },
+  {
+    "id": "outfit",
+    "name": "Guia de Estilo",
+    "description": "Diário outfit recommendations",
+    "generate": "Compartilhar an outfit recommendation",
+    "icon": "👔",
+    "color": "#5C6BC0",
+    "refreshText": "Novo Look",
+    "loadingText": "Carregando style guide...",
+    "placeholderText": "Toque \"Novo Look\" for style dicas",
+    "posterType": "outfit",
+    "slogan": "Dress with style, live with flair",
+    "aiTags": [
+      "outfit",
+      "styling"
+    ]
+  },
+  {
+    "id": "decoration",
+    "name": "Decoração de Casa",
+    "description": "Casa decoration dicas to beautify your space",
+    "generate": "Compartilhar a home decoration dica",
+    "icon": "🏠",
+    "color": "#FF7043",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando decor conhecimento...",
+    "placeholderText": "Toque \"Nova Dica\" for decoration dicas",
+    "posterType": "decoration",
+    "slogan": "Make your home warm and welcoming",
+    "aiTags": [
+      "decoration",
+      "Casa"
+    ]
+  },
+  {
+    "id": "glassFiber",
+    "name": "Especialista em Fibra de Vidro",
+    "description": "Fiberglass materials at the cutting edge",
+    "generate": "Compartilhar fiberglass-related conhecimento",
+    "icon": "🧵",
+    "color": "#7E57C2",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando fiberglass conhecimento...",
+    "placeholderText": "Toque \"Nova Dica\" for fiberglass expertise",
+    "posterType": "glassFiber",
+    "slogan": "Professional materials, professional quality",
+    "aiTags": [
+      "fiberglass",
+      "materials"
+    ]
+  },
+  {
+    "id": "resin",
+    "name": "Especialista em Resina",
+    "description": "Resin craft with endless creativity",
+    "generate": "Compartilhar a resin craft dica",
+    "icon": "🧪",
+    "color": "#42A5F5",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando resin conhecimento...",
+    "placeholderText": "Toque \"Nova Dica\" for resin conhecimento",
+    "posterType": "resin",
+    "slogan": "Materials science, limitless applications",
+    "aiTags": [
+      "resin",
+      "chemical"
+    ]
+  },
+  {
+    "id": "tax",
+    "name": "Consultor Fiscal",
+    "description": "Tax planning for compliance and savings",
+    "generate": "Compartilhar a tax planning dica",
+    "icon": "📋",
+    "color": "#26A69A",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando tax conhecimento...",
+    "placeholderText": "Toque \"Nova Dica\" for tax conhecimento",
+    "posterType": "tax",
+    "slogan": "Smart tax planning, compliant living",
+    "aiTags": [
+      "tax",
+      "Finanças"
+    ]
+  },
+  {
+    "id": "law",
+    "name": "Consultor Jurídico",
+    "description": "Legal conhecimento to know and protect your rights",
+    "generate": "Compartilhar a practical legal dica",
+    "icon": "⚖️",
+    "color": "#EC407A",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando legal conhecimento...",
+    "placeholderText": "Toque \"Nova Dica\" for legal conhecimento",
+    "posterType": "law",
+    "slogan": "Know the law, protect yourself",
+    "aiTags": [
+      "law",
+      "rights"
+    ]
+  },
+  {
+    "id": "official",
+    "name": "Carreira Pro",
+    "description": "Workplace sabedoria for career success",
+    "generate": "Compartilhar a workplace insight",
+    "icon": "🎩",
+    "color": "#EF5350",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando career conhecimento...",
+    "placeholderText": "Toque \"Nova Dica\" for career dicas",
+    "posterType": "official",
+    "slogan": "The workplace is a battlefield, win with sabedoria",
+    "aiTags": [
+      "Carreira",
+      "interpersonal"
+    ]
+  },
+  {
+    "id": "handling",
+    "name": "Habilidades para a Vida",
+    "description": "Practical sabedoria for handling life's situations",
+    "generate": "Compartilhar a practical life dica",
+    "icon": "💎",
+    "color": "#66BB6A",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando life sabedoria...",
+    "placeholderText": "Toque \"Nova Dica\" for life sabedoria",
+    "posterType": "handling",
+    "slogan": "Understanding the world is true sabedoria",
+    "aiTags": [
+      "Sabedoria",
+      "EQ"
+    ]
+  },
+  {
+    "id": "floral",
+    "name": "Arteista Floral",
+    "description": "Floral art dicas for a fragrant life",
+    "generate": "Compartilhar a floral care dica",
+    "icon": "💐",
+    "color": "#26C6DA",
+    "refreshText": "Nova Dica",
+    "loadingText": "Carregando floral conhecimento...",
+    "placeholderText": "Toque \"Nova Dica\" for floral art dicas",
+    "posterType": "floral",
+    "slogan": "Flowers speak a language of their own",
+    "aiTags": [
+      "floral",
+      "flower arrangement"
+    ]
+  },
+  {
+    "id": "history",
+    "name": "Espelho da História",
+    "description": "Historical stories to learn from the past",
+    "generate": "Compartilhar an interesting historical story",
+    "icon": "📚",
+    "color": "#AB47BC",
+    "refreshText": "Nova História",
+    "loadingText": "Carregando historical tales...",
+    "placeholderText": "Toque \"Nova História\" for historical conhecimento",
+    "posterType": "history",
+    "slogan": "Learn from history to see the future",
+    "aiTags": [
+      "História",
+      "stories"
+    ]
+  },
+  {
+    "id": "military",
+    "name": "Observatório Militar",
+    "description": "Military insights for strategic thinking",
+    "generate": "Compartilhar a military insight",
+    "icon": "🎖️",
+    "color": "#8D6E63",
+    "refreshText": "Novo Insight",
+    "loadingText": "Carregando military conhecimento...",
+    "placeholderText": "Toque \"Novo Insight\" for military conhecimento",
+    "posterType": "military",
+    "slogan": "Know yourself and your opponent, win every battle",
+    "aiTags": [
+      "military",
+      "Estratégia"
+    ]
+  },
+  {
+    "id": "stock",
+    "name": "Farol de Ações",
+    "description": "Stock market insights for informed investing",
+    "generate": "Compartilhar a stock market análise",
+    "icon": "📈",
+    "color": "#1E88E5",
+    "refreshText": "Novo Insight",
+    "loadingText": "Analyst is reviewing the market...",
+    "placeholderText": "Toque \"Novo Insight\" for investment conhecimento",
+    "posterType": "stock",
+    "slogan": "Rational investing, steady growth",
+    "aiTags": [
+      "stocks",
+      "futures"
+    ]
+  },
+  {
+    "id": "economics",
+    "name": "Visão Econômica",
+    "description": "Economic observations to understand trends",
+    "generate": "Compartilhar an economic observation",
+    "icon": "💰",
+    "color": "#00897B",
+    "refreshText": "Novo Insight",
+    "loadingText": "Economist is analyzing...",
+    "placeholderText": "Toque \"Novo Insight\" for economic conhecimento",
+    "posterType": "economics",
+    "slogan": "Understand the economy, grasp the trends",
+    "aiTags": [
+      "economics",
+      "análise"
+    ]
+  },
+  {
+    "id": "business",
+    "name": "Sabedoria Empresarial",
+    "description": "Negócios insights to seize opportunities",
+    "generate": "Compartilhar a business insight",
+    "icon": "💼",
+    "color": "#6D4C41",
+    "refreshText": "Novo Insight",
+    "loadingText": "Negócios mentor is advising...",
+    "placeholderText": "Toque \"Novo Insight\" for business sabedoria",
+    "posterType": "business",
+    "slogan": "Negócios is about people, win with vision",
+    "aiTags": [
+      "Negócios",
+      "management"
+    ]
+  },
+  {
+    "id": "news",
+    "name": "Fronteira de Notícias",
+    "description": "Diário news to stay informed",
+    "generate": "Gerar a daily news digest",
+    "icon": "📰",
+    "color": "#D32F2F",
+    "refreshText": "Nova Atualização",
+    "loadingText": "Media expert is briefing you...",
+    "placeholderText": "Toque \"Nova Atualização\" for news análise",
+    "posterType": "news",
+    "slogan": "Information is king, insight is power",
+    "aiTags": [
+      "Notícias",
+      "headlines"
+    ]
+  },
+  {
+    "id": "wisdomBag",
+    "name": "Bolsa de Sabedoria",
+    "description": "Sabedoria nuggets for everyday life",
+    "generate": "Compartilhar a sabedoria nugget",
+    "icon": "🎁",
+    "color": "#FFA000",
+    "refreshText": "Nova Joia",
+    "loadingText": "Gerando sabedoria...",
+    "placeholderText": "Toque \"Nova Joia\" for a sabedoria nugget",
+    "posterType": "wisdomBag",
+    "slogan": "Small sabedoria, big life",
+    "aiTags": [
+      "Sabedoria",
+      "life tips"
+    ]
+  },
+  {
+    "id": "robotAi",
+    "name": "Bot de IA",
+    "description": "Arteificial intelligence and future technology",
+    "generate": "Compartilhar a robotics or AI insight",
+    "icon": "🤖",
+    "color": "#7C4DFF",
+    "refreshText": "Novo Insight",
+    "loadingText": "AI is thinking...",
+    "placeholderText": "Toque \"Novo Insight\" for AI conhecimento",
+    "posterType": "robotAi",
+    "slogan": "The intelligent future is in your hands",
+    "aiTags": [
+      "AI",
+      "robotics"
+    ]
+  },
+  {
+    "id": "americanExpert",
+    "name": "Informante dos EUA",
+    "description": "American culture in depth",
+    "generate": "Compartilhar a fact about America",
+    "icon": "🗽",
+    "color": "#1565C0",
+    "refreshText": "Novo Fato",
+    "loadingText": "Explorando America...",
+    "placeholderText": "Toque \"Novo Fato\" to learn about America",
+    "posterType": "americanExpert",
+    "slogan": "Understand America, see the world",
+    "aiTags": [
+      "America",
+      "culture"
+    ]
+  },
+  {
+    "id": "apple",
+    "name": "Sala de Aula Apple",
+    "description": "Conhecimento as fruitful as an apple a day",
+    "generate": "Compartilhar an interesting conhecimento point",
+    "icon": "🍎",
+    "color": "#E53935",
+    "refreshText": "Nova Lição",
+    "loadingText": "Class is in session...",
+    "placeholderText": "Toque \"Nova Lição\" for fresh conhecimento",
+    "posterType": "apple",
+    "slogan": "A little progress every day",
+    "aiTags": [
+      "conhecimento",
+      "learning"
+    ]
+  },
+  {
+    "id": "growth",
+    "name": "Especialista em Crescimento",
+    "description": "Marca growth strategies and market insights",
+    "generate": "Compartilhar a brand growth strategy",
+    "icon": "📈",
+    "color": "#00C853",
+    "refreshText": "Nova Estratégia",
+    "loadingText": "Gerando growth strategies...",
+    "placeholderText": "Toque \"Nova Estratégia\" for growth conhecimento",
+    "posterType": "growth",
+    "slogan": "Crescimento is the lifeline of business",
+    "aiTags": [
+      "Crescimento",
+      "marketing"
+    ]
+  },
+  {
+    "id": "uiDesigner",
+    "name": "Designer UI",
+    "description": "UI design for visual aesthetics",
+    "generate": "Compartilhar a UI design dica",
+    "icon": "🎨",
+    "color": "#FF4081",
+    "refreshText": "Nova Ideia",
+    "loadingText": "Gerando design inspiration...",
+    "placeholderText": "Toque \"Nova Ideia\" for design inspiration",
+    "posterType": "uiDesigner",
+    "slogan": "Design makes the world a better place",
+    "aiTags": [
+      "Design",
+      "UI"
+    ]
+  },
+  {
+    "id": "futures",
+    "name": "Especialista em Futuros",
+    "description": "Commodity futures and professional análise",
+    "generate": "Compartilhar a futures trading insight",
+    "icon": "📊",
+    "color": "#455A64",
+    "refreshText": "Nova Análise",
+    "loadingText": "Analisando futures...",
+    "placeholderText": "Toque \"Nova Análise\" for futures conhecimento",
+    "posterType": "futures",
+    "slogan": "Understand commodities, manage risk",
+    "aiTags": [
+      "futures",
+      "commodities"
+    ]
+  },
+  {
+    "id": "freud",
+    "name": "Estudos Freudianos",
+    "description": "Freudian psychology concepts explored",
+    "generate": "Compartilhar a Freudian psychology concept",
+    "icon": "🧠",
+    "color": "#5E35B1",
+    "refreshText": "Novo Conceito",
+    "loadingText": "Psychoanalyzing...",
+    "placeholderText": "Toque \"Novo Conceito\" for psychology insights",
+    "posterType": "freud",
+    "slogan": "Explore the subconscious, decode the mind",
+    "aiTags": [
+      "psychology",
+      "psychoanalysis"
+    ]
+  },
+  {
+    "id": "fashionBrand",
+    "name": "Marcas de Luxo",
+    "description": "Mundo fashion brands at the frontier of style",
+    "generate": "Compartilhar a world fashion brand story",
+    "icon": "👛",
+    "color": "#880E4F",
+    "refreshText": "Nova História",
+    "loadingText": "Carregando brand stories...",
+    "placeholderText": "Toque \"Nova História\" to discover luxury brands",
+    "posterType": "fashionBrand",
+    "slogan": "Taste the classics, know the trends",
+    "aiTags": [
+      "brands",
+      "Moda"
+    ]
+  },
+  {
+    "id": "xinStudy",
+    "name": "Mestre Xinxue",
+    "description": "Wang Yangming's philosophy of mind",
+    "generate": "Compartilhar a Xinxue philosophy insight",
+    "icon": "💭",
+    "color": "#00695C",
+    "refreshText": "Novo Insight",
+    "loadingText": "Interpretando Xinxue sabedoria...",
+    "placeholderText": "Toque \"Novo Insight\" for Xinxue sabedoria",
+    "posterType": "xinStudy",
+    "slogan": "Unity of knowing and doing, attain true conscience",
+    "aiTags": [
+      "Xinxue",
+      "Wang Yangming"
+    ]
+  },
+  {
+    "id": "liStudy",
+    "name": "Mestre Lixue",
+    "description": "Zhu Xi's Neo-Confucian thought",
+    "generate": "Compartilhar a Lixue philosophy insight",
+    "icon": "📖",
+    "color": "#4A148C",
+    "refreshText": "Novo Insight",
+    "loadingText": "Interpretando Lixue sabedoria...",
+    "placeholderText": "Toque \"Novo Insight\" for Lixue sabedoria",
+    "posterType": "liStudy",
+    "slogan": "Investigate things, attain conhecimento; rectify the mind, make the will sincere",
+    "aiTags": [
+      "Lixue",
+      "Zhu Xi"
+    ]
+  },
+  {
+    "id": "anthropologist",
+    "name": "Antropólogo",
+    "description": "Anthropological perspectives on the world",
+    "generate": "Compartilhar an anthropology insight",
+    "icon": "🏛️",
+    "color": "#8D6E63",
+    "refreshText": "Novo Insight",
+    "loadingText": "Explorando humanity...",
+    "placeholderText": "Toque \"Novo Insight\" to explore civilizations",
+    "posterType": "anthropologist",
+    "slogan": "Understand humanity, know yourself",
+    "aiTags": [
+      "anthropology",
+      "culture"
+    ]
+  },
+  {
+    "id": "geographer",
+    "name": "Geógrafo",
+    "description": "Geographic conhecimento to explore the world",
+    "generate": "Compartilhar a geographic fact",
+    "icon": "🌍",
+    "color": "#26A69A",
+    "refreshText": "Novo Fato",
+    "loadingText": "Explorando geography...",
+    "placeholderText": "Toque \"Novo Fato\" to explore Earth's wonders",
+    "posterType": "geographer",
+    "slogan": "Read the Earth, see the world clearly",
+    "aiTags": [
+      "geography",
+      "landforms"
+    ]
+  },
+  {
+    "id": "historian",
+    "name": "Historiador",
+    "description": "Historical research and deep interpretation",
+    "generate": "Compartilhar a historical research perspective",
+    "icon": "📜",
+    "color": "#7E57C2",
+    "refreshText": "Novo Insight",
+    "loadingText": "Explorando the river of history...",
+    "placeholderText": "Toque \"Novo Insight\" to touch history's pulse",
+    "posterType": "historian",
+    "slogan": "Learn from history to illuminate the future",
+    "aiTags": [
+      "História",
+      "research"
+    ]
+  },
+  {
+    "id": "narratologist",
+    "name": "Narratólogo",
+    "description": "The art of narrative and the power of stories",
+    "generate": "Compartilhar a narratology concept",
+    "icon": "📖",
+    "color": "#EC407A",
+    "refreshText": "Novo Conceito",
+    "loadingText": "Interpretando narrative art...",
+    "placeholderText": "Toque \"Novo Conceito\" to grasp story magic",
+    "posterType": "narratologist",
+    "slogan": "The way of stories, the art of narrative",
+    "aiTags": [
+      "narrative",
+      "storytelling"
+    ]
+  },
+  {
+    "id": "psychologist",
+    "name": "Psicólogo",
+    "description": "Deep psychological research and insights",
+    "generate": "Compartilhar a psychology research finding",
+    "icon": "🧠",
+    "color": "#5C6BC0",
+    "refreshText": "Nova Descoberta",
+    "loadingText": "Explorando psychological mysteries...",
+    "placeholderText": "Toque \"Nova Descoberta\" to decode the mind",
+    "posterType": "psychologist",
+    "slogan": "Illuminate the mind, know yourself",
+    "aiTags": [
+      "psychology",
+      "cognition"
+    ]
+  },
+  {
+    "id": "softwareArchitect",
+    "name": "Arquiteto de Software",
+    "description": "Software architecture and system design",
+    "generate": "Compartilhar a software architecture insight",
+    "icon": "🏗️",
+    "color": "#1565C0",
+    "refreshText": "Novo Insight",
+    "loadingText": "Interpretando architecture conhecimento...",
+    "placeholderText": "Toque \"Novo Insight\" for architecture conhecimento",
+    "posterType": "softwareArchitect",
+    "slogan": "System design, the way of architecture",
+    "aiTags": [
+      "architecture",
+      "Design"
+    ]
+  },
+  {
+    "id": "solidityEngineer",
+    "name": "Engenheiro Solidity",
+    "description": "Smart contracts and blockchain development",
+    "generate": "Compartilhar a smart contract insight",
+    "icon": "⛓️",
+    "color": "#2E7D32",
+    "refreshText": "Novo Insight",
+    "loadingText": "Interpretando contract conhecimento...",
+    "placeholderText": "Toque \"Novo Insight\" for contract conhecimento",
+    "posterType": "solidityEngineer",
+    "slogan": "Smart contracts, the way of the chain",
+    "aiTags": [
+      "blockchain",
+      "smart contracts"
+    ]
+  },
+  {
+    "id": "xiaohongshuExpert",
+    "name": "Especialista RED",
+    "description": "Xiaohongshu operations and content seeding dicas",
+    "generate": "Compartilhar a Xiaohongshu operations dica",
+    "icon": "📕",
+    "color": "#E91E63",
+    "refreshText": "Nova Dica",
+    "loadingText": "Interpretando operations dicas...",
+    "placeholderText": "Toque \"Nova Dica\" for operations dicas",
+    "posterType": "xiaohongshuExpert",
+    "slogan": "Traffic code, content is king",
+    "aiTags": [
+      "operations",
+      "content marketing"
+    ]
+  },
+  {
+    "id": "seoExpert",
+    "name": "Especialista SEO",
+    "description": "Search engine optimization to reach more people",
+    "generate": "Gerar an SEO optimization dica",
+    "icon": "🔍",
+    "color": "#FF5722",
+    "refreshText": "Nova Dica",
+    "loadingText": "Interpretando SEO dicas...",
+    "placeholderText": "Toque \"Nova Dica\" for SEO dicas",
+    "posterType": "seoExpert",
+    "slogan": "Optimize for search, boost your rankings",
+    "aiTags": [
+      "SEO",
+      "search"
+    ]
+  },
+  {
+    "id": "idiom",
+    "name": "Provérbios Chineses",
+    "description": "Chinese folk sayings and traditional sabedoria",
+    "generate": "Gerar a Chinese idiom or folk proverb",
+    "icon": "📝",
+    "color": "#795548",
+    "refreshText": "Novo Ditado",
+    "loadingText": "Interpretando folk sabedoria...",
+    "placeholderText": "Toque \"Novo Ditado\" for a folk idiom or proverb",
+    "posterType": "idiom",
+    "slogan": "Folk sabedoria passed down through the ages",
+    "aiTags": [
+      "idioms",
+      "proverbs"
+    ]
+  }
+]

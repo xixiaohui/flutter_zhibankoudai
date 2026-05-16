@@ -1,0 +1,1022 @@
+[
+  {
+    "id": "quote",
+    "name": "คำคมเหนือกาลเวลา",
+    "description": "Words of ปัญญา to light up your day",
+    "generate": "สร้าง a classic คำคม with author and source",
+    "icon": "📜",
+    "color": "#5C6BC0",
+    "refreshText": "คำคมใหม่",
+    "loadingText": "ปัญญา กำลังมา...",
+    "placeholderText": "แตะ \"คำคมใหม่\" for today's inspiration",
+    "posterType": "quote",
+    "slogan": "ปัญญา from great minds",
+    "aiTags": [
+      "quotes",
+      "ปัญญา"
+    ]
+  },
+  {
+    "id": "joke",
+    "name": "เรื่องตลกประจำวัน",
+    "description": "Lighten up your day with laughter",
+    "generate": "สร้าง a short and funny เรื่องตลก",
+    "icon": "😄",
+    "color": "#FF7043",
+    "refreshText": "เรื่องตลกใหม่",
+    "loadingText": "A laugh กำลังมา...",
+    "placeholderText": "แตะ \"เรื่องตลกใหม่\" for a good laugh",
+    "posterType": "joke",
+    "slogan": "A laugh a day keeps the blues away",
+    "aiTags": [
+      "jokes",
+      "humor"
+    ]
+  },
+  {
+    "id": "psychology",
+    "name": "ปัญญาแห่งจิตใจ",
+    "description": "Psychology ข้อมูลเชิงลึกs to know yourself and others",
+    "generate": "สร้าง a practical psychology เคล็ดลับ",
+    "icon": "🧠",
+    "color": "#7E57C2",
+    "refreshText": "ข้อมูลเชิงลึกใหม่",
+    "loadingText": "กำลังวิเคราะห์...",
+    "placeholderText": "แตะ \"ข้อมูลเชิงลึกใหม่\" for psychology ความรู้",
+    "posterType": "psychology",
+    "slogan": "Understand the mind, meet a better self",
+    "aiTags": [
+      "psychology",
+      "emotions"
+    ]
+  },
+  {
+    "id": "finance",
+    "name": "หน้าต่างการเงิน",
+    "description": "การลงทุน and wealth management ข้อมูลเชิงลึกs",
+    "generate": "สร้าง a practical financial literacy เคล็ดลับ",
+    "icon": "💹",
+    "color": "#26A69A",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด financial ข้อมูลเชิงลึกs...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for financial news",
+    "posterType": "finance",
+    "slogan": "See the trends in wealth",
+    "aiTags": [
+      "การเงิน",
+      "economy"
+    ]
+  },
+  {
+    "id": "love",
+    "name": "ช่วงเวลาหวานละมุน",
+    "description": "Romantic คำคมs to warm your heart",
+    "generate": "สร้าง a romantic love คำคม",
+    "icon": "💕",
+    "color": "#EC407A",
+    "refreshText": "บรรทัดใหม่",
+    "loadingText": "กำลังสร้างสรรค์ sweet words...",
+    "placeholderText": "แตะ \"บรรทัดใหม่\" for a romantic คำคม",
+    "posterType": "love",
+    "slogan": "ความรัก speaks louder than words",
+    "aiTags": [
+      "ความรัก",
+      "romance"
+    ]
+  },
+  {
+    "id": "movie",
+    "name": "โลกภาพยนตร์",
+    "description": "Great movies you shouldn't miss",
+    "generate": "สร้าง a worthwhile movie recommendation",
+    "icon": "🎬",
+    "color": "#EF5350",
+    "refreshText": "ภาพยนตร์ใหม่",
+    "loadingText": "กำลังค้นหา great films...",
+    "placeholderText": "แตะ \"ภาพยนตร์ใหม่\" for a movie recommendation",
+    "posterType": "movie",
+    "slogan": "ชีวิต on screen, emotions in every frame",
+    "aiTags": [
+      "movies",
+      "reviews"
+    ]
+  },
+  {
+    "id": "music",
+    "name": "เวลาดนตรี",
+    "description": "Classic songs that touch the soul",
+    "generate": "Recommend a classic song",
+    "icon": "🎵",
+    "color": "#AB47BC",
+    "refreshText": "เพลงใหม่",
+    "loadingText": "กำลังเล่น a great track...",
+    "placeholderText": "แตะ \"เพลงใหม่\" for music recommendations",
+    "posterType": "music",
+    "slogan": "ดนตรี is food for the soul",
+    "aiTags": [
+      "ดนตรี",
+      "playlist"
+    ]
+  },
+  {
+    "id": "tech",
+    "name": "พรมแดนเทคโนโลยี",
+    "description": "เทคโนโลยีnology trends shaping the future",
+    "generate": "แชร์ a cutting-edge tech update",
+    "icon": "🚀",
+    "color": "#42A5F5",
+    "refreshText": "อัปเดตใหม่",
+    "loadingText": "กำลังโหลด tech news...",
+    "placeholderText": "แตะ \"อัปเดตใหม่\" for tech ข้อมูลเชิงลึกs",
+    "posterType": "tech",
+    "slogan": "เทคโนโลยีnology changes the world",
+    "aiTags": [
+      "เทคโนโลยี",
+      "innovation"
+    ]
+  },
+  {
+    "id": "tcm",
+    "name": "สุขภาพแพทย์แผนจีน",
+    "description": "Traditional Chinese Medicine for healthy living",
+    "generate": "แชร์ a TCM wellness เคล็ดลับ",
+    "icon": "🌿",
+    "color": "#66BB6A",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด wellness ความรู้...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for TCM ปัญญา",
+    "posterType": "tcm",
+    "slogan": "Ancient ปัญญา for modern health",
+    "aiTags": [
+      "TCM",
+      "wellness"
+    ]
+  },
+  {
+    "id": "travel",
+    "name": "บันทึกการเดินทาง",
+    "description": "ท่องเที่ยว recommendations to explore the world",
+    "generate": "Recommend a travel destination",
+    "icon": "✈️",
+    "color": "#26C6DA",
+    "refreshText": "สถานที่ใหม่",
+    "loadingText": "กำลังวางแผน your next trip...",
+    "placeholderText": "แตะ \"สถานที่ใหม่\" for travel inspiration",
+    "posterType": "travel",
+    "slogan": "The world is vast, go explore",
+    "aiTags": [
+      "ท่องเที่ยว",
+      "destinations"
+    ]
+  },
+  {
+    "id": "fortune",
+    "name": "โชคชะตาประจำวัน",
+    "description": "รายวัน fortune for good luck",
+    "generate": "สร้าง today's fortune วิเคราะห์",
+    "icon": "☯️",
+    "color": "#8D6E63",
+    "refreshText": "โยนอีกครั้ง",
+    "loadingText": "กำลังอ่าน the signs...",
+    "placeholderText": "แตะ \"โยนอีกครั้ง\" for today's fortune",
+    "posterType": "fortune",
+    "slogan": "Know your path, follow the flow",
+    "aiTags": [
+      "I Ching",
+      "fortune"
+    ]
+  },
+  {
+    "id": "literature",
+    "name": "หอวรรณกรรม",
+    "description": "Literary masterpieces to savor",
+    "generate": "แชร์ a literary excerpt with วิเคราะห์",
+    "icon": "📚",
+    "color": "#78909C",
+    "refreshText": "ผลงานใหม่",
+    "loadingText": "กำลังโหลด literary works...",
+    "placeholderText": "แตะ \"ผลงานใหม่\" for literature recommendations",
+    "posterType": "literature",
+    "slogan": "กำลังอ่าน refines the soul",
+    "aiTags": [
+      "literature",
+      "classics"
+    ]
+  },
+  {
+    "id": "foreignTrade",
+    "name": "ผู้ช่วยการค้า",
+    "description": "Foreign trade ข้อมูลเชิงลึกs and opportunities",
+    "generate": "แชร์ a foreign trade ข้อมูลเชิงลึก",
+    "icon": "🌐",
+    "color": "#5C6BC0",
+    "refreshText": "ข้อมูลเชิงลึกใหม่",
+    "loadingText": "กำลังโหลด trade ความรู้...",
+    "placeholderText": "แตะ \"ข้อมูลเชิงลึกใหม่\" for trade ความรู้",
+    "posterType": "foreignTrade",
+    "slogan": "Trade connects the world",
+    "aiTags": [
+      "trade",
+      "cross-border"
+    ]
+  },
+  {
+    "id": "ecommerce",
+    "name": "ปฏิบัติการอีคอมเมิร์ซ",
+    "description": "E-commerce trends and strategies",
+    "generate": "แชร์ an e-commerce operations เคล็ดลับ",
+    "icon": "🛒",
+    "color": "#FF7043",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด operations เคล็ดลับs...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for e-commerce ข้อมูลเชิงลึกs",
+    "posterType": "ecommerce",
+    "slogan": "Smart operations, worry-free sales",
+    "aiTags": [
+      "e-commerce",
+      "operations"
+    ]
+  },
+  {
+    "id": "math",
+    "name": "อัจฉริยะคณิตศาสตร์",
+    "description": "Fun math problems to sharpen your mind",
+    "generate": "แชร์ an interesting math fact",
+    "icon": "📐",
+    "color": "#7E57C2",
+    "refreshText": "ปัญหาใหม่",
+    "loadingText": "กำลังโหลด math puzzles...",
+    "placeholderText": "แตะ \"ปัญหาใหม่\" for math ความรู้",
+    "posterType": "math",
+    "slogan": "Mathematics is the language of science",
+    "aiTags": [
+      "math",
+      "problem-solving"
+    ]
+  },
+  {
+    "id": "english",
+    "name": "ภาษาอังกฤษโปร",
+    "description": "English learning เคล็ดลับs for self-improvement",
+    "generate": "แชร์ a practical English learning เคล็ดลับ",
+    "icon": "🔤",
+    "color": "#42A5F5",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด English เคล็ดลับs...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for English ความรู้",
+    "posterType": "english",
+    "slogan": "English is a global language",
+    "aiTags": [
+      "English",
+      "learning"
+    ]
+  },
+  {
+    "id": "programming",
+    "name": "ที่ปรึกษาโค้ด",
+    "description": "Programming เคล็ดลับs for technical growth",
+    "generate": "Introduce an interesting programming concept",
+    "icon": "💻",
+    "color": "#26A69A",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด code เคล็ดลับs...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for programming skills",
+    "posterType": "programming",
+    "slogan": "โค้ด changes the world",
+    "aiTags": [
+      "programming",
+      "coding"
+    ]
+  },
+  {
+    "id": "photography",
+    "name": "ปรมาจารย์ภาพถ่าย",
+    "description": "Photography เคล็ดลับs to capture beautiful moments",
+    "generate": "แชร์ a practical photography เคล็ดลับ",
+    "icon": "📷",
+    "color": "#EC407A",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด photography เคล็ดลับs...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for photography skills",
+    "posterType": "photography",
+    "slogan": "Capture beauty through the lens",
+    "aiTags": [
+      "photography",
+      "เคล็ดลับ"
+    ]
+  },
+  {
+    "id": "beauty",
+    "name": "กูรูความงาม",
+    "description": "Skincare and beauty เคล็ดลับs for a radiant glow",
+    "generate": "แชร์ a practical beauty and skincare เคล็ดลับ",
+    "icon": "💄",
+    "color": "#EF5350",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด beauty ความรู้...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for beauty เคล็ดลับs",
+    "posterType": "beauty",
+    "slogan": "ความงาม is in the details",
+    "aiTags": [
+      "ความงาม",
+      "skincare"
+    ]
+  },
+  {
+    "id": "investment",
+    "name": "ที่ปรึกษาการลงทุน",
+    "description": "การลงทุน ความรู้ for wealth growth",
+    "generate": "แชร์ an investment ความรู้ เคล็ดลับ",
+    "icon": "📈",
+    "color": "#66BB6A",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด investment ความรู้...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for investment ข้อมูลเชิงลึกs",
+    "posterType": "investment",
+    "slogan": "Steady investing, lasting wealth",
+    "aiTags": [
+      "การลงทุน",
+      "ความมั่งคั่ง"
+    ]
+  },
+  {
+    "id": "fishing",
+    "name": "ตกปลาโปร",
+    "description": "Fishing เคล็ดลับs for endless enjoyment",
+    "generate": "แชร์ a fishing เคล็ดลับ or ความรู้",
+    "icon": "🎣",
+    "color": "#26C6DA",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด fishing เคล็ดลับs...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for fishing ความรู้",
+    "posterType": "fishing",
+    "slogan": "Fishing is a way of life",
+    "aiTags": [
+      "fishing",
+      "เคล็ดลับ"
+    ]
+  },
+  {
+    "id": "fitness",
+    "name": "โค้ชฟิตเนส",
+    "description": "Fitness guidance for a stronger body",
+    "generate": "แชร์ a practical fitness เคล็ดลับ",
+    "icon": "💪",
+    "color": "#AB47BC",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด fitness ความรู้...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for fitness ความรู้",
+    "posterType": "fitness",
+    "slogan": "ชีวิต is movement",
+    "aiTags": [
+      "fitness",
+      "exercise"
+    ]
+  },
+  {
+    "id": "pet",
+    "name": "ผู้เชี่ยวชาญสัตว์เลี้ยง",
+    "description": "Pet care เคล็ดลับs with loving companionship",
+    "generate": "แชร์ a pet care เคล็ดลับ",
+    "icon": "🐾",
+    "color": "#8D6E63",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด pet ความรู้...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for pet care เคล็ดลับs",
+    "posterType": "pet",
+    "slogan": "Pets are our best friends",
+    "aiTags": [
+      "pets",
+      "care"
+    ]
+  },
+  {
+    "id": "fashion",
+    "name": "ไอคอนแฟชั่น",
+    "description": "แฟชั่น เคล็ดลับs to express your style",
+    "generate": "แชร์ a fashion and styling เคล็ดลับ",
+    "icon": "👗",
+    "color": "#78909C",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด fashion news...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for fashion ข้อมูลเชิงลึกs",
+    "posterType": "fashion",
+    "slogan": "แฟชั่น is what you buy, style is what you do with it",
+    "aiTags": [
+      "แฟชั่น",
+      "trends"
+    ]
+  },
+  {
+    "id": "outfit",
+    "name": "คู่มือสไตล์",
+    "description": "รายวัน outfit recommendations",
+    "generate": "แชร์ an outfit recommendation",
+    "icon": "👔",
+    "color": "#5C6BC0",
+    "refreshText": "ลุคใหม่",
+    "loadingText": "กำลังโหลด style guide...",
+    "placeholderText": "แตะ \"ลุคใหม่\" for style เคล็ดลับs",
+    "posterType": "outfit",
+    "slogan": "Dress with style, live with flair",
+    "aiTags": [
+      "outfit",
+      "styling"
+    ]
+  },
+  {
+    "id": "decoration",
+    "name": "ตกแต่งบ้าน",
+    "description": "บ้าน decoration เคล็ดลับs to beautify your space",
+    "generate": "แชร์ a home decoration เคล็ดลับ",
+    "icon": "🏠",
+    "color": "#FF7043",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด decor ความรู้...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for decoration เคล็ดลับs",
+    "posterType": "decoration",
+    "slogan": "Make your home warm and welcoming",
+    "aiTags": [
+      "decoration",
+      "บ้าน"
+    ]
+  },
+  {
+    "id": "glassFiber",
+    "name": "ผู้เชี่ยวชาญไฟเบอร์กลาส",
+    "description": "Fiberglass materials at the cutting edge",
+    "generate": "แชร์ fiberglass-related ความรู้",
+    "icon": "🧵",
+    "color": "#7E57C2",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด fiberglass ความรู้...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for fiberglass expertise",
+    "posterType": "glassFiber",
+    "slogan": "Professional materials, professional quality",
+    "aiTags": [
+      "fiberglass",
+      "materials"
+    ]
+  },
+  {
+    "id": "resin",
+    "name": "ผู้เชี่ยวชาญเรซิน",
+    "description": "Resin craft with endless creativity",
+    "generate": "แชร์ a resin craft เคล็ดลับ",
+    "icon": "🧪",
+    "color": "#42A5F5",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด resin ความรู้...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for resin ความรู้",
+    "posterType": "resin",
+    "slogan": "Materials science, limitless applications",
+    "aiTags": [
+      "resin",
+      "chemical"
+    ]
+  },
+  {
+    "id": "tax",
+    "name": "ที่ปรึกษาภาษี",
+    "description": "Tax planning for compliance and savings",
+    "generate": "แชร์ a tax planning เคล็ดลับ",
+    "icon": "📋",
+    "color": "#26A69A",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด tax ความรู้...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for tax ความรู้",
+    "posterType": "tax",
+    "slogan": "Smart tax planning, compliant living",
+    "aiTags": [
+      "tax",
+      "การเงิน"
+    ]
+  },
+  {
+    "id": "law",
+    "name": "ที่ปรึกษากฎหมาย",
+    "description": "Legal ความรู้ to know and protect your rights",
+    "generate": "แชร์ a practical legal เคล็ดลับ",
+    "icon": "⚖️",
+    "color": "#EC407A",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด legal ความรู้...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for legal ความรู้",
+    "posterType": "law",
+    "slogan": "Know the law, protect yourself",
+    "aiTags": [
+      "law",
+      "rights"
+    ]
+  },
+  {
+    "id": "official",
+    "name": "อาชีพโปร",
+    "description": "Workplace ปัญญา for career success",
+    "generate": "แชร์ a workplace ข้อมูลเชิงลึก",
+    "icon": "🎩",
+    "color": "#EF5350",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด career ความรู้...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for career เคล็ดลับs",
+    "posterType": "official",
+    "slogan": "The workplace is a battlefield, win with ปัญญา",
+    "aiTags": [
+      "อาชีพ",
+      "interpersonal"
+    ]
+  },
+  {
+    "id": "handling",
+    "name": "ทักษะชีวิต",
+    "description": "Practical ปัญญา for handling life's situations",
+    "generate": "แชร์ a practical life เคล็ดลับ",
+    "icon": "💎",
+    "color": "#66BB6A",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด life ปัญญา...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for life ปัญญา",
+    "posterType": "handling",
+    "slogan": "Understanding the world is true ปัญญา",
+    "aiTags": [
+      "ปัญญา",
+      "EQ"
+    ]
+  },
+  {
+    "id": "floral",
+    "name": "ศิลปินดอกไม้",
+    "description": "Floral art เคล็ดลับs for a fragrant life",
+    "generate": "แชร์ a floral care เคล็ดลับ",
+    "icon": "💐",
+    "color": "#26C6DA",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังโหลด floral ความรู้...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for floral art เคล็ดลับs",
+    "posterType": "floral",
+    "slogan": "Flowers speak a language of their own",
+    "aiTags": [
+      "floral",
+      "flower arrangement"
+    ]
+  },
+  {
+    "id": "history",
+    "name": "กระจกประวัติศาสตร์",
+    "description": "Historical stories to learn from the past",
+    "generate": "แชร์ an interesting historical story",
+    "icon": "📚",
+    "color": "#AB47BC",
+    "refreshText": "เรื่องราวใหม่",
+    "loadingText": "กำลังโหลด historical tales...",
+    "placeholderText": "แตะ \"เรื่องราวใหม่\" for historical ความรู้",
+    "posterType": "history",
+    "slogan": "Learn from history to see the future",
+    "aiTags": [
+      "ประวัติศาสตร์",
+      "stories"
+    ]
+  },
+  {
+    "id": "military",
+    "name": "จับตาการทหาร",
+    "description": "Military ข้อมูลเชิงลึกs for strategic thinking",
+    "generate": "แชร์ a military ข้อมูลเชิงลึก",
+    "icon": "🎖️",
+    "color": "#8D6E63",
+    "refreshText": "ข้อมูลเชิงลึกใหม่",
+    "loadingText": "กำลังโหลด military ความรู้...",
+    "placeholderText": "แตะ \"ข้อมูลเชิงลึกใหม่\" for military ความรู้",
+    "posterType": "military",
+    "slogan": "Know yourself and your opponent, win every battle",
+    "aiTags": [
+      "military",
+      "กลยุทธ์"
+    ]
+  },
+  {
+    "id": "stock",
+    "name": "สัญญาณหุ้น",
+    "description": "Stock market ข้อมูลเชิงลึกs for informed investing",
+    "generate": "แชร์ a stock market วิเคราะห์",
+    "icon": "📈",
+    "color": "#1E88E5",
+    "refreshText": "ข้อมูลเชิงลึกใหม่",
+    "loadingText": "Analyst is reviewing the market...",
+    "placeholderText": "แตะ \"ข้อมูลเชิงลึกใหม่\" for investment ความรู้",
+    "posterType": "stock",
+    "slogan": "Rational investing, steady growth",
+    "aiTags": [
+      "stocks",
+      "futures"
+    ]
+  },
+  {
+    "id": "economics",
+    "name": "มุมมองเศรษฐกิจ",
+    "description": "Economic observations to understand trends",
+    "generate": "แชร์ an economic observation",
+    "icon": "💰",
+    "color": "#00897B",
+    "refreshText": "ข้อมูลเชิงลึกใหม่",
+    "loadingText": "Economist is analyzing...",
+    "placeholderText": "แตะ \"ข้อมูลเชิงลึกใหม่\" for economic ความรู้",
+    "posterType": "economics",
+    "slogan": "Understand the economy, grasp the trends",
+    "aiTags": [
+      "economics",
+      "วิเคราะห์"
+    ]
+  },
+  {
+    "id": "business",
+    "name": "ปัญญาธุรกิจ",
+    "description": "ธุรกิจ ข้อมูลเชิงลึกs to seize opportunities",
+    "generate": "แชร์ a business ข้อมูลเชิงลึก",
+    "icon": "💼",
+    "color": "#6D4C41",
+    "refreshText": "ข้อมูลเชิงลึกใหม่",
+    "loadingText": "ธุรกิจ mentor is advising...",
+    "placeholderText": "แตะ \"ข้อมูลเชิงลึกใหม่\" for business ปัญญา",
+    "posterType": "business",
+    "slogan": "ธุรกิจ is about people, win with vision",
+    "aiTags": [
+      "ธุรกิจ",
+      "management"
+    ]
+  },
+  {
+    "id": "news",
+    "name": "พรมแดนข่าวสาร",
+    "description": "รายวัน news to stay informed",
+    "generate": "สร้าง a daily news digest",
+    "icon": "📰",
+    "color": "#D32F2F",
+    "refreshText": "อัปเดตใหม่",
+    "loadingText": "Media expert is briefing you...",
+    "placeholderText": "แตะ \"อัปเดตใหม่\" for news วิเคราะห์",
+    "posterType": "news",
+    "slogan": "Information is king, ข้อมูลเชิงลึก is power",
+    "aiTags": [
+      "ข่าว",
+      "headlines"
+    ]
+  },
+  {
+    "id": "wisdomBag",
+    "name": "ถุงปัญญา",
+    "description": "ปัญญา nuggets for everyday life",
+    "generate": "แชร์ a ปัญญา nugget",
+    "icon": "🎁",
+    "color": "#FFA000",
+    "refreshText": "อัญมณีใหม่",
+    "loadingText": "กำลังสร้าง ปัญญา...",
+    "placeholderText": "แตะ \"อัญมณีใหม่\" for a ปัญญา nugget",
+    "posterType": "wisdomBag",
+    "slogan": "Small ปัญญา, big life",
+    "aiTags": [
+      "ปัญญา",
+      "life tips"
+    ]
+  },
+  {
+    "id": "robotAi",
+    "name": "บอท AI",
+    "description": "ศิลปะificial intelligence and future technology",
+    "generate": "แชร์ a robotics or AI ข้อมูลเชิงลึก",
+    "icon": "🤖",
+    "color": "#7C4DFF",
+    "refreshText": "ข้อมูลเชิงลึกใหม่",
+    "loadingText": "AI is thinking...",
+    "placeholderText": "แตะ \"ข้อมูลเชิงลึกใหม่\" for AI ความรู้",
+    "posterType": "robotAi",
+    "slogan": "The intelligent future is in your hands",
+    "aiTags": [
+      "AI",
+      "robotics"
+    ]
+  },
+  {
+    "id": "americanExpert",
+    "name": "ผู้รู้จักอเมริกา",
+    "description": "American culture in depth",
+    "generate": "แชร์ a fact about America",
+    "icon": "🗽",
+    "color": "#1565C0",
+    "refreshText": "ข้อเท็จจริงใหม่",
+    "loadingText": "กำลังสำรวจ America...",
+    "placeholderText": "แตะ \"ข้อเท็จจริงใหม่\" to learn about America",
+    "posterType": "americanExpert",
+    "slogan": "Understand America, see the world",
+    "aiTags": [
+      "America",
+      "culture"
+    ]
+  },
+  {
+    "id": "apple",
+    "name": "ห้องเรียน Apple",
+    "description": "ความรู้ as fruitful as an apple a day",
+    "generate": "แชร์ an interesting ความรู้ point",
+    "icon": "🍎",
+    "color": "#E53935",
+    "refreshText": "บทเรียนใหม่",
+    "loadingText": "Class is in session...",
+    "placeholderText": "แตะ \"บทเรียนใหม่\" for fresh ความรู้",
+    "posterType": "apple",
+    "slogan": "A little progress every day",
+    "aiTags": [
+      "ความรู้",
+      "learning"
+    ]
+  },
+  {
+    "id": "growth",
+    "name": "ผู้เชี่ยวชาญการเติบโต",
+    "description": "แบรนด์ growth strategies and market ข้อมูลเชิงลึกs",
+    "generate": "แชร์ a brand growth strategy",
+    "icon": "📈",
+    "color": "#00C853",
+    "refreshText": "กลยุทธ์ใหม่",
+    "loadingText": "กำลังสร้าง growth strategies...",
+    "placeholderText": "แตะ \"กลยุทธ์ใหม่\" for growth ความรู้",
+    "posterType": "growth",
+    "slogan": "การเติบโต is the lifeline of business",
+    "aiTags": [
+      "การเติบโต",
+      "marketing"
+    ]
+  },
+  {
+    "id": "uiDesigner",
+    "name": "นักออกแบบ UI",
+    "description": "UI design for visual aesthetics",
+    "generate": "แชร์ a UI design เคล็ดลับ",
+    "icon": "🎨",
+    "color": "#FF4081",
+    "refreshText": "ไอเดียใหม่",
+    "loadingText": "กำลังสร้าง design inspiration...",
+    "placeholderText": "แตะ \"ไอเดียใหม่\" for design inspiration",
+    "posterType": "uiDesigner",
+    "slogan": "การออกแบบ makes the world a better place",
+    "aiTags": [
+      "การออกแบบ",
+      "UI"
+    ]
+  },
+  {
+    "id": "futures",
+    "name": "ผู้เชี่ยวชาญฟิวเจอร์ส",
+    "description": "Commodity futures and professional วิเคราะห์",
+    "generate": "แชร์ a futures trading ข้อมูลเชิงลึก",
+    "icon": "📊",
+    "color": "#455A64",
+    "refreshText": "บทวิเคราะห์ใหม่",
+    "loadingText": "กำลังวิเคราะห์ futures...",
+    "placeholderText": "แตะ \"บทวิเคราะห์ใหม่\" for futures ความรู้",
+    "posterType": "futures",
+    "slogan": "Understand commodities, manage risk",
+    "aiTags": [
+      "futures",
+      "commodities"
+    ]
+  },
+  {
+    "id": "freud",
+    "name": "การศึกษาฟรอยด์",
+    "description": "Freudian psychology concepts explored",
+    "generate": "แชร์ a Freudian psychology concept",
+    "icon": "🧠",
+    "color": "#5E35B1",
+    "refreshText": "แนวคิดใหม่",
+    "loadingText": "Psychoanalyzing...",
+    "placeholderText": "แตะ \"แนวคิดใหม่\" for psychology ข้อมูลเชิงลึกs",
+    "posterType": "freud",
+    "slogan": "Explore the subconscious, decode the mind",
+    "aiTags": [
+      "psychology",
+      "psychoanalysis"
+    ]
+  },
+  {
+    "id": "fashionBrand",
+    "name": "แบรนด์หรู",
+    "description": "โลก fashion brands at the frontier of style",
+    "generate": "แชร์ a world fashion brand story",
+    "icon": "👛",
+    "color": "#880E4F",
+    "refreshText": "เรื่องราวใหม่",
+    "loadingText": "กำลังโหลด brand stories...",
+    "placeholderText": "แตะ \"เรื่องราวใหม่\" to discover luxury brands",
+    "posterType": "fashionBrand",
+    "slogan": "Taste the classics, know the trends",
+    "aiTags": [
+      "brands",
+      "แฟชั่น"
+    ]
+  },
+  {
+    "id": "xinStudy",
+    "name": "ปรมาจารย์ซินเซวีย",
+    "description": "Wang Yangming's philosophy of mind",
+    "generate": "แชร์ a Xinxue philosophy ข้อมูลเชิงลึก",
+    "icon": "💭",
+    "color": "#00695C",
+    "refreshText": "ข้อมูลเชิงลึกใหม่",
+    "loadingText": "กำลังตีความ Xinxue ปัญญา...",
+    "placeholderText": "แตะ \"ข้อมูลเชิงลึกใหม่\" for Xinxue ปัญญา",
+    "posterType": "xinStudy",
+    "slogan": "Unity of knowing and doing, attain true conscience",
+    "aiTags": [
+      "Xinxue",
+      "Wang Yangming"
+    ]
+  },
+  {
+    "id": "liStudy",
+    "name": "ปรมาจารย์หลี่เซวีย",
+    "description": "Zhu Xi's Neo-Confucian thought",
+    "generate": "แชร์ a Lixue philosophy ข้อมูลเชิงลึก",
+    "icon": "📖",
+    "color": "#4A148C",
+    "refreshText": "ข้อมูลเชิงลึกใหม่",
+    "loadingText": "กำลังตีความ Lixue ปัญญา...",
+    "placeholderText": "แตะ \"ข้อมูลเชิงลึกใหม่\" for Lixue ปัญญา",
+    "posterType": "liStudy",
+    "slogan": "Investigate things, attain ความรู้; rectify the mind, make the will sincere",
+    "aiTags": [
+      "Lixue",
+      "Zhu Xi"
+    ]
+  },
+  {
+    "id": "anthropologist",
+    "name": "นักมานุษยวิทยา",
+    "description": "Anthropological perspectives on the world",
+    "generate": "แชร์ an anthropology ข้อมูลเชิงลึก",
+    "icon": "🏛️",
+    "color": "#8D6E63",
+    "refreshText": "ข้อมูลเชิงลึกใหม่",
+    "loadingText": "กำลังสำรวจ humanity...",
+    "placeholderText": "แตะ \"ข้อมูลเชิงลึกใหม่\" to explore civilizations",
+    "posterType": "anthropologist",
+    "slogan": "Understand humanity, know yourself",
+    "aiTags": [
+      "anthropology",
+      "culture"
+    ]
+  },
+  {
+    "id": "geographer",
+    "name": "นักภูมิศาสตร์",
+    "description": "Geographic ความรู้ to explore the world",
+    "generate": "แชร์ a geographic fact",
+    "icon": "🌍",
+    "color": "#26A69A",
+    "refreshText": "ข้อเท็จจริงใหม่",
+    "loadingText": "กำลังสำรวจ geography...",
+    "placeholderText": "แตะ \"ข้อเท็จจริงใหม่\" to explore Earth's wonders",
+    "posterType": "geographer",
+    "slogan": "Read the Earth, see the world clearly",
+    "aiTags": [
+      "geography",
+      "landforms"
+    ]
+  },
+  {
+    "id": "historian",
+    "name": "นักประวัติศาสตร์",
+    "description": "Historical research and deep interpretation",
+    "generate": "แชร์ a historical research perspective",
+    "icon": "📜",
+    "color": "#7E57C2",
+    "refreshText": "ข้อมูลเชิงลึกใหม่",
+    "loadingText": "กำลังสำรวจ the river of history...",
+    "placeholderText": "แตะ \"ข้อมูลเชิงลึกใหม่\" to touch history's pulse",
+    "posterType": "historian",
+    "slogan": "Learn from history to illuminate the future",
+    "aiTags": [
+      "ประวัติศาสตร์",
+      "research"
+    ]
+  },
+  {
+    "id": "narratologist",
+    "name": "นักวรรณกรรมเล่าเรื่อง",
+    "description": "The art of narrative and the power of stories",
+    "generate": "แชร์ a narratology concept",
+    "icon": "📖",
+    "color": "#EC407A",
+    "refreshText": "แนวคิดใหม่",
+    "loadingText": "กำลังตีความ narrative art...",
+    "placeholderText": "แตะ \"แนวคิดใหม่\" to grasp story magic",
+    "posterType": "narratologist",
+    "slogan": "The way of stories, the art of narrative",
+    "aiTags": [
+      "narrative",
+      "storytelling"
+    ]
+  },
+  {
+    "id": "psychologist",
+    "name": "นักจิตวิทยา",
+    "description": "Deep psychological research and ข้อมูลเชิงลึกs",
+    "generate": "แชร์ a psychology research finding",
+    "icon": "🧠",
+    "color": "#5C6BC0",
+    "refreshText": "การค้นพบใหม่",
+    "loadingText": "กำลังสำรวจ psychological mysteries...",
+    "placeholderText": "แตะ \"การค้นพบใหม่\" to decode the mind",
+    "posterType": "psychologist",
+    "slogan": "Illuminate the mind, know yourself",
+    "aiTags": [
+      "psychology",
+      "cognition"
+    ]
+  },
+  {
+    "id": "softwareArchitect",
+    "name": "สถาปนิกซอฟต์แวร์",
+    "description": "Software architecture and system design",
+    "generate": "แชร์ a software architecture ข้อมูลเชิงลึก",
+    "icon": "🏗️",
+    "color": "#1565C0",
+    "refreshText": "ข้อมูลเชิงลึกใหม่",
+    "loadingText": "กำลังตีความ architecture ความรู้...",
+    "placeholderText": "แตะ \"ข้อมูลเชิงลึกใหม่\" for architecture ความรู้",
+    "posterType": "softwareArchitect",
+    "slogan": "System design, the way of architecture",
+    "aiTags": [
+      "architecture",
+      "การออกแบบ"
+    ]
+  },
+  {
+    "id": "solidityEngineer",
+    "name": "วิศวกร Solidity",
+    "description": "Smart contracts and blockchain development",
+    "generate": "แชร์ a smart contract ข้อมูลเชิงลึก",
+    "icon": "⛓️",
+    "color": "#2E7D32",
+    "refreshText": "ข้อมูลเชิงลึกใหม่",
+    "loadingText": "กำลังตีความ contract ความรู้...",
+    "placeholderText": "แตะ \"ข้อมูลเชิงลึกใหม่\" for contract ความรู้",
+    "posterType": "solidityEngineer",
+    "slogan": "Smart contracts, the way of the chain",
+    "aiTags": [
+      "blockchain",
+      "smart contracts"
+    ]
+  },
+  {
+    "id": "xiaohongshuExpert",
+    "name": "ผู้เชี่ยวชาญ RED",
+    "description": "Xiaohongshu operations and content seeding เคล็ดลับs",
+    "generate": "แชร์ a Xiaohongshu operations เคล็ดลับ",
+    "icon": "📕",
+    "color": "#E91E63",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังตีความ operations เคล็ดลับs...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for operations เคล็ดลับs",
+    "posterType": "xiaohongshuExpert",
+    "slogan": "Traffic code, content is king",
+    "aiTags": [
+      "operations",
+      "content marketing"
+    ]
+  },
+  {
+    "id": "seoExpert",
+    "name": "ผู้เชี่ยวชาญ SEO",
+    "description": "Search engine optimization to reach more people",
+    "generate": "สร้าง an SEO optimization เคล็ดลับ",
+    "icon": "🔍",
+    "color": "#FF5722",
+    "refreshText": "เคล็ดลับใหม่",
+    "loadingText": "กำลังตีความ SEO เคล็ดลับs...",
+    "placeholderText": "แตะ \"เคล็ดลับใหม่\" for SEO เคล็ดลับs",
+    "posterType": "seoExpert",
+    "slogan": "Optimize for search, boost your rankings",
+    "aiTags": [
+      "SEO",
+      "search"
+    ]
+  },
+  {
+    "id": "idiom",
+    "name": "สุภาษิตจีน",
+    "description": "Chinese folk sayings and traditional ปัญญา",
+    "generate": "สร้าง a Chinese idiom or folk proverb",
+    "icon": "📝",
+    "color": "#795548",
+    "refreshText": "สุภาษิตใหม่",
+    "loadingText": "กำลังตีความ folk ปัญญา...",
+    "placeholderText": "แตะ \"สุภาษิตใหม่\" for a folk idiom or proverb",
+    "posterType": "idiom",
+    "slogan": "Folk ปัญญา passed down through the ages",
+    "aiTags": [
+      "idioms",
+      "proverbs"
+    ]
+  }
+]

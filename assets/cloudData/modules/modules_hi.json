@@ -1,0 +1,1022 @@
+[
+  {
+    "id": "quote",
+    "name": "कालजयी उद्धरण",
+    "description": "Words of ज्ञान to light up your day",
+    "generate": "उत्पन्न करें a classic उद्धरण with author and source",
+    "icon": "📜",
+    "color": "#5C6BC0",
+    "refreshText": "नया उद्धरण",
+    "loadingText": "ज्ञान आ रहा है...",
+    "placeholderText": "टैप करें \"नया उद्धरण\" for today's inspiration",
+    "posterType": "quote",
+    "slogan": "ज्ञान from great minds",
+    "aiTags": [
+      "quotes",
+      "ज्ञान"
+    ]
+  },
+  {
+    "id": "joke",
+    "name": "दैनिक चुटकुले",
+    "description": "Lighten up your day with laughter",
+    "generate": "उत्पन्न करें a short and funny चुटकुला",
+    "icon": "😄",
+    "color": "#FF7043",
+    "refreshText": "नया चुटकुला",
+    "loadingText": "A laugh आ रहा है...",
+    "placeholderText": "टैप करें \"नया चुटकुला\" for a good laugh",
+    "posterType": "joke",
+    "slogan": "A laugh a day keeps the blues away",
+    "aiTags": [
+      "jokes",
+      "humor"
+    ]
+  },
+  {
+    "id": "psychology",
+    "name": "मन की बुद्धि",
+    "description": "Psychology अंतर्दृष्टिs to know yourself and others",
+    "generate": "उत्पन्न करें a practical psychology सुझाव",
+    "icon": "🧠",
+    "color": "#7E57C2",
+    "refreshText": "नई अंतर्दृष्टि",
+    "loadingText": "विश्लेषण कर रहा है...",
+    "placeholderText": "टैप करें \"नई अंतर्दृष्टि\" for psychology ज्ञान",
+    "posterType": "psychology",
+    "slogan": "Understand the mind, meet a better self",
+    "aiTags": [
+      "psychology",
+      "emotions"
+    ]
+  },
+  {
+    "id": "finance",
+    "name": "वित्त खिड़की",
+    "description": "निवेश and wealth management अंतर्दृष्टिs",
+    "generate": "उत्पन्न करें a practical financial literacy सुझाव",
+    "icon": "💹",
+    "color": "#26A69A",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है financial अंतर्दृष्टिs...",
+    "placeholderText": "टैप करें \"नई सलाह\" for financial news",
+    "posterType": "finance",
+    "slogan": "See the trends in wealth",
+    "aiTags": [
+      "वित्त",
+      "economy"
+    ]
+  },
+  {
+    "id": "love",
+    "name": "मीठे पल",
+    "description": "Romantic उद्धरणs to warm your heart",
+    "generate": "उत्पन्न करें a romantic love उद्धरण",
+    "icon": "💕",
+    "color": "#EC407A",
+    "refreshText": "नई पंक्ति",
+    "loadingText": "रच रहा है sweet words...",
+    "placeholderText": "टैप करें \"नई पंक्ति\" for a romantic उद्धरण",
+    "posterType": "love",
+    "slogan": "प्रेम speaks louder than words",
+    "aiTags": [
+      "प्रेम",
+      "romance"
+    ]
+  },
+  {
+    "id": "movie",
+    "name": "फिल्मी दुनिया",
+    "description": "Great movies you shouldn't miss",
+    "generate": "उत्पन्न करें a worthwhile movie recommendation",
+    "icon": "🎬",
+    "color": "#EF5350",
+    "refreshText": "नई फिल्म",
+    "loadingText": "खोज रहा है great films...",
+    "placeholderText": "टैप करें \"नई फिल्म\" for a movie recommendation",
+    "posterType": "movie",
+    "slogan": "जीवन on screen, emotions in every frame",
+    "aiTags": [
+      "movies",
+      "reviews"
+    ]
+  },
+  {
+    "id": "music",
+    "name": "संगीत का समय",
+    "description": "Classic songs that touch the soul",
+    "generate": "Recommend a classic song",
+    "icon": "🎵",
+    "color": "#AB47BC",
+    "refreshText": "नया गाना",
+    "loadingText": "चला रहा है a great track...",
+    "placeholderText": "टैप करें \"नया गाना\" for music recommendations",
+    "posterType": "music",
+    "slogan": "संगीत is food for the soul",
+    "aiTags": [
+      "संगीत",
+      "playlist"
+    ]
+  },
+  {
+    "id": "tech",
+    "name": "तकनीकी सीमांत",
+    "description": "तकनीकnology trends shaping the future",
+    "generate": "साझा करें a cutting-edge tech update",
+    "icon": "🚀",
+    "color": "#42A5F5",
+    "refreshText": "नया अपडेट",
+    "loadingText": "लोड हो रहा है tech news...",
+    "placeholderText": "टैप करें \"नया अपडेट\" for tech अंतर्दृष्टिs",
+    "posterType": "tech",
+    "slogan": "तकनीकnology changes the world",
+    "aiTags": [
+      "तकनीक",
+      "innovation"
+    ]
+  },
+  {
+    "id": "tcm",
+    "name": "टीसीएम वेलनेस",
+    "description": "Traditional Chinese Medicine for healthy living",
+    "generate": "साझा करें a TCM wellness सुझाव",
+    "icon": "🌿",
+    "color": "#66BB6A",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है wellness ज्ञान...",
+    "placeholderText": "टैप करें \"नई सलाह\" for TCM ज्ञान",
+    "posterType": "tcm",
+    "slogan": "Ancient ज्ञान for modern health",
+    "aiTags": [
+      "TCM",
+      "wellness"
+    ]
+  },
+  {
+    "id": "travel",
+    "name": "यात्रा डायरी",
+    "description": "यात्रा recommendations to explore the world",
+    "generate": "Recommend a travel destination",
+    "icon": "✈️",
+    "color": "#26C6DA",
+    "refreshText": "नई जगह",
+    "loadingText": "योजना बना रहा है your next trip...",
+    "placeholderText": "टैप करें \"नई जगह\" for travel inspiration",
+    "posterType": "travel",
+    "slogan": "The world is vast, go explore",
+    "aiTags": [
+      "यात्रा",
+      "destinations"
+    ]
+  },
+  {
+    "id": "fortune",
+    "name": "दैनिक भाग्य",
+    "description": "दैनिक fortune for good luck",
+    "generate": "उत्पन्न करें today's fortune विश्लेषण",
+    "icon": "☯️",
+    "color": "#8D6E63",
+    "refreshText": "फिर से डालें",
+    "loadingText": "पढ़ रहा है the signs...",
+    "placeholderText": "टैप करें \"फिर से डालें\" for today's fortune",
+    "posterType": "fortune",
+    "slogan": "Know your path, follow the flow",
+    "aiTags": [
+      "I Ching",
+      "fortune"
+    ]
+  },
+  {
+    "id": "literature",
+    "name": "साहित्यिक भवन",
+    "description": "Literary masterpieces to savor",
+    "generate": "साझा करें a literary excerpt with विश्लेषण",
+    "icon": "📚",
+    "color": "#78909C",
+    "refreshText": "नई रचना",
+    "loadingText": "लोड हो रहा है literary works...",
+    "placeholderText": "टैप करें \"नई रचना\" for literature recommendations",
+    "posterType": "literature",
+    "slogan": "पढ़ रहा है refines the soul",
+    "aiTags": [
+      "literature",
+      "classics"
+    ]
+  },
+  {
+    "id": "foreignTrade",
+    "name": "व्यापार सहायक",
+    "description": "Foreign trade अंतर्दृष्टिs and opportunities",
+    "generate": "साझा करें a foreign trade अंतर्दृष्टि",
+    "icon": "🌐",
+    "color": "#5C6BC0",
+    "refreshText": "नई अंतर्दृष्टि",
+    "loadingText": "लोड हो रहा है trade ज्ञान...",
+    "placeholderText": "टैप करें \"नई अंतर्दृष्टि\" for trade ज्ञान",
+    "posterType": "foreignTrade",
+    "slogan": "Trade connects the world",
+    "aiTags": [
+      "trade",
+      "cross-border"
+    ]
+  },
+  {
+    "id": "ecommerce",
+    "name": "ई-कॉमर्स संचालन",
+    "description": "E-commerce trends and strategies",
+    "generate": "साझा करें an e-commerce operations सुझाव",
+    "icon": "🛒",
+    "color": "#FF7043",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है operations सुझावs...",
+    "placeholderText": "टैप करें \"नई सलाह\" for e-commerce अंतर्दृष्टिs",
+    "posterType": "ecommerce",
+    "slogan": "Smart operations, worry-free sales",
+    "aiTags": [
+      "e-commerce",
+      "operations"
+    ]
+  },
+  {
+    "id": "math",
+    "name": "गणित विशेषज्ञ",
+    "description": "Fun math problems to sharpen your mind",
+    "generate": "साझा करें an interesting math fact",
+    "icon": "📐",
+    "color": "#7E57C2",
+    "refreshText": "नई समस्या",
+    "loadingText": "लोड हो रहा है math puzzles...",
+    "placeholderText": "टैप करें \"नई समस्या\" for math ज्ञान",
+    "posterType": "math",
+    "slogan": "Mathematics is the language of science",
+    "aiTags": [
+      "math",
+      "problem-solving"
+    ]
+  },
+  {
+    "id": "english",
+    "name": "अंग्रेजी प्रो",
+    "description": "English learning सुझावs for self-improvement",
+    "generate": "साझा करें a practical English learning सुझाव",
+    "icon": "🔤",
+    "color": "#42A5F5",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है English सुझावs...",
+    "placeholderText": "टैप करें \"नई सलाह\" for English ज्ञान",
+    "posterType": "english",
+    "slogan": "English is a global language",
+    "aiTags": [
+      "English",
+      "learning"
+    ]
+  },
+  {
+    "id": "programming",
+    "name": "कोड मेंटर",
+    "description": "Programming सुझावs for technical growth",
+    "generate": "Introduce an interesting programming concept",
+    "icon": "💻",
+    "color": "#26A69A",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है code सुझावs...",
+    "placeholderText": "टैप करें \"नई सलाह\" for programming skills",
+    "posterType": "programming",
+    "slogan": "कोड changes the world",
+    "aiTags": [
+      "programming",
+      "coding"
+    ]
+  },
+  {
+    "id": "photography",
+    "name": "फोटो मास्टर",
+    "description": "Photography सुझावs to capture beautiful moments",
+    "generate": "साझा करें a practical photography सुझाव",
+    "icon": "📷",
+    "color": "#EC407A",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है photography सुझावs...",
+    "placeholderText": "टैप करें \"नई सलाह\" for photography skills",
+    "posterType": "photography",
+    "slogan": "Capture beauty through the lens",
+    "aiTags": [
+      "photography",
+      "टिप्स"
+    ]
+  },
+  {
+    "id": "beauty",
+    "name": "सौंदर्य गुरु",
+    "description": "Skincare and beauty सुझावs for a radiant glow",
+    "generate": "साझा करें a practical beauty and skincare सुझाव",
+    "icon": "💄",
+    "color": "#EF5350",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है beauty ज्ञान...",
+    "placeholderText": "टैप करें \"नई सलाह\" for beauty सुझावs",
+    "posterType": "beauty",
+    "slogan": "सौंदर्य is in the details",
+    "aiTags": [
+      "सौंदर्य",
+      "skincare"
+    ]
+  },
+  {
+    "id": "investment",
+    "name": "निवेश सलाहकार",
+    "description": "निवेश ज्ञान for wealth growth",
+    "generate": "साझा करें an investment ज्ञान सुझाव",
+    "icon": "📈",
+    "color": "#66BB6A",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है investment ज्ञान...",
+    "placeholderText": "टैप करें \"नई सलाह\" for investment अंतर्दृष्टिs",
+    "posterType": "investment",
+    "slogan": "Steady investing, lasting wealth",
+    "aiTags": [
+      "निवेश",
+      "धन"
+    ]
+  },
+  {
+    "id": "fishing",
+    "name": "मछली पकड़ने के विशेषज्ञ",
+    "description": "Fishing सुझावs for endless enjoyment",
+    "generate": "साझा करें a fishing सुझाव or ज्ञान",
+    "icon": "🎣",
+    "color": "#26C6DA",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है fishing सुझावs...",
+    "placeholderText": "टैप करें \"नई सलाह\" for fishing ज्ञान",
+    "posterType": "fishing",
+    "slogan": "Fishing is a way of life",
+    "aiTags": [
+      "fishing",
+      "टिप्स"
+    ]
+  },
+  {
+    "id": "fitness",
+    "name": "फिटनेस कोच",
+    "description": "Fitness guidance for a stronger body",
+    "generate": "साझा करें a practical fitness सुझाव",
+    "icon": "💪",
+    "color": "#AB47BC",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है fitness ज्ञान...",
+    "placeholderText": "टैप करें \"नई सलाह\" for fitness ज्ञान",
+    "posterType": "fitness",
+    "slogan": "जीवन is movement",
+    "aiTags": [
+      "fitness",
+      "exercise"
+    ]
+  },
+  {
+    "id": "pet",
+    "name": "पालतू विशेषज्ञ",
+    "description": "Pet care सुझावs with loving companionship",
+    "generate": "साझा करें a pet care सुझाव",
+    "icon": "🐾",
+    "color": "#8D6E63",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है pet ज्ञान...",
+    "placeholderText": "टैप करें \"नई सलाह\" for pet care सुझावs",
+    "posterType": "pet",
+    "slogan": "Pets are our best friends",
+    "aiTags": [
+      "pets",
+      "care"
+    ]
+  },
+  {
+    "id": "fashion",
+    "name": "फैशन आइकन",
+    "description": "फैशन सुझावs to express your style",
+    "generate": "साझा करें a fashion and styling सुझाव",
+    "icon": "👗",
+    "color": "#78909C",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है fashion news...",
+    "placeholderText": "टैप करें \"नई सलाह\" for fashion अंतर्दृष्टिs",
+    "posterType": "fashion",
+    "slogan": "फैशन is what you buy, style is what you do with it",
+    "aiTags": [
+      "फैशन",
+      "trends"
+    ]
+  },
+  {
+    "id": "outfit",
+    "name": "स्टाइल गाइड",
+    "description": "दैनिक outfit recommendations",
+    "generate": "साझा करें an outfit recommendation",
+    "icon": "👔",
+    "color": "#5C6BC0",
+    "refreshText": "नया लुक",
+    "loadingText": "लोड हो रहा है style guide...",
+    "placeholderText": "टैप करें \"नया लुक\" for style सुझावs",
+    "posterType": "outfit",
+    "slogan": "Dress with style, live with flair",
+    "aiTags": [
+      "outfit",
+      "styling"
+    ]
+  },
+  {
+    "id": "decoration",
+    "name": "गृह सज्जा",
+    "description": "घर decoration सुझावs to beautify your space",
+    "generate": "साझा करें a home decoration सुझाव",
+    "icon": "🏠",
+    "color": "#FF7043",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है decor ज्ञान...",
+    "placeholderText": "टैप करें \"नई सलाह\" for decoration सुझावs",
+    "posterType": "decoration",
+    "slogan": "Make your home warm and welcoming",
+    "aiTags": [
+      "decoration",
+      "घर"
+    ]
+  },
+  {
+    "id": "glassFiber",
+    "name": "फाइबरग्लास विशेषज्ञ",
+    "description": "Fiberglass materials at the cutting edge",
+    "generate": "साझा करें fiberglass-related ज्ञान",
+    "icon": "🧵",
+    "color": "#7E57C2",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है fiberglass ज्ञान...",
+    "placeholderText": "टैप करें \"नई सलाह\" for fiberglass expertise",
+    "posterType": "glassFiber",
+    "slogan": "Professional materials, professional quality",
+    "aiTags": [
+      "fiberglass",
+      "materials"
+    ]
+  },
+  {
+    "id": "resin",
+    "name": "रेजिन विशेषज्ञ",
+    "description": "Resin craft with endless creativity",
+    "generate": "साझा करें a resin craft सुझाव",
+    "icon": "🧪",
+    "color": "#42A5F5",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है resin ज्ञान...",
+    "placeholderText": "टैप करें \"नई सलाह\" for resin ज्ञान",
+    "posterType": "resin",
+    "slogan": "Materials science, limitless applications",
+    "aiTags": [
+      "resin",
+      "chemical"
+    ]
+  },
+  {
+    "id": "tax",
+    "name": "कर सलाहकार",
+    "description": "Tax planning for compliance and savings",
+    "generate": "साझा करें a tax planning सुझाव",
+    "icon": "📋",
+    "color": "#26A69A",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है tax ज्ञान...",
+    "placeholderText": "टैप करें \"नई सलाह\" for tax ज्ञान",
+    "posterType": "tax",
+    "slogan": "Smart tax planning, compliant living",
+    "aiTags": [
+      "tax",
+      "वित्त"
+    ]
+  },
+  {
+    "id": "law",
+    "name": "कानूनी सलाहकार",
+    "description": "Legal ज्ञान to know and protect your rights",
+    "generate": "साझा करें a practical legal सुझाव",
+    "icon": "⚖️",
+    "color": "#EC407A",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है legal ज्ञान...",
+    "placeholderText": "टैप करें \"नई सलाह\" for legal ज्ञान",
+    "posterType": "law",
+    "slogan": "Know the law, protect yourself",
+    "aiTags": [
+      "law",
+      "rights"
+    ]
+  },
+  {
+    "id": "official",
+    "name": "करियर प्रो",
+    "description": "Workplace ज्ञान for career success",
+    "generate": "साझा करें a workplace अंतर्दृष्टि",
+    "icon": "🎩",
+    "color": "#EF5350",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है career ज्ञान...",
+    "placeholderText": "टैप करें \"नई सलाह\" for career सुझावs",
+    "posterType": "official",
+    "slogan": "The workplace is a battlefield, win with ज्ञान",
+    "aiTags": [
+      "करियर",
+      "interpersonal"
+    ]
+  },
+  {
+    "id": "handling",
+    "name": "जीवन कौशल",
+    "description": "Practical ज्ञान for handling life's situations",
+    "generate": "साझा करें a practical life सुझाव",
+    "icon": "💎",
+    "color": "#66BB6A",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है life ज्ञान...",
+    "placeholderText": "टैप करें \"नई सलाह\" for life ज्ञान",
+    "posterType": "handling",
+    "slogan": "Understanding the world is true ज्ञान",
+    "aiTags": [
+      "ज्ञान",
+      "EQ"
+    ]
+  },
+  {
+    "id": "floral",
+    "name": "पुष्प कलाकार",
+    "description": "Floral art सुझावs for a fragrant life",
+    "generate": "साझा करें a floral care सुझाव",
+    "icon": "💐",
+    "color": "#26C6DA",
+    "refreshText": "नई सलाह",
+    "loadingText": "लोड हो रहा है floral ज्ञान...",
+    "placeholderText": "टैप करें \"नई सलाह\" for floral art सुझावs",
+    "posterType": "floral",
+    "slogan": "Flowers speak a language of their own",
+    "aiTags": [
+      "floral",
+      "flower arrangement"
+    ]
+  },
+  {
+    "id": "history",
+    "name": "इतिहास दर्पण",
+    "description": "Historical stories to learn from the past",
+    "generate": "साझा करें an interesting historical story",
+    "icon": "📚",
+    "color": "#AB47BC",
+    "refreshText": "नई कहानी",
+    "loadingText": "लोड हो रहा है historical tales...",
+    "placeholderText": "टैप करें \"नई कहानी\" for historical ज्ञान",
+    "posterType": "history",
+    "slogan": "Learn from history to see the future",
+    "aiTags": [
+      "इतिहास",
+      "stories"
+    ]
+  },
+  {
+    "id": "military",
+    "name": "सैन्य निगरानी",
+    "description": "Military अंतर्दृष्टिs for strategic thinking",
+    "generate": "साझा करें a military अंतर्दृष्टि",
+    "icon": "🎖️",
+    "color": "#8D6E63",
+    "refreshText": "नई अंतर्दृष्टि",
+    "loadingText": "लोड हो रहा है military ज्ञान...",
+    "placeholderText": "टैप करें \"नई अंतर्दृष्टि\" for military ज्ञान",
+    "posterType": "military",
+    "slogan": "Know yourself and your opponent, win every battle",
+    "aiTags": [
+      "military",
+      "रणनीति"
+    ]
+  },
+  {
+    "id": "stock",
+    "name": "स्टॉक बीकन",
+    "description": "Stock market अंतर्दृष्टिs for informed investing",
+    "generate": "साझा करें a stock market विश्लेषण",
+    "icon": "📈",
+    "color": "#1E88E5",
+    "refreshText": "नई अंतर्दृष्टि",
+    "loadingText": "Analyst is reviewing the market...",
+    "placeholderText": "टैप करें \"नई अंतर्दृष्टि\" for investment ज्ञान",
+    "posterType": "stock",
+    "slogan": "Rational investing, steady growth",
+    "aiTags": [
+      "stocks",
+      "futures"
+    ]
+  },
+  {
+    "id": "economics",
+    "name": "आर्थिक दृष्टिकोण",
+    "description": "Economic observations to understand trends",
+    "generate": "साझा करें an economic observation",
+    "icon": "💰",
+    "color": "#00897B",
+    "refreshText": "नई अंतर्दृष्टि",
+    "loadingText": "Economist is analyzing...",
+    "placeholderText": "टैप करें \"नई अंतर्दृष्टि\" for economic ज्ञान",
+    "posterType": "economics",
+    "slogan": "Understand the economy, grasp the trends",
+    "aiTags": [
+      "economics",
+      "विश्लेषण"
+    ]
+  },
+  {
+    "id": "business",
+    "name": "व्यावसायिक ज्ञान",
+    "description": "व्यवसाय अंतर्दृष्टिs to seize opportunities",
+    "generate": "साझा करें a business अंतर्दृष्टि",
+    "icon": "💼",
+    "color": "#6D4C41",
+    "refreshText": "नई अंतर्दृष्टि",
+    "loadingText": "व्यवसाय mentor is advising...",
+    "placeholderText": "टैप करें \"नई अंतर्दृष्टि\" for business ज्ञान",
+    "posterType": "business",
+    "slogan": "व्यवसाय is about people, win with vision",
+    "aiTags": [
+      "व्यवसाय",
+      "management"
+    ]
+  },
+  {
+    "id": "news",
+    "name": "समाचार सीमांत",
+    "description": "दैनिक news to stay informed",
+    "generate": "उत्पन्न करें a daily news digest",
+    "icon": "📰",
+    "color": "#D32F2F",
+    "refreshText": "नया अपडेट",
+    "loadingText": "Media expert is briefing you...",
+    "placeholderText": "टैप करें \"नया अपडेट\" for news विश्लेषण",
+    "posterType": "news",
+    "slogan": "Information is king, अंतर्दृष्टि is power",
+    "aiTags": [
+      "समाचार",
+      "headlines"
+    ]
+  },
+  {
+    "id": "wisdomBag",
+    "name": "ज्ञान की थैली",
+    "description": "ज्ञान nuggets for everyday life",
+    "generate": "साझा करें a ज्ञान nugget",
+    "icon": "🎁",
+    "color": "#FFA000",
+    "refreshText": "नया रत्न",
+    "loadingText": "उत्पन्न हो रहा है ज्ञान...",
+    "placeholderText": "टैप करें \"नया रत्न\" for a ज्ञान nugget",
+    "posterType": "wisdomBag",
+    "slogan": "Small ज्ञान, big life",
+    "aiTags": [
+      "ज्ञान",
+      "life tips"
+    ]
+  },
+  {
+    "id": "robotAi",
+    "name": "एआई बॉट",
+    "description": "कलाificial intelligence and future technology",
+    "generate": "साझा करें a robotics or AI अंतर्दृष्टि",
+    "icon": "🤖",
+    "color": "#7C4DFF",
+    "refreshText": "नई अंतर्दृष्टि",
+    "loadingText": "AI is thinking...",
+    "placeholderText": "टैप करें \"नई अंतर्दृष्टि\" for AI ज्ञान",
+    "posterType": "robotAi",
+    "slogan": "The intelligent future is in your hands",
+    "aiTags": [
+      "AI",
+      "robotics"
+    ]
+  },
+  {
+    "id": "americanExpert",
+    "name": "अमेरिका विशेषज्ञ",
+    "description": "American culture in depth",
+    "generate": "साझा करें a fact about America",
+    "icon": "🗽",
+    "color": "#1565C0",
+    "refreshText": "नया तथ्य",
+    "loadingText": "अन्वेषण कर रहा है America...",
+    "placeholderText": "टैप करें \"नया तथ्य\" to learn about America",
+    "posterType": "americanExpert",
+    "slogan": "Understand America, see the world",
+    "aiTags": [
+      "America",
+      "culture"
+    ]
+  },
+  {
+    "id": "apple",
+    "name": "एप्पल कक्षा",
+    "description": "ज्ञान as fruitful as an apple a day",
+    "generate": "साझा करें an interesting ज्ञान point",
+    "icon": "🍎",
+    "color": "#E53935",
+    "refreshText": "नया पाठ",
+    "loadingText": "Class is in session...",
+    "placeholderText": "टैप करें \"नया पाठ\" for fresh ज्ञान",
+    "posterType": "apple",
+    "slogan": "A little progress every day",
+    "aiTags": [
+      "ज्ञान",
+      "learning"
+    ]
+  },
+  {
+    "id": "growth",
+    "name": "विकास विशेषज्ञ",
+    "description": "ब्रांड growth strategies and market अंतर्दृष्टिs",
+    "generate": "साझा करें a brand growth strategy",
+    "icon": "📈",
+    "color": "#00C853",
+    "refreshText": "नई रणनीति",
+    "loadingText": "उत्पन्न हो रहा है growth strategies...",
+    "placeholderText": "टैप करें \"नई रणनीति\" for growth ज्ञान",
+    "posterType": "growth",
+    "slogan": "विकास is the lifeline of business",
+    "aiTags": [
+      "विकास",
+      "marketing"
+    ]
+  },
+  {
+    "id": "uiDesigner",
+    "name": "यूआई डिजाइनर",
+    "description": "UI design for visual aesthetics",
+    "generate": "साझा करें a UI design सुझाव",
+    "icon": "🎨",
+    "color": "#FF4081",
+    "refreshText": "नया विचार",
+    "loadingText": "उत्पन्न हो रहा है design inspiration...",
+    "placeholderText": "टैप करें \"नया विचार\" for design inspiration",
+    "posterType": "uiDesigner",
+    "slogan": "डिजाइन makes the world a better place",
+    "aiTags": [
+      "डिजाइन",
+      "UI"
+    ]
+  },
+  {
+    "id": "futures",
+    "name": "वायदा विशेषज्ञ",
+    "description": "Commodity futures and professional विश्लेषण",
+    "generate": "साझा करें a futures trading अंतर्दृष्टि",
+    "icon": "📊",
+    "color": "#455A64",
+    "refreshText": "नया विश्लेषण",
+    "loadingText": "विश्लेषण कर रहा है futures...",
+    "placeholderText": "टैप करें \"नया विश्लेषण\" for futures ज्ञान",
+    "posterType": "futures",
+    "slogan": "Understand commodities, manage risk",
+    "aiTags": [
+      "futures",
+      "commodities"
+    ]
+  },
+  {
+    "id": "freud",
+    "name": "फ्रायड अध्ययन",
+    "description": "Freudian psychology concepts explored",
+    "generate": "साझा करें a Freudian psychology concept",
+    "icon": "🧠",
+    "color": "#5E35B1",
+    "refreshText": "नई अवधारणा",
+    "loadingText": "Psychoanalyzing...",
+    "placeholderText": "टैप करें \"नई अवधारणा\" for psychology अंतर्दृष्टिs",
+    "posterType": "freud",
+    "slogan": "Explore the subconscious, decode the mind",
+    "aiTags": [
+      "psychology",
+      "psychoanalysis"
+    ]
+  },
+  {
+    "id": "fashionBrand",
+    "name": "लक्जरी ब्रांड",
+    "description": "दुनिया fashion brands at the frontier of style",
+    "generate": "साझा करें a world fashion brand story",
+    "icon": "👛",
+    "color": "#880E4F",
+    "refreshText": "नई कहानी",
+    "loadingText": "लोड हो रहा है brand stories...",
+    "placeholderText": "टैप करें \"नई कहानी\" to discover luxury brands",
+    "posterType": "fashionBrand",
+    "slogan": "Taste the classics, know the trends",
+    "aiTags": [
+      "brands",
+      "फैशन"
+    ]
+  },
+  {
+    "id": "xinStudy",
+    "name": "शिनक्स्यू मास्टर",
+    "description": "Wang Yangming's philosophy of mind",
+    "generate": "साझा करें a Xinxue philosophy अंतर्दृष्टि",
+    "icon": "💭",
+    "color": "#00695C",
+    "refreshText": "नई अंतर्दृष्टि",
+    "loadingText": "व्याख्या कर रहा है Xinxue ज्ञान...",
+    "placeholderText": "टैप करें \"नई अंतर्दृष्टि\" for Xinxue ज्ञान",
+    "posterType": "xinStudy",
+    "slogan": "Unity of knowing and doing, attain true conscience",
+    "aiTags": [
+      "Xinxue",
+      "Wang Yangming"
+    ]
+  },
+  {
+    "id": "liStudy",
+    "name": "लीक्स्यू मास्टर",
+    "description": "Zhu Xi's Neo-Confucian thought",
+    "generate": "साझा करें a Lixue philosophy अंतर्दृष्टि",
+    "icon": "📖",
+    "color": "#4A148C",
+    "refreshText": "नई अंतर्दृष्टि",
+    "loadingText": "व्याख्या कर रहा है Lixue ज्ञान...",
+    "placeholderText": "टैप करें \"नई अंतर्दृष्टि\" for Lixue ज्ञान",
+    "posterType": "liStudy",
+    "slogan": "Investigate things, attain ज्ञान; rectify the mind, make the will sincere",
+    "aiTags": [
+      "Lixue",
+      "Zhu Xi"
+    ]
+  },
+  {
+    "id": "anthropologist",
+    "name": "मानवविज्ञानी",
+    "description": "Anthropological perspectives on the world",
+    "generate": "साझा करें an anthropology अंतर्दृष्टि",
+    "icon": "🏛️",
+    "color": "#8D6E63",
+    "refreshText": "नई अंतर्दृष्टि",
+    "loadingText": "अन्वेषण कर रहा है humanity...",
+    "placeholderText": "टैप करें \"नई अंतर्दृष्टि\" to explore civilizations",
+    "posterType": "anthropologist",
+    "slogan": "Understand humanity, know yourself",
+    "aiTags": [
+      "anthropology",
+      "culture"
+    ]
+  },
+  {
+    "id": "geographer",
+    "name": "भूगोलवेत्ता",
+    "description": "Geographic ज्ञान to explore the world",
+    "generate": "साझा करें a geographic fact",
+    "icon": "🌍",
+    "color": "#26A69A",
+    "refreshText": "नया तथ्य",
+    "loadingText": "अन्वेषण कर रहा है geography...",
+    "placeholderText": "टैप करें \"नया तथ्य\" to explore Earth's wonders",
+    "posterType": "geographer",
+    "slogan": "Read the Earth, see the world clearly",
+    "aiTags": [
+      "geography",
+      "landforms"
+    ]
+  },
+  {
+    "id": "historian",
+    "name": "इतिहासकार",
+    "description": "Historical research and deep interpretation",
+    "generate": "साझा करें a historical research perspective",
+    "icon": "📜",
+    "color": "#7E57C2",
+    "refreshText": "नई अंतर्दृष्टि",
+    "loadingText": "अन्वेषण कर रहा है the river of history...",
+    "placeholderText": "टैप करें \"नई अंतर्दृष्टि\" to touch history's pulse",
+    "posterType": "historian",
+    "slogan": "Learn from history to illuminate the future",
+    "aiTags": [
+      "इतिहास",
+      "research"
+    ]
+  },
+  {
+    "id": "narratologist",
+    "name": "कथावाचक",
+    "description": "The art of narrative and the power of stories",
+    "generate": "साझा करें a narratology concept",
+    "icon": "📖",
+    "color": "#EC407A",
+    "refreshText": "नई अवधारणा",
+    "loadingText": "व्याख्या कर रहा है narrative art...",
+    "placeholderText": "टैप करें \"नई अवधारणा\" to grasp story magic",
+    "posterType": "narratologist",
+    "slogan": "The way of stories, the art of narrative",
+    "aiTags": [
+      "narrative",
+      "storytelling"
+    ]
+  },
+  {
+    "id": "psychologist",
+    "name": "मनोवैज्ञानिक",
+    "description": "Deep psychological research and अंतर्दृष्टिs",
+    "generate": "साझा करें a psychology research finding",
+    "icon": "🧠",
+    "color": "#5C6BC0",
+    "refreshText": "नई खोज",
+    "loadingText": "अन्वेषण कर रहा है psychological mysteries...",
+    "placeholderText": "टैप करें \"नई खोज\" to decode the mind",
+    "posterType": "psychologist",
+    "slogan": "Illuminate the mind, know yourself",
+    "aiTags": [
+      "psychology",
+      "cognition"
+    ]
+  },
+  {
+    "id": "softwareArchitect",
+    "name": "सॉफ्टवेयर आर्किटेक्ट",
+    "description": "Software architecture and system design",
+    "generate": "साझा करें a software architecture अंतर्दृष्टि",
+    "icon": "🏗️",
+    "color": "#1565C0",
+    "refreshText": "नई अंतर्दृष्टि",
+    "loadingText": "व्याख्या कर रहा है architecture ज्ञान...",
+    "placeholderText": "टैप करें \"नई अंतर्दृष्टि\" for architecture ज्ञान",
+    "posterType": "softwareArchitect",
+    "slogan": "System design, the way of architecture",
+    "aiTags": [
+      "architecture",
+      "डिजाइन"
+    ]
+  },
+  {
+    "id": "solidityEngineer",
+    "name": "सॉलिडिटी इंजीनियर",
+    "description": "Smart contracts and blockchain development",
+    "generate": "साझा करें a smart contract अंतर्दृष्टि",
+    "icon": "⛓️",
+    "color": "#2E7D32",
+    "refreshText": "नई अंतर्दृष्टि",
+    "loadingText": "व्याख्या कर रहा है contract ज्ञान...",
+    "placeholderText": "टैप करें \"नई अंतर्दृष्टि\" for contract ज्ञान",
+    "posterType": "solidityEngineer",
+    "slogan": "Smart contracts, the way of the chain",
+    "aiTags": [
+      "blockchain",
+      "smart contracts"
+    ]
+  },
+  {
+    "id": "xiaohongshuExpert",
+    "name": "आरईडी विशेषज्ञ",
+    "description": "Xiaohongshu operations and content seeding सुझावs",
+    "generate": "साझा करें a Xiaohongshu operations सुझाव",
+    "icon": "📕",
+    "color": "#E91E63",
+    "refreshText": "नई सलाह",
+    "loadingText": "व्याख्या कर रहा है operations सुझावs...",
+    "placeholderText": "टैप करें \"नई सलाह\" for operations सुझावs",
+    "posterType": "xiaohongshuExpert",
+    "slogan": "Traffic code, content is king",
+    "aiTags": [
+      "operations",
+      "content marketing"
+    ]
+  },
+  {
+    "id": "seoExpert",
+    "name": "एसईओ विशेषज्ञ",
+    "description": "Search engine optimization to reach more people",
+    "generate": "उत्पन्न करें an SEO optimization सुझाव",
+    "icon": "🔍",
+    "color": "#FF5722",
+    "refreshText": "नई सलाह",
+    "loadingText": "व्याख्या कर रहा है SEO सुझावs...",
+    "placeholderText": "टैप करें \"नई सलाह\" for SEO सुझावs",
+    "posterType": "seoExpert",
+    "slogan": "Optimize for search, boost your rankings",
+    "aiTags": [
+      "SEO",
+      "search"
+    ]
+  },
+  {
+    "id": "idiom",
+    "name": "चीनी कहावतें",
+    "description": "Chinese folk sayings and traditional ज्ञान",
+    "generate": "उत्पन्न करें a Chinese idiom or folk proverb",
+    "icon": "📝",
+    "color": "#795548",
+    "refreshText": "नई कहावत",
+    "loadingText": "व्याख्या कर रहा है folk ज्ञान...",
+    "placeholderText": "टैप करें \"नई कहावत\" for a folk idiom or proverb",
+    "posterType": "idiom",
+    "slogan": "Folk ज्ञान passed down through the ages",
+    "aiTags": [
+      "idioms",
+      "proverbs"
+    ]
+  }
+]

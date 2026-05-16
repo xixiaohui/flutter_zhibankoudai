@@ -1,0 +1,1022 @@
+[
+  {
+    "id": "quote",
+    "name": "時代を超えた名言",
+    "description": "一日を照らす知恵の言葉",
+    "generate": "著者と出典付きの古典的名言を生成",
+    "icon": "📜",
+    "color": "#5C6BC0",
+    "refreshText": "新しい名言",
+    "loadingText": "知恵は準備中...",
+    "placeholderText": "タップして今日の名言を",
+    "posterType": "quote",
+    "slogan": "偉大な心からの知恵",
+    "aiTags": [
+      "quotes",
+      "wisdom"
+    ]
+  },
+  {
+    "id": "joke",
+    "name": "今日のジョーク",
+    "description": "笑いで一日を明るく",
+    "generate": "短くて面白いジョークを生成",
+    "icon": "😄",
+    "color": "#FF7043",
+    "refreshText": "新しいジョーク",
+    "loadingText": "笑いがやってくる...",
+    "placeholderText": "タップして素敵なジョークを",
+    "posterType": "joke",
+    "slogan": "1日1笑いで憂鬱を吹き飛ばす",
+    "aiTags": [
+      "jokes",
+      "humor"
+    ]
+  },
+  {
+    "id": "psychology",
+    "name": "心の知恵",
+    "description": "自分と他者を知る心理学インサイト",
+    "generate": "実用的な心理学のヒントを生成",
+    "icon": "🧠",
+    "color": "#7E57C2",
+    "refreshText": "新しいインサイト",
+    "loadingText": "分析中...",
+    "placeholderText": "タップして心理学の知識を",
+    "posterType": "psychology",
+    "slogan": "心を理解し、より良い自分に出会う",
+    "aiTags": [
+      "psychology",
+      "emotions"
+    ]
+  },
+  {
+    "id": "finance",
+    "name": "ファイナンスウィンドウ",
+    "description": "投資と資産管理のインサイト",
+    "generate": "実用的な金融リテラシーのヒントを生成",
+    "icon": "💹",
+    "color": "#26A69A",
+    "refreshText": "新しいヒント",
+    "loadingText": "金融知識を読み込み中...",
+    "placeholderText": "タップして金融ニュースを",
+    "posterType": "finance",
+    "slogan": "富のトレンドを見る",
+    "aiTags": [
+      "finance",
+      "economy"
+    ]
+  },
+  {
+    "id": "love",
+    "name": "甘い瞬間",
+    "description": "心を温めるロマンチックな名言",
+    "generate": "ロマンチックな愛の名言を生成",
+    "icon": "💕",
+    "color": "#EC407A",
+    "refreshText": "新しい言葉",
+    "loadingText": "甘い言葉を作成中...",
+    "placeholderText": "タップしてロマンチックな名言を",
+    "posterType": "love",
+    "slogan": "愛は言葉より雄弁",
+    "aiTags": [
+      "love",
+      "romance"
+    ]
+  },
+  {
+    "id": "movie",
+    "name": "映画の世界",
+    "description": "見逃せない名作映画",
+    "generate": "おすすめの映画を生成",
+    "icon": "🎬",
+    "color": "#EF5350",
+    "refreshText": "新しい映画",
+    "loadingText": "素敵な映画を検索中...",
+    "placeholderText": "タップして映画のおすすめを",
+    "posterType": "movie",
+    "slogan": "画面上の人生、すべてのフレームに感情",
+    "aiTags": [
+      "movies",
+      "reviews"
+    ]
+  },
+  {
+    "id": "music",
+    "name": "ミュージックタイム",
+    "description": "魂に触れる名曲",
+    "generate": "名曲をおすすめ",
+    "icon": "🎵",
+    "color": "#AB47BC",
+    "refreshText": "新しい曲",
+    "loadingText": "素敵な曲を再生中...",
+    "placeholderText": "タップして音楽のおすすめを",
+    "posterType": "music",
+    "slogan": "音楽は魂の糧",
+    "aiTags": [
+      "music",
+      "playlist"
+    ]
+  },
+  {
+    "id": "tech",
+    "name": "テクノロジーフロンティア",
+    "description": "未来を形作る技術トレンド",
+    "generate": "最先端の技術アップデートを共有",
+    "icon": "🚀",
+    "color": "#42A5F5",
+    "refreshText": "新しいアップデート",
+    "loadingText": "技術ニュースを読み込み中...",
+    "placeholderText": "タップして技術インサイトを",
+    "posterType": "tech",
+    "slogan": "技術が世界を変える",
+    "aiTags": [
+      "tech",
+      "innovation"
+    ]
+  },
+  {
+    "id": "tcm",
+    "name": "漢方健康",
+    "description": "健康的な生活のための漢方",
+    "generate": "漢方健康のヒントを共有",
+    "icon": "🌿",
+    "color": "#66BB6A",
+    "refreshText": "新しいヒント",
+    "loadingText": "健康知識を読み込み中...",
+    "placeholderText": "タップして漢方の知恵を",
+    "posterType": "tcm",
+    "slogan": "現代の健康のための古代の知恵",
+    "aiTags": [
+      "TCM",
+      "wellness"
+    ]
+  },
+  {
+    "id": "travel",
+    "name": "旅日記",
+    "description": "世界を探検する旅のおすすめ",
+    "generate": "旅行先をおすすめ",
+    "icon": "✈️",
+    "color": "#26C6DA",
+    "refreshText": "新しい場所",
+    "loadingText": "次の旅行を計画中...",
+    "placeholderText": "タップして旅行のインスピレーションを",
+    "posterType": "travel",
+    "slogan": "世界は広い、探検しよう",
+    "aiTags": [
+      "travel",
+      "destinations"
+    ]
+  },
+  {
+    "id": "fortune",
+    "name": "今日の運勢",
+    "description": "幸運のための今日の運勢",
+    "generate": "今日の運勢分析を生成",
+    "icon": "☯️",
+    "color": "#8D6E63",
+    "refreshText": "もう一度引く",
+    "loadingText": "兆しを読み取り中...",
+    "placeholderText": "タップして今日の運勢を",
+    "posterType": "fortune",
+    "slogan": "自分の道を知り、流れに従う",
+    "aiTags": [
+      "I Ching",
+      "fortune"
+    ]
+  },
+  {
+    "id": "literature",
+    "name": "文学の殿堂",
+    "description": "味わうべき文学の傑作",
+    "generate": "分析付きの文学の抜粋を共有",
+    "icon": "📚",
+    "color": "#78909C",
+    "refreshText": "新しい作品",
+    "loadingText": "文学作品を読み込み中...",
+    "placeholderText": "タップして文学のおすすめを",
+    "posterType": "literature",
+    "slogan": "読書は魂を磨く",
+    "aiTags": [
+      "literature",
+      "classics"
+    ]
+  },
+  {
+    "id": "foreignTrade",
+    "name": "貿易アシスタント",
+    "description": "貿易インサイトと機会",
+    "generate": "貿易インサイトを共有",
+    "icon": "🌐",
+    "color": "#5C6BC0",
+    "refreshText": "新しいインサイト",
+    "loadingText": "貿易知識を読み込み中...",
+    "placeholderText": "タップして貿易知識を",
+    "posterType": "foreignTrade",
+    "slogan": "貿易が世界をつなぐ",
+    "aiTags": [
+      "trade",
+      "cross-border"
+    ]
+  },
+  {
+    "id": "ecommerce",
+    "name": "EC運営",
+    "description": "EC トレンドと戦略",
+    "generate": "EC運営のヒントを共有",
+    "icon": "🛒",
+    "color": "#FF7043",
+    "refreshText": "新しいヒント",
+    "loadingText": "運用のヒントを読み込み中...",
+    "placeholderText": "タップしてEC知識を",
+    "posterType": "ecommerce",
+    "slogan": "スマートな運営、安心の販売",
+    "aiTags": [
+      "e-commerce",
+      "operations"
+    ]
+  },
+  {
+    "id": "math",
+    "name": "数学マスター",
+    "description": "頭を鍛える楽しい数学問題",
+    "generate": "面白い数学の事実を共有",
+    "icon": "📐",
+    "color": "#7E57C2",
+    "refreshText": "新しい問題",
+    "loadingText": "数学パズルを読み込み中...",
+    "placeholderText": "タップして数学知識を",
+    "posterType": "math",
+    "slogan": "数学は科学の言語",
+    "aiTags": [
+      "math",
+      "problem-solving"
+    ]
+  },
+  {
+    "id": "english",
+    "name": "英語プロ",
+    "description": "自己成長のための英語学習のヒント",
+    "generate": "実用的な英語学習のヒントを共有",
+    "icon": "🔤",
+    "color": "#42A5F5",
+    "refreshText": "新しいヒント",
+    "loadingText": "英語のヒントを読み込み中...",
+    "placeholderText": "タップして英語知識を",
+    "posterType": "english",
+    "slogan": "英語はグローバル言語",
+    "aiTags": [
+      "English",
+      "learning"
+    ]
+  },
+  {
+    "id": "programming",
+    "name": "コードメンター",
+    "description": "技術成長のためのプログラミングのヒント",
+    "generate": "面白いプログラミングの概念を紹介",
+    "icon": "💻",
+    "color": "#26A69A",
+    "refreshText": "新しいヒント",
+    "loadingText": "コードのヒントを読み込み中...",
+    "placeholderText": "タップしてプログラミングスキルを",
+    "posterType": "programming",
+    "slogan": "コードが世界を変える",
+    "aiTags": [
+      "programming",
+      "coding"
+    ]
+  },
+  {
+    "id": "photography",
+    "name": "写真マスター",
+    "description": "美しい瞬間を捉える写真のヒント",
+    "generate": "実用的な写真のヒントを共有",
+    "icon": "📷",
+    "color": "#EC407A",
+    "refreshText": "新しいヒント",
+    "loadingText": "写真のヒントを読み込み中...",
+    "placeholderText": "タップして写真スキルを",
+    "posterType": "photography",
+    "slogan": "レンズを通して美を捉える",
+    "aiTags": [
+      "photography",
+      "tips"
+    ]
+  },
+  {
+    "id": "beauty",
+    "name": "美容グル",
+    "description": "輝く肌のための美容のヒント",
+    "generate": "実用的な美容とスキンケアのヒントを共有",
+    "icon": "💄",
+    "color": "#EF5350",
+    "refreshText": "新しいヒント",
+    "loadingText": "美容知識を読み込み中...",
+    "placeholderText": "タップして美容のヒントを",
+    "posterType": "beauty",
+    "slogan": "美は細部に宿る",
+    "aiTags": [
+      "beauty",
+      "skincare"
+    ]
+  },
+  {
+    "id": "investment",
+    "name": "投資アドバイザー",
+    "description": "資産成長のための投資知識",
+    "generate": "投資知識のヒントを共有",
+    "icon": "📈",
+    "color": "#66BB6A",
+    "refreshText": "新しいヒント",
+    "loadingText": "投資知識を読み込み中...",
+    "placeholderText": "タップして投資インサイトを",
+    "posterType": "investment",
+    "slogan": "着実な投資、持続する富",
+    "aiTags": [
+      "investment",
+      "wealth"
+    ]
+  },
+  {
+    "id": "fishing",
+    "name": "釣りプロ",
+    "description": "無限の楽しみのための釣りのヒント",
+    "generate": "釣りのヒントや知識を共有",
+    "icon": "🎣",
+    "color": "#26C6DA",
+    "refreshText": "新しいヒント",
+    "loadingText": "釣りのヒントを読み込み中...",
+    "placeholderText": "タップして釣り知識を",
+    "posterType": "fishing",
+    "slogan": "釣りは人生の道",
+    "aiTags": [
+      "fishing",
+      "tips"
+    ]
+  },
+  {
+    "id": "fitness",
+    "name": "フィットネスコーチ",
+    "description": "強い体のためのフィットネス指導",
+    "generate": "実用的なフィットネスのヒントを共有",
+    "icon": "💪",
+    "color": "#AB47BC",
+    "refreshText": "新しいヒント",
+    "loadingText": "フィットネス知識を読み込み中...",
+    "placeholderText": "タップしてフィットネス知識を",
+    "posterType": "fitness",
+    "slogan": "人生は動き",
+    "aiTags": [
+      "fitness",
+      "exercise"
+    ]
+  },
+  {
+    "id": "pet",
+    "name": "ペット専門家",
+    "description": "愛情あふれるペットケアのヒント",
+    "generate": "ペットケアのヒントを共有",
+    "icon": "🐾",
+    "color": "#8D6E63",
+    "refreshText": "新しいヒント",
+    "loadingText": "ペット知識を読み込み中...",
+    "placeholderText": "タップしてペットケアのヒントを",
+    "posterType": "pet",
+    "slogan": "ペットは最高の友達",
+    "aiTags": [
+      "pets",
+      "care"
+    ]
+  },
+  {
+    "id": "fashion",
+    "name": "ファッションアイコン",
+    "description": "スタイルを表現するファッションのヒント",
+    "generate": "ファッションとスタイリングのヒントを共有",
+    "icon": "👗",
+    "color": "#78909C",
+    "refreshText": "新しいヒント",
+    "loadingText": "ファッションニュースを読み込み中...",
+    "placeholderText": "タップしてファッションインサイトを",
+    "posterType": "fashion",
+    "slogan": "ファッションは買うもの、スタイルは使いこなすもの",
+    "aiTags": [
+      "fashion",
+      "trends"
+    ]
+  },
+  {
+    "id": "outfit",
+    "name": "スタイルガイド",
+    "description": "毎日のコーディネートのおすすめ",
+    "generate": "コーディネートのおすすめを共有",
+    "icon": "👔",
+    "color": "#5C6BC0",
+    "refreshText": "新しいスタイル",
+    "loadingText": "スタイルガイドを読み込み中...",
+    "placeholderText": "タップしてスタイルのヒントを",
+    "posterType": "outfit",
+    "slogan": "スタイルよく着こなし、センスよく生きる",
+    "aiTags": [
+      "outfit",
+      "styling"
+    ]
+  },
+  {
+    "id": "decoration",
+    "name": "家の装飾",
+    "description": "空間を美しくする家の装飾のヒント",
+    "generate": "家の装飾のヒントを共有",
+    "icon": "🏠",
+    "color": "#FF7043",
+    "refreshText": "新しいヒント",
+    "loadingText": "デコ知識を読み込み中...",
+    "placeholderText": "タップして装飾のヒントを",
+    "posterType": "decoration",
+    "slogan": "家を暖かく居心地よく",
+    "aiTags": [
+      "decoration",
+      "home"
+    ]
+  },
+  {
+    "id": "glassFiber",
+    "name": "ガラス繊維専門家",
+    "description": "最先端のガラス繊維材料",
+    "generate": "ガラス繊維関連の知識を共有",
+    "icon": "🧵",
+    "color": "#7E57C2",
+    "refreshText": "新しいヒント",
+    "loadingText": "ガラス繊維知識を読み込み中...",
+    "placeholderText": "タップしてガラス繊維の専門知識を",
+    "posterType": "glassFiber",
+    "slogan": "プロの材料、プロの品質",
+    "aiTags": [
+      "fiberglass",
+      "materials"
+    ]
+  },
+  {
+    "id": "resin",
+    "name": "樹脂専門家",
+    "description": "無限の創造性を持つ樹脂クラフト",
+    "generate": "樹脂クラフトのヒントを共有",
+    "icon": "🧪",
+    "color": "#42A5F5",
+    "refreshText": "新しいヒント",
+    "loadingText": "樹脂知識を読み込み中...",
+    "placeholderText": "タップして樹脂知識を",
+    "posterType": "resin",
+    "slogan": "材料科学、無限の応用",
+    "aiTags": [
+      "resin",
+      "chemical"
+    ]
+  },
+  {
+    "id": "tax",
+    "name": "税務アドバイザー",
+    "description": "コンプライアンスと節約のための税務計画",
+    "generate": "税務計画のヒントを共有",
+    "icon": "📋",
+    "color": "#26A69A",
+    "refreshText": "新しいヒント",
+    "loadingText": "税務知識を読み込み中...",
+    "placeholderText": "タップして税務知識を",
+    "posterType": "tax",
+    "slogan": "スマートな税務計画、コンプライアンスな生活",
+    "aiTags": [
+      "tax",
+      "finance"
+    ]
+  },
+  {
+    "id": "law",
+    "name": "法律アドバイザー",
+    "description": "権利を知り守るための法律知識",
+    "generate": "実用的な法律のヒントを共有",
+    "icon": "⚖️",
+    "color": "#EC407A",
+    "refreshText": "新しいヒント",
+    "loadingText": "法律知識を読み込み中...",
+    "placeholderText": "タップして法律知識を",
+    "posterType": "law",
+    "slogan": "法を知り、身を守る",
+    "aiTags": [
+      "law",
+      "rights"
+    ]
+  },
+  {
+    "id": "official",
+    "name": "キャリアプロ",
+    "description": "キャリア成功のための職場の知恵",
+    "generate": "職場のインサイトを共有",
+    "icon": "🎩",
+    "color": "#EF5350",
+    "refreshText": "新しいヒント",
+    "loadingText": "キャリア知識を読み込み中...",
+    "placeholderText": "タップしてキャリアのヒントを",
+    "posterType": "official",
+    "slogan": "職場は戦場、知恵で勝つ",
+    "aiTags": [
+      "career",
+      "interpersonal"
+    ]
+  },
+  {
+    "id": "handling",
+    "name": "生活の知恵",
+    "description": "人生の状況に対処する実践的な知恵",
+    "generate": "実用的な生活のヒントを共有",
+    "icon": "💎",
+    "color": "#66BB6A",
+    "refreshText": "新しいヒント",
+    "loadingText": "人生の知恵を読み込み中...",
+    "placeholderText": "タップして人生の知恵を",
+    "posterType": "handling",
+    "slogan": "世の中を理解することが真の知恵",
+    "aiTags": [
+      "wisdom",
+      "EQ"
+    ]
+  },
+  {
+    "id": "floral",
+    "name": "フラワーアーティスト",
+    "description": "香り高い生活のためのフラワーアートのヒント",
+    "generate": "フラワーケアのヒントを共有",
+    "icon": "💐",
+    "color": "#26C6DA",
+    "refreshText": "新しいヒント",
+    "loadingText": "フラワー知識を読み込み中...",
+    "placeholderText": "タップしてフラワーアートのヒントを",
+    "posterType": "floral",
+    "slogan": "花は独自の言葉を話す",
+    "aiTags": [
+      "floral",
+      "flower arrangement"
+    ]
+  },
+  {
+    "id": "history",
+    "name": "歴史の鏡",
+    "description": "過去から学ぶ歴史物語",
+    "generate": "面白い歴史物語を共有",
+    "icon": "📚",
+    "color": "#AB47BC",
+    "refreshText": "新しいストーリー",
+    "loadingText": "歴史物語を読み込み中...",
+    "placeholderText": "タップして歴史知識を",
+    "posterType": "history",
+    "slogan": "歴史から学び未来を見る",
+    "aiTags": [
+      "history",
+      "stories"
+    ]
+  },
+  {
+    "id": "military",
+    "name": "軍事ウォッチ",
+    "description": "戦略的思考のための軍事インサイト",
+    "generate": "軍事インサイトを共有",
+    "icon": "🎖️",
+    "color": "#8D6E63",
+    "refreshText": "新しいインサイト",
+    "loadingText": "軍事知識を読み込み中...",
+    "placeholderText": "タップして軍事知識を",
+    "posterType": "military",
+    "slogan": "己を知り敵を知れば百戦危うからず",
+    "aiTags": [
+      "military",
+      "strategy"
+    ]
+  },
+  {
+    "id": "stock",
+    "name": "株式ビーコン",
+    "description": "情報に基づく投資のための株式市場インサイト",
+    "generate": "株式市場分析を共有",
+    "icon": "📈",
+    "color": "#1E88E5",
+    "refreshText": "新しいインサイト",
+    "loadingText": "アナリストが市場を分析中...",
+    "placeholderText": "タップして投資知識を",
+    "posterType": "stock",
+    "slogan": "合理的な投資、着実な成長",
+    "aiTags": [
+      "stocks",
+      "futures"
+    ]
+  },
+  {
+    "id": "economics",
+    "name": "経済ビュー",
+    "description": "トレンドを理解する経済観測",
+    "generate": "経済観測を共有",
+    "icon": "💰",
+    "color": "#00897B",
+    "refreshText": "新しいインサイト",
+    "loadingText": "エコノミストが分析中...",
+    "placeholderText": "タップして経済知識を",
+    "posterType": "economics",
+    "slogan": "経済を理解し、トレンドをつかむ",
+    "aiTags": [
+      "economics",
+      "analysis"
+    ]
+  },
+  {
+    "id": "business",
+    "name": "ビジネスの知恵",
+    "description": "チャンスをつかむビジネスインサイト",
+    "generate": "ビジネスインサイトを共有",
+    "icon": "💼",
+    "color": "#6D4C41",
+    "refreshText": "新しいインサイト",
+    "loadingText": "ビジネスメンターが助言中...",
+    "placeholderText": "タップしてビジネスの知恵を",
+    "posterType": "business",
+    "slogan": "ビジネスは人、ビジョンで勝つ",
+    "aiTags": [
+      "business",
+      "management"
+    ]
+  },
+  {
+    "id": "news",
+    "name": "ニュースフロンティア",
+    "description": "情報を把握するための日刊ニュース",
+    "generate": "日刊ニュースダイジェストを生成",
+    "icon": "📰",
+    "color": "#D32F2F",
+    "refreshText": "新しいアップデート",
+    "loadingText": "メディア専門家が説明中...",
+    "placeholderText": "タップしてニュース分析を",
+    "posterType": "news",
+    "slogan": "情報は王、インサイトは力",
+    "aiTags": [
+      "news",
+      "headlines"
+    ]
+  },
+  {
+    "id": "wisdomBag",
+    "name": "知恵袋",
+    "description": "日常生活のための知恵の粒",
+    "generate": "知恵の粒を共有",
+    "icon": "🎁",
+    "color": "#FFA000",
+    "refreshText": "新しい宝石",
+    "loadingText": "知恵を生成中...",
+    "placeholderText": "タップして知恵の宝石を",
+    "posterType": "wisdomBag",
+    "slogan": "小さな知恵、大きな人生",
+    "aiTags": [
+      "wisdom",
+      "life tips"
+    ]
+  },
+  {
+    "id": "robotAi",
+    "name": "AIボット",
+    "description": "人工知能と未来技術",
+    "generate": "ロボティクスまたはAIのインサイトを共有",
+    "icon": "🤖",
+    "color": "#7C4DFF",
+    "refreshText": "新しいインサイト",
+    "loadingText": "AIが考え中...",
+    "placeholderText": "タップしてAIの知識を",
+    "posterType": "robotAi",
+    "slogan": "知能の未来はあなたの手に",
+    "aiTags": [
+      "AI",
+      "robotics"
+    ]
+  },
+  {
+    "id": "americanExpert",
+    "name": "アメリカ通",
+    "description": "アメリカ文化の深層",
+    "generate": "アメリカに関する事実を共有",
+    "icon": "🗽",
+    "color": "#1565C0",
+    "refreshText": "新しい事実",
+    "loadingText": "アメリカを探索中...",
+    "placeholderText": "タップしてアメリカを学ぶ",
+    "posterType": "americanExpert",
+    "slogan": "アメリカを理解し、世界を見る",
+    "aiTags": [
+      "America",
+      "culture"
+    ]
+  },
+  {
+    "id": "apple",
+    "name": "アップル教室",
+    "description": "1日1個のリンゴのように実りある知識",
+    "generate": "面白い知識ポイントを共有",
+    "icon": "🍎",
+    "color": "#E53935",
+    "refreshText": "新しいレッスン",
+    "loadingText": "授業中...",
+    "placeholderText": "タップして新しい知識を",
+    "posterType": "apple",
+    "slogan": "毎日少しずつ進歩",
+    "aiTags": [
+      "knowledge",
+      "learning"
+    ]
+  },
+  {
+    "id": "growth",
+    "name": "成長専門家",
+    "description": "ブランド成長戦略と市場インサイト",
+    "generate": "ブランド成長戦略を共有",
+    "icon": "📈",
+    "color": "#00C853",
+    "refreshText": "新しい戦略",
+    "loadingText": "成長戦略を生成中...",
+    "placeholderText": "タップして成長知識を",
+    "posterType": "growth",
+    "slogan": "成長はビジネスの生命線",
+    "aiTags": [
+      "growth",
+      "marketing"
+    ]
+  },
+  {
+    "id": "uiDesigner",
+    "name": "UIデザイナー",
+    "description": "視覚的美しさのためのUIデザイン",
+    "generate": "UIデザインのヒントを共有",
+    "icon": "🎨",
+    "color": "#FF4081",
+    "refreshText": "新しいアイデア",
+    "loadingText": "デザインインスピレーションを生成中...",
+    "placeholderText": "タップしてデザインのインスピレーションを",
+    "posterType": "uiDesigner",
+    "slogan": "デザインが世界をより良くする",
+    "aiTags": [
+      "design",
+      "UI"
+    ]
+  },
+  {
+    "id": "futures",
+    "name": "先物専門家",
+    "description": "商品先物と専門的分析",
+    "generate": "先物取引のインサイトを共有",
+    "icon": "📊",
+    "color": "#455A64",
+    "refreshText": "新しい分析",
+    "loadingText": "先物を分析中...",
+    "placeholderText": "タップして先物知識を",
+    "posterType": "futures",
+    "slogan": "商品を理解し、リスクを管理",
+    "aiTags": [
+      "futures",
+      "commodities"
+    ]
+  },
+  {
+    "id": "freud",
+    "name": "フロイト研究",
+    "description": "フロイト心理学の概念を探求",
+    "generate": "フロイト心理学の概念を共有",
+    "icon": "🧠",
+    "color": "#5E35B1",
+    "refreshText": "新しい概念",
+    "loadingText": "精神分析中...",
+    "placeholderText": "タップして心理学インサイトを",
+    "posterType": "freud",
+    "slogan": "潜在意識を探り、心を解読",
+    "aiTags": [
+      "psychology",
+      "psychoanalysis"
+    ]
+  },
+  {
+    "id": "fashionBrand",
+    "name": "ラグジュアリーブランド",
+    "description": "スタイルの最前線の世界ファッションブランド",
+    "generate": "世界のファッションブランドストーリーを共有",
+    "icon": "👛",
+    "color": "#880E4F",
+    "refreshText": "新しいストーリー",
+    "loadingText": "ブランドストーリーを読み込み中...",
+    "placeholderText": "タップしてラグジュアリーブランドを発見",
+    "posterType": "fashionBrand",
+    "slogan": "古典を味わい、トレンドを知る",
+    "aiTags": [
+      "brands",
+      "fashion"
+    ]
+  },
+  {
+    "id": "xinStudy",
+    "name": "心学マスター",
+    "description": "王陽明の心学",
+    "generate": "心学の哲学インサイトを共有",
+    "icon": "💭",
+    "color": "#00695C",
+    "refreshText": "新しいインサイト",
+    "loadingText": "心学の知恵を解釈中...",
+    "placeholderText": "タップして心学の知恵を",
+    "posterType": "xinStudy",
+    "slogan": "知行合一、良知を達成",
+    "aiTags": [
+      "Xinxue",
+      "Wang Yangming"
+    ]
+  },
+  {
+    "id": "liStudy",
+    "name": "理学マスター",
+    "description": "朱子の理学思想",
+    "generate": "理学の哲学インサイトを共有",
+    "icon": "📖",
+    "color": "#4A148C",
+    "refreshText": "新しいインサイト",
+    "loadingText": "理学の知恵を解釈中...",
+    "placeholderText": "タップして理学の知恵を",
+    "posterType": "liStudy",
+    "slogan": "格物致知、誠意正心",
+    "aiTags": [
+      "Lixue",
+      "Zhu Xi"
+    ]
+  },
+  {
+    "id": "anthropologist",
+    "name": "人類学者",
+    "description": "人類学的視点で世界を見る",
+    "generate": "人類学のインサイトを共有",
+    "icon": "🏛️",
+    "color": "#8D6E63",
+    "refreshText": "新しいインサイト",
+    "loadingText": "人類を探求中...",
+    "placeholderText": "タップして文明を探求",
+    "posterType": "anthropologist",
+    "slogan": "人類を理解し、自分を知る",
+    "aiTags": [
+      "anthropology",
+      "culture"
+    ]
+  },
+  {
+    "id": "geographer",
+    "name": "地理学者",
+    "description": "世界を探検する地理知識",
+    "generate": "地理的事実を共有",
+    "icon": "🌍",
+    "color": "#26A69A",
+    "refreshText": "新しい事実",
+    "loadingText": "地理を探求中...",
+    "placeholderText": "タップして地球の不思議を探求",
+    "posterType": "geographer",
+    "slogan": "地球を読み、世界を明確に見る",
+    "aiTags": [
+      "geography",
+      "landforms"
+    ]
+  },
+  {
+    "id": "historian",
+    "name": "歴史学者",
+    "description": "歴史研究と深い解釈",
+    "generate": "歴史研究の視点を共有",
+    "icon": "📜",
+    "color": "#7E57C2",
+    "refreshText": "新しいインサイト",
+    "loadingText": "歴史の川を探索中...",
+    "placeholderText": "タップして歴史の鼓動に触れる",
+    "posterType": "historian",
+    "slogan": "歴史から学び未来を照らす",
+    "aiTags": [
+      "history",
+      "research"
+    ]
+  },
+  {
+    "id": "narratologist",
+    "name": "物語学者",
+    "description": "物語の芸術とストーリーの力",
+    "generate": "物語学の概念を共有",
+    "icon": "📖",
+    "color": "#EC407A",
+    "refreshText": "新しい概念",
+    "loadingText": "物語の芸術を解釈中...",
+    "placeholderText": "タップして物語の魔法を掴む",
+    "posterType": "narratologist",
+    "slogan": "物語の道、語りの芸術",
+    "aiTags": [
+      "narrative",
+      "storytelling"
+    ]
+  },
+  {
+    "id": "psychologist",
+    "name": "心理学者",
+    "description": "深層心理学の研究とインサイト",
+    "generate": "心理学研究の発見を共有",
+    "icon": "🧠",
+    "color": "#5C6BC0",
+    "refreshText": "新しい発見",
+    "loadingText": "心理の謎を探求中...",
+    "placeholderText": "タップして心を解読",
+    "posterType": "psychologist",
+    "slogan": "心を照らし、自分を知る",
+    "aiTags": [
+      "psychology",
+      "cognition"
+    ]
+  },
+  {
+    "id": "softwareArchitect",
+    "name": "ソフトウェアアーキテクト",
+    "description": "ソフトウェアアーキテクチャとシステム設計",
+    "generate": "ソフトウェアアーキテクチャのインサイトを共有",
+    "icon": "🏗️",
+    "color": "#1565C0",
+    "refreshText": "新しいインサイト",
+    "loadingText": "アーキテクチャ知識を解釈中...",
+    "placeholderText": "タップしてアーキテクチャ知識を",
+    "posterType": "softwareArchitect",
+    "slogan": "システムデザイン、アーキテクチャの道",
+    "aiTags": [
+      "architecture",
+      "design"
+    ]
+  },
+  {
+    "id": "solidityEngineer",
+    "name": "Solidityエンジニア",
+    "description": "スマートコントラクトとブロックチェーン開発",
+    "generate": "スマートコントラクトのインサイトを共有",
+    "icon": "⛓️",
+    "color": "#2E7D32",
+    "refreshText": "新しいインサイト",
+    "loadingText": "契約知識を解釈中...",
+    "placeholderText": "タップして契約知識を",
+    "posterType": "solidityEngineer",
+    "slogan": "スマートコントラクト、チェーンの道",
+    "aiTags": [
+      "blockchain",
+      "smart contracts"
+    ]
+  },
+  {
+    "id": "xiaohongshuExpert",
+    "name": "RED専門家",
+    "description": "小紅書の運用とコンテンツシーディングのヒント",
+    "generate": "小紅書の運営のヒントを共有",
+    "icon": "📕",
+    "color": "#E91E63",
+    "refreshText": "新しいヒント",
+    "loadingText": "運用のヒントを解釈中...",
+    "placeholderText": "タップして運用のヒントを",
+    "posterType": "xiaohongshuExpert",
+    "slogan": "トラフィックコード、コンテンツは王",
+    "aiTags": [
+      "operations",
+      "content marketing"
+    ]
+  },
+  {
+    "id": "seoExpert",
+    "name": "SEO専門家",
+    "description": "より多くの人に届けるSEO最適化",
+    "generate": "SEO最適化のヒントを生成",
+    "icon": "🔍",
+    "color": "#FF5722",
+    "refreshText": "新しいヒント",
+    "loadingText": "SEOのヒントを解釈中...",
+    "placeholderText": "タップしてSEOのヒントを",
+    "posterType": "seoExpert",
+    "slogan": "検索最適化、ランキング向上",
+    "aiTags": [
+      "SEO",
+      "search"
+    ]
+  },
+  {
+    "id": "idiom",
+    "name": "中国の故事ことわざ",
+    "description": "中国の民間のことわざと伝統的な知恵",
+    "generate": "中国の故事ことわざを生成",
+    "icon": "📝",
+    "color": "#795548",
+    "refreshText": "新しいことわざ",
+    "loadingText": "民間の知恵を解釈中...",
+    "placeholderText": "タップして民間のことわざを",
+    "posterType": "idiom",
+    "slogan": "代々受け継がれる民間の知恵",
+    "aiTags": [
+      "idioms",
+      "proverbs"
+    ]
+  }
+]

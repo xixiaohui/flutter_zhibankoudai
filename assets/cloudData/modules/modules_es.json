@@ -1,0 +1,1022 @@
+[
+  {
+    "id": "quote",
+    "name": "Citas Eternas",
+    "description": "Palabras de sabiduría para iluminar tu día",
+    "generate": "Generar una cita clásica con autor y fuente",
+    "icon": "📜",
+    "color": "#5C6BC0",
+    "refreshText": "Nueva Cita",
+    "loadingText": "Sabiduría está en camino...",
+    "placeholderText": "Toca \"Nueva Cita\" for today's inspiration",
+    "posterType": "quote",
+    "slogan": "Sabiduría de grandes mentes",
+    "aiTags": [
+      "quotes",
+      "Sabiduría"
+    ]
+  },
+  {
+    "id": "joke",
+    "name": "Chistes Diarios",
+    "description": "Alegra tu día con risas",
+    "generate": "Generar un chiste corto y divertido",
+    "icon": "😄",
+    "color": "#FF7043",
+    "refreshText": "Nuevo Chiste",
+    "loadingText": "A laugh está en camino...",
+    "placeholderText": "Toca \"Nuevo Chiste\" for a good laugh",
+    "posterType": "joke",
+    "slogan": "Una risa al día mantiene la tristeza alejada",
+    "aiTags": [
+      "jokes",
+      "humor"
+    ]
+  },
+  {
+    "id": "psychology",
+    "name": "Sabiduría Mental",
+    "description": "Perspectivas de psicología para conocerte",
+    "generate": "Generar un consejo práctico de psicología",
+    "icon": "🧠",
+    "color": "#7E57C2",
+    "refreshText": "Nuevo Insight",
+    "loadingText": "Analizando...",
+    "placeholderText": "Toca \"Nuevo Insight\" for psychology conocimiento",
+    "posterType": "psychology",
+    "slogan": "Entiende la mente, encuentra un mejor yo",
+    "aiTags": [
+      "psychology",
+      "emotions"
+    ]
+  },
+  {
+    "id": "finance",
+    "name": "Ventana Financiera",
+    "description": "Perspectivas de inversión y gestión patrimonial",
+    "generate": "Generar un consejo práctico de educación financiera",
+    "icon": "💹",
+    "color": "#26A69A",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando financial perspectivas...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for financial news",
+    "posterType": "finance",
+    "slogan": "Ve las tendencias en la riqueza",
+    "aiTags": [
+      "Finanzas",
+      "economy"
+    ]
+  },
+  {
+    "id": "love",
+    "name": "Dulces Momentos",
+    "description": "Frases románticas que calientan el corazón",
+    "generate": "Generar una cita romántica de amor",
+    "icon": "💕",
+    "color": "#EC407A",
+    "refreshText": "Nueva Frase",
+    "loadingText": "Elaborando sweet words...",
+    "placeholderText": "Toca \"Nueva Frase\" for a romantic cita",
+    "posterType": "love",
+    "slogan": "El amor habla más fuerte que las palabras",
+    "aiTags": [
+      "Amor",
+      "romance"
+    ]
+  },
+  {
+    "id": "movie",
+    "name": "Mundo del Cine",
+    "description": "Grandes películas que no debes perderte",
+    "generate": "Generar una recomendación de película que valga la pena",
+    "icon": "🎬",
+    "color": "#EF5350",
+    "refreshText": "Nueva Película",
+    "loadingText": "Buscando great films...",
+    "placeholderText": "Toca \"Nueva Película\" for a movie recommendation",
+    "posterType": "movie",
+    "slogan": "Vida en pantalla, emociones en cada fotograma",
+    "aiTags": [
+      "movies",
+      "reviews"
+    ]
+  },
+  {
+    "id": "music",
+    "name": "Hora Músicaal",
+    "description": "Canciones clásicas que tocan el alma",
+    "generate": "Recomendar una canción clásica",
+    "icon": "🎵",
+    "color": "#AB47BC",
+    "refreshText": "Nueva Canción",
+    "loadingText": "Reproduciendo a great track...",
+    "placeholderText": "Toca \"Nueva Canción\" for music recommendations",
+    "posterType": "music",
+    "slogan": "La música es alimento para el alma",
+    "aiTags": [
+      "Música",
+      "playlist"
+    ]
+  },
+  {
+    "id": "tech",
+    "name": "Frontera Tecnológica",
+    "description": "Tendencias tecnológicas que moldean el futuro",
+    "generate": "Compartir una actualización tecnológica de vanguardia",
+    "icon": "🚀",
+    "color": "#42A5F5",
+    "refreshText": "Nueva Actualización",
+    "loadingText": "Cargando tech news...",
+    "placeholderText": "Toca \"Nueva Actualización\" for tech perspectivas",
+    "posterType": "tech",
+    "slogan": "La tecnología cambia el mundo",
+    "aiTags": [
+      "Tecnología",
+      "innovation"
+    ]
+  },
+  {
+    "id": "tcm",
+    "name": "Bienestar MTC",
+    "description": "Medicina china tradicional para una vida sana",
+    "generate": "Compartir un consejo de bienestar de MTC",
+    "icon": "🌿",
+    "color": "#66BB6A",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando wellness conocimiento...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for TCM sabiduría",
+    "posterType": "tcm",
+    "slogan": "Sabiduría antigua para la salud moderna",
+    "aiTags": [
+      "TCM",
+      "wellness"
+    ]
+  },
+  {
+    "id": "travel",
+    "name": "Diario de Viaje",
+    "description": "Recomendaciones de viaje para explorar el mundo",
+    "generate": "Recomendar un destino de viaje",
+    "icon": "✈️",
+    "color": "#26C6DA",
+    "refreshText": "Nuevo Lugar",
+    "loadingText": "Planeando your next trip...",
+    "placeholderText": "Toca \"Nuevo Lugar\" for travel inspiration",
+    "posterType": "travel",
+    "slogan": "El mundo es vasto, ve a explorar",
+    "aiTags": [
+      "Viaje",
+      "destinations"
+    ]
+  },
+  {
+    "id": "fortune",
+    "name": "Fortuna Diaria",
+    "description": "Suerte diaria para la buena fortuna",
+    "generate": "Generar el análisis de la suerte de hoy",
+    "icon": "☯️",
+    "color": "#8D6E63",
+    "refreshText": "Tirar de Nuevo",
+    "loadingText": "Leyendo the signs...",
+    "placeholderText": "Toca \"Tirar de Nuevo\" for today's fortune",
+    "posterType": "fortune",
+    "slogan": "Conoce tu camino, sigue el flujo",
+    "aiTags": [
+      "I Ching",
+      "fortune"
+    ]
+  },
+  {
+    "id": "literature",
+    "name": "Salón Literario",
+    "description": "Obras maestras literarias para saborear",
+    "generate": "Compartir un fragmento literario con análisis",
+    "icon": "📚",
+    "color": "#78909C",
+    "refreshText": "Nueva Pieza",
+    "loadingText": "Cargando literary works...",
+    "placeholderText": "Toca \"Nueva Pieza\" for literature recommendations",
+    "posterType": "literature",
+    "slogan": "La lectura refina el alma",
+    "aiTags": [
+      "literature",
+      "classics"
+    ]
+  },
+  {
+    "id": "foreignTrade",
+    "name": "Asistente Comercial",
+    "description": "Perspectivas y oportunidades de comercio exterior",
+    "generate": "Compartir una perspectiva de comercio exterior",
+    "icon": "🌐",
+    "color": "#5C6BC0",
+    "refreshText": "Nuevo Insight",
+    "loadingText": "Cargando trade conocimiento...",
+    "placeholderText": "Toca \"Nuevo Insight\" for trade conocimiento",
+    "posterType": "foreignTrade",
+    "slogan": "El comercio conecta el mundo",
+    "aiTags": [
+      "trade",
+      "cross-border"
+    ]
+  },
+  {
+    "id": "ecommerce",
+    "name": "Operaciones E-Commerce",
+    "description": "Tendencias y estrategias de comercio electrónico",
+    "generate": "Compartir un consejo de operaciones de comercio electrónico",
+    "icon": "🛒",
+    "color": "#FF7043",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando operations consejos...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for e-commerce perspectivas",
+    "posterType": "ecommerce",
+    "slogan": "Operaciones inteligentes, ventas sin preocupaciones",
+    "aiTags": [
+      "e-commerce",
+      "operations"
+    ]
+  },
+  {
+    "id": "math",
+    "name": "Genio Matemático",
+    "description": "Problemas divertidos de matemáticas para agudizar la mente",
+    "generate": "Compartir un dato matemático interesante",
+    "icon": "📐",
+    "color": "#7E57C2",
+    "refreshText": "Nuevo Problema",
+    "loadingText": "Cargando math puzzles...",
+    "placeholderText": "Toca \"Nuevo Problema\" for math conocimiento",
+    "posterType": "math",
+    "slogan": "Las matemáticas son el lenguaje de la ciencia",
+    "aiTags": [
+      "math",
+      "problem-solving"
+    ]
+  },
+  {
+    "id": "english",
+    "name": "Inglés Pro",
+    "description": "Consejos de inglés para la superación personal",
+    "generate": "Compartir un consejo práctico de aprendizaje de inglés",
+    "icon": "🔤",
+    "color": "#42A5F5",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando English consejos...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for English conocimiento",
+    "posterType": "english",
+    "slogan": "El inglés es un idioma global",
+    "aiTags": [
+      "English",
+      "learning"
+    ]
+  },
+  {
+    "id": "programming",
+    "name": "Mentor de Código",
+    "description": "Consejos de programación para el crecimiento técnico",
+    "generate": "Presentar un concepto de programación interesante",
+    "icon": "💻",
+    "color": "#26A69A",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando code consejos...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for programming skills",
+    "posterType": "programming",
+    "slogan": "El código cambia el mundo",
+    "aiTags": [
+      "programming",
+      "coding"
+    ]
+  },
+  {
+    "id": "photography",
+    "name": "Maestro de Foto",
+    "description": "Consejos de fotografía para capturar momentos bellos",
+    "generate": "Compartir un consejo práctico de fotografía",
+    "icon": "📷",
+    "color": "#EC407A",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando photography consejos...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for photography skills",
+    "posterType": "photography",
+    "slogan": "Captura la belleza a través del lente",
+    "aiTags": [
+      "photography",
+      "Consejos"
+    ]
+  },
+  {
+    "id": "beauty",
+    "name": "Gurú de Belleza",
+    "description": "Consejos de cuidado de la piel y belleza",
+    "generate": "Compartir un consejo práctico de belleza y cuidado de la piel",
+    "icon": "💄",
+    "color": "#EF5350",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando beauty conocimiento...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for beauty consejos",
+    "posterType": "beauty",
+    "slogan": "La belleza está en los detalles",
+    "aiTags": [
+      "Belleza",
+      "skincare"
+    ]
+  },
+  {
+    "id": "investment",
+    "name": "Asesor de Inversión",
+    "description": "Conocimiento de inversión para hacer crecer el patrimonio",
+    "generate": "Compartir un consejo de conocimiento de inversión",
+    "icon": "📈",
+    "color": "#66BB6A",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando investment conocimiento...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for investment perspectivas",
+    "posterType": "investment",
+    "slogan": "Inversión constante, riqueza duradera",
+    "aiTags": [
+      "Inversión",
+      "Riqueza"
+    ]
+  },
+  {
+    "id": "fishing",
+    "name": "Pesca Pro",
+    "description": "Consejos de pesca para un disfrute sin fin",
+    "generate": "Compartir un consejo o conocimiento de pesca",
+    "icon": "🎣",
+    "color": "#26C6DA",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando fishing consejos...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for fishing conocimiento",
+    "posterType": "fishing",
+    "slogan": "La pesca es un estilo de vida",
+    "aiTags": [
+      "fishing",
+      "Consejos"
+    ]
+  },
+  {
+    "id": "fitness",
+    "name": "Entrenador Fitness",
+    "description": "Guía de fitness para un cuerpo más fuerte",
+    "generate": "Compartir un consejo práctico de fitness",
+    "icon": "💪",
+    "color": "#AB47BC",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando fitness conocimiento...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for fitness conocimiento",
+    "posterType": "fitness",
+    "slogan": "La vida es movimiento",
+    "aiTags": [
+      "fitness",
+      "exercise"
+    ]
+  },
+  {
+    "id": "pet",
+    "name": "Expertoo en Mascotas",
+    "description": "Consejos de cuidado de mascotas con amor",
+    "generate": "Compartir un consejo de cuidado de mascotas",
+    "icon": "🐾",
+    "color": "#8D6E63",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando pet conocimiento...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for pet care consejos",
+    "posterType": "pet",
+    "slogan": "Las mascotas son nuestros mejores amigos",
+    "aiTags": [
+      "pets",
+      "care"
+    ]
+  },
+  {
+    "id": "fashion",
+    "name": "Icono de Moda",
+    "description": "Consejos de moda para expresar tu estilo",
+    "generate": "Compartir un consejo de moda y estilismo",
+    "icon": "👗",
+    "color": "#78909C",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando fashion news...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for fashion perspectivas",
+    "posterType": "fashion",
+    "slogan": "La moda es lo que compras, el estilo es lo que haces con ella",
+    "aiTags": [
+      "Moda",
+      "trends"
+    ]
+  },
+  {
+    "id": "outfit",
+    "name": "Guía de Estilo",
+    "description": "Recomendaciones diarias de vestimenta",
+    "generate": "Compartir una recomendación de vestimenta",
+    "icon": "👔",
+    "color": "#5C6BC0",
+    "refreshText": "Nuevo Look",
+    "loadingText": "Cargando style guide...",
+    "placeholderText": "Toca \"Nuevo Look\" for style consejos",
+    "posterType": "outfit",
+    "slogan": "Vístete con estilo, vive con garbo",
+    "aiTags": [
+      "outfit",
+      "styling"
+    ]
+  },
+  {
+    "id": "decoration",
+    "name": "Decoración del Hogar",
+    "description": "Consejos de decoración del hogar para embellecer tu espacio",
+    "generate": "Compartir un consejo de decoración del hogar",
+    "icon": "🏠",
+    "color": "#FF7043",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando decor conocimiento...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for decoration consejos",
+    "posterType": "decoration",
+    "slogan": "Haz tu hogar cálido y acogedor",
+    "aiTags": [
+      "decoration",
+      "Hogar"
+    ]
+  },
+  {
+    "id": "glassFiber",
+    "name": "Expertoo en Fibra de Vidrio",
+    "description": "Materiales de fibra de vidrio de vanguardia",
+    "generate": "Compartir conocimiento relacionado con fibra de vidrio",
+    "icon": "🧵",
+    "color": "#7E57C2",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando fiberglass conocimiento...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for fiberglass expertise",
+    "posterType": "glassFiber",
+    "slogan": "Materiales profesionales, calidad profesional",
+    "aiTags": [
+      "fiberglass",
+      "materials"
+    ]
+  },
+  {
+    "id": "resin",
+    "name": "Expertoo en Resina",
+    "description": "Arteesanía con resina y creatividad sin fin",
+    "generate": "Compartir un consejo de artesanía con resina",
+    "icon": "🧪",
+    "color": "#42A5F5",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando resin conocimiento...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for resin conocimiento",
+    "posterType": "resin",
+    "slogan": "Ciencia de materiales, aplicaciones ilimitadas",
+    "aiTags": [
+      "resin",
+      "chemical"
+    ]
+  },
+  {
+    "id": "tax",
+    "name": "Asesor Fiscal",
+    "description": "Planificación fiscal para cumplimiento y ahorro",
+    "generate": "Compartir un consejo de planificación fiscal",
+    "icon": "📋",
+    "color": "#26A69A",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando tax conocimiento...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for tax conocimiento",
+    "posterType": "tax",
+    "slogan": "Planificación fiscal inteligente, vida conforme",
+    "aiTags": [
+      "tax",
+      "Finanzas"
+    ]
+  },
+  {
+    "id": "law",
+    "name": "Asesor Legal",
+    "description": "Conocimiento legal para conocer y proteger tus derechos",
+    "generate": "Compartir un consejo legal práctico",
+    "icon": "⚖️",
+    "color": "#EC407A",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando legal conocimiento...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for legal conocimiento",
+    "posterType": "law",
+    "slogan": "Conoce la ley, protégete",
+    "aiTags": [
+      "law",
+      "rights"
+    ]
+  },
+  {
+    "id": "official",
+    "name": "Carrera Pro",
+    "description": "Sabiduría laboral para el éxito profesional",
+    "generate": "Compartir una perspectiva laboral",
+    "icon": "🎩",
+    "color": "#EF5350",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando career conocimiento...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for career consejos",
+    "posterType": "official",
+    "slogan": "El lugar de trabajo es un campo de batalla, gana con sabiduría",
+    "aiTags": [
+      "Carrera",
+      "interpersonal"
+    ]
+  },
+  {
+    "id": "handling",
+    "name": "Habilidades para la Vida",
+    "description": "Sabiduría práctica para manejar situaciones de la vida",
+    "generate": "Compartir un consejo práctico de vida",
+    "icon": "💎",
+    "color": "#66BB6A",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando life sabiduría...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for life sabiduría",
+    "posterType": "handling",
+    "slogan": "Entender el mundo es la verdadera sabiduría",
+    "aiTags": [
+      "Sabiduría",
+      "EQ"
+    ]
+  },
+  {
+    "id": "floral",
+    "name": "Arteista Floral",
+    "description": "Consejos de arte floral para una vida fragante",
+    "generate": "Compartir un consejo de cuidado floral",
+    "icon": "💐",
+    "color": "#26C6DA",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Cargando floral conocimiento...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for floral art consejos",
+    "posterType": "floral",
+    "slogan": "Las flores hablan su propio idioma",
+    "aiTags": [
+      "floral",
+      "flower arrangement"
+    ]
+  },
+  {
+    "id": "history",
+    "name": "Espejo de la Historia",
+    "description": "Historias para aprender del pasado",
+    "generate": "Compartir una historia histórica interesante",
+    "icon": "📚",
+    "color": "#AB47BC",
+    "refreshText": "Nueva Historia",
+    "loadingText": "Cargando historical tales...",
+    "placeholderText": "Toca \"Nueva Historia\" for historical conocimiento",
+    "posterType": "history",
+    "slogan": "Aprende de la historia para ver el futuro",
+    "aiTags": [
+      "Historia",
+      "stories"
+    ]
+  },
+  {
+    "id": "military",
+    "name": "Observatorio Militar",
+    "description": "Perspectivas militares para el pensamiento estratégico",
+    "generate": "Compartir una perspectiva militar",
+    "icon": "🎖️",
+    "color": "#8D6E63",
+    "refreshText": "Nuevo Insight",
+    "loadingText": "Cargando military conocimiento...",
+    "placeholderText": "Toca \"Nuevo Insight\" for military conocimiento",
+    "posterType": "military",
+    "slogan": "Conócete a ti mismo y a tu oponente, gana cada batalla",
+    "aiTags": [
+      "military",
+      "Estrategia"
+    ]
+  },
+  {
+    "id": "stock",
+    "name": "Faro de Acciones",
+    "description": "Perspectivas del mercado de valores para invertir informado",
+    "generate": "Compartir un análisis del mercado de valores",
+    "icon": "📈",
+    "color": "#1E88E5",
+    "refreshText": "Nuevo Insight",
+    "loadingText": "Analyst is reviewing the market...",
+    "placeholderText": "Toca \"Nuevo Insight\" for investment conocimiento",
+    "posterType": "stock",
+    "slogan": "Inversión racional, crecimiento constante",
+    "aiTags": [
+      "stocks",
+      "futures"
+    ]
+  },
+  {
+    "id": "economics",
+    "name": "Visión Económica",
+    "description": "Observaciones económicas para entender tendencias",
+    "generate": "Compartir una observación económica",
+    "icon": "💰",
+    "color": "#00897B",
+    "refreshText": "Nuevo Insight",
+    "loadingText": "Economist is analyzing...",
+    "placeholderText": "Toca \"Nuevo Insight\" for economic conocimiento",
+    "posterType": "economics",
+    "slogan": "Entiende la economía, capta las tendencias",
+    "aiTags": [
+      "economics",
+      "Análisis"
+    ]
+  },
+  {
+    "id": "business",
+    "name": "Sabiduría Empresarial",
+    "description": "Perspectivas de negocio para aprovechar oportunidades",
+    "generate": "Compartir una perspectiva de negocios",
+    "icon": "💼",
+    "color": "#6D4C41",
+    "refreshText": "Nuevo Insight",
+    "loadingText": "Negocios mentor is advising...",
+    "placeholderText": "Toca \"Nuevo Insight\" for business sabiduría",
+    "posterType": "business",
+    "slogan": "Los negocios son sobre personas, gana con visión",
+    "aiTags": [
+      "Negocios",
+      "management"
+    ]
+  },
+  {
+    "id": "news",
+    "name": "Frontera de Noticias",
+    "description": "Noticias diarias para mantenerse informado",
+    "generate": "Generar un resumen diario de noticias",
+    "icon": "📰",
+    "color": "#D32F2F",
+    "refreshText": "Nueva Actualización",
+    "loadingText": "Media expert is briefing you...",
+    "placeholderText": "Toca \"Nueva Actualización\" for news análisis",
+    "posterType": "news",
+    "slogan": "La información es rey, la percepción es poder",
+    "aiTags": [
+      "Noticias",
+      "headlines"
+    ]
+  },
+  {
+    "id": "wisdomBag",
+    "name": "Bolsa de Sabiduría",
+    "description": "Pepitas de sabiduría para la vida cotidiana",
+    "generate": "Compartir una pepita de sabiduría",
+    "icon": "🎁",
+    "color": "#FFA000",
+    "refreshText": "Nueva Alegríaa",
+    "loadingText": "Generando sabiduría...",
+    "placeholderText": "Toca \"Nueva Alegríaa\" for a sabiduría nugget",
+    "posterType": "wisdomBag",
+    "slogan": "Pequeña sabiduría, gran vida",
+    "aiTags": [
+      "Sabiduría",
+      "life tips"
+    ]
+  },
+  {
+    "id": "robotAi",
+    "name": "Bot de IA",
+    "description": "Inteligencia artificial y tecnología del futuro",
+    "generate": "Compartir una perspectiva de robótica o IA",
+    "icon": "🤖",
+    "color": "#7C4DFF",
+    "refreshText": "Nuevo Insight",
+    "loadingText": "AI is thinking...",
+    "placeholderText": "Toca \"Nuevo Insight\" for AI conocimiento",
+    "posterType": "robotAi",
+    "slogan": "El futuro inteligente está en tus manos",
+    "aiTags": [
+      "AI",
+      "robotics"
+    ]
+  },
+  {
+    "id": "americanExpert",
+    "name": "Informante de EE.UU.",
+    "description": "Cultura estadounidense en profundidad",
+    "generate": "Compartir un dato sobre Estados Unidos",
+    "icon": "🗽",
+    "color": "#1565C0",
+    "refreshText": "Nuevo Dato",
+    "loadingText": "Explorando America...",
+    "placeholderText": "Toca \"Nuevo Dato\" to learn about America",
+    "posterType": "americanExpert",
+    "slogan": "Entiende América, ve el mundo",
+    "aiTags": [
+      "America",
+      "culture"
+    ]
+  },
+  {
+    "id": "apple",
+    "name": "Aula Apple",
+    "description": "Conocimiento tan fructífero como una manzana al día",
+    "generate": "Compartir un punto de conocimiento interesante",
+    "icon": "🍎",
+    "color": "#E53935",
+    "refreshText": "Nueva Lección",
+    "loadingText": "Class is in session...",
+    "placeholderText": "Toca \"Nueva Lección\" for fresh conocimiento",
+    "posterType": "apple",
+    "slogan": "Un pequeño progreso cada día",
+    "aiTags": [
+      "conocimiento",
+      "learning"
+    ]
+  },
+  {
+    "id": "growth",
+    "name": "Expertoo en Crecimiento",
+    "description": "Estrategias de crecimiento de marca y perspectivas de mercado",
+    "generate": "Compartir una estrategia de crecimiento de marca",
+    "icon": "📈",
+    "color": "#00C853",
+    "refreshText": "Nueva Estrategia",
+    "loadingText": "Generando growth strategies...",
+    "placeholderText": "Toca \"Nueva Estrategia\" for growth conocimiento",
+    "posterType": "growth",
+    "slogan": "El crecimiento es la línea de vida del negocio",
+    "aiTags": [
+      "Crecimiento",
+      "marketing"
+    ]
+  },
+  {
+    "id": "uiDesigner",
+    "name": "Diseñador UI",
+    "description": "Diseño UI para estética visual",
+    "generate": "Compartir un consejo de diseño UI",
+    "icon": "🎨",
+    "color": "#FF4081",
+    "refreshText": "Nueva Idea",
+    "loadingText": "Generando design inspiration...",
+    "placeholderText": "Toca \"Nueva Idea\" for design inspiration",
+    "posterType": "uiDesigner",
+    "slogan": "El diseño hace del mundo un lugar mejor",
+    "aiTags": [
+      "Diseño",
+      "UI"
+    ]
+  },
+  {
+    "id": "futures",
+    "name": "Expertoo en Futuros",
+    "description": "Futuros de materias primas y análisis profesional",
+    "generate": "Compartir una perspectiva de trading de futuros",
+    "icon": "📊",
+    "color": "#455A64",
+    "refreshText": "Nuevo Análisis",
+    "loadingText": "Analizando futures...",
+    "placeholderText": "Toca \"Nuevo Análisis\" for futures conocimiento",
+    "posterType": "futures",
+    "slogan": "Entiende las materias primas, gestiona el riesgo",
+    "aiTags": [
+      "futures",
+      "commodities"
+    ]
+  },
+  {
+    "id": "freud",
+    "name": "Estudios Freudianos",
+    "description": "Conceptos de psicología freudiana explorados",
+    "generate": "Compartir un concepto de psicología freudiana",
+    "icon": "🧠",
+    "color": "#5E35B1",
+    "refreshText": "Nuevo Concepto",
+    "loadingText": "Psychoanalyzing...",
+    "placeholderText": "Toca \"Nuevo Concepto\" for psychology perspectivas",
+    "posterType": "freud",
+    "slogan": "Explora el subconsciente, decodifica la mente",
+    "aiTags": [
+      "psychology",
+      "psychoanalysis"
+    ]
+  },
+  {
+    "id": "fashionBrand",
+    "name": "Marcas de Lujo",
+    "description": "Marcas de moda mundiales en la frontera del estilo",
+    "generate": "Compartir una historia de marca de moda mundial",
+    "icon": "👛",
+    "color": "#880E4F",
+    "refreshText": "Nueva Historia",
+    "loadingText": "Cargando brand stories...",
+    "placeholderText": "Toca \"Nueva Historia\" to discover luxury brands",
+    "posterType": "fashionBrand",
+    "slogan": "Saborea los clásicos, conoce las tendencias",
+    "aiTags": [
+      "brands",
+      "Moda"
+    ]
+  },
+  {
+    "id": "xinStudy",
+    "name": "Maestro Xinxue",
+    "description": "Filosofía de la mente de Wang Yangming",
+    "generate": "Compartir una perspectiva de filosofía Xinxue",
+    "icon": "💭",
+    "color": "#00695C",
+    "refreshText": "Nuevo Insight",
+    "loadingText": "Interpretando Xinxue sabiduría...",
+    "placeholderText": "Toca \"Nuevo Insight\" for Xinxue sabiduría",
+    "posterType": "xinStudy",
+    "slogan": "Unidad de saber y hacer, alcanzar la verdadera conciencia",
+    "aiTags": [
+      "Xinxue",
+      "Wang Yangming"
+    ]
+  },
+  {
+    "id": "liStudy",
+    "name": "Maestro Lixue",
+    "description": "Pensamiento neoconfuciano de Zhu Xi",
+    "generate": "Compartir una perspectiva de filosofía Lixue",
+    "icon": "📖",
+    "color": "#4A148C",
+    "refreshText": "Nuevo Insight",
+    "loadingText": "Interpretando Lixue sabiduría...",
+    "placeholderText": "Toca \"Nuevo Insight\" for Lixue sabiduría",
+    "posterType": "liStudy",
+    "slogan": "Investigar las cosas, alcanzar el conocimiento; rectificar la mente, hacer sincera la voluntad",
+    "aiTags": [
+      "Lixue",
+      "Zhu Xi"
+    ]
+  },
+  {
+    "id": "anthropologist",
+    "name": "Antropólogo",
+    "description": "Perspectivas antropológicas sobre el mundo",
+    "generate": "Compartir una perspectiva de antropología",
+    "icon": "🏛️",
+    "color": "#8D6E63",
+    "refreshText": "Nuevo Insight",
+    "loadingText": "Explorando humanity...",
+    "placeholderText": "Toca \"Nuevo Insight\" to explore civilizations",
+    "posterType": "anthropologist",
+    "slogan": "Entiende la humanidad, conócete a ti mismo",
+    "aiTags": [
+      "anthropology",
+      "culture"
+    ]
+  },
+  {
+    "id": "geographer",
+    "name": "Geógrafo",
+    "description": "Conocimiento geográfico para explorar el mundo",
+    "generate": "Compartir un dato geográfico",
+    "icon": "🌍",
+    "color": "#26A69A",
+    "refreshText": "Nuevo Dato",
+    "loadingText": "Explorando geography...",
+    "placeholderText": "Toca \"Nuevo Dato\" to explore Earth's wonders",
+    "posterType": "geographer",
+    "slogan": "Lee la Tierra, ve el mundo claramente",
+    "aiTags": [
+      "geography",
+      "landforms"
+    ]
+  },
+  {
+    "id": "historian",
+    "name": "Historiador",
+    "description": "Investigación histórica e interpretación profunda",
+    "generate": "Compartir una perspectiva de investigación histórica",
+    "icon": "📜",
+    "color": "#7E57C2",
+    "refreshText": "Nuevo Insight",
+    "loadingText": "Explorando the river of history...",
+    "placeholderText": "Toca \"Nuevo Insight\" to touch history's pulse",
+    "posterType": "historian",
+    "slogan": "Aprende de la historia para iluminar el futuro",
+    "aiTags": [
+      "Historia",
+      "research"
+    ]
+  },
+  {
+    "id": "narratologist",
+    "name": "Narratólogo",
+    "description": "El arte de la narrativa y el poder de las historias",
+    "generate": "Compartir un concepto de narratología",
+    "icon": "📖",
+    "color": "#EC407A",
+    "refreshText": "Nuevo Concepto",
+    "loadingText": "Interpretando narrative art...",
+    "placeholderText": "Toca \"Nuevo Concepto\" to grasp story magic",
+    "posterType": "narratologist",
+    "slogan": "El camino de las historias, el arte de la narrativa",
+    "aiTags": [
+      "narrative",
+      "storytelling"
+    ]
+  },
+  {
+    "id": "psychologist",
+    "name": "Psicólogo",
+    "description": "Investigación psicológica profunda y perspectivas",
+    "generate": "Compartir un hallazgo de investigación psicológica",
+    "icon": "🧠",
+    "color": "#5C6BC0",
+    "refreshText": "Nuevo Hallazgo",
+    "loadingText": "Explorando psychological mysteries...",
+    "placeholderText": "Toca \"Nuevo Hallazgo\" to decode the mind",
+    "posterType": "psychologist",
+    "slogan": "Ilumina la mente, conócete a ti mismo",
+    "aiTags": [
+      "psychology",
+      "cognition"
+    ]
+  },
+  {
+    "id": "softwareArchitect",
+    "name": "Arquitecto de Software",
+    "description": "Arquitectura de software y diseño de sistemas",
+    "generate": "Compartir una perspectiva de arquitectura de software",
+    "icon": "🏗️",
+    "color": "#1565C0",
+    "refreshText": "Nuevo Insight",
+    "loadingText": "Interpretando architecture conocimiento...",
+    "placeholderText": "Toca \"Nuevo Insight\" for architecture conocimiento",
+    "posterType": "softwareArchitect",
+    "slogan": "Diseño de sistemas, el camino de la arquitectura",
+    "aiTags": [
+      "architecture",
+      "Diseño"
+    ]
+  },
+  {
+    "id": "solidityEngineer",
+    "name": "Ingeniero Solidity",
+    "description": "Contratos inteligentes y desarrollo blockchain",
+    "generate": "Compartir una perspectiva de contrato inteligente",
+    "icon": "⛓️",
+    "color": "#2E7D32",
+    "refreshText": "Nuevo Insight",
+    "loadingText": "Interpretando contract conocimiento...",
+    "placeholderText": "Toca \"Nuevo Insight\" for contract conocimiento",
+    "posterType": "solidityEngineer",
+    "slogan": "Contratos inteligentes, el camino de la cadena",
+    "aiTags": [
+      "blockchain",
+      "smart contracts"
+    ]
+  },
+  {
+    "id": "xiaohongshuExpert",
+    "name": "Expertoo RED",
+    "description": "Consejos de operaciones y contenido de Xiaohongshu",
+    "generate": "Compartir un consejo de operaciones de Xiaohongshu",
+    "icon": "📕",
+    "color": "#E91E63",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Interpretando operations consejos...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for operations consejos",
+    "posterType": "xiaohongshuExpert",
+    "slogan": "Código de tráfico, el contenido es rey",
+    "aiTags": [
+      "operations",
+      "content marketing"
+    ]
+  },
+  {
+    "id": "seoExpert",
+    "name": "Expertoo SEO",
+    "description": "Optimización de motores de búsqueda para llegar a más personas",
+    "generate": "Generar un consejo de optimización SEO",
+    "icon": "🔍",
+    "color": "#FF5722",
+    "refreshText": "Nuevo Consejo",
+    "loadingText": "Interpretando SEO consejos...",
+    "placeholderText": "Toca \"Nuevo Consejo\" for SEO consejos",
+    "posterType": "seoExpert",
+    "slogan": "Optimiza para búsqueda, mejora tus rankings",
+    "aiTags": [
+      "SEO",
+      "search"
+    ]
+  },
+  {
+    "id": "idiom",
+    "name": "Refranes Chinos",
+    "description": "Refranes populares chinos y sabiduría tradicional",
+    "generate": "Generar un modismo o proverbio popular chino",
+    "icon": "📝",
+    "color": "#795548",
+    "refreshText": "Nuevo Refrán",
+    "loadingText": "Interpretando folk sabiduría...",
+    "placeholderText": "Toca \"Nuevo Refrán\" for a folk idiom or proverb",
+    "posterType": "idiom",
+    "slogan": "Sabiduría popular transmitida a través de los tiempos",
+    "aiTags": [
+      "idioms",
+      "proverbs"
+    ]
+  }
+]

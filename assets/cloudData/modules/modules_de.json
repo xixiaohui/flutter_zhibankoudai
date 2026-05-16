@@ -1,0 +1,1022 @@
+[
+  {
+    "id": "quote",
+    "name": "Zeitlose Zitate",
+    "description": "Words of Weisheit to light up your day",
+    "generate": "Generieren a classic Zitat with author and source",
+    "icon": "📜",
+    "color": "#5C6BC0",
+    "refreshText": "Neues Zitat",
+    "loadingText": "Weisheit ist unterwegs...",
+    "placeholderText": "Tippen \"Neues Zitat\" for today's inspiration",
+    "posterType": "quote",
+    "slogan": "Weisheit from great minds",
+    "aiTags": [
+      "quotes",
+      "Weisheit"
+    ]
+  },
+  {
+    "id": "joke",
+    "name": "Tägliche Witze",
+    "description": "Lighten up your day with laughter",
+    "generate": "Generieren a short and funny Witz",
+    "icon": "😄",
+    "color": "#FF7043",
+    "refreshText": "Neuer Witz",
+    "loadingText": "A laugh ist unterwegs...",
+    "placeholderText": "Tippen \"Neuer Witz\" for a good laugh",
+    "posterType": "joke",
+    "slogan": "A laugh a day keeps the blues away",
+    "aiTags": [
+      "jokes",
+      "humor"
+    ]
+  },
+  {
+    "id": "psychology",
+    "name": "Geistesweisheit",
+    "description": "Psychology Einblicks to know yourself and others",
+    "generate": "Generieren a practical psychology Tipp",
+    "icon": "🧠",
+    "color": "#7E57C2",
+    "refreshText": "Neue Einsicht",
+    "loadingText": "Analysiere...",
+    "placeholderText": "Tippen \"Neue Einsicht\" for psychology Wissen",
+    "posterType": "psychology",
+    "slogan": "Understand the mind, meet a better self",
+    "aiTags": [
+      "psychology",
+      "emotions"
+    ]
+  },
+  {
+    "id": "finance",
+    "name": "Finanzfenster",
+    "description": "Investition and wealth management Einblicks",
+    "generate": "Generieren a practical financial literacy Tipp",
+    "icon": "💹",
+    "color": "#26A69A",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden financial Einblicks...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for financial news",
+    "posterType": "finance",
+    "slogan": "See the trends in wealth",
+    "aiTags": [
+      "Finanzen",
+      "economy"
+    ]
+  },
+  {
+    "id": "love",
+    "name": "Süße Momente",
+    "description": "Romantic Zitats to warm your heart",
+    "generate": "Generieren a romantic love Zitat",
+    "icon": "💕",
+    "color": "#EC407A",
+    "refreshText": "Neue Zeile",
+    "loadingText": "Erstelle sweet words...",
+    "placeholderText": "Tippen \"Neue Zeile\" for a romantic Zitat",
+    "posterType": "love",
+    "slogan": "Liebe speaks louder than words",
+    "aiTags": [
+      "Liebe",
+      "romance"
+    ]
+  },
+  {
+    "id": "movie",
+    "name": "Filmwelt",
+    "description": "Great movies you shouldn't miss",
+    "generate": "Generieren a worthwhile movie recommendation",
+    "icon": "🎬",
+    "color": "#EF5350",
+    "refreshText": "Neuer Film",
+    "loadingText": "Suche great films...",
+    "placeholderText": "Tippen \"Neuer Film\" for a movie recommendation",
+    "posterType": "movie",
+    "slogan": "Leben on screen, emotions in every frame",
+    "aiTags": [
+      "movies",
+      "reviews"
+    ]
+  },
+  {
+    "id": "music",
+    "name": "Musikzeit",
+    "description": "Classic songs that touch the soul",
+    "generate": "Recommend a classic song",
+    "icon": "🎵",
+    "color": "#AB47BC",
+    "refreshText": "Neues Lied",
+    "loadingText": "Spiele a great track...",
+    "placeholderText": "Tippen \"Neues Lied\" for music recommendations",
+    "posterType": "music",
+    "slogan": "Musik is food for the soul",
+    "aiTags": [
+      "Musik",
+      "playlist"
+    ]
+  },
+  {
+    "id": "tech",
+    "name": "Technik-Grenze",
+    "description": "Techniknology trends shaping the future",
+    "generate": "Teilen a cutting-edge tech update",
+    "icon": "🚀",
+    "color": "#42A5F5",
+    "refreshText": "Neues Update",
+    "loadingText": "Laden tech news...",
+    "placeholderText": "Tippen \"Neues Update\" for tech Einblicks",
+    "posterType": "tech",
+    "slogan": "Techniknology changes the world",
+    "aiTags": [
+      "Technik",
+      "innovation"
+    ]
+  },
+  {
+    "id": "tcm",
+    "name": "TCM-Wohlbefinden",
+    "description": "Traditional Chinese Medicine for healthy living",
+    "generate": "Teilen a TCM wellness Tipp",
+    "icon": "🌿",
+    "color": "#66BB6A",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden wellness Wissen...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for TCM Weisheit",
+    "posterType": "tcm",
+    "slogan": "Ancient Weisheit for modern health",
+    "aiTags": [
+      "TCM",
+      "wellness"
+    ]
+  },
+  {
+    "id": "travel",
+    "name": "Reisetagebuch",
+    "description": "Reisen recommendations to explore the world",
+    "generate": "Recommend a travel destination",
+    "icon": "✈️",
+    "color": "#26C6DA",
+    "refreshText": "Neuer Ort",
+    "loadingText": "Plane your next trip...",
+    "placeholderText": "Tippen \"Neuer Ort\" for travel inspiration",
+    "posterType": "travel",
+    "slogan": "The world is vast, go explore",
+    "aiTags": [
+      "Reisen",
+      "destinations"
+    ]
+  },
+  {
+    "id": "fortune",
+    "name": "Tägliches Glück",
+    "description": "Täglich fortune for good luck",
+    "generate": "Generieren today's fortune Analyse",
+    "icon": "☯️",
+    "color": "#8D6E63",
+    "refreshText": "Erneut Werfen",
+    "loadingText": "Lese the signs...",
+    "placeholderText": "Tippen \"Erneut Werfen\" for today's fortune",
+    "posterType": "fortune",
+    "slogan": "Know your path, follow the flow",
+    "aiTags": [
+      "I Ching",
+      "fortune"
+    ]
+  },
+  {
+    "id": "literature",
+    "name": "Literarische Halle",
+    "description": "Literary masterpieces to savor",
+    "generate": "Teilen a literary excerpt with Analyse",
+    "icon": "📚",
+    "color": "#78909C",
+    "refreshText": "Neues Stück",
+    "loadingText": "Laden literary works...",
+    "placeholderText": "Tippen \"Neues Stück\" for literature recommendations",
+    "posterType": "literature",
+    "slogan": "Lese refines the soul",
+    "aiTags": [
+      "literature",
+      "classics"
+    ]
+  },
+  {
+    "id": "foreignTrade",
+    "name": "Handelsassistent",
+    "description": "Foreign trade Einblicks and opportunities",
+    "generate": "Teilen a foreign trade Einblick",
+    "icon": "🌐",
+    "color": "#5C6BC0",
+    "refreshText": "Neue Einsicht",
+    "loadingText": "Laden trade Wissen...",
+    "placeholderText": "Tippen \"Neue Einsicht\" for trade Wissen",
+    "posterType": "foreignTrade",
+    "slogan": "Trade connects the world",
+    "aiTags": [
+      "trade",
+      "cross-border"
+    ]
+  },
+  {
+    "id": "ecommerce",
+    "name": "E-Commerce-Betrieb",
+    "description": "E-commerce trends and strategies",
+    "generate": "Teilen an e-commerce operations Tipp",
+    "icon": "🛒",
+    "color": "#FF7043",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden operations Tipps...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for e-commerce Einblicks",
+    "posterType": "ecommerce",
+    "slogan": "Smart operations, worry-free sales",
+    "aiTags": [
+      "e-commerce",
+      "operations"
+    ]
+  },
+  {
+    "id": "math",
+    "name": "Mathe-Ass",
+    "description": "Fun math problems to sharpen your mind",
+    "generate": "Teilen an interesting math fact",
+    "icon": "📐",
+    "color": "#7E57C2",
+    "refreshText": "Neues Problem",
+    "loadingText": "Laden math puzzles...",
+    "placeholderText": "Tippen \"Neues Problem\" for math Wissen",
+    "posterType": "math",
+    "slogan": "Mathematics is the language of science",
+    "aiTags": [
+      "math",
+      "problem-solving"
+    ]
+  },
+  {
+    "id": "english",
+    "name": "Englisch Pro",
+    "description": "English learning Tipps for self-improvement",
+    "generate": "Teilen a practical English learning Tipp",
+    "icon": "🔤",
+    "color": "#42A5F5",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden English Tipps...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for English Wissen",
+    "posterType": "english",
+    "slogan": "English is a global language",
+    "aiTags": [
+      "English",
+      "learning"
+    ]
+  },
+  {
+    "id": "programming",
+    "name": "Code-Mentor",
+    "description": "Programming Tipps for technical growth",
+    "generate": "Introduce an interesting programming concept",
+    "icon": "💻",
+    "color": "#26A69A",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden code Tipps...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for programming skills",
+    "posterType": "programming",
+    "slogan": "Code changes the world",
+    "aiTags": [
+      "programming",
+      "coding"
+    ]
+  },
+  {
+    "id": "photography",
+    "name": "Fotomeister",
+    "description": "Photography Tipps to capture beautiful moments",
+    "generate": "Teilen a practical photography Tipp",
+    "icon": "📷",
+    "color": "#EC407A",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden photography Tipps...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for photography skills",
+    "posterType": "photography",
+    "slogan": "Capture beauty through the lens",
+    "aiTags": [
+      "photography",
+      "Tipps"
+    ]
+  },
+  {
+    "id": "beauty",
+    "name": "Schönheits-Guru",
+    "description": "Skincare and beauty Tipps for a radiant glow",
+    "generate": "Teilen a practical beauty and skincare Tipp",
+    "icon": "💄",
+    "color": "#EF5350",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden beauty Wissen...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for beauty Tipps",
+    "posterType": "beauty",
+    "slogan": "Schönheit is in the details",
+    "aiTags": [
+      "Schönheit",
+      "skincare"
+    ]
+  },
+  {
+    "id": "investment",
+    "name": "Anlageberater",
+    "description": "Investition Wissen for wealth growth",
+    "generate": "Teilen an investment Wissen Tipp",
+    "icon": "📈",
+    "color": "#66BB6A",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden investment Wissen...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for investment Einblicks",
+    "posterType": "investment",
+    "slogan": "Steady investing, lasting wealth",
+    "aiTags": [
+      "Investition",
+      "Wohlstand"
+    ]
+  },
+  {
+    "id": "fishing",
+    "name": "Angel-Profi",
+    "description": "Fishing Tipps for endless enjoyment",
+    "generate": "Teilen a fishing Tipp or Wissen",
+    "icon": "🎣",
+    "color": "#26C6DA",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden fishing Tipps...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for fishing Wissen",
+    "posterType": "fishing",
+    "slogan": "Fishing is a way of life",
+    "aiTags": [
+      "fishing",
+      "Tipps"
+    ]
+  },
+  {
+    "id": "fitness",
+    "name": "Fitness-Coach",
+    "description": "Fitness guidance for a stronger body",
+    "generate": "Teilen a practical fitness Tipp",
+    "icon": "💪",
+    "color": "#AB47BC",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden fitness Wissen...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for fitness Wissen",
+    "posterType": "fitness",
+    "slogan": "Leben is movement",
+    "aiTags": [
+      "fitness",
+      "exercise"
+    ]
+  },
+  {
+    "id": "pet",
+    "name": "Haustier-Expertee",
+    "description": "Pet care Tipps with loving companionship",
+    "generate": "Teilen a pet care Tipp",
+    "icon": "🐾",
+    "color": "#8D6E63",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden pet Wissen...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for pet care Tipps",
+    "posterType": "pet",
+    "slogan": "Pets are our best friends",
+    "aiTags": [
+      "pets",
+      "care"
+    ]
+  },
+  {
+    "id": "fashion",
+    "name": "Mode-Ikone",
+    "description": "Mode Tipps to express your style",
+    "generate": "Teilen a fashion and styling Tipp",
+    "icon": "👗",
+    "color": "#78909C",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden fashion news...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for fashion Einblicks",
+    "posterType": "fashion",
+    "slogan": "Mode is what you buy, style is what you do with it",
+    "aiTags": [
+      "Mode",
+      "trends"
+    ]
+  },
+  {
+    "id": "outfit",
+    "name": "Stilberater",
+    "description": "Täglich outfit recommendations",
+    "generate": "Teilen an outfit recommendation",
+    "icon": "👔",
+    "color": "#5C6BC0",
+    "refreshText": "Neuer Look",
+    "loadingText": "Laden style guide...",
+    "placeholderText": "Tippen \"Neuer Look\" for style Tipps",
+    "posterType": "outfit",
+    "slogan": "Dress with style, live with flair",
+    "aiTags": [
+      "outfit",
+      "styling"
+    ]
+  },
+  {
+    "id": "decoration",
+    "name": "Wohnkultur",
+    "description": "Zuhause decoration Tipps to beautify your space",
+    "generate": "Teilen a home decoration Tipp",
+    "icon": "🏠",
+    "color": "#FF7043",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden decor Wissen...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for decoration Tipps",
+    "posterType": "decoration",
+    "slogan": "Make your home warm and welcoming",
+    "aiTags": [
+      "decoration",
+      "Zuhause"
+    ]
+  },
+  {
+    "id": "glassFiber",
+    "name": "Glasfaser-Expertee",
+    "description": "Fiberglass materials at the cutting edge",
+    "generate": "Teilen fiberglass-related Wissen",
+    "icon": "🧵",
+    "color": "#7E57C2",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden fiberglass Wissen...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for fiberglass expertise",
+    "posterType": "glassFiber",
+    "slogan": "Professional materials, professional quality",
+    "aiTags": [
+      "fiberglass",
+      "materials"
+    ]
+  },
+  {
+    "id": "resin",
+    "name": "Harz-Expertee",
+    "description": "Resin craft with endless creativity",
+    "generate": "Teilen a resin craft Tipp",
+    "icon": "🧪",
+    "color": "#42A5F5",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden resin Wissen...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for resin Wissen",
+    "posterType": "resin",
+    "slogan": "Materials science, limitless applications",
+    "aiTags": [
+      "resin",
+      "chemical"
+    ]
+  },
+  {
+    "id": "tax",
+    "name": "Steuerberater",
+    "description": "Tax planning for compliance and savings",
+    "generate": "Teilen a tax planning Tipp",
+    "icon": "📋",
+    "color": "#26A69A",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden tax Wissen...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for tax Wissen",
+    "posterType": "tax",
+    "slogan": "Smart tax planning, compliant living",
+    "aiTags": [
+      "tax",
+      "Finanzen"
+    ]
+  },
+  {
+    "id": "law",
+    "name": "Rechtsberater",
+    "description": "Legal Wissen to know and protect your rights",
+    "generate": "Teilen a practical legal Tipp",
+    "icon": "⚖️",
+    "color": "#EC407A",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden legal Wissen...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for legal Wissen",
+    "posterType": "law",
+    "slogan": "Know the law, protect yourself",
+    "aiTags": [
+      "law",
+      "rights"
+    ]
+  },
+  {
+    "id": "official",
+    "name": "Karriere-Profi",
+    "description": "Workplace Weisheit for career success",
+    "generate": "Teilen a workplace Einblick",
+    "icon": "🎩",
+    "color": "#EF5350",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden career Wissen...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for career Tipps",
+    "posterType": "official",
+    "slogan": "The workplace is a battlefield, win with Weisheit",
+    "aiTags": [
+      "Karriere",
+      "interpersonal"
+    ]
+  },
+  {
+    "id": "handling",
+    "name": "Lebenskompetenz",
+    "description": "Practical Weisheit for handling life's situations",
+    "generate": "Teilen a practical life Tipp",
+    "icon": "💎",
+    "color": "#66BB6A",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden life Weisheit...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for life Weisheit",
+    "posterType": "handling",
+    "slogan": "Understanding the world is true Weisheit",
+    "aiTags": [
+      "Weisheit",
+      "EQ"
+    ]
+  },
+  {
+    "id": "floral",
+    "name": "Floralkünstler",
+    "description": "Floral art Tipps for a fragrant life",
+    "generate": "Teilen a floral care Tipp",
+    "icon": "💐",
+    "color": "#26C6DA",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Laden floral Wissen...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for floral art Tipps",
+    "posterType": "floral",
+    "slogan": "Flowers speak a language of their own",
+    "aiTags": [
+      "floral",
+      "flower arrangement"
+    ]
+  },
+  {
+    "id": "history",
+    "name": "Geschichtsspiegel",
+    "description": "Historical stories to learn from the past",
+    "generate": "Teilen an interesting historical story",
+    "icon": "📚",
+    "color": "#AB47BC",
+    "refreshText": "Neue Geschichte",
+    "loadingText": "Laden historical tales...",
+    "placeholderText": "Tippen \"Neue Geschichte\" for historical Wissen",
+    "posterType": "history",
+    "slogan": "Learn from history to see the future",
+    "aiTags": [
+      "Geschichte",
+      "stories"
+    ]
+  },
+  {
+    "id": "military",
+    "name": "Militärbeobachter",
+    "description": "Military Einblicks for strategic thinking",
+    "generate": "Teilen a military Einblick",
+    "icon": "🎖️",
+    "color": "#8D6E63",
+    "refreshText": "Neue Einsicht",
+    "loadingText": "Laden military Wissen...",
+    "placeholderText": "Tippen \"Neue Einsicht\" for military Wissen",
+    "posterType": "military",
+    "slogan": "Know yourself and your opponent, win every battle",
+    "aiTags": [
+      "military",
+      "Strategie"
+    ]
+  },
+  {
+    "id": "stock",
+    "name": "Aktien-Leuchtfeuer",
+    "description": "Stock market Einblicks for informed investing",
+    "generate": "Teilen a stock market Analyse",
+    "icon": "📈",
+    "color": "#1E88E5",
+    "refreshText": "Neue Einsicht",
+    "loadingText": "Analyst is reviewing the market...",
+    "placeholderText": "Tippen \"Neue Einsicht\" for investment Wissen",
+    "posterType": "stock",
+    "slogan": "Rational investing, steady growth",
+    "aiTags": [
+      "stocks",
+      "futures"
+    ]
+  },
+  {
+    "id": "economics",
+    "name": "Wirtschaftsansicht",
+    "description": "Economic observations to understand trends",
+    "generate": "Teilen an economic observation",
+    "icon": "💰",
+    "color": "#00897B",
+    "refreshText": "Neue Einsicht",
+    "loadingText": "Economist is analyzing...",
+    "placeholderText": "Tippen \"Neue Einsicht\" for economic Wissen",
+    "posterType": "economics",
+    "slogan": "Understand the economy, grasp the trends",
+    "aiTags": [
+      "economics",
+      "Analyse"
+    ]
+  },
+  {
+    "id": "business",
+    "name": "Geschäftsweisheit",
+    "description": "Geschäft Einblicks to seize opportunities",
+    "generate": "Teilen a business Einblick",
+    "icon": "💼",
+    "color": "#6D4C41",
+    "refreshText": "Neue Einsicht",
+    "loadingText": "Geschäft mentor is advising...",
+    "placeholderText": "Tippen \"Neue Einsicht\" for business Weisheit",
+    "posterType": "business",
+    "slogan": "Geschäft is about people, win with vision",
+    "aiTags": [
+      "Geschäft",
+      "management"
+    ]
+  },
+  {
+    "id": "news",
+    "name": "Nachrichten-Grenze",
+    "description": "Täglich news to stay informed",
+    "generate": "Generieren a daily news digest",
+    "icon": "📰",
+    "color": "#D32F2F",
+    "refreshText": "Neues Update",
+    "loadingText": "Media expert is briefing you...",
+    "placeholderText": "Tippen \"Neues Update\" for news Analyse",
+    "posterType": "news",
+    "slogan": "Information is king, Einblick is power",
+    "aiTags": [
+      "Nachrichten",
+      "headlines"
+    ]
+  },
+  {
+    "id": "wisdomBag",
+    "name": "Weisheitsbeutel",
+    "description": "Weisheit nuggets for everyday life",
+    "generate": "Teilen a Weisheit nugget",
+    "icon": "🎁",
+    "color": "#FFA000",
+    "refreshText": "Neues Juwel",
+    "loadingText": "Generiere Weisheit...",
+    "placeholderText": "Tippen \"Neues Juwel\" for a Weisheit nugget",
+    "posterType": "wisdomBag",
+    "slogan": "Small Weisheit, big life",
+    "aiTags": [
+      "Weisheit",
+      "life tips"
+    ]
+  },
+  {
+    "id": "robotAi",
+    "name": "KI-Bot",
+    "description": "Kunstificial intelligence and future technology",
+    "generate": "Teilen a robotics or AI Einblick",
+    "icon": "🤖",
+    "color": "#7C4DFF",
+    "refreshText": "Neue Einsicht",
+    "loadingText": "AI is thinking...",
+    "placeholderText": "Tippen \"Neue Einsicht\" for AI Wissen",
+    "posterType": "robotAi",
+    "slogan": "The intelligent future is in your hands",
+    "aiTags": [
+      "AI",
+      "robotics"
+    ]
+  },
+  {
+    "id": "americanExpert",
+    "name": "Amerika-Insider",
+    "description": "American culture in depth",
+    "generate": "Teilen a fact about America",
+    "icon": "🗽",
+    "color": "#1565C0",
+    "refreshText": "Neue Tatsache",
+    "loadingText": "Erkunde America...",
+    "placeholderText": "Tippen \"Neue Tatsache\" to learn about America",
+    "posterType": "americanExpert",
+    "slogan": "Understand America, see the world",
+    "aiTags": [
+      "America",
+      "culture"
+    ]
+  },
+  {
+    "id": "apple",
+    "name": "Apple-Klassenzimmer",
+    "description": "Wissen as fruitful as an apple a day",
+    "generate": "Teilen an interesting Wissen point",
+    "icon": "🍎",
+    "color": "#E53935",
+    "refreshText": "Neue Lektion",
+    "loadingText": "Class is in session...",
+    "placeholderText": "Tippen \"Neue Lektion\" for fresh Wissen",
+    "posterType": "apple",
+    "slogan": "A little progress every day",
+    "aiTags": [
+      "Wissen",
+      "learning"
+    ]
+  },
+  {
+    "id": "growth",
+    "name": "Wachstums-Expertee",
+    "description": "Marke growth strategies and market Einblicks",
+    "generate": "Teilen a brand growth strategy",
+    "icon": "📈",
+    "color": "#00C853",
+    "refreshText": "Neue Strategie",
+    "loadingText": "Generiere growth strategies...",
+    "placeholderText": "Tippen \"Neue Strategie\" for growth Wissen",
+    "posterType": "growth",
+    "slogan": "Wachstum is the lifeline of business",
+    "aiTags": [
+      "Wachstum",
+      "marketing"
+    ]
+  },
+  {
+    "id": "uiDesigner",
+    "name": "UI-Designer",
+    "description": "UI design for visual aesthetics",
+    "generate": "Teilen a UI design Tipp",
+    "icon": "🎨",
+    "color": "#FF4081",
+    "refreshText": "Neue Idee",
+    "loadingText": "Generiere design inspiration...",
+    "placeholderText": "Tippen \"Neue Idee\" for design inspiration",
+    "posterType": "uiDesigner",
+    "slogan": "Design makes the world a better place",
+    "aiTags": [
+      "Design",
+      "UI"
+    ]
+  },
+  {
+    "id": "futures",
+    "name": "Terminhandel-Expertee",
+    "description": "Commodity futures and professional Analyse",
+    "generate": "Teilen a futures trading Einblick",
+    "icon": "📊",
+    "color": "#455A64",
+    "refreshText": "Neue Analyse",
+    "loadingText": "Analysiere futures...",
+    "placeholderText": "Tippen \"Neue Analyse\" for futures Wissen",
+    "posterType": "futures",
+    "slogan": "Understand commodities, manage risk",
+    "aiTags": [
+      "futures",
+      "commodities"
+    ]
+  },
+  {
+    "id": "freud",
+    "name": "Freud-Studien",
+    "description": "Freudian psychology concepts explored",
+    "generate": "Teilen a Freudian psychology concept",
+    "icon": "🧠",
+    "color": "#5E35B1",
+    "refreshText": "Neues Konzept",
+    "loadingText": "Psychoanalyzing...",
+    "placeholderText": "Tippen \"Neues Konzept\" for psychology Einblicks",
+    "posterType": "freud",
+    "slogan": "Explore the subconscious, decode the mind",
+    "aiTags": [
+      "psychology",
+      "psychoanalysis"
+    ]
+  },
+  {
+    "id": "fashionBrand",
+    "name": "Luxusmarken",
+    "description": "Welt fashion brands at the frontier of style",
+    "generate": "Teilen a world fashion brand story",
+    "icon": "👛",
+    "color": "#880E4F",
+    "refreshText": "Neue Geschichte",
+    "loadingText": "Laden brand stories...",
+    "placeholderText": "Tippen \"Neue Geschichte\" to discover luxury brands",
+    "posterType": "fashionBrand",
+    "slogan": "Taste the classics, know the trends",
+    "aiTags": [
+      "brands",
+      "Mode"
+    ]
+  },
+  {
+    "id": "xinStudy",
+    "name": "Xinxue-Meister",
+    "description": "Wang Yangming's philosophy of mind",
+    "generate": "Teilen a Xinxue philosophy Einblick",
+    "icon": "💭",
+    "color": "#00695C",
+    "refreshText": "Neue Einsicht",
+    "loadingText": "Interpretiere Xinxue Weisheit...",
+    "placeholderText": "Tippen \"Neue Einsicht\" for Xinxue Weisheit",
+    "posterType": "xinStudy",
+    "slogan": "Unity of knowing and doing, attain true conscience",
+    "aiTags": [
+      "Xinxue",
+      "Wang Yangming"
+    ]
+  },
+  {
+    "id": "liStudy",
+    "name": "Lixue-Meister",
+    "description": "Zhu Xi's Neo-Confucian thought",
+    "generate": "Teilen a Lixue philosophy Einblick",
+    "icon": "📖",
+    "color": "#4A148C",
+    "refreshText": "Neue Einsicht",
+    "loadingText": "Interpretiere Lixue Weisheit...",
+    "placeholderText": "Tippen \"Neue Einsicht\" for Lixue Weisheit",
+    "posterType": "liStudy",
+    "slogan": "Investigate things, attain Wissen; rectify the mind, make the will sincere",
+    "aiTags": [
+      "Lixue",
+      "Zhu Xi"
+    ]
+  },
+  {
+    "id": "anthropologist",
+    "name": "Anthropologe",
+    "description": "Anthropological perspectives on the world",
+    "generate": "Teilen an anthropology Einblick",
+    "icon": "🏛️",
+    "color": "#8D6E63",
+    "refreshText": "Neue Einsicht",
+    "loadingText": "Erkunde humanity...",
+    "placeholderText": "Tippen \"Neue Einsicht\" to explore civilizations",
+    "posterType": "anthropologist",
+    "slogan": "Understand humanity, know yourself",
+    "aiTags": [
+      "anthropology",
+      "culture"
+    ]
+  },
+  {
+    "id": "geographer",
+    "name": "Geograph",
+    "description": "Geographic Wissen to explore the world",
+    "generate": "Teilen a geographic fact",
+    "icon": "🌍",
+    "color": "#26A69A",
+    "refreshText": "Neue Tatsache",
+    "loadingText": "Erkunde geography...",
+    "placeholderText": "Tippen \"Neue Tatsache\" to explore Earth's wonders",
+    "posterType": "geographer",
+    "slogan": "Read the Earth, see the world clearly",
+    "aiTags": [
+      "geography",
+      "landforms"
+    ]
+  },
+  {
+    "id": "historian",
+    "name": "Historiker",
+    "description": "Historical research and deep interpretation",
+    "generate": "Teilen a historical research perspective",
+    "icon": "📜",
+    "color": "#7E57C2",
+    "refreshText": "Neue Einsicht",
+    "loadingText": "Erkunde the river of history...",
+    "placeholderText": "Tippen \"Neue Einsicht\" to touch history's pulse",
+    "posterType": "historian",
+    "slogan": "Learn from history to illuminate the future",
+    "aiTags": [
+      "Geschichte",
+      "research"
+    ]
+  },
+  {
+    "id": "narratologist",
+    "name": "Narratologe",
+    "description": "The art of narrative and the power of stories",
+    "generate": "Teilen a narratology concept",
+    "icon": "📖",
+    "color": "#EC407A",
+    "refreshText": "Neues Konzept",
+    "loadingText": "Interpretiere narrative art...",
+    "placeholderText": "Tippen \"Neues Konzept\" to grasp story magic",
+    "posterType": "narratologist",
+    "slogan": "The way of stories, the art of narrative",
+    "aiTags": [
+      "narrative",
+      "storytelling"
+    ]
+  },
+  {
+    "id": "psychologist",
+    "name": "Psychologe",
+    "description": "Deep psychological research and Einblicks",
+    "generate": "Teilen a psychology research finding",
+    "icon": "🧠",
+    "color": "#5C6BC0",
+    "refreshText": "Neue Erkenntnis",
+    "loadingText": "Erkunde psychological mysteries...",
+    "placeholderText": "Tippen \"Neue Erkenntnis\" to decode the mind",
+    "posterType": "psychologist",
+    "slogan": "Illuminate the mind, know yourself",
+    "aiTags": [
+      "psychology",
+      "cognition"
+    ]
+  },
+  {
+    "id": "softwareArchitect",
+    "name": "Software-Architekt",
+    "description": "Software architecture and system design",
+    "generate": "Teilen a software architecture Einblick",
+    "icon": "🏗️",
+    "color": "#1565C0",
+    "refreshText": "Neue Einsicht",
+    "loadingText": "Interpretiere architecture Wissen...",
+    "placeholderText": "Tippen \"Neue Einsicht\" for architecture Wissen",
+    "posterType": "softwareArchitect",
+    "slogan": "System design, the way of architecture",
+    "aiTags": [
+      "architecture",
+      "Design"
+    ]
+  },
+  {
+    "id": "solidityEngineer",
+    "name": "Solidity-Ingenieur",
+    "description": "Smart contracts and blockchain development",
+    "generate": "Teilen a smart contract Einblick",
+    "icon": "⛓️",
+    "color": "#2E7D32",
+    "refreshText": "Neue Einsicht",
+    "loadingText": "Interpretiere contract Wissen...",
+    "placeholderText": "Tippen \"Neue Einsicht\" for contract Wissen",
+    "posterType": "solidityEngineer",
+    "slogan": "Smart contracts, the way of the chain",
+    "aiTags": [
+      "blockchain",
+      "smart contracts"
+    ]
+  },
+  {
+    "id": "xiaohongshuExpert",
+    "name": "RED-Expertee",
+    "description": "Xiaohongshu operations and content seeding Tipps",
+    "generate": "Teilen a Xiaohongshu operations Tipp",
+    "icon": "📕",
+    "color": "#E91E63",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Interpretiere operations Tipps...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for operations Tipps",
+    "posterType": "xiaohongshuExpert",
+    "slogan": "Traffic code, content is king",
+    "aiTags": [
+      "operations",
+      "content marketing"
+    ]
+  },
+  {
+    "id": "seoExpert",
+    "name": "SEO-Expertee",
+    "description": "Search engine optimization to reach more people",
+    "generate": "Generieren an SEO optimization Tipp",
+    "icon": "🔍",
+    "color": "#FF5722",
+    "refreshText": "Neuer Tipp",
+    "loadingText": "Interpretiere SEO Tipps...",
+    "placeholderText": "Tippen \"Neuer Tipp\" for SEO Tipps",
+    "posterType": "seoExpert",
+    "slogan": "Optimize for search, boost your rankings",
+    "aiTags": [
+      "SEO",
+      "search"
+    ]
+  },
+  {
+    "id": "idiom",
+    "name": "Chinesische Sprichwörter",
+    "description": "Chinese folk sayings and traditional Weisheit",
+    "generate": "Generieren a Chinese idiom or folk proverb",
+    "icon": "📝",
+    "color": "#795548",
+    "refreshText": "Neues Sprichwort",
+    "loadingText": "Interpretiere folk Weisheit...",
+    "placeholderText": "Tippen \"Neues Sprichwort\" for a folk idiom or proverb",
+    "posterType": "idiom",
+    "slogan": "Folk Weisheit passed down through the ages",
+    "aiTags": [
+      "idioms",
+      "proverbs"
+    ]
+  }
+]

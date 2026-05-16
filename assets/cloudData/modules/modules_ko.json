@@ -1,0 +1,1022 @@
+[
+  {
+    "id": "quote",
+    "name": "시대를 초월한 명언",
+    "description": "하루를 밝히는 지혜의 말",
+    "generate": "저자와 출처가 있는 고전 명언 생성",
+    "icon": "📜",
+    "color": "#5C6BC0",
+    "refreshText": "새로운 명언",
+    "loadingText": "지혜 가 오고 있습니다...",
+    "placeholderText": "탭 \"새로운 명언\" for today's inspiration",
+    "posterType": "quote",
+    "slogan": "위대한 마음에서 나온 지혜",
+    "aiTags": [
+      "quotes",
+      "지혜"
+    ]
+  },
+  {
+    "id": "joke",
+    "name": "오늘의 농담",
+    "description": "웃음으로 하루를 밝게",
+    "generate": "짧고 재미있는 농담 생성",
+    "icon": "😄",
+    "color": "#FF7043",
+    "refreshText": "새로운 농담",
+    "loadingText": "A laugh 가 오고 있습니다...",
+    "placeholderText": "탭 \"새로운 농담\" for a good laugh",
+    "posterType": "joke",
+    "slogan": "하루 한 번 웃음으로 우울을 날리자",
+    "aiTags": [
+      "jokes",
+      "humor"
+    ]
+  },
+  {
+    "id": "psychology",
+    "name": "마음의 지혜",
+    "description": "자신과 타인을 이해하는 심리학 인사이트",
+    "generate": "실용 심리학 팁 생성",
+    "icon": "🧠",
+    "color": "#7E57C2",
+    "refreshText": "새로운 인사이트",
+    "loadingText": "분석 중...",
+    "placeholderText": "탭 \"새로운 인사이트\" for psychology 지식",
+    "posterType": "psychology",
+    "slogan": "마음을 이해하고 더 나은 자신을 만나다",
+    "aiTags": [
+      "psychology",
+      "emotions"
+    ]
+  },
+  {
+    "id": "finance",
+    "name": "금융 윈도우",
+    "description": "투자와 자산 관리 인사이트",
+    "generate": "실용 금융 지식 팁 생성",
+    "icon": "💹",
+    "color": "#26A69A",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 financial 인사이트s...",
+    "placeholderText": "탭 \"새로운 팁\" for financial news",
+    "posterType": "finance",
+    "slogan": "부의 흐름을 보다",
+    "aiTags": [
+      "금융",
+      "economy"
+    ]
+  },
+  {
+    "id": "love",
+    "name": "달콤한 순간",
+    "description": "마음을 따뜻하게 하는 로맨틱 명언",
+    "generate": "로맨틱 사랑 명언 생성",
+    "icon": "💕",
+    "color": "#EC407A",
+    "refreshText": "새로운 문장",
+    "loadingText": "만드는 중 sweet words...",
+    "placeholderText": "탭 \"새로운 문장\" for a romantic 명언",
+    "posterType": "love",
+    "slogan": "사랑은 말보다 크게 말한다",
+    "aiTags": [
+      "사랑",
+      "romance"
+    ]
+  },
+  {
+    "id": "movie",
+    "name": "영화의 세계",
+    "description": "놓치면 안 될 명작 영화",
+    "generate": "볼만한 영화 추천 생성",
+    "icon": "🎬",
+    "color": "#EF5350",
+    "refreshText": "새로운 영화",
+    "loadingText": "찾는 중 great films...",
+    "placeholderText": "탭 \"새로운 영화\" for a movie recommendation",
+    "posterType": "movie",
+    "slogan": "화면 속 인생, 모든 프레임의 감정",
+    "aiTags": [
+      "movies",
+      "reviews"
+    ]
+  },
+  {
+    "id": "music",
+    "name": "뮤직 타임",
+    "description": "영혼을 울리는 명곡",
+    "generate": "명곡 추천",
+    "icon": "🎵",
+    "color": "#AB47BC",
+    "refreshText": "새로운 노래",
+    "loadingText": "재생 중 a great track...",
+    "placeholderText": "탭 \"새로운 노래\" for music recommendations",
+    "posterType": "music",
+    "slogan": "음악은 영혼의 양식",
+    "aiTags": [
+      "음악",
+      "playlist"
+    ]
+  },
+  {
+    "id": "tech",
+    "name": "테크 프론티어",
+    "description": "미래를 만드는 기술 트렌드",
+    "generate": "최첨단 기술 업데이트 공유",
+    "icon": "🚀",
+    "color": "#42A5F5",
+    "refreshText": "새로운 업데이트",
+    "loadingText": "로딩 중 tech news...",
+    "placeholderText": "탭 \"새로운 업데이트\" for tech 인사이트s",
+    "posterType": "tech",
+    "slogan": "기술이 세상을 바꾼다",
+    "aiTags": [
+      "기술",
+      "innovation"
+    ]
+  },
+  {
+    "id": "tcm",
+    "name": "한방 웰니스",
+    "description": "건강한 삶을 위한 한방",
+    "generate": "한방 건강 팁 공유",
+    "icon": "🌿",
+    "color": "#66BB6A",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 wellness 지식...",
+    "placeholderText": "탭 \"새로운 팁\" for TCM 지혜",
+    "posterType": "tcm",
+    "slogan": "현대 건강을 위한 고대의 지혜",
+    "aiTags": [
+      "TCM",
+      "wellness"
+    ]
+  },
+  {
+    "id": "travel",
+    "name": "여행 일기",
+    "description": "세계를 탐험하는 여행 추천",
+    "generate": "여행지 추천",
+    "icon": "✈️",
+    "color": "#26C6DA",
+    "refreshText": "새로운 장소",
+    "loadingText": "계획 중 your next trip...",
+    "placeholderText": "탭 \"새로운 장소\" for travel inspiration",
+    "posterType": "travel",
+    "slogan": "세상은 넓다, 탐험하라",
+    "aiTags": [
+      "여행",
+      "destinations"
+    ]
+  },
+  {
+    "id": "fortune",
+    "name": "오늘의 운세",
+    "description": "행운을 위한 오늘의 운세",
+    "generate": "오늘의 운세 분석 생성",
+    "icon": "☯️",
+    "color": "#8D6E63",
+    "refreshText": "다시 뽑기",
+    "loadingText": "읽는 중 the signs...",
+    "placeholderText": "탭 \"다시 뽑기\" for today's fortune",
+    "posterType": "fortune",
+    "slogan": "자신의 길을 알고 흐름을 따르라",
+    "aiTags": [
+      "I Ching",
+      "fortune"
+    ]
+  },
+  {
+    "id": "literature",
+    "name": "문학의 전당",
+    "description": "음미할 문학 걸작",
+    "generate": "분석과 함께 문학 발췌 공유",
+    "icon": "📚",
+    "color": "#78909C",
+    "refreshText": "새로운 작품",
+    "loadingText": "로딩 중 literary works...",
+    "placeholderText": "탭 \"새로운 작품\" for literature recommendations",
+    "posterType": "literature",
+    "slogan": "독서는 영혼을 정제한다",
+    "aiTags": [
+      "literature",
+      "classics"
+    ]
+  },
+  {
+    "id": "foreignTrade",
+    "name": "무역 어시스턴트",
+    "description": "해외 무역 인사이트와 기회",
+    "generate": "해외 무역 인사이트 공유",
+    "icon": "🌐",
+    "color": "#5C6BC0",
+    "refreshText": "새로운 인사이트",
+    "loadingText": "로딩 중 trade 지식...",
+    "placeholderText": "탭 \"새로운 인사이트\" for trade 지식",
+    "posterType": "foreignTrade",
+    "slogan": "무역이 세상을 연결한다",
+    "aiTags": [
+      "trade",
+      "cross-border"
+    ]
+  },
+  {
+    "id": "ecommerce",
+    "name": "이커머스 운영",
+    "description": "이커머스 트렌드와 전략",
+    "generate": "이커머스 운영 팁 공유",
+    "icon": "🛒",
+    "color": "#FF7043",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 operations 팁s...",
+    "placeholderText": "탭 \"새로운 팁\" for e-commerce 인사이트s",
+    "posterType": "ecommerce",
+    "slogan": "스마트 운영, 걱정 없는 판매",
+    "aiTags": [
+      "e-commerce",
+      "operations"
+    ]
+  },
+  {
+    "id": "math",
+    "name": "수학 천재",
+    "description": "두뇌를 깨우는 재미있는 수학",
+    "generate": "재미있는 수학 사실 공유",
+    "icon": "📐",
+    "color": "#7E57C2",
+    "refreshText": "새로운 문제",
+    "loadingText": "로딩 중 math puzzles...",
+    "placeholderText": "탭 \"새로운 문제\" for math 지식",
+    "posterType": "math",
+    "slogan": "수학은 과학의 언어",
+    "aiTags": [
+      "math",
+      "problem-solving"
+    ]
+  },
+  {
+    "id": "english",
+    "name": "영어 프로",
+    "description": "자기 계발을 위한 영어 학습 팁",
+    "generate": "실용 영어 학습 팁 공유",
+    "icon": "🔤",
+    "color": "#42A5F5",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 English 팁s...",
+    "placeholderText": "탭 \"새로운 팁\" for English 지식",
+    "posterType": "english",
+    "slogan": "영어는 글로벌 언어",
+    "aiTags": [
+      "English",
+      "learning"
+    ]
+  },
+  {
+    "id": "programming",
+    "name": "코드 멘토",
+    "description": "기술 성장을 위한 프로그래밍 팁",
+    "generate": "흥미로운 프로그래밍 개념 소개",
+    "icon": "💻",
+    "color": "#26A69A",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 code 팁s...",
+    "placeholderText": "탭 \"새로운 팁\" for programming skills",
+    "posterType": "programming",
+    "slogan": "코드가 세상을 바꾼다",
+    "aiTags": [
+      "programming",
+      "coding"
+    ]
+  },
+  {
+    "id": "photography",
+    "name": "사진 마스터",
+    "description": "아름다운 순간을 담는 사진 팁",
+    "generate": "실용 사진 팁 공유",
+    "icon": "📷",
+    "color": "#EC407A",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 photography 팁s...",
+    "placeholderText": "탭 \"새로운 팁\" for photography skills",
+    "posterType": "photography",
+    "slogan": "렌즈로 아름다움을 담다",
+    "aiTags": [
+      "photography",
+      "팁"
+    ]
+  },
+  {
+    "id": "beauty",
+    "name": "뷰티 전문가",
+    "description": "빛나는 피부를 위한 뷰티 팁",
+    "generate": "실용 뷰티 스킨케어 팁 공유",
+    "icon": "💄",
+    "color": "#EF5350",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 beauty 지식...",
+    "placeholderText": "탭 \"새로운 팁\" for beauty 팁s",
+    "posterType": "beauty",
+    "slogan": "아름다움은 디테일에 있다",
+    "aiTags": [
+      "아름다움",
+      "skincare"
+    ]
+  },
+  {
+    "id": "investment",
+    "name": "투자 어드바이저",
+    "description": "자산 증식을 위한 투자 지식",
+    "generate": "투자 지식 팁 공유",
+    "icon": "📈",
+    "color": "#66BB6A",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 investment 지식...",
+    "placeholderText": "탭 \"새로운 팁\" for investment 인사이트s",
+    "posterType": "investment",
+    "slogan": "꾸준한 투자, 지속되는 부",
+    "aiTags": [
+      "투자",
+      "부"
+    ]
+  },
+  {
+    "id": "fishing",
+    "name": "낚시 프로",
+    "description": "끝없는 즐거움을 위한 낚시 팁",
+    "generate": "낚시 팁 또는 지식 공유",
+    "icon": "🎣",
+    "color": "#26C6DA",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 fishing 팁s...",
+    "placeholderText": "탭 \"새로운 팁\" for fishing 지식",
+    "posterType": "fishing",
+    "slogan": "낚시는 삶의 방식",
+    "aiTags": [
+      "fishing",
+      "팁"
+    ]
+  },
+  {
+    "id": "fitness",
+    "name": "피트니스 코치",
+    "description": "더 강한 몸을 위한 피트니스 가이드",
+    "generate": "실용 피트니스 팁 공유",
+    "icon": "💪",
+    "color": "#AB47BC",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 fitness 지식...",
+    "placeholderText": "탭 \"새로운 팁\" for fitness 지식",
+    "posterType": "fitness",
+    "slogan": "인생은 움직임",
+    "aiTags": [
+      "fitness",
+      "exercise"
+    ]
+  },
+  {
+    "id": "pet",
+    "name": "반려동물 전문가",
+    "description": "사랑스러운 반려동물 케어 팁",
+    "generate": "반려동물 케어 팁 공유",
+    "icon": "🐾",
+    "color": "#8D6E63",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 pet 지식...",
+    "placeholderText": "탭 \"새로운 팁\" for pet care 팁s",
+    "posterType": "pet",
+    "slogan": "반려동물은 최고의 친구",
+    "aiTags": [
+      "pets",
+      "care"
+    ]
+  },
+  {
+    "id": "fashion",
+    "name": "패션 아이콘",
+    "description": "스타일을 표현하는 패션 팁",
+    "generate": "패션 스타일링 팁 공유",
+    "icon": "👗",
+    "color": "#78909C",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 fashion news...",
+    "placeholderText": "탭 \"새로운 팁\" for fashion 인사이트s",
+    "posterType": "fashion",
+    "slogan": "패션은 사는 것, 스타일은 입는 것",
+    "aiTags": [
+      "패션",
+      "trends"
+    ]
+  },
+  {
+    "id": "outfit",
+    "name": "스타일 가이드",
+    "description": "데일리 코디 추천",
+    "generate": "코디 추천 공유",
+    "icon": "👔",
+    "color": "#5C6BC0",
+    "refreshText": "새로운 스타일",
+    "loadingText": "로딩 중 style guide...",
+    "placeholderText": "탭 \"새로운 스타일\" for style 팁s",
+    "posterType": "outfit",
+    "slogan": "스타일 있게 입고, 멋지게 살자",
+    "aiTags": [
+      "outfit",
+      "styling"
+    ]
+  },
+  {
+    "id": "decoration",
+    "name": "홈 데코",
+    "description": "공간을 아름답게 꾸미는 홈 데코 팁",
+    "generate": "홈 데코 팁 공유",
+    "icon": "🏠",
+    "color": "#FF7043",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 decor 지식...",
+    "placeholderText": "탭 \"새로운 팁\" for decoration 팁s",
+    "posterType": "decoration",
+    "slogan": "집을 따뜻하고 환영하게",
+    "aiTags": [
+      "decoration",
+      "홈"
+    ]
+  },
+  {
+    "id": "glassFiber",
+    "name": "유리섬유 전문가",
+    "description": "최첨단 유리섬유 소재",
+    "generate": "유리섬유 관련 지식 공유",
+    "icon": "🧵",
+    "color": "#7E57C2",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 fiberglass 지식...",
+    "placeholderText": "탭 \"새로운 팁\" for fiberglass expertise",
+    "posterType": "glassFiber",
+    "slogan": "전문 소재, 전문 품질",
+    "aiTags": [
+      "fiberglass",
+      "materials"
+    ]
+  },
+  {
+    "id": "resin",
+    "name": "레진 전문가",
+    "description": "무한한 창의성의 레진 공예",
+    "generate": "레진 공예 팁 공유",
+    "icon": "🧪",
+    "color": "#42A5F5",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 resin 지식...",
+    "placeholderText": "탭 \"새로운 팁\" for resin 지식",
+    "posterType": "resin",
+    "slogan": "재료 과학, 무한한 응용",
+    "aiTags": [
+      "resin",
+      "chemical"
+    ]
+  },
+  {
+    "id": "tax",
+    "name": "세무 어드바이저",
+    "description": "절세와 컴플라이언스를 위한 세무 플랜",
+    "generate": "세무 플랜 팁 공유",
+    "icon": "📋",
+    "color": "#26A69A",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 tax 지식...",
+    "placeholderText": "탭 \"새로운 팁\" for tax 지식",
+    "posterType": "tax",
+    "slogan": "스마트 세무 플랜, 컴플라이언스 생활",
+    "aiTags": [
+      "tax",
+      "금융"
+    ]
+  },
+  {
+    "id": "law",
+    "name": "법률 어드바이저",
+    "description": "권리를 알고 지키는 법률 지식",
+    "generate": "실용 법률 팁 공유",
+    "icon": "⚖️",
+    "color": "#EC407A",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 legal 지식...",
+    "placeholderText": "탭 \"새로운 팁\" for legal 지식",
+    "posterType": "law",
+    "slogan": "법을 알고 자신을 보호하라",
+    "aiTags": [
+      "law",
+      "rights"
+    ]
+  },
+  {
+    "id": "official",
+    "name": "커리어 프로",
+    "description": "커리어 성공을 위한 직장 지혜",
+    "generate": "직장 인사이트 공유",
+    "icon": "🎩",
+    "color": "#EF5350",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 career 지식...",
+    "placeholderText": "탭 \"새로운 팁\" for career 팁s",
+    "posterType": "official",
+    "slogan": "직장은 전장, 지혜로 승리하라",
+    "aiTags": [
+      "커리어",
+      "interpersonal"
+    ]
+  },
+  {
+    "id": "handling",
+    "name": "생활의 지혜",
+    "description": "인생의 상황을 다루는 실용 지혜",
+    "generate": "실용 생활 팁 공유",
+    "icon": "💎",
+    "color": "#66BB6A",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 life 지혜...",
+    "placeholderText": "탭 \"새로운 팁\" for life 지혜",
+    "posterType": "handling",
+    "slogan": "세상을 이해하는 것이 진정한 지혜",
+    "aiTags": [
+      "지혜",
+      "EQ"
+    ]
+  },
+  {
+    "id": "floral",
+    "name": "플로럴 아티스트",
+    "description": "향기로운 삶을 위한 플라워 아트 팁",
+    "generate": "플라워 케어 팁 공유",
+    "icon": "💐",
+    "color": "#26C6DA",
+    "refreshText": "새로운 팁",
+    "loadingText": "로딩 중 floral 지식...",
+    "placeholderText": "탭 \"새로운 팁\" for floral art 팁s",
+    "posterType": "floral",
+    "slogan": "꽃은 그들만의 언어로 말한다",
+    "aiTags": [
+      "floral",
+      "flower arrangement"
+    ]
+  },
+  {
+    "id": "history",
+    "name": "역사의 거울",
+    "description": "과거에서 배우는 역사 이야기",
+    "generate": "흥미로운 역사 이야기 공유",
+    "icon": "📚",
+    "color": "#AB47BC",
+    "refreshText": "새로운 스토리",
+    "loadingText": "로딩 중 historical tales...",
+    "placeholderText": "탭 \"새로운 스토리\" for historical 지식",
+    "posterType": "history",
+    "slogan": "역사에서 배워 미래를 보라",
+    "aiTags": [
+      "역사",
+      "stories"
+    ]
+  },
+  {
+    "id": "military",
+    "name": "밀리터리 워치",
+    "description": "전략적 사고를 위한 군사 인사이트",
+    "generate": "군사 인사이트 공유",
+    "icon": "🎖️",
+    "color": "#8D6E63",
+    "refreshText": "새로운 인사이트",
+    "loadingText": "로딩 중 military 지식...",
+    "placeholderText": "탭 \"새로운 인사이트\" for military 지식",
+    "posterType": "military",
+    "slogan": "자신을 알고 상대를 알면 백전백승",
+    "aiTags": [
+      "military",
+      "전략"
+    ]
+  },
+  {
+    "id": "stock",
+    "name": "주식 비콘",
+    "description": "정보 있는 투자를 위한 주식 인사이트",
+    "generate": "주식 시장 분석 공유",
+    "icon": "📈",
+    "color": "#1E88E5",
+    "refreshText": "새로운 인사이트",
+    "loadingText": "Analyst is reviewing the market...",
+    "placeholderText": "탭 \"새로운 인사이트\" for investment 지식",
+    "posterType": "stock",
+    "slogan": "합리적 투자, 꾸준한 성장",
+    "aiTags": [
+      "stocks",
+      "futures"
+    ]
+  },
+  {
+    "id": "economics",
+    "name": "경제 뷰",
+    "description": "트렌드를 이해하는 경제 관찰",
+    "generate": "경제 관찰 공유",
+    "icon": "💰",
+    "color": "#00897B",
+    "refreshText": "새로운 인사이트",
+    "loadingText": "Economist is analyzing...",
+    "placeholderText": "탭 \"새로운 인사이트\" for economic 지식",
+    "posterType": "economics",
+    "slogan": "경제를 이해하고 트렌드를 잡아라",
+    "aiTags": [
+      "economics",
+      "분석"
+    ]
+  },
+  {
+    "id": "business",
+    "name": "비즈니스 지혜",
+    "description": "기회를 잡는 비즈니스 인사이트",
+    "generate": "비즈니스 인사이트 공유",
+    "icon": "💼",
+    "color": "#6D4C41",
+    "refreshText": "새로운 인사이트",
+    "loadingText": "비즈니스 mentor is advising...",
+    "placeholderText": "탭 \"새로운 인사이트\" for business 지혜",
+    "posterType": "business",
+    "slogan": "비즈니스는 사람, 비전으로 승리하라",
+    "aiTags": [
+      "비즈니스",
+      "management"
+    ]
+  },
+  {
+    "id": "news",
+    "name": "뉴스 프론티어",
+    "description": "정보 획득을 위한 데일리 뉴스",
+    "generate": "일일 뉴스 다이제스트 생성",
+    "icon": "📰",
+    "color": "#D32F2F",
+    "refreshText": "새로운 업데이트",
+    "loadingText": "Media expert is briefing you...",
+    "placeholderText": "탭 \"새로운 업데이트\" for news 분석",
+    "posterType": "news",
+    "slogan": "정보는 왕, 인사이트는 힘",
+    "aiTags": [
+      "뉴스",
+      "headlines"
+    ]
+  },
+  {
+    "id": "wisdomBag",
+    "name": "지혜 주머니",
+    "description": "일상을 위한 지혜 조각",
+    "generate": "지혜 조각 공유",
+    "icon": "🎁",
+    "color": "#FFA000",
+    "refreshText": "새로운 보석",
+    "loadingText": "생성 중 지혜...",
+    "placeholderText": "탭 \"새로운 보석\" for a 지혜 nugget",
+    "posterType": "wisdomBag",
+    "slogan": "작은 지혜, 큰 인생",
+    "aiTags": [
+      "지혜",
+      "life tips"
+    ]
+  },
+  {
+    "id": "robotAi",
+    "name": "AI 봇",
+    "description": "인공지능과 미래 기술",
+    "generate": "로봇공학 또는 AI 인사이트 공유",
+    "icon": "🤖",
+    "color": "#7C4DFF",
+    "refreshText": "새로운 인사이트",
+    "loadingText": "AI is thinking...",
+    "placeholderText": "탭 \"새로운 인사이트\" for AI 지식",
+    "posterType": "robotAi",
+    "slogan": "지능형 미래가 당신 손에",
+    "aiTags": [
+      "AI",
+      "robotics"
+    ]
+  },
+  {
+    "id": "americanExpert",
+    "name": "미국 인사이더",
+    "description": "미국 문화 심층 탐구",
+    "generate": "미국에 관한 사실 공유",
+    "icon": "🗽",
+    "color": "#1565C0",
+    "refreshText": "새로운 사실",
+    "loadingText": "탐색 중 America...",
+    "placeholderText": "탭 \"새로운 사실\" to learn about America",
+    "posterType": "americanExpert",
+    "slogan": "미국을 이해하고 세계를 보라",
+    "aiTags": [
+      "America",
+      "culture"
+    ]
+  },
+  {
+    "id": "apple",
+    "name": "애플 교실",
+    "description": "하루 한 알 사과처럼 유익한 지식",
+    "generate": "흥미로운 지식 포인트 공유",
+    "icon": "🍎",
+    "color": "#E53935",
+    "refreshText": "새로운 레슨",
+    "loadingText": "Class is in session...",
+    "placeholderText": "탭 \"새로운 레슨\" for fresh 지식",
+    "posterType": "apple",
+    "slogan": "매일 조금씩 진전",
+    "aiTags": [
+      "지식",
+      "learning"
+    ]
+  },
+  {
+    "id": "growth",
+    "name": "성장 전문가",
+    "description": "브랜드 성장 전략과 마켓 인사이트",
+    "generate": "브랜드 성장 전략 공유",
+    "icon": "📈",
+    "color": "#00C853",
+    "refreshText": "새로운 전략",
+    "loadingText": "생성 중 growth strategies...",
+    "placeholderText": "탭 \"새로운 전략\" for growth 지식",
+    "posterType": "growth",
+    "slogan": "성장은 비즈니스의 생명선",
+    "aiTags": [
+      "성장",
+      "marketing"
+    ]
+  },
+  {
+    "id": "uiDesigner",
+    "name": "UI 디자이너",
+    "description": "시각적 미학을 위한 UI 디자인",
+    "generate": "UI 디자인 팁 공유",
+    "icon": "🎨",
+    "color": "#FF4081",
+    "refreshText": "새로운 아이디어",
+    "loadingText": "생성 중 design inspiration...",
+    "placeholderText": "탭 \"새로운 아이디어\" for design inspiration",
+    "posterType": "uiDesigner",
+    "slogan": "디자인이 세상을 더 나은 곳으로",
+    "aiTags": [
+      "디자인",
+      "UI"
+    ]
+  },
+  {
+    "id": "futures",
+    "name": "선물 전문가",
+    "description": "상품 선물과 전문 분석",
+    "generate": "선물 거래 인사이트 공유",
+    "icon": "📊",
+    "color": "#455A64",
+    "refreshText": "새로운 분석",
+    "loadingText": "분석 중 futures...",
+    "placeholderText": "탭 \"새로운 분석\" for futures 지식",
+    "posterType": "futures",
+    "slogan": "상품을 이해하고 리스크를 관리하라",
+    "aiTags": [
+      "futures",
+      "commodities"
+    ]
+  },
+  {
+    "id": "freud",
+    "name": "프로이트 연구",
+    "description": "프로이트 심리학 개념 탐구",
+    "generate": "프로이트 심리학 개념 공유",
+    "icon": "🧠",
+    "color": "#5E35B1",
+    "refreshText": "새로운 개념",
+    "loadingText": "Psychoanalyzing...",
+    "placeholderText": "탭 \"새로운 개념\" for psychology 인사이트s",
+    "posterType": "freud",
+    "slogan": "잠재의식을 탐구하고 마음을 해독하라",
+    "aiTags": [
+      "psychology",
+      "psychoanalysis"
+    ]
+  },
+  {
+    "id": "fashionBrand",
+    "name": "럭셔리 브랜드",
+    "description": "스타일의 최전선, 세계 패션 브랜드",
+    "generate": "세계 패션 브랜드 스토리 공유",
+    "icon": "👛",
+    "color": "#880E4F",
+    "refreshText": "새로운 스토리",
+    "loadingText": "로딩 중 brand stories...",
+    "placeholderText": "탭 \"새로운 스토리\" to discover luxury brands",
+    "posterType": "fashionBrand",
+    "slogan": "클래식을 음미하고 트렌드를 알라",
+    "aiTags": [
+      "brands",
+      "패션"
+    ]
+  },
+  {
+    "id": "xinStudy",
+    "name": "심학 마스터",
+    "description": "왕양명의 심학",
+    "generate": "심학 철학 인사이트 공유",
+    "icon": "💭",
+    "color": "#00695C",
+    "refreshText": "새로운 인사이트",
+    "loadingText": "해석 중 Xinxue 지혜...",
+    "placeholderText": "탭 \"새로운 인사이트\" for Xinxue 지혜",
+    "posterType": "xinStudy",
+    "slogan": "지행합일, 진정한 양심을 이루다",
+    "aiTags": [
+      "Xinxue",
+      "Wang Yangming"
+    ]
+  },
+  {
+    "id": "liStudy",
+    "name": "이학 마스터",
+    "description": "주자의 성리학",
+    "generate": "성리학 철학 인사이트 공유",
+    "icon": "📖",
+    "color": "#4A148C",
+    "refreshText": "새로운 인사이트",
+    "loadingText": "해석 중 Lixue 지혜...",
+    "placeholderText": "탭 \"새로운 인사이트\" for Lixue 지혜",
+    "posterType": "liStudy",
+    "slogan": "격물치지, 성의정심",
+    "aiTags": [
+      "Lixue",
+      "Zhu Xi"
+    ]
+  },
+  {
+    "id": "anthropologist",
+    "name": "인류학자",
+    "description": "인류학적 시각으로 보는 세계",
+    "generate": "인류학 인사이트 공유",
+    "icon": "🏛️",
+    "color": "#8D6E63",
+    "refreshText": "새로운 인사이트",
+    "loadingText": "탐색 중 humanity...",
+    "placeholderText": "탭 \"새로운 인사이트\" to explore civilizations",
+    "posterType": "anthropologist",
+    "slogan": "인류를 이해하고 자신을 알라",
+    "aiTags": [
+      "anthropology",
+      "culture"
+    ]
+  },
+  {
+    "id": "geographer",
+    "name": "지리학자",
+    "description": "세계를 탐험하는 지리 지식",
+    "generate": "지리적 사실 공유",
+    "icon": "🌍",
+    "color": "#26A69A",
+    "refreshText": "새로운 사실",
+    "loadingText": "탐색 중 geography...",
+    "placeholderText": "탭 \"새로운 사실\" to explore Earth's wonders",
+    "posterType": "geographer",
+    "slogan": "지구를 읽고 세상을 명확히 보라",
+    "aiTags": [
+      "geography",
+      "landforms"
+    ]
+  },
+  {
+    "id": "historian",
+    "name": "역사학자",
+    "description": "역사 연구와 깊은 해석",
+    "generate": "역사 연구 관점 공유",
+    "icon": "📜",
+    "color": "#7E57C2",
+    "refreshText": "새로운 인사이트",
+    "loadingText": "탐색 중 the river of history...",
+    "placeholderText": "탭 \"새로운 인사이트\" to touch history's pulse",
+    "posterType": "historian",
+    "slogan": "역사에서 배워 미래를 밝혀라",
+    "aiTags": [
+      "역사",
+      "research"
+    ]
+  },
+  {
+    "id": "narratologist",
+    "name": "서사학자",
+    "description": "서사의 예술과 이야기의 힘",
+    "generate": "서사학 개념 공유",
+    "icon": "📖",
+    "color": "#EC407A",
+    "refreshText": "새로운 개념",
+    "loadingText": "해석 중 narrative art...",
+    "placeholderText": "탭 \"새로운 개념\" to grasp story magic",
+    "posterType": "narratologist",
+    "slogan": "이야기의 길, 서사의 예술",
+    "aiTags": [
+      "narrative",
+      "storytelling"
+    ]
+  },
+  {
+    "id": "psychologist",
+    "name": "심리학자",
+    "description": "심층 심리학 연구와 인사이트",
+    "generate": "심리학 연구 발견 공유",
+    "icon": "🧠",
+    "color": "#5C6BC0",
+    "refreshText": "새로운 발견",
+    "loadingText": "탐색 중 psychological mysteries...",
+    "placeholderText": "탭 \"새로운 발견\" to decode the mind",
+    "posterType": "psychologist",
+    "slogan": "마음을 밝히고 자신을 알라",
+    "aiTags": [
+      "psychology",
+      "cognition"
+    ]
+  },
+  {
+    "id": "softwareArchitect",
+    "name": "소프트웨어 아키텍트",
+    "description": "소프트웨어 아키텍처와 시스템 설계",
+    "generate": "소프트웨어 아키텍처 인사이트 공유",
+    "icon": "🏗️",
+    "color": "#1565C0",
+    "refreshText": "새로운 인사이트",
+    "loadingText": "해석 중 architecture 지식...",
+    "placeholderText": "탭 \"새로운 인사이트\" for architecture 지식",
+    "posterType": "softwareArchitect",
+    "slogan": "시스템 디자인, 아키텍처의 길",
+    "aiTags": [
+      "architecture",
+      "디자인"
+    ]
+  },
+  {
+    "id": "solidityEngineer",
+    "name": "Solidity 엔지니어",
+    "description": "스마트 컨트랙트와 블록체인 개발",
+    "generate": "스마트 컨트랙트 인사이트 공유",
+    "icon": "⛓️",
+    "color": "#2E7D32",
+    "refreshText": "새로운 인사이트",
+    "loadingText": "해석 중 contract 지식...",
+    "placeholderText": "탭 \"새로운 인사이트\" for contract 지식",
+    "posterType": "solidityEngineer",
+    "slogan": "스마트 컨트랙트, 체인의 길",
+    "aiTags": [
+      "blockchain",
+      "smart contracts"
+    ]
+  },
+  {
+    "id": "xiaohongshuExpert",
+    "name": "RED 전문가",
+    "description": "샤오홍슈 운영과 콘텐츠 시딩 팁",
+    "generate": "샤오홍슈 운영 팁 공유",
+    "icon": "📕",
+    "color": "#E91E63",
+    "refreshText": "새로운 팁",
+    "loadingText": "해석 중 operations 팁s...",
+    "placeholderText": "탭 \"새로운 팁\" for operations 팁s",
+    "posterType": "xiaohongshuExpert",
+    "slogan": "트래픽 코드, 콘텐츠가 왕",
+    "aiTags": [
+      "operations",
+      "content marketing"
+    ]
+  },
+  {
+    "id": "seoExpert",
+    "name": "SEO 전문가",
+    "description": "더 많은 사람에게 도달하는 SEO",
+    "generate": "SEO 최적화 팁 생성",
+    "icon": "🔍",
+    "color": "#FF5722",
+    "refreshText": "새로운 팁",
+    "loadingText": "해석 중 SEO 팁s...",
+    "placeholderText": "탭 \"새로운 팁\" for SEO 팁s",
+    "posterType": "seoExpert",
+    "slogan": "검색 최적화, 랭킹 향상",
+    "aiTags": [
+      "SEO",
+      "search"
+    ]
+  },
+  {
+    "id": "idiom",
+    "name": "중국 속담",
+    "description": "중국 민간 속담과 전통 지혜",
+    "generate": "중국 사자성어 또는 민간 속담 생성",
+    "icon": "📝",
+    "color": "#795548",
+    "refreshText": "새로운 속담",
+    "loadingText": "해석 중 folk 지혜...",
+    "placeholderText": "탭 \"새로운 속담\" for a folk idiom or proverb",
+    "posterType": "idiom",
+    "slogan": "대대로 전해지는 민간 지혜",
+    "aiTags": [
+      "idioms",
+      "proverbs"
+    ]
+  }
+]

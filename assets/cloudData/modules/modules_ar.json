@@ -1,0 +1,1022 @@
+[
+  {
+    "id": "quote",
+    "name": "اقتباسات خالدة",
+    "description": "Words of حكمة to light up your day",
+    "generate": "إنشاء a classic اقتباس with author and source",
+    "icon": "📜",
+    "color": "#5C6BC0",
+    "refreshText": "اقتباس جديد",
+    "loadingText": "حكمة في الطريق...",
+    "placeholderText": "اضغط \"اقتباس جديد\" for today's inspiration",
+    "posterType": "quote",
+    "slogan": "حكمة from great minds",
+    "aiTags": [
+      "quotes",
+      "حكمة"
+    ]
+  },
+  {
+    "id": "joke",
+    "name": "نكت يومية",
+    "description": "Lighten up your day with laughter",
+    "generate": "إنشاء a short and funny نكتة",
+    "icon": "😄",
+    "color": "#FF7043",
+    "refreshText": "نكتة جديدة",
+    "loadingText": "A laugh في الطريق...",
+    "placeholderText": "اضغط \"نكتة جديدة\" for a good laugh",
+    "posterType": "joke",
+    "slogan": "A laugh a day keeps the blues away",
+    "aiTags": [
+      "jokes",
+      "humor"
+    ]
+  },
+  {
+    "id": "psychology",
+    "name": "حكمة العقل",
+    "description": "Psychology رؤيةs to know yourself and others",
+    "generate": "إنشاء a practical psychology نصيحة",
+    "icon": "🧠",
+    "color": "#7E57C2",
+    "refreshText": "رؤية جديدة",
+    "loadingText": "جاري التحليل...",
+    "placeholderText": "اضغط \"رؤية جديدة\" for psychology معرفة",
+    "posterType": "psychology",
+    "slogan": "Understand the mind, meet a better self",
+    "aiTags": [
+      "psychology",
+      "emotions"
+    ]
+  },
+  {
+    "id": "finance",
+    "name": "نافذة المال",
+    "description": "استثمار and wealth management رؤيةs",
+    "generate": "إنشاء a practical financial literacy نصيحة",
+    "icon": "💹",
+    "color": "#26A69A",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل financial رؤيةs...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for financial news",
+    "posterType": "finance",
+    "slogan": "See the trends in wealth",
+    "aiTags": [
+      "مالية",
+      "economy"
+    ]
+  },
+  {
+    "id": "love",
+    "name": "لحظات حلوة",
+    "description": "Romantic اقتباسs to warm your heart",
+    "generate": "إنشاء a romantic love اقتباس",
+    "icon": "💕",
+    "color": "#EC407A",
+    "refreshText": "سطر جديد",
+    "loadingText": "جاري الصياغة sweet words...",
+    "placeholderText": "اضغط \"سطر جديد\" for a romantic اقتباس",
+    "posterType": "love",
+    "slogan": "حب speaks louder than words",
+    "aiTags": [
+      "حب",
+      "romance"
+    ]
+  },
+  {
+    "id": "movie",
+    "name": "عالم السينما",
+    "description": "Great movies you shouldn't miss",
+    "generate": "إنشاء a worthwhile movie recommendation",
+    "icon": "🎬",
+    "color": "#EF5350",
+    "refreshText": "فيلم جديد",
+    "loadingText": "جاري البحث great films...",
+    "placeholderText": "اضغط \"فيلم جديد\" for a movie recommendation",
+    "posterType": "movie",
+    "slogan": "حياة on screen, emotions in every frame",
+    "aiTags": [
+      "movies",
+      "reviews"
+    ]
+  },
+  {
+    "id": "music",
+    "name": "وقت الموسيقى",
+    "description": "Classic songs that touch the soul",
+    "generate": "Recommend a classic song",
+    "icon": "🎵",
+    "color": "#AB47BC",
+    "refreshText": "أغنية جديدة",
+    "loadingText": "جاري التشغيل a great track...",
+    "placeholderText": "اضغط \"أغنية جديدة\" for music recommendations",
+    "posterType": "music",
+    "slogan": "موسيقى is food for the soul",
+    "aiTags": [
+      "موسيقى",
+      "playlist"
+    ]
+  },
+  {
+    "id": "tech",
+    "name": "حدود التقنية",
+    "description": "تقنيةnology trends shaping the future",
+    "generate": "مشاركة a cutting-edge tech update",
+    "icon": "🚀",
+    "color": "#42A5F5",
+    "refreshText": "تحديث جديد",
+    "loadingText": "جاري التحميل tech news...",
+    "placeholderText": "اضغط \"تحديث جديد\" for tech رؤيةs",
+    "posterType": "tech",
+    "slogan": "تقنيةnology changes the world",
+    "aiTags": [
+      "تقنية",
+      "innovation"
+    ]
+  },
+  {
+    "id": "tcm",
+    "name": "العافية بالطب الصيني",
+    "description": "Traditional Chinese Medicine for healthy living",
+    "generate": "مشاركة a TCM wellness نصيحة",
+    "icon": "🌿",
+    "color": "#66BB6A",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل wellness معرفة...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for TCM حكمة",
+    "posterType": "tcm",
+    "slogan": "Ancient حكمة for modern health",
+    "aiTags": [
+      "TCM",
+      "wellness"
+    ]
+  },
+  {
+    "id": "travel",
+    "name": "يوميات السفر",
+    "description": "سفر recommendations to explore the world",
+    "generate": "Recommend a travel destination",
+    "icon": "✈️",
+    "color": "#26C6DA",
+    "refreshText": "مكان جديد",
+    "loadingText": "جاري التخطيط your next trip...",
+    "placeholderText": "اضغط \"مكان جديد\" for travel inspiration",
+    "posterType": "travel",
+    "slogan": "The world is vast, go explore",
+    "aiTags": [
+      "سفر",
+      "destinations"
+    ]
+  },
+  {
+    "id": "fortune",
+    "name": "الحظ اليومي",
+    "description": "يومي fortune for good luck",
+    "generate": "إنشاء today's fortune تحليل",
+    "icon": "☯️",
+    "color": "#8D6E63",
+    "refreshText": "ألق مجددا",
+    "loadingText": "جاري القراءة the signs...",
+    "placeholderText": "اضغط \"ألق مجددا\" for today's fortune",
+    "posterType": "fortune",
+    "slogan": "Know your path, follow the flow",
+    "aiTags": [
+      "I Ching",
+      "fortune"
+    ]
+  },
+  {
+    "id": "literature",
+    "name": "القاعة الأدبية",
+    "description": "Literary masterpieces to savor",
+    "generate": "مشاركة a literary excerpt with تحليل",
+    "icon": "📚",
+    "color": "#78909C",
+    "refreshText": "قطعة جديدة",
+    "loadingText": "جاري التحميل literary works...",
+    "placeholderText": "اضغط \"قطعة جديدة\" for literature recommendations",
+    "posterType": "literature",
+    "slogan": "جاري القراءة refines the soul",
+    "aiTags": [
+      "literature",
+      "classics"
+    ]
+  },
+  {
+    "id": "foreignTrade",
+    "name": "مساعد التجارة",
+    "description": "Foreign trade رؤيةs and opportunities",
+    "generate": "مشاركة a foreign trade رؤية",
+    "icon": "🌐",
+    "color": "#5C6BC0",
+    "refreshText": "رؤية جديدة",
+    "loadingText": "جاري التحميل trade معرفة...",
+    "placeholderText": "اضغط \"رؤية جديدة\" for trade معرفة",
+    "posterType": "foreignTrade",
+    "slogan": "Trade connects the world",
+    "aiTags": [
+      "trade",
+      "cross-border"
+    ]
+  },
+  {
+    "id": "ecommerce",
+    "name": "عمليات التجارة الإلكترونية",
+    "description": "E-commerce trends and strategies",
+    "generate": "مشاركة an e-commerce operations نصيحة",
+    "icon": "🛒",
+    "color": "#FF7043",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل operations نصيحةs...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for e-commerce رؤيةs",
+    "posterType": "ecommerce",
+    "slogan": "Smart operations, worry-free sales",
+    "aiTags": [
+      "e-commerce",
+      "operations"
+    ]
+  },
+  {
+    "id": "math",
+    "name": "عبقري الرياضيات",
+    "description": "Fun math problems to sharpen your mind",
+    "generate": "مشاركة an interesting math fact",
+    "icon": "📐",
+    "color": "#7E57C2",
+    "refreshText": "مسألة جديدة",
+    "loadingText": "جاري التحميل math puzzles...",
+    "placeholderText": "اضغط \"مسألة جديدة\" for math معرفة",
+    "posterType": "math",
+    "slogan": "Mathematics is the language of science",
+    "aiTags": [
+      "math",
+      "problem-solving"
+    ]
+  },
+  {
+    "id": "english",
+    "name": "الإنجليزية للمحترفين",
+    "description": "English learning نصيحةs for self-improvement",
+    "generate": "مشاركة a practical English learning نصيحة",
+    "icon": "🔤",
+    "color": "#42A5F5",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل English نصيحةs...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for English معرفة",
+    "posterType": "english",
+    "slogan": "English is a global language",
+    "aiTags": [
+      "English",
+      "learning"
+    ]
+  },
+  {
+    "id": "programming",
+    "name": "مرشد البرمجة",
+    "description": "Programming نصيحةs for technical growth",
+    "generate": "Introduce an interesting programming concept",
+    "icon": "💻",
+    "color": "#26A69A",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل code نصيحةs...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for programming skills",
+    "posterType": "programming",
+    "slogan": "كود changes the world",
+    "aiTags": [
+      "programming",
+      "coding"
+    ]
+  },
+  {
+    "id": "photography",
+    "name": "سيد التصوير",
+    "description": "Photography نصيحةs to capture beautiful moments",
+    "generate": "مشاركة a practical photography نصيحة",
+    "icon": "📷",
+    "color": "#EC407A",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل photography نصيحةs...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for photography skills",
+    "posterType": "photography",
+    "slogan": "Capture beauty through the lens",
+    "aiTags": [
+      "photography",
+      "نصائح"
+    ]
+  },
+  {
+    "id": "beauty",
+    "name": "خبير التجميل",
+    "description": "Skincare and beauty نصيحةs for a radiant glow",
+    "generate": "مشاركة a practical beauty and skincare نصيحة",
+    "icon": "💄",
+    "color": "#EF5350",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل beauty معرفة...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for beauty نصيحةs",
+    "posterType": "beauty",
+    "slogan": "جمال is in the details",
+    "aiTags": [
+      "جمال",
+      "skincare"
+    ]
+  },
+  {
+    "id": "investment",
+    "name": "مستشار الاستثمار",
+    "description": "استثمار معرفة for wealth growth",
+    "generate": "مشاركة an investment معرفة نصيحة",
+    "icon": "📈",
+    "color": "#66BB6A",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل investment معرفة...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for investment رؤيةs",
+    "posterType": "investment",
+    "slogan": "Steady investing, lasting wealth",
+    "aiTags": [
+      "استثمار",
+      "ثروة"
+    ]
+  },
+  {
+    "id": "fishing",
+    "name": "صيد محترف",
+    "description": "Fishing نصيحةs for endless enjoyment",
+    "generate": "مشاركة a fishing نصيحة or معرفة",
+    "icon": "🎣",
+    "color": "#26C6DA",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل fishing نصيحةs...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for fishing معرفة",
+    "posterType": "fishing",
+    "slogan": "Fishing is a way of life",
+    "aiTags": [
+      "fishing",
+      "نصائح"
+    ]
+  },
+  {
+    "id": "fitness",
+    "name": "مدرب لياقة",
+    "description": "Fitness guidance for a stronger body",
+    "generate": "مشاركة a practical fitness نصيحة",
+    "icon": "💪",
+    "color": "#AB47BC",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل fitness معرفة...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for fitness معرفة",
+    "posterType": "fitness",
+    "slogan": "حياة is movement",
+    "aiTags": [
+      "fitness",
+      "exercise"
+    ]
+  },
+  {
+    "id": "pet",
+    "name": "خبير الحيوانات الأليفة",
+    "description": "Pet care نصيحةs with loving companionship",
+    "generate": "مشاركة a pet care نصيحة",
+    "icon": "🐾",
+    "color": "#8D6E63",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل pet معرفة...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for pet care نصيحةs",
+    "posterType": "pet",
+    "slogan": "Pets are our best friends",
+    "aiTags": [
+      "pets",
+      "care"
+    ]
+  },
+  {
+    "id": "fashion",
+    "name": "أيقونة الموضة",
+    "description": "موضة نصيحةs to express your style",
+    "generate": "مشاركة a fashion and styling نصيحة",
+    "icon": "👗",
+    "color": "#78909C",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل fashion news...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for fashion رؤيةs",
+    "posterType": "fashion",
+    "slogan": "موضة is what you buy, style is what you do with it",
+    "aiTags": [
+      "موضة",
+      "trends"
+    ]
+  },
+  {
+    "id": "outfit",
+    "name": "دليل الأناقة",
+    "description": "يومي outfit recommendations",
+    "generate": "مشاركة an outfit recommendation",
+    "icon": "👔",
+    "color": "#5C6BC0",
+    "refreshText": "مظهر جديد",
+    "loadingText": "جاري التحميل style guide...",
+    "placeholderText": "اضغط \"مظهر جديد\" for style نصيحةs",
+    "posterType": "outfit",
+    "slogan": "Dress with style, live with flair",
+    "aiTags": [
+      "outfit",
+      "styling"
+    ]
+  },
+  {
+    "id": "decoration",
+    "name": "ديكور المنزل",
+    "description": "منزل decoration نصيحةs to beautify your space",
+    "generate": "مشاركة a home decoration نصيحة",
+    "icon": "🏠",
+    "color": "#FF7043",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل decor معرفة...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for decoration نصيحةs",
+    "posterType": "decoration",
+    "slogan": "Make your home warm and welcoming",
+    "aiTags": [
+      "decoration",
+      "منزل"
+    ]
+  },
+  {
+    "id": "glassFiber",
+    "name": "خبير الألياف الزجاجية",
+    "description": "Fiberglass materials at the cutting edge",
+    "generate": "مشاركة fiberglass-related معرفة",
+    "icon": "🧵",
+    "color": "#7E57C2",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل fiberglass معرفة...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for fiberglass expertise",
+    "posterType": "glassFiber",
+    "slogan": "Professional materials, professional quality",
+    "aiTags": [
+      "fiberglass",
+      "materials"
+    ]
+  },
+  {
+    "id": "resin",
+    "name": "خبير الراتنج",
+    "description": "Resin craft with endless creativity",
+    "generate": "مشاركة a resin craft نصيحة",
+    "icon": "🧪",
+    "color": "#42A5F5",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل resin معرفة...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for resin معرفة",
+    "posterType": "resin",
+    "slogan": "Materials science, limitless applications",
+    "aiTags": [
+      "resin",
+      "chemical"
+    ]
+  },
+  {
+    "id": "tax",
+    "name": "مستشار الضرائب",
+    "description": "Tax planning for compliance and savings",
+    "generate": "مشاركة a tax planning نصيحة",
+    "icon": "📋",
+    "color": "#26A69A",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل tax معرفة...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for tax معرفة",
+    "posterType": "tax",
+    "slogan": "Smart tax planning, compliant living",
+    "aiTags": [
+      "tax",
+      "مالية"
+    ]
+  },
+  {
+    "id": "law",
+    "name": "مستشار قانوني",
+    "description": "Legal معرفة to know and protect your rights",
+    "generate": "مشاركة a practical legal نصيحة",
+    "icon": "⚖️",
+    "color": "#EC407A",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل legal معرفة...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for legal معرفة",
+    "posterType": "law",
+    "slogan": "Know the law, protect yourself",
+    "aiTags": [
+      "law",
+      "rights"
+    ]
+  },
+  {
+    "id": "official",
+    "name": "محترف وظيفي",
+    "description": "Workplace حكمة for career success",
+    "generate": "مشاركة a workplace رؤية",
+    "icon": "🎩",
+    "color": "#EF5350",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل career معرفة...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for career نصيحةs",
+    "posterType": "official",
+    "slogan": "The workplace is a battlefield, win with حكمة",
+    "aiTags": [
+      "مهنة",
+      "interpersonal"
+    ]
+  },
+  {
+    "id": "handling",
+    "name": "مهارات الحياة",
+    "description": "Practical حكمة for handling life's situations",
+    "generate": "مشاركة a practical life نصيحة",
+    "icon": "💎",
+    "color": "#66BB6A",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل life حكمة...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for life حكمة",
+    "posterType": "handling",
+    "slogan": "Understanding the world is true حكمة",
+    "aiTags": [
+      "حكمة",
+      "EQ"
+    ]
+  },
+  {
+    "id": "floral",
+    "name": "فنان الزهور",
+    "description": "Floral art نصيحةs for a fragrant life",
+    "generate": "مشاركة a floral care نصيحة",
+    "icon": "💐",
+    "color": "#26C6DA",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التحميل floral معرفة...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for floral art نصيحةs",
+    "posterType": "floral",
+    "slogan": "Flowers speak a language of their own",
+    "aiTags": [
+      "floral",
+      "flower arrangement"
+    ]
+  },
+  {
+    "id": "history",
+    "name": "مرآة التاريخ",
+    "description": "Historical stories to learn from the past",
+    "generate": "مشاركة an interesting historical story",
+    "icon": "📚",
+    "color": "#AB47BC",
+    "refreshText": "قصة جديدة",
+    "loadingText": "جاري التحميل historical tales...",
+    "placeholderText": "اضغط \"قصة جديدة\" for historical معرفة",
+    "posterType": "history",
+    "slogan": "Learn from history to see the future",
+    "aiTags": [
+      "تاريخ",
+      "stories"
+    ]
+  },
+  {
+    "id": "military",
+    "name": "مراقب عسكري",
+    "description": "Military رؤيةs for strategic thinking",
+    "generate": "مشاركة a military رؤية",
+    "icon": "🎖️",
+    "color": "#8D6E63",
+    "refreshText": "رؤية جديدة",
+    "loadingText": "جاري التحميل military معرفة...",
+    "placeholderText": "اضغط \"رؤية جديدة\" for military معرفة",
+    "posterType": "military",
+    "slogan": "Know yourself and your opponent, win every battle",
+    "aiTags": [
+      "military",
+      "استراتيجية"
+    ]
+  },
+  {
+    "id": "stock",
+    "name": "منارة الأسهم",
+    "description": "Stock market رؤيةs for informed investing",
+    "generate": "مشاركة a stock market تحليل",
+    "icon": "📈",
+    "color": "#1E88E5",
+    "refreshText": "رؤية جديدة",
+    "loadingText": "Analyst is reviewing the market...",
+    "placeholderText": "اضغط \"رؤية جديدة\" for investment معرفة",
+    "posterType": "stock",
+    "slogan": "Rational investing, steady growth",
+    "aiTags": [
+      "stocks",
+      "futures"
+    ]
+  },
+  {
+    "id": "economics",
+    "name": "نظرة اقتصادية",
+    "description": "Economic observations to understand trends",
+    "generate": "مشاركة an economic observation",
+    "icon": "💰",
+    "color": "#00897B",
+    "refreshText": "رؤية جديدة",
+    "loadingText": "Economist is analyzing...",
+    "placeholderText": "اضغط \"رؤية جديدة\" for economic معرفة",
+    "posterType": "economics",
+    "slogan": "Understand the economy, grasp the trends",
+    "aiTags": [
+      "economics",
+      "تحليل"
+    ]
+  },
+  {
+    "id": "business",
+    "name": "حكمة الأعمال",
+    "description": "أعمال رؤيةs to seize opportunities",
+    "generate": "مشاركة a business رؤية",
+    "icon": "💼",
+    "color": "#6D4C41",
+    "refreshText": "رؤية جديدة",
+    "loadingText": "أعمال mentor is advising...",
+    "placeholderText": "اضغط \"رؤية جديدة\" for business حكمة",
+    "posterType": "business",
+    "slogan": "أعمال is about people, win with vision",
+    "aiTags": [
+      "أعمال",
+      "management"
+    ]
+  },
+  {
+    "id": "news",
+    "name": "حدود الأخبار",
+    "description": "يومي news to stay informed",
+    "generate": "إنشاء a daily news digest",
+    "icon": "📰",
+    "color": "#D32F2F",
+    "refreshText": "تحديث جديد",
+    "loadingText": "Media expert is briefing you...",
+    "placeholderText": "اضغط \"تحديث جديد\" for news تحليل",
+    "posterType": "news",
+    "slogan": "Information is king, رؤية is power",
+    "aiTags": [
+      "أخبار",
+      "headlines"
+    ]
+  },
+  {
+    "id": "wisdomBag",
+    "name": "كيس الحكمة",
+    "description": "حكمة nuggets for everyday life",
+    "generate": "مشاركة a حكمة nugget",
+    "icon": "🎁",
+    "color": "#FFA000",
+    "refreshText": "جوهرة جديدة",
+    "loadingText": "جاري الإنشاء حكمة...",
+    "placeholderText": "اضغط \"جوهرة جديدة\" for a حكمة nugget",
+    "posterType": "wisdomBag",
+    "slogan": "Small حكمة, big life",
+    "aiTags": [
+      "حكمة",
+      "life tips"
+    ]
+  },
+  {
+    "id": "robotAi",
+    "name": "بوت الذكاء الاصطناعي",
+    "description": "فنificial intelligence and future technology",
+    "generate": "مشاركة a robotics or AI رؤية",
+    "icon": "🤖",
+    "color": "#7C4DFF",
+    "refreshText": "رؤية جديدة",
+    "loadingText": "AI is thinking...",
+    "placeholderText": "اضغط \"رؤية جديدة\" for AI معرفة",
+    "posterType": "robotAi",
+    "slogan": "The intelligent future is in your hands",
+    "aiTags": [
+      "AI",
+      "robotics"
+    ]
+  },
+  {
+    "id": "americanExpert",
+    "name": "خبير أمريكا",
+    "description": "American culture in depth",
+    "generate": "مشاركة a fact about America",
+    "icon": "🗽",
+    "color": "#1565C0",
+    "refreshText": "حقيقة جديدة",
+    "loadingText": "جاري الاستكشاف America...",
+    "placeholderText": "اضغط \"حقيقة جديدة\" to learn about America",
+    "posterType": "americanExpert",
+    "slogan": "Understand America, see the world",
+    "aiTags": [
+      "America",
+      "culture"
+    ]
+  },
+  {
+    "id": "apple",
+    "name": "فصل آبل",
+    "description": "معرفة as fruitful as an apple a day",
+    "generate": "مشاركة an interesting معرفة point",
+    "icon": "🍎",
+    "color": "#E53935",
+    "refreshText": "درس جديد",
+    "loadingText": "Class is in session...",
+    "placeholderText": "اضغط \"درس جديد\" for fresh معرفة",
+    "posterType": "apple",
+    "slogan": "A little progress every day",
+    "aiTags": [
+      "معرفة",
+      "learning"
+    ]
+  },
+  {
+    "id": "growth",
+    "name": "خبير النمو",
+    "description": "علامة تجارية growth strategies and market رؤيةs",
+    "generate": "مشاركة a brand growth strategy",
+    "icon": "📈",
+    "color": "#00C853",
+    "refreshText": "استراتيجية جديدة",
+    "loadingText": "جاري الإنشاء growth strategies...",
+    "placeholderText": "اضغط \"استراتيجية جديدة\" for growth معرفة",
+    "posterType": "growth",
+    "slogan": "نمو is the lifeline of business",
+    "aiTags": [
+      "نمو",
+      "marketing"
+    ]
+  },
+  {
+    "id": "uiDesigner",
+    "name": "مصمم واجهات",
+    "description": "UI design for visual aesthetics",
+    "generate": "مشاركة a UI design نصيحة",
+    "icon": "🎨",
+    "color": "#FF4081",
+    "refreshText": "فكرة جديدة",
+    "loadingText": "جاري الإنشاء design inspiration...",
+    "placeholderText": "اضغط \"فكرة جديدة\" for design inspiration",
+    "posterType": "uiDesigner",
+    "slogan": "تصميم makes the world a better place",
+    "aiTags": [
+      "تصميم",
+      "UI"
+    ]
+  },
+  {
+    "id": "futures",
+    "name": "خبير العقود الآجلة",
+    "description": "Commodity futures and professional تحليل",
+    "generate": "مشاركة a futures trading رؤية",
+    "icon": "📊",
+    "color": "#455A64",
+    "refreshText": "تحليل جديد",
+    "loadingText": "جاري التحليل futures...",
+    "placeholderText": "اضغط \"تحليل جديد\" for futures معرفة",
+    "posterType": "futures",
+    "slogan": "Understand commodities, manage risk",
+    "aiTags": [
+      "futures",
+      "commodities"
+    ]
+  },
+  {
+    "id": "freud",
+    "name": "دراسات فرويد",
+    "description": "Freudian psychology concepts explored",
+    "generate": "مشاركة a Freudian psychology concept",
+    "icon": "🧠",
+    "color": "#5E35B1",
+    "refreshText": "مفهوم جديد",
+    "loadingText": "Psychoanalyzing...",
+    "placeholderText": "اضغط \"مفهوم جديد\" for psychology رؤيةs",
+    "posterType": "freud",
+    "slogan": "Explore the subconscious, decode the mind",
+    "aiTags": [
+      "psychology",
+      "psychoanalysis"
+    ]
+  },
+  {
+    "id": "fashionBrand",
+    "name": "علامات فاخرة",
+    "description": "عالم fashion brands at the frontier of style",
+    "generate": "مشاركة a world fashion brand story",
+    "icon": "👛",
+    "color": "#880E4F",
+    "refreshText": "قصة جديدة",
+    "loadingText": "جاري التحميل brand stories...",
+    "placeholderText": "اضغط \"قصة جديدة\" to discover luxury brands",
+    "posterType": "fashionBrand",
+    "slogan": "Taste the classics, know the trends",
+    "aiTags": [
+      "brands",
+      "موضة"
+    ]
+  },
+  {
+    "id": "xinStudy",
+    "name": "سيد شينشوي",
+    "description": "Wang Yangming's philosophy of mind",
+    "generate": "مشاركة a Xinxue philosophy رؤية",
+    "icon": "💭",
+    "color": "#00695C",
+    "refreshText": "رؤية جديدة",
+    "loadingText": "جاري التفسير Xinxue حكمة...",
+    "placeholderText": "اضغط \"رؤية جديدة\" for Xinxue حكمة",
+    "posterType": "xinStudy",
+    "slogan": "Unity of knowing and doing, attain true conscience",
+    "aiTags": [
+      "Xinxue",
+      "Wang Yangming"
+    ]
+  },
+  {
+    "id": "liStudy",
+    "name": "سيد ليشوي",
+    "description": "Zhu Xi's Neo-Confucian thought",
+    "generate": "مشاركة a Lixue philosophy رؤية",
+    "icon": "📖",
+    "color": "#4A148C",
+    "refreshText": "رؤية جديدة",
+    "loadingText": "جاري التفسير Lixue حكمة...",
+    "placeholderText": "اضغط \"رؤية جديدة\" for Lixue حكمة",
+    "posterType": "liStudy",
+    "slogan": "Investigate things, attain معرفة; rectify the mind, make the will sincere",
+    "aiTags": [
+      "Lixue",
+      "Zhu Xi"
+    ]
+  },
+  {
+    "id": "anthropologist",
+    "name": "عالم أنثروبولوجيا",
+    "description": "Anthropological perspectives on the world",
+    "generate": "مشاركة an anthropology رؤية",
+    "icon": "🏛️",
+    "color": "#8D6E63",
+    "refreshText": "رؤية جديدة",
+    "loadingText": "جاري الاستكشاف humanity...",
+    "placeholderText": "اضغط \"رؤية جديدة\" to explore civilizations",
+    "posterType": "anthropologist",
+    "slogan": "Understand humanity, know yourself",
+    "aiTags": [
+      "anthropology",
+      "culture"
+    ]
+  },
+  {
+    "id": "geographer",
+    "name": "جغرافي",
+    "description": "Geographic معرفة to explore the world",
+    "generate": "مشاركة a geographic fact",
+    "icon": "🌍",
+    "color": "#26A69A",
+    "refreshText": "حقيقة جديدة",
+    "loadingText": "جاري الاستكشاف geography...",
+    "placeholderText": "اضغط \"حقيقة جديدة\" to explore Earth's wonders",
+    "posterType": "geographer",
+    "slogan": "Read the Earth, see the world clearly",
+    "aiTags": [
+      "geography",
+      "landforms"
+    ]
+  },
+  {
+    "id": "historian",
+    "name": "مؤرخ",
+    "description": "Historical research and deep interpretation",
+    "generate": "مشاركة a historical research perspective",
+    "icon": "📜",
+    "color": "#7E57C2",
+    "refreshText": "رؤية جديدة",
+    "loadingText": "جاري الاستكشاف the river of history...",
+    "placeholderText": "اضغط \"رؤية جديدة\" to touch history's pulse",
+    "posterType": "historian",
+    "slogan": "Learn from history to illuminate the future",
+    "aiTags": [
+      "تاريخ",
+      "research"
+    ]
+  },
+  {
+    "id": "narratologist",
+    "name": "عالم السرد",
+    "description": "The art of narrative and the power of stories",
+    "generate": "مشاركة a narratology concept",
+    "icon": "📖",
+    "color": "#EC407A",
+    "refreshText": "مفهوم جديد",
+    "loadingText": "جاري التفسير narrative art...",
+    "placeholderText": "اضغط \"مفهوم جديد\" to grasp story magic",
+    "posterType": "narratologist",
+    "slogan": "The way of stories, the art of narrative",
+    "aiTags": [
+      "narrative",
+      "storytelling"
+    ]
+  },
+  {
+    "id": "psychologist",
+    "name": "عالم نفس",
+    "description": "Deep psychological research and رؤيةs",
+    "generate": "مشاركة a psychology research finding",
+    "icon": "🧠",
+    "color": "#5C6BC0",
+    "refreshText": "اكتشاف جديد",
+    "loadingText": "جاري الاستكشاف psychological mysteries...",
+    "placeholderText": "اضغط \"اكتشاف جديد\" to decode the mind",
+    "posterType": "psychologist",
+    "slogan": "Illuminate the mind, know yourself",
+    "aiTags": [
+      "psychology",
+      "cognition"
+    ]
+  },
+  {
+    "id": "softwareArchitect",
+    "name": "مهندس برمجيات",
+    "description": "Software architecture and system design",
+    "generate": "مشاركة a software architecture رؤية",
+    "icon": "🏗️",
+    "color": "#1565C0",
+    "refreshText": "رؤية جديدة",
+    "loadingText": "جاري التفسير architecture معرفة...",
+    "placeholderText": "اضغط \"رؤية جديدة\" for architecture معرفة",
+    "posterType": "softwareArchitect",
+    "slogan": "System design, the way of architecture",
+    "aiTags": [
+      "architecture",
+      "تصميم"
+    ]
+  },
+  {
+    "id": "solidityEngineer",
+    "name": "مهندس Solidity",
+    "description": "Smart contracts and blockchain development",
+    "generate": "مشاركة a smart contract رؤية",
+    "icon": "⛓️",
+    "color": "#2E7D32",
+    "refreshText": "رؤية جديدة",
+    "loadingText": "جاري التفسير contract معرفة...",
+    "placeholderText": "اضغط \"رؤية جديدة\" for contract معرفة",
+    "posterType": "solidityEngineer",
+    "slogan": "Smart contracts, the way of the chain",
+    "aiTags": [
+      "blockchain",
+      "smart contracts"
+    ]
+  },
+  {
+    "id": "xiaohongshuExpert",
+    "name": "خبير RED",
+    "description": "Xiaohongshu operations and content seeding نصيحةs",
+    "generate": "مشاركة a Xiaohongshu operations نصيحة",
+    "icon": "📕",
+    "color": "#E91E63",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التفسير operations نصيحةs...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for operations نصيحةs",
+    "posterType": "xiaohongshuExpert",
+    "slogan": "Traffic code, content is king",
+    "aiTags": [
+      "operations",
+      "content marketing"
+    ]
+  },
+  {
+    "id": "seoExpert",
+    "name": "خبير SEO",
+    "description": "Search engine optimization to reach more people",
+    "generate": "إنشاء an SEO optimization نصيحة",
+    "icon": "🔍",
+    "color": "#FF5722",
+    "refreshText": "نصيحة جديدة",
+    "loadingText": "جاري التفسير SEO نصيحةs...",
+    "placeholderText": "اضغط \"نصيحة جديدة\" for SEO نصيحةs",
+    "posterType": "seoExpert",
+    "slogan": "Optimize for search, boost your rankings",
+    "aiTags": [
+      "SEO",
+      "search"
+    ]
+  },
+  {
+    "id": "idiom",
+    "name": "أمثال صينية",
+    "description": "Chinese folk sayings and traditional حكمة",
+    "generate": "إنشاء a Chinese idiom or folk proverb",
+    "icon": "📝",
+    "color": "#795548",
+    "refreshText": "قول جديد",
+    "loadingText": "جاري التفسير folk حكمة...",
+    "placeholderText": "اضغط \"قول جديد\" for a folk idiom or proverb",
+    "posterType": "idiom",
+    "slogan": "Folk حكمة passed down through the ages",
+    "aiTags": [
+      "idioms",
+      "proverbs"
+    ]
+  }
+]

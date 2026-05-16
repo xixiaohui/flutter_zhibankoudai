@@ -1,0 +1,1022 @@
+[
+  {
+    "id": "quote",
+    "name": "Вечные Цитаты",
+    "description": "Words of мудрость to light up your day",
+    "generate": "Создать a classic цитата with author and source",
+    "icon": "📜",
+    "color": "#5C6BC0",
+    "refreshText": "Новая Цитата",
+    "loadingText": "Мудрость уже в пути...",
+    "placeholderText": "Нажмите \"Новая Цитата\" for today's inspiration",
+    "posterType": "quote",
+    "slogan": "Мудрость from great minds",
+    "aiTags": [
+      "quotes",
+      "Мудрость"
+    ]
+  },
+  {
+    "id": "joke",
+    "name": "Ежедневные Шутки",
+    "description": "Lighten up your day with laughter",
+    "generate": "Создать a short and funny шутка",
+    "icon": "😄",
+    "color": "#FF7043",
+    "refreshText": "Новая Шутка",
+    "loadingText": "A laugh уже в пути...",
+    "placeholderText": "Нажмите \"Новая Шутка\" for a good laugh",
+    "posterType": "joke",
+    "slogan": "A laugh a day keeps the blues away",
+    "aiTags": [
+      "jokes",
+      "humor"
+    ]
+  },
+  {
+    "id": "psychology",
+    "name": "Мудрость Ума",
+    "description": "Psychology пониманиеs to know yourself and others",
+    "generate": "Создать a practical psychology совет",
+    "icon": "🧠",
+    "color": "#7E57C2",
+    "refreshText": "Новое Понимание",
+    "loadingText": "Анализ...",
+    "placeholderText": "Нажмите \"Новое Понимание\" for psychology знания",
+    "posterType": "psychology",
+    "slogan": "Understand the mind, meet a better self",
+    "aiTags": [
+      "psychology",
+      "emotions"
+    ]
+  },
+  {
+    "id": "finance",
+    "name": "Финансовое Окно",
+    "description": "Инвестиции and wealth management пониманиеs",
+    "generate": "Создать a practical financial literacy совет",
+    "icon": "💹",
+    "color": "#26A69A",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка financial пониманиеs...",
+    "placeholderText": "Нажмите \"Новый Совет\" for financial news",
+    "posterType": "finance",
+    "slogan": "See the trends in wealth",
+    "aiTags": [
+      "Финансы",
+      "economy"
+    ]
+  },
+  {
+    "id": "love",
+    "name": "Сладкие Моменты",
+    "description": "Romantic цитатаs to warm your heart",
+    "generate": "Создать a romantic love цитата",
+    "icon": "💕",
+    "color": "#EC407A",
+    "refreshText": "Новая Строка",
+    "loadingText": "Создание sweet words...",
+    "placeholderText": "Нажмите \"Новая Строка\" for a romantic цитата",
+    "posterType": "love",
+    "slogan": "Любовь speaks louder than words",
+    "aiTags": [
+      "Любовь",
+      "romance"
+    ]
+  },
+  {
+    "id": "movie",
+    "name": "Мир Кино",
+    "description": "Great movies you shouldn't miss",
+    "generate": "Создать a worthwhile movie recommendation",
+    "icon": "🎬",
+    "color": "#EF5350",
+    "refreshText": "Новый Фильм",
+    "loadingText": "Поиск great films...",
+    "placeholderText": "Нажмите \"Новый Фильм\" for a movie recommendation",
+    "posterType": "movie",
+    "slogan": "Жизнь on screen, emotions in every frame",
+    "aiTags": [
+      "movies",
+      "reviews"
+    ]
+  },
+  {
+    "id": "music",
+    "name": "Время Музыки",
+    "description": "Classic songs that touch the soul",
+    "generate": "Recommend a classic song",
+    "icon": "🎵",
+    "color": "#AB47BC",
+    "refreshText": "Новая Песня",
+    "loadingText": "Воспроизведение a great track...",
+    "placeholderText": "Нажмите \"Новая Песня\" for music recommendations",
+    "posterType": "music",
+    "slogan": "Музыка is food for the soul",
+    "aiTags": [
+      "Музыка",
+      "playlist"
+    ]
+  },
+  {
+    "id": "tech",
+    "name": "Технологический Фронтир",
+    "description": "Технологииnology trends shaping the future",
+    "generate": "Поделиться a cutting-edge tech update",
+    "icon": "🚀",
+    "color": "#42A5F5",
+    "refreshText": "Новое Обновление",
+    "loadingText": "Загрузка tech news...",
+    "placeholderText": "Нажмите \"Новое Обновление\" for tech пониманиеs",
+    "posterType": "tech",
+    "slogan": "Технологииnology changes the world",
+    "aiTags": [
+      "Технологии",
+      "innovation"
+    ]
+  },
+  {
+    "id": "tcm",
+    "name": "Оздоровление ТКМ",
+    "description": "Traditional Chinese Medicine for healthy living",
+    "generate": "Поделиться a TCM wellness совет",
+    "icon": "🌿",
+    "color": "#66BB6A",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка wellness знания...",
+    "placeholderText": "Нажмите \"Новый Совет\" for TCM мудрость",
+    "posterType": "tcm",
+    "slogan": "Ancient мудрость for modern health",
+    "aiTags": [
+      "TCM",
+      "wellness"
+    ]
+  },
+  {
+    "id": "travel",
+    "name": "Дневник Путешествий",
+    "description": "Путешествия recommendations to explore the world",
+    "generate": "Recommend a travel destination",
+    "icon": "✈️",
+    "color": "#26C6DA",
+    "refreshText": "Новое Место",
+    "loadingText": "Планирование your next trip...",
+    "placeholderText": "Нажмите \"Новое Место\" for travel inspiration",
+    "posterType": "travel",
+    "slogan": "The world is vast, go explore",
+    "aiTags": [
+      "Путешествия",
+      "destinations"
+    ]
+  },
+  {
+    "id": "fortune",
+    "name": "Ежедневная Удача",
+    "description": "Ежедневно fortune for good luck",
+    "generate": "Создать today's fortune анализ",
+    "icon": "☯️",
+    "color": "#8D6E63",
+    "refreshText": "Бросить Снова",
+    "loadingText": "Чтение the signs...",
+    "placeholderText": "Нажмите \"Бросить Снова\" for today's fortune",
+    "posterType": "fortune",
+    "slogan": "Know your path, follow the flow",
+    "aiTags": [
+      "I Ching",
+      "fortune"
+    ]
+  },
+  {
+    "id": "literature",
+    "name": "Литературный Зал",
+    "description": "Literary masterpieces to savor",
+    "generate": "Поделиться a literary excerpt with анализ",
+    "icon": "📚",
+    "color": "#78909C",
+    "refreshText": "Новое Произведение",
+    "loadingText": "Загрузка literary works...",
+    "placeholderText": "Нажмите \"Новое Произведение\" for literature recommendations",
+    "posterType": "literature",
+    "slogan": "Чтение refines the soul",
+    "aiTags": [
+      "literature",
+      "classics"
+    ]
+  },
+  {
+    "id": "foreignTrade",
+    "name": "Торговый Ассистент",
+    "description": "Foreign trade пониманиеs and opportunities",
+    "generate": "Поделиться a foreign trade понимание",
+    "icon": "🌐",
+    "color": "#5C6BC0",
+    "refreshText": "Новое Понимание",
+    "loadingText": "Загрузка trade знания...",
+    "placeholderText": "Нажмите \"Новое Понимание\" for trade знания",
+    "posterType": "foreignTrade",
+    "slogan": "Trade connects the world",
+    "aiTags": [
+      "trade",
+      "cross-border"
+    ]
+  },
+  {
+    "id": "ecommerce",
+    "name": "Операции Электронной Коммерции",
+    "description": "E-commerce trends and strategies",
+    "generate": "Поделиться an e-commerce operations совет",
+    "icon": "🛒",
+    "color": "#FF7043",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка operations советs...",
+    "placeholderText": "Нажмите \"Новый Совет\" for e-commerce пониманиеs",
+    "posterType": "ecommerce",
+    "slogan": "Smart operations, worry-free sales",
+    "aiTags": [
+      "e-commerce",
+      "operations"
+    ]
+  },
+  {
+    "id": "math",
+    "name": "Математический Гений",
+    "description": "Fun math problems to sharpen your mind",
+    "generate": "Поделиться an interesting math fact",
+    "icon": "📐",
+    "color": "#7E57C2",
+    "refreshText": "Новая Задача",
+    "loadingText": "Загрузка math puzzles...",
+    "placeholderText": "Нажмите \"Новая Задача\" for math знания",
+    "posterType": "math",
+    "slogan": "Mathematics is the language of science",
+    "aiTags": [
+      "math",
+      "problem-solving"
+    ]
+  },
+  {
+    "id": "english",
+    "name": "Английский Про",
+    "description": "English learning советs for self-improvement",
+    "generate": "Поделиться a practical English learning совет",
+    "icon": "🔤",
+    "color": "#42A5F5",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка English советs...",
+    "placeholderText": "Нажмите \"Новый Совет\" for English знания",
+    "posterType": "english",
+    "slogan": "English is a global language",
+    "aiTags": [
+      "English",
+      "learning"
+    ]
+  },
+  {
+    "id": "programming",
+    "name": "Кодовый Ментор",
+    "description": "Programming советs for technical growth",
+    "generate": "Introduce an interesting programming concept",
+    "icon": "💻",
+    "color": "#26A69A",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка code советs...",
+    "placeholderText": "Нажмите \"Новый Совет\" for programming skills",
+    "posterType": "programming",
+    "slogan": "Код changes the world",
+    "aiTags": [
+      "programming",
+      "coding"
+    ]
+  },
+  {
+    "id": "photography",
+    "name": "Мастер Фото",
+    "description": "Photography советs to capture beautiful moments",
+    "generate": "Поделиться a practical photography совет",
+    "icon": "📷",
+    "color": "#EC407A",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка photography советs...",
+    "placeholderText": "Нажмите \"Новый Совет\" for photography skills",
+    "posterType": "photography",
+    "slogan": "Capture beauty through the lens",
+    "aiTags": [
+      "photography",
+      "Советы"
+    ]
+  },
+  {
+    "id": "beauty",
+    "name": "Гуру Красоты",
+    "description": "Skincare and beauty советs for a radiant glow",
+    "generate": "Поделиться a practical beauty and skincare совет",
+    "icon": "💄",
+    "color": "#EF5350",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка beauty знания...",
+    "placeholderText": "Нажмите \"Новый Совет\" for beauty советs",
+    "posterType": "beauty",
+    "slogan": "Красота is in the details",
+    "aiTags": [
+      "Красота",
+      "skincare"
+    ]
+  },
+  {
+    "id": "investment",
+    "name": "Инвестиционный Советник",
+    "description": "Инвестиции знания for wealth growth",
+    "generate": "Поделиться an investment знания совет",
+    "icon": "📈",
+    "color": "#66BB6A",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка investment знания...",
+    "placeholderText": "Нажмите \"Новый Совет\" for investment пониманиеs",
+    "posterType": "investment",
+    "slogan": "Steady investing, lasting wealth",
+    "aiTags": [
+      "Инвестиции",
+      "Богатство"
+    ]
+  },
+  {
+    "id": "fishing",
+    "name": "Рыболов Про",
+    "description": "Fishing советs for endless enjoyment",
+    "generate": "Поделиться a fishing совет or знания",
+    "icon": "🎣",
+    "color": "#26C6DA",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка fishing советs...",
+    "placeholderText": "Нажмите \"Новый Совет\" for fishing знания",
+    "posterType": "fishing",
+    "slogan": "Fishing is a way of life",
+    "aiTags": [
+      "fishing",
+      "Советы"
+    ]
+  },
+  {
+    "id": "fitness",
+    "name": "Фитнес-Тренер",
+    "description": "Fitness guidance for a stronger body",
+    "generate": "Поделиться a practical fitness совет",
+    "icon": "💪",
+    "color": "#AB47BC",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка fitness знания...",
+    "placeholderText": "Нажмите \"Новый Совет\" for fitness знания",
+    "posterType": "fitness",
+    "slogan": "Жизнь is movement",
+    "aiTags": [
+      "fitness",
+      "exercise"
+    ]
+  },
+  {
+    "id": "pet",
+    "name": "Эксперт по Питомцам",
+    "description": "Pet care советs with loving companionship",
+    "generate": "Поделиться a pet care совет",
+    "icon": "🐾",
+    "color": "#8D6E63",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка pet знания...",
+    "placeholderText": "Нажмите \"Новый Совет\" for pet care советs",
+    "posterType": "pet",
+    "slogan": "Pets are our best friends",
+    "aiTags": [
+      "pets",
+      "care"
+    ]
+  },
+  {
+    "id": "fashion",
+    "name": "Икона Моды",
+    "description": "Мода советs to express your style",
+    "generate": "Поделиться a fashion and styling совет",
+    "icon": "👗",
+    "color": "#78909C",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка fashion news...",
+    "placeholderText": "Нажмите \"Новый Совет\" for fashion пониманиеs",
+    "posterType": "fashion",
+    "slogan": "Мода is what you buy, style is what you do with it",
+    "aiTags": [
+      "Мода",
+      "trends"
+    ]
+  },
+  {
+    "id": "outfit",
+    "name": "Гид по Стилю",
+    "description": "Ежедневно outfit recommendations",
+    "generate": "Поделиться an outfit recommendation",
+    "icon": "👔",
+    "color": "#5C6BC0",
+    "refreshText": "Новый Образ",
+    "loadingText": "Загрузка style guide...",
+    "placeholderText": "Нажмите \"Новый Образ\" for style советs",
+    "posterType": "outfit",
+    "slogan": "Dress with style, live with flair",
+    "aiTags": [
+      "outfit",
+      "styling"
+    ]
+  },
+  {
+    "id": "decoration",
+    "name": "Домашний Декор",
+    "description": "Дом decoration советs to beautify your space",
+    "generate": "Поделиться a home decoration совет",
+    "icon": "🏠",
+    "color": "#FF7043",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка decor знания...",
+    "placeholderText": "Нажмите \"Новый Совет\" for decoration советs",
+    "posterType": "decoration",
+    "slogan": "Make your home warm and welcoming",
+    "aiTags": [
+      "decoration",
+      "Дом"
+    ]
+  },
+  {
+    "id": "glassFiber",
+    "name": "Эксперт по Стекловолокну",
+    "description": "Fiberglass materials at the cutting edge",
+    "generate": "Поделиться fiberglass-related знания",
+    "icon": "🧵",
+    "color": "#7E57C2",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка fiberglass знания...",
+    "placeholderText": "Нажмите \"Новый Совет\" for fiberglass expertise",
+    "posterType": "glassFiber",
+    "slogan": "Professional materials, professional quality",
+    "aiTags": [
+      "fiberglass",
+      "materials"
+    ]
+  },
+  {
+    "id": "resin",
+    "name": "Эксперт по Смолам",
+    "description": "Resin craft with endless creativity",
+    "generate": "Поделиться a resin craft совет",
+    "icon": "🧪",
+    "color": "#42A5F5",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка resin знания...",
+    "placeholderText": "Нажмите \"Новый Совет\" for resin знания",
+    "posterType": "resin",
+    "slogan": "Materials science, limitless applications",
+    "aiTags": [
+      "resin",
+      "chemical"
+    ]
+  },
+  {
+    "id": "tax",
+    "name": "Налоговый Советник",
+    "description": "Tax planning for compliance and savings",
+    "generate": "Поделиться a tax planning совет",
+    "icon": "📋",
+    "color": "#26A69A",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка tax знания...",
+    "placeholderText": "Нажмите \"Новый Совет\" for tax знания",
+    "posterType": "tax",
+    "slogan": "Smart tax planning, compliant living",
+    "aiTags": [
+      "tax",
+      "Финансы"
+    ]
+  },
+  {
+    "id": "law",
+    "name": "Юридический Советник",
+    "description": "Legal знания to know and protect your rights",
+    "generate": "Поделиться a practical legal совет",
+    "icon": "⚖️",
+    "color": "#EC407A",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка legal знания...",
+    "placeholderText": "Нажмите \"Новый Совет\" for legal знания",
+    "posterType": "law",
+    "slogan": "Know the law, protect yourself",
+    "aiTags": [
+      "law",
+      "rights"
+    ]
+  },
+  {
+    "id": "official",
+    "name": "Карьера Про",
+    "description": "Workplace мудрость for career success",
+    "generate": "Поделиться a workplace понимание",
+    "icon": "🎩",
+    "color": "#EF5350",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка career знания...",
+    "placeholderText": "Нажмите \"Новый Совет\" for career советs",
+    "posterType": "official",
+    "slogan": "The workplace is a battlefield, win with мудрость",
+    "aiTags": [
+      "Карьера",
+      "interpersonal"
+    ]
+  },
+  {
+    "id": "handling",
+    "name": "Жизненные Навыки",
+    "description": "Practical мудрость for handling life's situations",
+    "generate": "Поделиться a practical life совет",
+    "icon": "💎",
+    "color": "#66BB6A",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка life мудрость...",
+    "placeholderText": "Нажмите \"Новый Совет\" for life мудрость",
+    "posterType": "handling",
+    "slogan": "Understanding the world is true мудрость",
+    "aiTags": [
+      "Мудрость",
+      "EQ"
+    ]
+  },
+  {
+    "id": "floral",
+    "name": "Флористический Художник",
+    "description": "Floral art советs for a fragrant life",
+    "generate": "Поделиться a floral care совет",
+    "icon": "💐",
+    "color": "#26C6DA",
+    "refreshText": "Новый Совет",
+    "loadingText": "Загрузка floral знания...",
+    "placeholderText": "Нажмите \"Новый Совет\" for floral art советs",
+    "posterType": "floral",
+    "slogan": "Flowers speak a language of their own",
+    "aiTags": [
+      "floral",
+      "flower arrangement"
+    ]
+  },
+  {
+    "id": "history",
+    "name": "Зеркало Истории",
+    "description": "Historical stories to learn from the past",
+    "generate": "Поделиться an interesting historical story",
+    "icon": "📚",
+    "color": "#AB47BC",
+    "refreshText": "Новая История",
+    "loadingText": "Загрузка historical tales...",
+    "placeholderText": "Нажмите \"Новая История\" for historical знания",
+    "posterType": "history",
+    "slogan": "Learn from history to see the future",
+    "aiTags": [
+      "История",
+      "stories"
+    ]
+  },
+  {
+    "id": "military",
+    "name": "Военный Обозреватель",
+    "description": "Military пониманиеs for strategic thinking",
+    "generate": "Поделиться a military понимание",
+    "icon": "🎖️",
+    "color": "#8D6E63",
+    "refreshText": "Новое Понимание",
+    "loadingText": "Загрузка military знания...",
+    "placeholderText": "Нажмите \"Новое Понимание\" for military знания",
+    "posterType": "military",
+    "slogan": "Know yourself and your opponent, win every battle",
+    "aiTags": [
+      "military",
+      "Стратегия"
+    ]
+  },
+  {
+    "id": "stock",
+    "name": "Фондовый Маяк",
+    "description": "Stock market пониманиеs for informed investing",
+    "generate": "Поделиться a stock market анализ",
+    "icon": "📈",
+    "color": "#1E88E5",
+    "refreshText": "Новое Понимание",
+    "loadingText": "Analyst is reviewing the market...",
+    "placeholderText": "Нажмите \"Новое Понимание\" for investment знания",
+    "posterType": "stock",
+    "slogan": "Rational investing, steady growth",
+    "aiTags": [
+      "stocks",
+      "futures"
+    ]
+  },
+  {
+    "id": "economics",
+    "name": "Экономический Взгляд",
+    "description": "Economic observations to understand trends",
+    "generate": "Поделиться an economic observation",
+    "icon": "💰",
+    "color": "#00897B",
+    "refreshText": "Новое Понимание",
+    "loadingText": "Economist is analyzing...",
+    "placeholderText": "Нажмите \"Новое Понимание\" for economic знания",
+    "posterType": "economics",
+    "slogan": "Understand the economy, grasp the trends",
+    "aiTags": [
+      "economics",
+      "анализ"
+    ]
+  },
+  {
+    "id": "business",
+    "name": "Деловая Мудрость",
+    "description": "Бизнес пониманиеs to seize opportunities",
+    "generate": "Поделиться a business понимание",
+    "icon": "💼",
+    "color": "#6D4C41",
+    "refreshText": "Новое Понимание",
+    "loadingText": "Бизнес mentor is advising...",
+    "placeholderText": "Нажмите \"Новое Понимание\" for business мудрость",
+    "posterType": "business",
+    "slogan": "Бизнес is about people, win with vision",
+    "aiTags": [
+      "Бизнес",
+      "management"
+    ]
+  },
+  {
+    "id": "news",
+    "name": "Новостной Фронтир",
+    "description": "Ежедневно news to stay informed",
+    "generate": "Создать a daily news digest",
+    "icon": "📰",
+    "color": "#D32F2F",
+    "refreshText": "Новое Обновление",
+    "loadingText": "Media expert is briefing you...",
+    "placeholderText": "Нажмите \"Новое Обновление\" for news анализ",
+    "posterType": "news",
+    "slogan": "Information is king, понимание is power",
+    "aiTags": [
+      "Новости",
+      "headlines"
+    ]
+  },
+  {
+    "id": "wisdomBag",
+    "name": "Мешочек Мудрости",
+    "description": "Мудрость nuggets for everyday life",
+    "generate": "Поделиться a мудрость nugget",
+    "icon": "🎁",
+    "color": "#FFA000",
+    "refreshText": "Новый Самоцвет",
+    "loadingText": "Создание мудрость...",
+    "placeholderText": "Нажмите \"Новый Самоцвет\" for a мудрость nugget",
+    "posterType": "wisdomBag",
+    "slogan": "Small мудрость, big life",
+    "aiTags": [
+      "Мудрость",
+      "life tips"
+    ]
+  },
+  {
+    "id": "robotAi",
+    "name": "ИИ Бот",
+    "description": "Искусствоificial intelligence and future technology",
+    "generate": "Поделиться a robotics or AI понимание",
+    "icon": "🤖",
+    "color": "#7C4DFF",
+    "refreshText": "Новое Понимание",
+    "loadingText": "AI is thinking...",
+    "placeholderText": "Нажмите \"Новое Понимание\" for AI знания",
+    "posterType": "robotAi",
+    "slogan": "The intelligent future is in your hands",
+    "aiTags": [
+      "AI",
+      "robotics"
+    ]
+  },
+  {
+    "id": "americanExpert",
+    "name": "Инсайдер Америки",
+    "description": "American culture in depth",
+    "generate": "Поделиться a fact about America",
+    "icon": "🗽",
+    "color": "#1565C0",
+    "refreshText": "Новый Факт",
+    "loadingText": "Исследование America...",
+    "placeholderText": "Нажмите \"Новый Факт\" to learn about America",
+    "posterType": "americanExpert",
+    "slogan": "Understand America, see the world",
+    "aiTags": [
+      "America",
+      "culture"
+    ]
+  },
+  {
+    "id": "apple",
+    "name": "Класс Apple",
+    "description": "Знания as fruitful as an apple a day",
+    "generate": "Поделиться an interesting знания point",
+    "icon": "🍎",
+    "color": "#E53935",
+    "refreshText": "Новый Урок",
+    "loadingText": "Class is in session...",
+    "placeholderText": "Нажмите \"Новый Урок\" for fresh знания",
+    "posterType": "apple",
+    "slogan": "A little progress every day",
+    "aiTags": [
+      "знания",
+      "learning"
+    ]
+  },
+  {
+    "id": "growth",
+    "name": "Эксперт по Росту",
+    "description": "Бренд growth strategies and market пониманиеs",
+    "generate": "Поделиться a brand growth strategy",
+    "icon": "📈",
+    "color": "#00C853",
+    "refreshText": "Новая Стратегия",
+    "loadingText": "Создание growth strategies...",
+    "placeholderText": "Нажмите \"Новая Стратегия\" for growth знания",
+    "posterType": "growth",
+    "slogan": "Рост is the lifeline of business",
+    "aiTags": [
+      "Рост",
+      "marketing"
+    ]
+  },
+  {
+    "id": "uiDesigner",
+    "name": "UI Дизайнер",
+    "description": "UI design for visual aesthetics",
+    "generate": "Поделиться a UI design совет",
+    "icon": "🎨",
+    "color": "#FF4081",
+    "refreshText": "Новая Идея",
+    "loadingText": "Создание design inspiration...",
+    "placeholderText": "Нажмите \"Новая Идея\" for design inspiration",
+    "posterType": "uiDesigner",
+    "slogan": "Дизайн makes the world a better place",
+    "aiTags": [
+      "Дизайн",
+      "UI"
+    ]
+  },
+  {
+    "id": "futures",
+    "name": "Эксперт по Фьючерсам",
+    "description": "Commodity futures and professional анализ",
+    "generate": "Поделиться a futures trading понимание",
+    "icon": "📊",
+    "color": "#455A64",
+    "refreshText": "Новый Анализ",
+    "loadingText": "Анализ futures...",
+    "placeholderText": "Нажмите \"Новый Анализ\" for futures знания",
+    "posterType": "futures",
+    "slogan": "Understand commodities, manage risk",
+    "aiTags": [
+      "futures",
+      "commodities"
+    ]
+  },
+  {
+    "id": "freud",
+    "name": "Исследования Фрейда",
+    "description": "Freudian psychology concepts explored",
+    "generate": "Поделиться a Freudian psychology concept",
+    "icon": "🧠",
+    "color": "#5E35B1",
+    "refreshText": "Новая Концепция",
+    "loadingText": "Psychoanalyzing...",
+    "placeholderText": "Нажмите \"Новая Концепция\" for psychology пониманиеs",
+    "posterType": "freud",
+    "slogan": "Explore the subconscious, decode the mind",
+    "aiTags": [
+      "psychology",
+      "psychoanalysis"
+    ]
+  },
+  {
+    "id": "fashionBrand",
+    "name": "Люксовые Бренды",
+    "description": "Мир fashion brands at the frontier of style",
+    "generate": "Поделиться a world fashion brand story",
+    "icon": "👛",
+    "color": "#880E4F",
+    "refreshText": "Новая История",
+    "loadingText": "Загрузка brand stories...",
+    "placeholderText": "Нажмите \"Новая История\" to discover luxury brands",
+    "posterType": "fashionBrand",
+    "slogan": "Taste the classics, know the trends",
+    "aiTags": [
+      "brands",
+      "Мода"
+    ]
+  },
+  {
+    "id": "xinStudy",
+    "name": "Мастер Синьсюэ",
+    "description": "Wang Yangming's philosophy of mind",
+    "generate": "Поделиться a Xinxue philosophy понимание",
+    "icon": "💭",
+    "color": "#00695C",
+    "refreshText": "Новое Понимание",
+    "loadingText": "Интерпретация Xinxue мудрость...",
+    "placeholderText": "Нажмите \"Новое Понимание\" for Xinxue мудрость",
+    "posterType": "xinStudy",
+    "slogan": "Unity of knowing and doing, attain true conscience",
+    "aiTags": [
+      "Xinxue",
+      "Wang Yangming"
+    ]
+  },
+  {
+    "id": "liStudy",
+    "name": "Мастер Лисюэ",
+    "description": "Zhu Xi's Neo-Confucian thought",
+    "generate": "Поделиться a Lixue philosophy понимание",
+    "icon": "📖",
+    "color": "#4A148C",
+    "refreshText": "Новое Понимание",
+    "loadingText": "Интерпретация Lixue мудрость...",
+    "placeholderText": "Нажмите \"Новое Понимание\" for Lixue мудрость",
+    "posterType": "liStudy",
+    "slogan": "Investigate things, attain знания; rectify the mind, make the will sincere",
+    "aiTags": [
+      "Lixue",
+      "Zhu Xi"
+    ]
+  },
+  {
+    "id": "anthropologist",
+    "name": "Антрополог",
+    "description": "Anthropological perspectives on the world",
+    "generate": "Поделиться an anthropology понимание",
+    "icon": "🏛️",
+    "color": "#8D6E63",
+    "refreshText": "Новое Понимание",
+    "loadingText": "Исследование humanity...",
+    "placeholderText": "Нажмите \"Новое Понимание\" to explore civilizations",
+    "posterType": "anthropologist",
+    "slogan": "Understand humanity, know yourself",
+    "aiTags": [
+      "anthropology",
+      "culture"
+    ]
+  },
+  {
+    "id": "geographer",
+    "name": "Географ",
+    "description": "Geographic знания to explore the world",
+    "generate": "Поделиться a geographic fact",
+    "icon": "🌍",
+    "color": "#26A69A",
+    "refreshText": "Новый Факт",
+    "loadingText": "Исследование geography...",
+    "placeholderText": "Нажмите \"Новый Факт\" to explore Earth's wonders",
+    "posterType": "geographer",
+    "slogan": "Read the Earth, see the world clearly",
+    "aiTags": [
+      "geography",
+      "landforms"
+    ]
+  },
+  {
+    "id": "historian",
+    "name": "Историк",
+    "description": "Historical research and deep interpretation",
+    "generate": "Поделиться a historical research perspective",
+    "icon": "📜",
+    "color": "#7E57C2",
+    "refreshText": "Новое Понимание",
+    "loadingText": "Исследование the river of history...",
+    "placeholderText": "Нажмите \"Новое Понимание\" to touch history's pulse",
+    "posterType": "historian",
+    "slogan": "Learn from history to illuminate the future",
+    "aiTags": [
+      "История",
+      "research"
+    ]
+  },
+  {
+    "id": "narratologist",
+    "name": "Нарратолог",
+    "description": "The art of narrative and the power of stories",
+    "generate": "Поделиться a narratology concept",
+    "icon": "📖",
+    "color": "#EC407A",
+    "refreshText": "Новая Концепция",
+    "loadingText": "Интерпретация narrative art...",
+    "placeholderText": "Нажмите \"Новая Концепция\" to grasp story magic",
+    "posterType": "narratologist",
+    "slogan": "The way of stories, the art of narrative",
+    "aiTags": [
+      "narrative",
+      "storytelling"
+    ]
+  },
+  {
+    "id": "psychologist",
+    "name": "Психолог",
+    "description": "Deep psychological research and пониманиеs",
+    "generate": "Поделиться a psychology research finding",
+    "icon": "🧠",
+    "color": "#5C6BC0",
+    "refreshText": "Новое Открытие",
+    "loadingText": "Исследование psychological mysteries...",
+    "placeholderText": "Нажмите \"Новое Открытие\" to decode the mind",
+    "posterType": "psychologist",
+    "slogan": "Illuminate the mind, know yourself",
+    "aiTags": [
+      "psychology",
+      "cognition"
+    ]
+  },
+  {
+    "id": "softwareArchitect",
+    "name": "Программный Архитектор",
+    "description": "Software architecture and system design",
+    "generate": "Поделиться a software architecture понимание",
+    "icon": "🏗️",
+    "color": "#1565C0",
+    "refreshText": "Новое Понимание",
+    "loadingText": "Интерпретация architecture знания...",
+    "placeholderText": "Нажмите \"Новое Понимание\" for architecture знания",
+    "posterType": "softwareArchitect",
+    "slogan": "System design, the way of architecture",
+    "aiTags": [
+      "architecture",
+      "Дизайн"
+    ]
+  },
+  {
+    "id": "solidityEngineer",
+    "name": "Solidity Инженер",
+    "description": "Smart contracts and blockchain development",
+    "generate": "Поделиться a smart contract понимание",
+    "icon": "⛓️",
+    "color": "#2E7D32",
+    "refreshText": "Новое Понимание",
+    "loadingText": "Интерпретация contract знания...",
+    "placeholderText": "Нажмите \"Новое Понимание\" for contract знания",
+    "posterType": "solidityEngineer",
+    "slogan": "Smart contracts, the way of the chain",
+    "aiTags": [
+      "blockchain",
+      "smart contracts"
+    ]
+  },
+  {
+    "id": "xiaohongshuExpert",
+    "name": "Эксперт RED",
+    "description": "Xiaohongshu operations and content seeding советs",
+    "generate": "Поделиться a Xiaohongshu operations совет",
+    "icon": "📕",
+    "color": "#E91E63",
+    "refreshText": "Новый Совет",
+    "loadingText": "Интерпретация operations советs...",
+    "placeholderText": "Нажмите \"Новый Совет\" for operations советs",
+    "posterType": "xiaohongshuExpert",
+    "slogan": "Traffic code, content is king",
+    "aiTags": [
+      "operations",
+      "content marketing"
+    ]
+  },
+  {
+    "id": "seoExpert",
+    "name": "SEO Эксперт",
+    "description": "Search engine optimization to reach more people",
+    "generate": "Создать an SEO optimization совет",
+    "icon": "🔍",
+    "color": "#FF5722",
+    "refreshText": "Новый Совет",
+    "loadingText": "Интерпретация SEO советs...",
+    "placeholderText": "Нажмите \"Новый Совет\" for SEO советs",
+    "posterType": "seoExpert",
+    "slogan": "Optimize for search, boost your rankings",
+    "aiTags": [
+      "SEO",
+      "search"
+    ]
+  },
+  {
+    "id": "idiom",
+    "name": "Китайские Пословицы",
+    "description": "Chinese folk sayings and traditional мудрость",
+    "generate": "Создать a Chinese idiom or folk proverb",
+    "icon": "📝",
+    "color": "#795548",
+    "refreshText": "Новая Пословица",
+    "loadingText": "Интерпретация folk мудрость...",
+    "placeholderText": "Нажмите \"Новая Пословица\" for a folk idiom or proverb",
+    "posterType": "idiom",
+    "slogan": "Folk мудрость passed down through the ages",
+    "aiTags": [
+      "idioms",
+      "proverbs"
+    ]
+  }
+]
