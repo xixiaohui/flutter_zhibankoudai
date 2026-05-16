@@ -15,14 +15,14 @@ import '../widgets/daily_card.dart';
 import '../widgets/module_grid_item.dart';
 
 const Map<String, List<String>> _moduleCategories = {
-  '热门精选': ['wisdomBag', 'quote', 'joke', 'movie', 'music', 'programming'],
-  '财经商业': ['finance', 'investment', 'stock', 'economics', 'business', 'tax', 'foreignTrade', 'ecommerce', 'futures'],
-  '学习成长': ['english', 'math', 'literature', 'history', 'idiom', 'apple', 'xinStudy', 'liStudy'],
-  '生活休闲': ['travel', 'fishing', 'fitness', 'pet', 'fashion', 'outfit', 'beauty', 'floral', 'decoration', 'photography', 'love'],
-  '科技设计': ['tech', 'robotAi', 'softwareArchitect', 'solidityEngineer', 'uiDesigner', 'growth', 'seoExpert', 'xiaohongshuExpert', 'glassFiber', 'resin'],
-  '健康养生': ['tcm', 'fortune'],
-  '人文社科': ['anthropologist', 'geographer', 'historian', 'narratologist', 'psychologist', 'freud'],
-  '实用资讯': ['official', 'handling', 'law', 'fashionBrand', 'military', 'news'],
+  'hotPicks': ['wisdomBag', 'quote', 'joke', 'movie', 'music', 'programming'],
+  'finance': ['finance', 'investment', 'stock', 'economics', 'business', 'tax', 'foreignTrade', 'ecommerce', 'futures'],
+  'learning': ['english', 'math', 'literature', 'history', 'idiom', 'apple', 'xinStudy', 'liStudy'],
+  'lifestyle': ['travel', 'fishing', 'fitness', 'pet', 'fashion', 'outfit', 'beauty', 'floral', 'decoration', 'photography', 'love'],
+  'tech': ['tech', 'robotAi', 'softwareArchitect', 'solidityEngineer', 'uiDesigner', 'growth', 'seoExpert', 'xiaohongshuExpert', 'glassFiber', 'resin'],
+  'health': ['tcm', 'fortune'],
+  'humanities': ['anthropologist', 'geographer', 'historian', 'narratologist', 'psychologist', 'freud'],
+  'practical': ['official', 'handling', 'law', 'fashionBrand', 'military', 'news'],
 };
 
 class HomePage extends StatefulWidget {
@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     final moduleMap = <String, ModuleConfig>{for (final m in modules) m.id: m};
     final slivers = <Widget>[];
 
-    final featuredIds = _moduleCategories['热门精选']!;
+    final featuredIds = _moduleCategories['hotPicks']!;
     final featured = featuredIds.map((id) => moduleMap[id]).whereType<ModuleConfig>().toList();
     if (featured.isNotEmpty) {
       slivers.add(SliverToBoxAdapter(child: _buildFeaturedRow(featured, textTheme, colorScheme)));
@@ -112,11 +112,11 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     }
 
     for (final entry in _moduleCategories.entries) {
-      if (entry.key == '热门精选') continue;
+      if (entry.key == 'hotPicks') continue;
       final catModules = entry.value.map((id) => moduleMap[id]).whereType<ModuleConfig>().toList();
       if (catModules.isEmpty) continue;
 
-      slivers.add(SliverToBoxAdapter(child: _categoryLabel(entry.key, catModules.length, textTheme, colorScheme)));
+      slivers.add(SliverToBoxAdapter(child: _categoryLabel(_catName(entry.key), catModules.length, textTheme, colorScheme)));
       slivers.add(SliverPadding(
         padding: const EdgeInsets.symmetric(horizontal: AppSpacing.screenHorizontal),
         sliver: SliverGrid(
@@ -396,6 +396,18 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     final wd = ['', l10n.weekdayMon, l10n.weekdayTue, l10n.weekdayWed, l10n.weekdayThu, l10n.weekdayFri, l10n.weekdaySat, l10n.weekdaySun];
     return '${now.year}年${now.month}月${now.day}日 ${wd[now.weekday]}';
   }
+
+  String _catName(String key) => switch (key) {
+    'hotPicks' => AppLocalizations.of(context)!.catHotPicks,
+    'finance' => AppLocalizations.of(context)!.catFinance,
+    'learning' => AppLocalizations.of(context)!.catLearning,
+    'lifestyle' => AppLocalizations.of(context)!.catLifestyle,
+    'tech' => AppLocalizations.of(context)!.catTech,
+    'health' => AppLocalizations.of(context)!.catHealth,
+    'humanities' => AppLocalizations.of(context)!.catHumanities,
+    'practical' => AppLocalizations.of(context)!.catPractical,
+    _ => key,
+  };
 
   void _navigateToDetail(String id) => context.push('/module/$id');
   void _navigateToPoster(DailyContent? c) {

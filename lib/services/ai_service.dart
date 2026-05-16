@@ -394,8 +394,8 @@ class AiService {
     return DailyContent(
       id: '${moduleId}_default_${DateTime.now().millisecondsSinceEpoch}',
       moduleId: moduleId,
-      title: lastModule?.slogan ?? '暂无内容',
-      content: lastModule?.placeholderText ?? '暂无内容，请稍后再试',
+      title: lastModule?.slogan ?? 'No content',
+      content: lastModule?.placeholderText ?? 'No content available, please try again later',
       date: DateTime.now(),
       isAiGenerated: false,
     );

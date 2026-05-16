@@ -553,7 +553,7 @@ class _AIFriendPageState extends State<AIFriendPage> {
               child: const Center(child: Text('🧸', style: TextStyle(fontSize: 20))),
             ),
             const SizedBox(width: 10),
-            Text('小智', style: textTheme.titleSmall?.copyWith(color: colorScheme.onSurface)),
+            Text(AppLocalizations.of(context)!.memoryBot, style: textTheme.titleSmall?.copyWith(color: colorScheme.onSurface)),
           ],
         ),
         actions: [

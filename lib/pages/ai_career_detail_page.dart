@@ -69,7 +69,7 @@ class _AICareerDetailPageState extends State<AICareerDetailPage> {
 
   void _addGreeting() {
     _messages.add(ChatMessage(
-      text: '你好！我是${_career.nameZh}专家。${_career.vibeZh}',
+      text: AppLocalizations.of(context)!.careerGreeting(_career.nameZh, _career.vibeZh),
       isUser: false,
     ));
     _persistMessages();

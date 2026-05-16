@@ -113,8 +113,8 @@ class DailyContentProvider extends ChangeNotifier {
     return DailyContent(
       id: '${module.id}_default_${DateTime.now().millisecondsSinceEpoch}',
       moduleId: module.id,
-      title: lastModule?.slogan ?? '暂无内容',
-      content: lastModule?.placeholderText ?? '暂无内容,点击AI生成',
+      title: lastModule?.slogan ?? 'No content',
+      content: lastModule?.placeholderText ?? 'No content available, tap AI to generate',
       date: DateTime.now(),
     );
   }

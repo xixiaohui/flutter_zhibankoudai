@@ -225,5 +225,20 @@
   "fieldFortuneColor": "吉利颜色",
   "fieldCoreQuote": "核心金句",
   "identifyEmotion": "识别情绪",
-  "confidence": "置信度"
+  "confidence": "置信度",
+  "careerGreeting": "你好！我是{name}专家。{vibe}",
+  "@careerGreeting": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "vibe": {"type": "String"}
+    }
+  },
+  "catHotPicks": "热门精选",
+  "catFinance": "财经商业",
+  "catLearning": "学习成长",
+  "catLifestyle": "生活休闲",
+  "catTech": "科技设计",
+  "catHealth": "健康养生",
+  "catHumanities": "人文社科",
+  "catPractical": "实用资讯"
 }

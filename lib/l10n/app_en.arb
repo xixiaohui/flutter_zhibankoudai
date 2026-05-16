@@ -225,5 +225,20 @@
   "fieldFortuneColor": "Lucky Color",
   "fieldCoreQuote": "Core Quote",
   "identifyEmotion": "Detected Emotion",
-  "confidence": "Confidence"
+  "confidence": "Confidence",
+  "careerGreeting": "Hi! I'm {name} expert. {vibe}",
+  "@careerGreeting": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "vibe": {"type": "String"}
+    }
+  },
+  "catHotPicks": "Hot Picks",
+  "catFinance": "Finance & Business",
+  "catLearning": "Learning & Growth",
+  "catLifestyle": "Lifestyle",
+  "catTech": "Tech & Design",
+  "catHealth": "Health & Wellness",
+  "catHumanities": "Humanities",
+  "catPractical": "Practical Info"
 }
