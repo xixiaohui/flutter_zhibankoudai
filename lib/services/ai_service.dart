@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/config/constants.dart';
 import 'package:flutter_application_zhiban/services/cloudbase_db.dart';
 import 'package:flutter_application_zhiban/services/local_config.dart';
 import 'package:flutter_application_zhiban/xui/utils/module.dart';
@@ -254,8 +255,8 @@ class AiService {
       // Use xclaw API (non-streaming) as primary
       final contentStr =
           await generateTextXclaw(
-            model: 'hunyuan-exp',
-            subModel: 'hunyuan-turbos-latest',
+            model: AppConstants.defaultModel,
+            subModel: AppConstants.defaultSubModel,
             messages: [
               {'role': 'system', 'content': systemPrompt},
               {'role': 'user', 'content': userMessage},

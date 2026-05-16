@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_zhiban/config/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../l10n/gen/app_localizations.dart';
 import '../models/chat_message.dart';
@@ -23,8 +24,8 @@ class AIFriendConfig {
     required this.safetyPrompt,
     required this.scenePrompts,
     this.memoryRounds = 5,
-    this.model = 'hunyuan-exp',
-    this.subModel = 'hunyuan-turbos-latest',
+    this.model = AppConstants.defaultModel,
+    this.subModel = AppConstants.defaultSubModel,
   });
 
   factory AIFriendConfig.fromJson(Map<String, dynamic> json) {
@@ -35,8 +36,8 @@ class AIFriendConfig {
         (k, v) => MapEntry(k, ScenePromptConfig.fromJson(v)),
       ) ?? {},
       memoryRounds: json['memoryRounds'] ?? 5,
-      model: json['model'] ?? 'hunyuan-exp',
-      subModel: json['subModel'] ?? 'hunyuan-turbos-latest',
+      model: json['model'] ?? AppConstants.defaultModel,
+      subModel: json['subModel'] ?? AppConstants.defaultSubModel,
     );
   }
 

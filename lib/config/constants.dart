@@ -22,8 +22,8 @@ class AppConstants {
   static const String cloudbaseEnvId = 'YOUR_ENVID'; // TODO: 替换为实际环境ID
 
   //默认模型
-  static const String defaultModel = 'hunyuan-exp';
-  static const String defaultSubModel = 'hunyuan-turbos-latest';
+  static const String defaultModel = 'hunyuan-v3';
+  static const String defaultSubModel = 'hy3-preview';
 
     // 模块类型枚举
   static const Map<String, String> moduleTypes = {
