@@ -23,30 +23,44 @@ class DailyContentProvider extends ChangeNotifier {
   final Map<String, bool> _generatingMap = {};
   bool isGenerating(String moduleId) => _generatingMap[moduleId] ?? false;
 
+  /// 当前locale对应的内容缓存key前缀
+  String _locale = 'zh';
+
   /// 获取指定模块的每日内容
-  DailyContent? getContent(String moduleId) => _contents[moduleId];
+  DailyContent? getContent(String moduleId) => _contents['${moduleId}_$_locale'];
+
+  /// 更新locale并清空缓存（语言切换时调用）
+  void updateLocale(String locale) {
+    if (_locale != locale) {
+      _locale = locale;
+      _contents.clear();
+      _loadingMap.clear();
+      _generatingMap.clear();
+      notifyListeners();
+    }
+  }
 
   /// 加载模块内容
   /// 流程：检查内存缓存 → 本地缓存 → 云端数据库 → AI生成 → 兜底数据
-  Future<void> loadContent(ModuleConfig module) async {
-    // 内存缓存命中
-    if (_contents.containsKey(module.id)) return;
+  Future<void> loadContent(ModuleConfig module, {String locale = 'zh'}) async {
+    // 内存缓存命中（locale 不变时复用）
+    final cacheKey = '${module.id}_$locale';
+    if (_contents.containsKey(cacheKey)) return;
 
     _loadingMap[module.id] = true;
     notifyListeners();
 
     try {
       // 1. 使用兜底数据
-      _contents[module.id] = _useFallback(module);
+      _contents[cacheKey] = _useFallback(module);
 
       if (module.generatePrompt != null && module.generatePrompt!.isNotEmpty) {
         // 2. 尝试从本地缓存/云端获取
         final cachedData = await _dataService.getDailyContent(module.id);
         if (cachedData != null) {
-          _contents[module.id] = DailyContent.fromJson(cachedData);
+          _contents[cacheKey] = DailyContent.fromJson(cachedData);
           _loadingMap[module.id] = false;
           notifyListeners();
-
           return;
         }
       } else {
@@ -55,12 +69,13 @@ class DailyContentProvider extends ChangeNotifier {
           moduleId: module.id,
           prompt: module.generatePrompt!,
           fallback: module.fallback,
+          locale: locale,
         );
-        _contents[module.id] = aiContent;
+        _contents[cacheKey] = aiContent;
       }
     } catch (e) {
       // 出错时使用兜底数据
-      _contents[module.id] = _useFallback(module);
+      _contents[cacheKey] = _useFallback(module);
     }
 
     _loadingMap[module.id] = false;
@@ -80,7 +95,7 @@ class DailyContentProvider extends ChangeNotifier {
           fallback: module.fallback,
           locale: locale,
         );
-        _contents[module.id] = aiContent;
+        _contents['${module.id}_$locale'] = aiContent;
       }
     } catch (e) {
       // 保持原有内容

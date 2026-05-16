@@ -80,10 +80,11 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
 
     if (mp.modules.isEmpty || _lastLocale != locale) {
       _lastLocale = locale;
+      cp.updateLocale(locale);
       await mp.loadModules(locale: locale);
     }
     for (final m in mp.modules) {
-      if (cp.getContent(m.id) == null) cp.loadContent(m);
+      if (cp.getContent(m.id) == null) cp.loadContent(m, locale: locale);
     }
   }
 
