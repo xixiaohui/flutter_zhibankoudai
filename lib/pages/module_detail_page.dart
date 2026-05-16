@@ -10,6 +10,7 @@ import '../l10n/gen/app_localizations.dart';
 import '../models/daily_content.dart';
 import '../providers/module_provider.dart';
 import '../providers/daily_content_provider.dart';
+import '../providers/locale_provider.dart';
 import '../widgets/action_button.dart';
 import '../widgets/outlined_action_button.dart';
 import 'module_detail/widgets/metadata_section.dart';
@@ -169,7 +170,7 @@ class _ModuleDetailPageState extends State<ModuleDetailPage> {
                           label: isGenerating ? l10n.generating : l10n.aiRefresh,
                           icon: isGenerating ? Icons.hourglass_empty : Icons.refresh,
                           loading: isGenerating,
-                          onTap: isGenerating ? null : () => cp.refreshWithAi(module),
+                          onTap: isGenerating ? null : () => cp.refreshWithAi(module, locale: context.read<LocaleProvider>().languageCode),
                         ),
                       ),
                       const SizedBox(width: 12),

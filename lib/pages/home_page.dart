@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../config/routes.dart';
 import '../design/spacing.dart';
 import '../l10n/gen/app_localizations.dart';
+import '../providers/locale_provider.dart';
 import '../models/daily_content.dart';
 import '../models/module_config.dart';
 import '../providers/module_provider.dart';
@@ -53,17 +54,37 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   @override
   bool get wantKeepAlive => true;
 
+  String? _lastLocale;
+
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _loadData());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadData();
+      context.read<LocaleProvider>().addListener(_onLocaleChange);
+    });
   }
+
+  @override
+  void dispose() {
+    context.read<LocaleProvider>().removeListener(_onLocaleChange);
+    super.dispose();
+  }
+
+  void _onLocaleChange() => _loadData();
 
   Future<void> _loadData() async {
     final mp = context.read<ModuleProvider>();
     final cp = context.read<DailyContentProvider>();
-    if (mp.modules.isEmpty) await mp.loadModules();
-    for (final m in mp.modules) { if (cp.getContent(m.id) == null) cp.loadContent(m); }
+    final locale = context.read<LocaleProvider>().languageCode;
+
+    if (mp.modules.isEmpty || _lastLocale != locale) {
+      _lastLocale = locale;
+      await mp.loadModules(locale: locale);
+    }
+    for (final m in mp.modules) {
+      if (cp.getContent(m.id) == null) cp.loadContent(m);
+    }
   }
 
   @override
@@ -85,7 +106,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                 module: fm, content: content,
                 isLoading: cp.isLoading(fm.id), isGenerating: cp.isGenerating(fm.id),
                 onTap: () => _navigateToDetail(fm.id),
-                onRefresh: () => cp.refreshWithAi(fm),
+                onRefresh: () => cp.refreshWithAi(fm, locale: context.read<LocaleProvider>().languageCode),
                 onShare: () => _navigateToPoster(content),
               ),
             ));
